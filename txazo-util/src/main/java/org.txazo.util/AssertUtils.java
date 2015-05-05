@@ -4,8 +4,8 @@ package org.txazo.util;
  * 断言工具类
  *
  * @author txazo
- * @email txazo@1218.com
  * @date 2015-05-05
+ * @email txazo@1218.com
  */
 public abstract class AssertUtils {
 
