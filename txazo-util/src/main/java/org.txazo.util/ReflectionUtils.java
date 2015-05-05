@@ -6,7 +6,14 @@ import org.springframework.util.ConcurrentReferenceHashMap;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-public class ReflectionUtils {
+/**
+ * 反射工具类
+ *
+ * @author txazo
+ * @email txazo@1218.com
+ * @date 2015-05-05
+ */
+public abstract class ReflectionUtils {
 
     private static final Map<Class<?>, Field[]> declaredFieldsCache =
             new ConcurrentReferenceHashMap<Class<?>, Field[]>(256);
