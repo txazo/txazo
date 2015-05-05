@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.txazo</groupId>
         <artifactId>txazo</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -18,22 +18,14 @@
     <url>https://github.com/txazo/txazo</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>4.12</junit.version>
-        <commons-lang3.version>3.4</commons-lang3.version>
+        <txazo-test.version>1.0</txazo-test.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
+            <groupId>org.txazo</groupId>
+            <artifactId>txazo-test</artifactId>
+            <version>${txazo-test.version}</version>
         </dependency>
     </dependencies>
 </project>
