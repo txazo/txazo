@@ -3,7 +3,7 @@
 
     <parent>
         <groupId>org.txazo</groupId>
-        <artifactId>txazo</artifactId>
+        <artifactId>txazo-parent</artifactId>
         <version>1.0</version>
     </parent>
 

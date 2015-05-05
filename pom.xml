@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
-    <artifactId>txazo</artifactId>
+    <artifactId>txazo-parent</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
-    <name>txazo</name>
+    <name>txazo-parent</name>
     <url>https://github.com/txazo/txazo</url>
 
     <modules>
