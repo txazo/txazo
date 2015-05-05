@@ -1,5 +1,10 @@
 package org.txazo.util;
 
+/**
+ * @author txazo
+ * @email txazo@1218.com
+ * @date 2015-05-05
+ */
 public abstract class AssertUtils {
 
     public static void isNull(Object object, String message) {
