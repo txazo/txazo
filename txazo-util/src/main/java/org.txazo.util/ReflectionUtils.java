@@ -10,8 +10,9 @@ import java.util.Map;
  * 反射工具类
  *
  * @author txazo
- * @date 2015-05-05
- * @email txazo@1218.com
+ * @email txazo1218@163.com
+ * @qq 784990655
+ * @since 05.05.2015
  */
 public abstract class ReflectionUtils {
 
