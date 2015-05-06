@@ -1,7 +1,5 @@
 package org.txazo.util;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.Assert;
 import org.springframework.util.ConcurrentReferenceHashMap;
 
 import java.lang.reflect.Field;
@@ -37,7 +35,7 @@ public abstract class ReflectionUtils {
      * 查找Field
      */
     public static Field findField(Class<?> clazz, String name, Class<?> type) {
-        if (clazz == null || (StringUtils.isBlank(name) && type == null)) {
+        if (clazz == null || (name == null && type == null)) {
             return null;
         }
         Class<?> searchType = clazz;
