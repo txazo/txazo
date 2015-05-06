@@ -1,5 +1,6 @@
 package org.txazo.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.ConcurrentReferenceHashMap;
 
@@ -18,13 +19,27 @@ public abstract class ReflectionUtils {
 
     private static final Map<Class<?>, Field[]> declaredFieldsCache = new ConcurrentReferenceHashMap<Class<?>, Field[]>(256);
 
+    /**
+     * 查找Field
+     */
     public static Field findField(Class<?> clazz, String name) {
         return findField(clazz, name, null);
     }
 
+    /**
+     * 查找Field
+     */
+    public static Field findField(Class<?> clazz, Class<?> type) {
+        return findField(clazz, null, type);
+    }
+
+    /**
+     * 查找Field
+     */
     public static Field findField(Class<?> clazz, String name, Class<?> type) {
-        AssertUtils.notNull(clazz, "Class must not be null");
-        Assert.isTrue(name != null || type != null, "Either name or type of the field must be specified");
+        if (clazz == null || (StringUtils.isBlank(name) && type == null)) {
+            return null;
+        }
         Class<?> searchType = clazz;
         while (!Object.class.equals(searchType) && searchType != null) {
             Field[] fields = getDeclaredFields(searchType);
