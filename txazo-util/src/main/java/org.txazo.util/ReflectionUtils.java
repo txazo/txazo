@@ -16,8 +16,7 @@ import java.util.Map;
  */
 public abstract class ReflectionUtils {
 
-    private static final Map<Class<?>, Field[]> declaredFieldsCache =
-            new ConcurrentReferenceHashMap<Class<?>, Field[]>(256);
+    private static final Map<Class<?>, Field[]> declaredFieldsCache = new ConcurrentReferenceHashMap<Class<?>, Field[]>(256);
 
     public static Field findField(Class<?> clazz, String name) {
         return findField(clazz, name, null);
