@@ -7,7 +7,6 @@ import org.apache.commons.lang3.ArrayUtils;
  *
  * @author txazo
  * @email txazo1218@163.com
- * @qq 784990655
  * @see org.apache.commons.lang3.StringUtils
  * @since 05.05.2015
  */
