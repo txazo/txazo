@@ -17,15 +17,4 @@
     <name>txazo-reflection</name>
     <url>https://github.com/txazo/txazo</url>
 
-    <properties>
-        <txazo-test.version>1.0</txazo-test.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.txazo</groupId>
-            <artifactId>txazo-test</artifactId>
-            <version>${txazo-test.version}</version>
-        </dependency>
-    </dependencies>
 </project>

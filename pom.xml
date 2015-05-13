@@ -20,6 +20,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <txazo-test.version>1.0</txazo-test.version>
         <junit.version>4.12</junit.version>
         <commons-lang3.version>3.4</commons-lang3.version>
         <commons-collections4.version>4.0</commons-collections4.version>
@@ -28,6 +29,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.txazo</groupId>
+            <artifactId>txazo-test</artifactId>
+            <version>${txazo-test.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
