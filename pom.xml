@@ -13,6 +13,7 @@
 
     <modules>
         <module>txazo-java</module>
+        <module>txazo-reflection</module>
         <module>txazo-test</module>
         <module>txazo-util</module>
     </modules>
