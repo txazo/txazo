@@ -3,10 +3,6 @@
     <span class="octicon octicon-link"></span></a>
     txazo
 </h2>
-<p>
-txazo
-</p>
-
 <ul>
     <li><a href="#txazo-java">txazo-java</a></li>
     <li><a href="#txazo-reflection">txazo-reflection</a></li>
