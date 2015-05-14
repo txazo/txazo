@@ -13,4 +13,8 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public abstract class AbstractTest {
 
+    protected static void print(String msg) {
+        System.out.println(msg);
+    }
+
 }
