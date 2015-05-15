@@ -12,6 +12,7 @@
     <url>https://github.com/txazo/txazo</url>
 
     <modules>
+        <module>txazo-freemarker</module>
         <module>txazo-java</module>
         <module>txazo-reflection</module>
         <module>txazo-test</module>
