@@ -1,7 +1,10 @@
 package org.txazo.test;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import java.util.Date;
 
 /**
  * AbstractTest
@@ -13,8 +16,10 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public abstract class AbstractTest {
 
-    protected static void print(String msg) {
-        System.out.println(msg);
+    private static final String pattern = "yyyy-MM-dd HH:mm:ss";
+
+    protected static void print(Object msg) {
+        System.out.println(DateFormatUtils.format(new Date(), pattern) + "\t" + msg);
     }
 
 }
