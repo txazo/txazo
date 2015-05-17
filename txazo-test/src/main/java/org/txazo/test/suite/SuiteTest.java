@@ -1,6 +1,7 @@
-package org.txazo.test;
+package org.txazo.test.suite;
 
 import org.junit.Test;
+import org.txazo.test.AbstractTest;
 import org.txazo.test.annotation.Suite;
 
 /**

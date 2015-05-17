@@ -1,11 +1,11 @@
-package org.txazo.test;
+package org.txazo.test.suite;
 
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 import org.txazo.test.annotation.Suite;
-import org.txazo.test.exception.TxazoTestException;
+import org.txazo.test.exception.TestException;
 import org.txazo.test.util.PackageUtils;
 
 import java.util.Set;
@@ -25,11 +25,11 @@ public class SuiteRunTest {
         this.basePackage = basePackage;
     }
 
-    public void run() throws TxazoTestException {
+    public void run() throws TestException {
         TestRunner.run(suite());
     }
 
-    public Test suite() throws TxazoTestException {
+    public Test suite() throws TestException {
         TestSuite suite = new TestSuite();
         try {
             Set<Class<?>> classes = PackageUtils.getClassesWithAnnotation(basePackage, Suite.class);
@@ -37,7 +37,7 @@ public class SuiteRunTest {
                 suite.addTest(new JUnit4TestAdapter(clazz));
             }
         } catch (Exception e) {
-            throw new TxazoTestException(e);
+            throw new TestException(e);
         }
         return suite;
     }

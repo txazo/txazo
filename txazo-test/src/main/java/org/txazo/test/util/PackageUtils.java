@@ -2,6 +2,7 @@ package org.txazo.test.util;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.txazo.test.filter.ClassFileFilter;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.Set;
  * @email txazo1218@163.com
  * @since 17.05.2015
  */
-public class PackageUtils {
+public abstract class PackageUtils {
 
     private static boolean existsAnnotation(Class<?> clazz, Class<? extends Annotation> annotation) {
         return clazz != null && clazz.getAnnotation(annotation) != null;
@@ -67,13 +68,13 @@ public class PackageUtils {
         return classes;
     }
 
-    public static void findAndAddClassesInPackageByFile(String packageName, String packagePath, boolean recursive, Set<Class<?>> classes) throws ClassNotFoundException {
+    private static void findAndAddClassesInPackageByFile(String packageName, String packagePath, boolean recursive, Set<Class<?>> classes) throws ClassNotFoundException {
         File dir = new File(packagePath);
         if (!dir.exists() || !dir.isDirectory()) {
             return;
         }
 
-        File[] files = dir.listFiles(new JavaFileFilter(recursive));
+        File[] files = dir.listFiles(new ClassFileFilter(recursive));
         if (ArrayUtils.isEmpty(files)) {
             return;
         }
