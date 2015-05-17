@@ -12,6 +12,7 @@ import java.lang.reflect.Field;
  *
  * @author txazo
  * @email txazo1218@163.com
+ * @see java.lang.Class
  * @since 13.05.2015
  */
 public class ReflectionClass extends AbstractTest {
@@ -28,16 +29,16 @@ public class ReflectionClass extends AbstractTest {
 
         /** 基本数据类型的class */
         Field field = c1.getField("id");
-        Assert.assertSame(field.getType(), int.class);
+        assertSame(field.getType(), int.class);
     }
 
     @Test
     public void test2() {
         Class<?> clazz = ClassVo.class;
         /** 类名 */
-        Assert.assertEquals("ClassVo", clazz.getSimpleName());
+        assertEquals("ClassVo", clazz.getSimpleName());
         /** 全限定类名 */
-        Assert.assertEquals("org.txazo.reflection.vo.ClassVo", clazz.getName());
+        assertEquals("org.txazo.reflection.vo.ClassVo", clazz.getName());
     }
 
 }
