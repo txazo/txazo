@@ -1,7 +1,5 @@
 package org.txazo.test.suite;
 
-import org.txazo.test.exception.TestException;
-
 /**
  * SuiteRunTestTest
  *
@@ -11,7 +9,7 @@ import org.txazo.test.exception.TestException;
  */
 public class SuiteRunTestTest {
 
-    public static void main(String[] args) throws TestException {
+    public static void main(String[] args) {
         new SuiteRunTest("org.txazo.test").run();
     }
 

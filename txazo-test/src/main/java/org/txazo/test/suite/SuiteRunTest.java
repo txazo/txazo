@@ -25,8 +25,12 @@ public class SuiteRunTest {
         this.basePackage = basePackage;
     }
 
-    public void run() throws TestException {
-        TestRunner.run(suite());
+    public void run() {
+        try {
+            TestRunner.run(suite());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Test suite() throws TestException {

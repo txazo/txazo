@@ -17,9 +17,12 @@ public class PackageUtilsTest extends SuiteTest {
 
     @Test
     public void testGetClasses() throws IOException, ClassNotFoundException {
-        String packageName = "org.txazo.test";
-        print(PackageUtils.getClasses(packageName));
-        print(PackageUtils.getClassesWithAnnotation(packageName, Suite.class));
+        print(PackageUtils.getClasses("org.txazo.test"));
+    }
+
+    @Test
+    public void testGetClassesWithAnnotation() throws IOException, ClassNotFoundException {
+        print(PackageUtils.getClassesWithAnnotation("org.txazo.test", Suite.class));
     }
 
 }
