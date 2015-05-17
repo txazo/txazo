@@ -3,10 +3,25 @@
     <span class="octicon octicon-link"></span></a>
     txazo-test
 </h2>
-<p>
-v1.0 2015-05-05
-1. 集成Junit4单元测试
+<ul>
+    <li><a href="#txazo-test-v1.0">v1.0</a></li>
+    <li><a href="#txazo-test-v1.1">v1.1</a></li>
+</ul>
 
-v1.1 2015-05-17
+<h2>
+    <a id="user-content-txazo-test-v1.0" class="anchor" href="#txazo-test-v1.0" aria-hidden="true">
+    <span class="octicon octicon-link"></span></a>
+    v1.0
+</h2>
+<p>
+1. 集成Junit4单元测试
+</p>
+
+<h2>
+    <a id="user-content-txazo-test-v1.1" class="anchor" href="#txazo-test-v1.1" aria-hidden="true">
+    <span class="octicon octicon-link"></span></a>
+    v1.1
+</h2>
+<p>
 1. 集成Junit4套件测试
 </p>
