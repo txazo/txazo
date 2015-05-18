@@ -19,12 +19,10 @@ import java.util.Map;
  */
 public class SuiteResultPrinter extends ResultPrinter {
 
-    private PrintStream writer;
     private Map<String, Long> runTimes = new HashMap<String, Long>();
 
     public SuiteResultPrinter(PrintStream writer) {
         super(writer);
-        this.writer = writer;
     }
 
     synchronized void print(TestResult result, long runTime) {
@@ -34,14 +32,9 @@ public class SuiteResultPrinter extends ResultPrinter {
         this.printFooter(result);
     }
 
-    void printWaitPrompt() {
-        this.getWriter().println();
-        this.getWriter().println("<RETURN> to continue");
-    }
-
     @Override
     protected void printHeader(long runTime) {
-        writer.println("Time: " + this.elapsedTimeAsString(runTime) + "s");
+        super.getWriter().println("Time: " + this.elapsedTimeAsString(runTime) + "s");
     }
 
     @Override
@@ -85,11 +78,6 @@ public class SuiteResultPrinter extends ResultPrinter {
     }
 
     @Override
-    public PrintStream getWriter() {
-        return super.getWriter();
-    }
-
-    @Override
     public void addError(Test test, Throwable e) {
         super.addError(test, e);
     }
@@ -106,13 +94,13 @@ public class SuiteResultPrinter extends ResultPrinter {
         long endTime = System.currentTimeMillis();
         long runTime = endTime - startTime;
         this.printHeader(runTime);
-        writer.println("-------------------------------------------------------");
+        super.getWriter().println("-------------------------------------------------------");
     }
 
     @Override
     public void startTest(Test test) {
         String testName = getTestName(test);
-        writer.println("Running " + testName);
+        super.getWriter().println("Running " + testName);
         runTimes.put(testName, System.currentTimeMillis());
     }
 
