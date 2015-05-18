@@ -3,7 +3,7 @@ package org.txazo.reflection;
 import org.junit.Assert;
 import org.junit.Test;
 import org.txazo.reflection.vo.ClassVo;
-import org.txazo.test.AbstractTest;
+import org.txazo.test.suite.SuiteTest;
 
 import java.lang.reflect.Field;
 
@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
  * @see java.lang.Class
  * @since 13.05.2015
  */
-public class ReflectionClass extends AbstractTest {
+public class ReflectionClass extends SuiteTest {
 
     @Test
     public void test1() throws ClassNotFoundException, NoSuchFieldException {
@@ -28,7 +28,7 @@ public class ReflectionClass extends AbstractTest {
         Assert.assertSame(c1, c4);
 
         /** 基本数据类型的class */
-        Field field = c1.getField("id");
+        Field field = c1.getDeclaredField("id");
         assertSame(field.getType(), int.class);
     }
 

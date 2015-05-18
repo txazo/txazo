@@ -3,7 +3,7 @@ package org.txazo.reflection;
 import org.junit.Test;
 import org.txazo.reflection.anno.FieldAnno;
 import org.txazo.reflection.vo.FieldVo;
-import org.txazo.test.AbstractTest;
+import org.txazo.test.suite.SuiteTest;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -16,7 +16,7 @@ import java.lang.reflect.Modifier;
  * @see java.lang.reflect.Field
  * @since 15.05.2015
  */
-public class ReflectionField extends AbstractTest {
+public class ReflectionField extends SuiteTest {
 
     @Test
     public void test1() throws Exception {

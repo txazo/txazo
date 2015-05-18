@@ -3,8 +3,6 @@ package org.txazo.test.suite;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import junit.textui.TestRunner;
-import org.txazo.test.annotation.Suite;
 import org.txazo.test.exception.TestException;
 import org.txazo.test.util.PackageUtils;
 
@@ -27,7 +25,8 @@ public class SuiteRunTest {
 
     public void run() {
         try {
-            TestRunner.run(suite());
+            SuiteTestRunner runner = new SuiteTestRunner();
+            runner.doRun(suite());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +37,9 @@ public class SuiteRunTest {
         try {
             Set<Class<?>> classes = PackageUtils.getClassesWithAnnotation(basePackage, Suite.class);
             for (Class<?> clazz : classes) {
-                suite.addTest(new JUnit4TestAdapter(clazz));
+                if (clazz != SuiteTest.class) {
+                    suite.addTest(new JUnit4TestAdapter(clazz));
+                }
             }
         } catch (Exception e) {
             throw new TestException(e);

@@ -1,4 +1,4 @@
-package org.txazo.test.annotation;
+package org.txazo.test.suite;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,8 +1,6 @@
 package org.txazo.test.suite;
 
-import org.junit.Test;
 import org.txazo.test.AbstractTest;
-import org.txazo.test.annotation.Suite;
 
 /**
  * SuiteTest
@@ -13,9 +11,5 @@ import org.txazo.test.annotation.Suite;
  */
 @Suite
 public class SuiteTest extends AbstractTest {
-
-    @Test
-    public void test() {
-    }
 
 }
