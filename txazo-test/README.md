@@ -42,7 +42,8 @@ public class MyTest extends SuiteTest {
     }
 
 }
-
+</pre>
+<pre>
 import org.txazo.test.suite.SuiteRunTest;
 
 public class SuiteRunTestTest {
