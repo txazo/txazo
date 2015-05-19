@@ -13,8 +13,10 @@
     <span class="octicon octicon-link"></span></a>
     集成Junit4单元测试
 </h3>
-<pre>
-<code>
+<pre><code>
+import org.junit.Test;
+import org.txazo.test.AbstractTest;
+
 public class MyTest extends AbstractTest {
 
     @Test
@@ -22,16 +24,17 @@ public class MyTest extends AbstractTest {
     }
 
 }
-</code>
-</pre>
+</code></pre>
 
 <h3>
     <a id="user-content-txazo-test-v1.0" class="anchor" href="#txazo-test-v1.0" aria-hidden="true">
     <span class="octicon octicon-link"></span></a>
     集成Junit4套件测试
 </h3>
-<pre>
-<code>
+<pre><code>
+import org.junit.Test;
+import org.txazo.test.suite.SuiteTest;
+
 public class MyTest extends SuiteTest {
 
     @Test
@@ -40,6 +43,8 @@ public class MyTest extends SuiteTest {
 
 }
 
+import org.txazo.test.suite.SuiteRunTest;
+
 public class SuiteRunTestTest {
 
     public static void main(String[] args) {
@@ -47,5 +52,4 @@ public class SuiteRunTestTest {
     }
 
 }
-</code>
-</pre>
+</code></pre>
