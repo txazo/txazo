@@ -6,7 +6,6 @@ import junit.textui.ResultPrinter;
 import org.junit.runner.Description;
 
 import java.io.PrintStream;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public class SuiteResultPrinter extends ResultPrinter {
 
     @Override
     protected void printHeader(long runTime) {
-        super.getWriter().println("Time: " + this.elapsedTimeAsString(runTime) + "s");
+        this.println("Time: " + super.elapsedTimeAsString(runTime) + "s");
     }
 
     @Override
@@ -48,43 +47,24 @@ public class SuiteResultPrinter extends ResultPrinter {
     }
 
     @Override
-    protected void printDefects(Enumeration<TestFailure> booBoos, int count, String type) {
-        super.printDefects(booBoos, count, type);
-    }
-
-    @Override
-    public void printDefect(TestFailure booBoo, int count) {
-        super.printDefect(booBoo, count);
-    }
-
-    @Override
-    protected void printDefectHeader(TestFailure booBoo, int count) {
-        super.printDefectHeader(booBoo, count);
-    }
-
-    @Override
-    protected void printDefectTrace(TestFailure booBoo) {
-        super.printDefectTrace(booBoo);
-    }
-
-    @Override
     protected void printFooter(TestResult result) {
-        super.printFooter(result);
-    }
-
-    @Override
-    protected String elapsedTimeAsString(long runTime) {
-        return super.elapsedTimeAsString(runTime);
+        if (result.wasSuccessful()) {
+            this.print("OK");
+            this.println(" (" + result.runCount() + " test" + (result.runCount() == 1 ? "" : "s") + ")");
+        } else {
+            this.println("FAILURES!!!");
+            this.println("Tests run: " + result.runCount() + ",  Failures: " + result.failureCount() + ",  Errors: " + result.errorCount());
+        }
     }
 
     @Override
     public void addError(Test test, Throwable e) {
-        super.addError(test, e);
+        e.printStackTrace(super.getWriter());
     }
 
     @Override
     public void addFailure(Test test, AssertionFailedError t) {
-        super.addFailure(test, t);
+        t.printStackTrace(super.getWriter());
     }
 
     @Override
@@ -108,6 +88,14 @@ public class SuiteResultPrinter extends ResultPrinter {
         JUnit4TestCaseFacade testCaseFacade = (JUnit4TestCaseFacade) test;
         Description desp = testCaseFacade.getDescription();
         return desp.getTestClass().getName() + "." + desp.getMethodName() + "()";
+    }
+
+    protected void print(Object msg) {
+        super.getWriter().print(msg);
+    }
+
+    protected void println(Object msg) {
+        super.getWriter().println(msg);
     }
 
 }

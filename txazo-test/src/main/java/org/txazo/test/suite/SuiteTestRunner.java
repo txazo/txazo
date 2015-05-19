@@ -34,9 +34,9 @@ public class SuiteTestRunner extends TestRunner {
     public TestResult doRun(Test suite) {
         TestResult result = super.createTestResult();
         result.addListener(printer);
-        this.printer.getWriter().println("-------------------------------------------------------");
-        this.printer.getWriter().println(" T E S T S");
-        this.printer.getWriter().println("-------------------------------------------------------");
+        this.printer.println("-------------------------------------------------------");
+        this.printer.println(" T E S T S");
+        this.printer.println("-------------------------------------------------------");
         long startTime = System.currentTimeMillis();
         suite.run(result);
         long endTime = System.currentTimeMillis();
