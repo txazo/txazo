@@ -1,5 +1,7 @@
 package org.txazo.test.suite;
 
+import org.txazo.test.junit4.suite.SuiteRunTest;
+
 /**
  * SuiteRunTestTest
  *

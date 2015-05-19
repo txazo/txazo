@@ -33,7 +33,7 @@ public class MyTest extends AbstractTest {
 </h3>
 <pre>
 import org.junit.Test;
-import org.txazo.test.suite.SuiteTest;
+import SuiteTest;
 
 public class MyTest extends SuiteTest {
 
@@ -44,7 +44,7 @@ public class MyTest extends SuiteTest {
 }
 </pre>
 <pre>
-import org.txazo.test.suite.SuiteRunTest;
+import SuiteRunTest;
 
 public class SuiteRunTestTest {
 

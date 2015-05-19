@@ -3,7 +3,7 @@ package org.txazo.reflection;
 import org.junit.Assert;
 import org.junit.Test;
 import org.txazo.reflection.vo.ClassVo;
-import org.txazo.test.suite.SuiteTest;
+import org.txazo.test.junit4.suite.SuiteTest;
 
 import java.lang.reflect.Field;
 

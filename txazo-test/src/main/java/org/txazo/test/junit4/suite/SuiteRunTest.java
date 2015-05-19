@@ -1,4 +1,4 @@
-package org.txazo.test.suite;
+package org.txazo.test.junit4.suite;
 
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
