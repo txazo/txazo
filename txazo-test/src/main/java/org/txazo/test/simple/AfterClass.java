@@ -1,0 +1,19 @@
+package org.txazo.test.simple;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * AfterClass
+ *
+ * @author txazo
+ * @email txazo1218@163.com
+ * @since 21.05.2015
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
+public @interface AfterClass {
+
+}
