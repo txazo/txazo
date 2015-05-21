@@ -1,7 +1,7 @@
 package org.txazo.test.util;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.txazo.test.exception.TestException;
 import org.txazo.test.filter.ClassFileFilter;
 
 import java.io.File;
@@ -26,7 +26,9 @@ public abstract class PackageUtils {
         return clazz != null && clazz.getAnnotation(annotation) != null;
     }
 
-    public static Set<Class<?>> getClassesWithAnnotation(String packageName, Class<? extends Annotation> annotation) throws IOException, ClassNotFoundException {
+    public static Set<Class<?>> getClassesWithAnnotation(String packageName, Class<? extends Annotation> annotation) {
+        AssertUtils.assertNotNull(annotation);
+        AssertUtils.assertNotBlank(packageName);
         Class<?> superClass = null;
         Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
         for (Class<?> clazz : getClasses(packageName)) {
@@ -45,30 +47,31 @@ public abstract class PackageUtils {
         return classes;
     }
 
-    public static Set<Class<?>> getClasses(String packageName) throws IOException, ClassNotFoundException {
-        if (StringUtils.isBlank(packageName)) {
-            throw new IllegalArgumentException("packageName is null");
-        }
-
+    public static Set<Class<?>> getClasses(String packageName) {
+        AssertUtils.assertNotBlank(packageName);
         boolean recursive = true;
         String packageDir = packageName.replace(".", "/");
         Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
 
         URL url = null;
         String filePath = null;
-        Enumeration<URL> dirs = Thread.currentThread().getContextClassLoader().getResources(packageDir);
-        while (dirs.hasMoreElements()) {
-            url = dirs.nextElement();
-            if ("file".equals(url.getProtocol())) {
-                filePath = URLDecoder.decode(url.getFile(), "UTF-8");
-                findAndAddClassesInPackageByFile(packageName, filePath, recursive, classes);
+        try {
+            Enumeration<URL> dirs = Thread.currentThread().getContextClassLoader().getResources(packageDir);
+            while (dirs.hasMoreElements()) {
+                url = dirs.nextElement();
+                if ("file".equals(url.getProtocol())) {
+                    filePath = URLDecoder.decode(url.getFile(), "UTF-8");
+                    findAndAddClassesInPackageByFile(packageName, filePath, recursive, classes);
+                }
             }
+        } catch (IOException e) {
+            throw new TestException(e);
         }
 
         return classes;
     }
 
-    private static void findAndAddClassesInPackageByFile(String packageName, String packagePath, boolean recursive, Set<Class<?>> classes) throws ClassNotFoundException {
+    private static void findAndAddClassesInPackageByFile(String packageName, String packagePath, boolean recursive, Set<Class<?>> classes) {
         File dir = new File(packagePath);
         if (!dir.exists() || !dir.isDirectory()) {
             return;
@@ -79,14 +82,18 @@ public abstract class PackageUtils {
             return;
         }
 
-        String className = null;
-        for (File file : files) {
-            if (file.isDirectory()) {
-                findAndAddClassesInPackageByFile(packageName + "." + file.getName(), file.getAbsolutePath(), recursive, classes);
-            } else {
-                className = file.getName().substring(0, file.getName().length() - 6);
-                classes.add(Thread.currentThread().getContextClassLoader().loadClass(packageName + "." + className));
+        try {
+            String className = null;
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    findAndAddClassesInPackageByFile(packageName + "." + file.getName(), file.getAbsolutePath(), recursive, classes);
+                } else {
+                    className = file.getName().substring(0, file.getName().length() - 6);
+                    classes.add(Thread.currentThread().getContextClassLoader().loadClass(packageName + "." + className));
+                }
             }
+        } catch (ClassNotFoundException e) {
+            throw new TestException(e);
         }
     }
 

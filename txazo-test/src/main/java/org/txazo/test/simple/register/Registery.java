@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public abstract class Registery {
 
-    private static final Map<Class<? extends AbstractTest>, Class<? extends TestListener>> listenerRegistery = new HashMap<>();
+    private static final Map<Class<? extends AbstractTest>, Class<? extends TestListener>> listenerRegistery = new HashMap<Class<? extends AbstractTest>, Class<? extends TestListener>>();
 
     static {
         registerListener(MethodTest.class, MethodTestListener.class);

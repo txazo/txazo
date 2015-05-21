@@ -13,7 +13,7 @@ public abstract class AbstractTest {
 
     protected TestListener listener;
 
-    public void runTest() {
+    public final void runTest() {
         listener.testBefore();
         this.test();
         listener.testAfter();

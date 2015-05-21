@@ -32,7 +32,7 @@ public class SuiteRunTest {
         }
     }
 
-    public Test suite() throws TestException {
+    public Test suite() {
         TestSuite suite = new TestSuite();
         try {
             Set<Class<?>> classes = PackageUtils.getClassesWithAnnotation(basePackage, Suite.class);

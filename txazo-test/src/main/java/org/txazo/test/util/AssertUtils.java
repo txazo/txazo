@@ -1,6 +1,7 @@
 package org.txazo.test.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.txazo.test.exception.TestException;
 
 /**
  * AssertUtils
@@ -9,26 +10,26 @@ import org.apache.commons.lang3.StringUtils;
  * @email txazo1218@163.com
  * @since 21.05.2015
  */
-public class AssertUtils {
+public abstract class AssertUtils {
 
     public static void assertNotNull(Object... objs) {
         if (objs == null) {
-            throw new RuntimeException("args is null");
+            throw new TestException("args is null");
         }
         for (Object obj : objs) {
             if (obj == null) {
-                throw new RuntimeException("args is null");
+                throw new TestException("args is null");
             }
         }
     }
 
     public static void assertNotBlank(String... strs) {
         if (strs == null) {
-            throw new RuntimeException("args is blank");
+            throw new TestException("args is blank");
         }
         for (String str : strs) {
             if (StringUtils.isBlank(str)) {
-                throw new RuntimeException("args is blank");
+                throw new TestException("args is blank");
             }
         }
     }

@@ -7,7 +7,7 @@ package org.txazo.test.exception;
  * @email txazo1218@163.com
  * @since 17.05.2015
  */
-public class TestException extends Exception {
+public class TestException extends RuntimeException {
 
     public TestException() {
     }

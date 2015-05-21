@@ -1,10 +1,16 @@
 package org.txazo.test.simple.runner;
 
-import org.txazo.test.simple.suite.TestSuite;
+import org.txazo.test.simple.suite.Suite;
+import org.txazo.test.simple.test.ClassTest;
+import org.txazo.test.simple.test.MethodTest;
+import org.txazo.test.simple.test.SuiteTest;
+import org.txazo.test.simple.builder.TestBuilder;
 import org.txazo.test.util.AssertUtils;
+import org.txazo.test.util.PackageUtils;
+import org.txazo.test.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.Set;
 
 /**
  * SimpleTestRunner
@@ -16,59 +22,46 @@ import java.util.List;
 public class SimpleTestRunner implements TestRunner {
 
     @Override
-    public TestResult run(String className) {
-        AssertUtils.assertNotBlank(className);
-        Class<?> clazz = null;
-        try {
-            clazz = Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return run(clazz);
+    public void run(String className) {
+        this.run(ReflectionUtils.getClass(className));
     }
 
     @Override
-    public TestResult run(String packageName, boolean recursive) {
-        return null;
+    public void run(String packageName, boolean recursive) {
+        this.run(PackageUtils.getClassesWithAnnotation(packageName, Suite.class));
     }
 
     @Override
-    public TestResult run(Class<?> clazz) {
-        AssertUtils.assertNotNull(clazz);
-        Method[] methods = clazz.getMethods();
-        for (Method method : methods) {
-            run(clazz, method);
-        }
-        return null;
+    public void run(Class<?> clazz) {
+        this.run(TestBuilder.wrapSuiteTest(TestBuilder.buildClassTest(clazz)));
     }
 
     @Override
-    public TestResult run(Class<?> clazz, Method method) {
-        AssertUtils.assertNotNull(clazz, method);
-        return null;
+    public void run(Class<?> clazz, Method method) {
+        this.run(TestBuilder.wrapSuiteTest(TestBuilder.buildMethodTest(clazz, method)));
     }
 
     @Override
-    public TestResult run(Class<?> clazz, String methodName, Class<?>[] paramTypes) {
-        AssertUtils.assertNotNull(clazz);
-        AssertUtils.assertNotBlank(methodName);
-        Method method = null;
-        try {
-            method = clazz.getMethod(methodName, paramTypes);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        return run(clazz, method);
+    public void run(Class<?> clazz, String methodName, Class<?>[] paramTypes) {
+        this.run(clazz, ReflectionUtils.getMethod(clazz, methodName, paramTypes));
     }
 
     @Override
-    public TestResult run(List<Class<?>> classes) {
-        return null;
+    public void run(Set<Class<?>> classes) {
+        this.run(TestBuilder.buildSuiteTest(classes));
+    }
+
+    private void run(MethodTest methodTest) {
+        this.run(TestBuilder.wrapSuiteTest(methodTest));
+    }
+
+    private void run(ClassTest classTest) {
+        this.run(TestBuilder.wrapSuiteTest(classTest));
     }
 
     @Override
-    public TestResult run(TestSuite suite) {
-        return null;
+    public void run(SuiteTest suiteTest) {
+        AssertUtils.assertNotNull(suiteTest);
     }
 
 }

@@ -1,9 +1,9 @@
 package org.txazo.test.simple.runner;
 
-import org.txazo.test.simple.suite.TestSuite;
+import org.txazo.test.simple.test.SuiteTest;
 
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.Set;
 
 /**
  * TestRunner
@@ -14,18 +14,18 @@ import java.util.List;
  */
 public interface TestRunner {
 
-    public TestResult run(String className);
+    public void run(String className);
 
-    public TestResult run(String packageName, boolean recursive);
+    public void run(String packageName, boolean recursive);
 
-    public TestResult run(Class<?> clazz);
+    public void run(Class<?> clazz);
 
-    public TestResult run(Class<?> clazz, Method method);
+    public void run(Class<?> clazz, Method method);
 
-    public TestResult run(Class<?> clazz, String method, Class<?>[] params);
+    public void run(Class<?> clazz, String method, Class<?>[] paramTypes);
 
-    public TestResult run(List<Class<?>> classes);
+    public void run(Set<Class<?>> classes);
 
-    public TestResult run(TestSuite suite);
+    public void run(SuiteTest suiteTest);
 
 }

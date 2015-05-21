@@ -1,4 +1,4 @@
-package org.txazo.test.simple.runner;
+package org.txazo.test.simple.result;
 
 /**
  * TestResult
