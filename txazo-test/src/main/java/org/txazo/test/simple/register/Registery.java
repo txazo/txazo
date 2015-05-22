@@ -1,14 +1,13 @@
 package org.txazo.test.simple.register;
 
-import org.txazo.test.simple.listener.ClassTestListener;
-import org.txazo.test.simple.listener.MethodTestListener;
-import org.txazo.test.simple.listener.SuiteTestListener;
-import org.txazo.test.simple.listener.TestListener;
+import org.txazo.test.simple.builder.BuildFactory;
+import org.txazo.test.simple.listener.*;
 import org.txazo.test.simple.test.AbstractTest;
 import org.txazo.test.simple.test.ClassTest;
 import org.txazo.test.simple.test.MethodTest;
 import org.txazo.test.simple.test.SuiteTest;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +20,7 @@ import java.util.Map;
  */
 public abstract class Registery {
 
-    private static final Map<Class<? extends AbstractTest>, Class<? extends TestListener>> listenerRegistery = new HashMap<Class<? extends AbstractTest>, Class<? extends TestListener>>();
+    private static final Map<Class<? extends AbstractTest>, Class<? extends AbstractTestListener>> listenerRegistery = new HashMap<Class<? extends AbstractTest>, Class<? extends AbstractTestListener>>();
 
     static {
         registerListener(MethodTest.class, MethodTestListener.class);
@@ -29,8 +28,12 @@ public abstract class Registery {
         registerListener(SuiteTest.class, SuiteTestListener.class);
     }
 
-    public static void registerListener(Class<? extends AbstractTest> testClass, Class<? extends TestListener> listenerClass) {
+    public static void registerListener(Class<? extends AbstractTest> testClass, Class<? extends AbstractTestListener> listenerClass) {
         listenerRegistery.put(testClass, listenerClass);
+    }
+
+    public static AbstractTestListener getRegisterTestListener(Class<? extends AbstractTest> testClass, PrintStream writer) {
+        return BuildFactory.buildTestListener(listenerRegistery.get(testClass), writer);
     }
 
 }

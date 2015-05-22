@@ -9,4 +9,9 @@ package org.txazo.test.simple.runner;
  */
 public class SimpleTestRunnerTest {
 
+    public static void main(String[] args) {
+        TestRunner runner = new SimpleTestRunner();
+        runner.run("org.txazo.test.simple.runner", false);
+    }
+
 }

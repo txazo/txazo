@@ -1,5 +1,6 @@
 package org.txazo.test.simple.runner;
 
+import org.txazo.test.simple.register.Registery;
 import org.txazo.test.simple.suite.Suite;
 import org.txazo.test.simple.test.ClassTest;
 import org.txazo.test.simple.test.MethodTest;
@@ -9,6 +10,7 @@ import org.txazo.test.util.AssertUtils;
 import org.txazo.test.util.PackageUtils;
 import org.txazo.test.util.ReflectionUtils;
 
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.util.Set;
 
@@ -62,6 +64,11 @@ public class SimpleTestRunner implements TestRunner {
     @Override
     public void run(SuiteTest suiteTest) {
         AssertUtils.assertNotNull(suiteTest);
+
+        PrintStream writer = System.err;
+        suiteTest.registerListener(Registery.getRegisterTestListener(suiteTest.getClass(), writer));
+
+        suiteTest.runTest();
     }
 
 }

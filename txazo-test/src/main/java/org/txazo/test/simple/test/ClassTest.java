@@ -1,6 +1,8 @@
 package org.txazo.test.simple.test;
 
 import org.txazo.test.simple.builder.TestBuilder;
+import org.txazo.test.simple.listener.AbstractTestListener;
+import org.txazo.test.simple.register.Registery;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -31,11 +33,19 @@ public class ClassTest extends AbstractTest {
 
     @Override
     public void test() {
-        listener.testBefore();
         for (Iterator<Map.Entry<Method, MethodTest>> i = methodTests.entrySet().iterator(); i.hasNext(); ) {
-            i.next().getValue().test();
+            i.next().getValue().runTest();
         }
-        listener.testAfter();
+    }
+
+    @Override
+    public void registerListener(AbstractTestListener listener) {
+        super.registerListener(listener);
+        MethodTest methodTest = null;
+        for (Iterator<Map.Entry<Method, MethodTest>> i = methodTests.entrySet().iterator(); i.hasNext(); ) {
+            methodTest = i.next().getValue();
+            methodTest.registerListener(Registery.getRegisterTestListener(methodTest.getClass(), listener.getWriter()));
+        }
     }
 
     public Class<?> getClazz() {

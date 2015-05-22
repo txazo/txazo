@@ -1,5 +1,7 @@
 package org.txazo.test.simple.test;
 
+import org.txazo.test.simple.runner.TestExecuor;
+
 import java.lang.reflect.Method;
 
 /**
@@ -14,6 +16,8 @@ public class MethodTest extends AbstractTest {
     private Class<?> clazz;
     private Method method;
 
+    private static TestExecuor execuor = new TestExecuor();
+
     public MethodTest(Class<?> clazz, Method method) {
         this.clazz = clazz;
         this.method = method;
@@ -21,8 +25,6 @@ public class MethodTest extends AbstractTest {
 
     @Override
     public void test() {
-        listener.testBefore();
-        listener.testAfter();
     }
 
     public Class<?> getClazz() {

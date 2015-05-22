@@ -1,9 +1,8 @@
 package org.txazo.util;
 
-import org.springframework.util.ConcurrentReferenceHashMap;
-
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 反射工具类
@@ -14,7 +13,7 @@ import java.util.Map;
  */
 public abstract class ReflectionUtils {
 
-    private static final Map<Class<?>, Field[]> declaredFieldsCache = new ConcurrentReferenceHashMap<Class<?>, Field[]>(256);
+    private static final Map<Class<?>, Field[]> declaredFieldsCache = new ConcurrentHashMap<Class<?>, Field[]>(256);
 
     /**
      * 查找Field

@@ -1,7 +1,5 @@
 package org.txazo.util;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 /**
  * 字符串工具类
  *
