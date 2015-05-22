@@ -21,9 +21,8 @@ import java.util.Set;
  */
 public class TestBuilder {
 
-    public static MethodTest buildMethodTest(Class<?> clazz, Method method) {
-        AssertUtils.assertNotNull(clazz, method);
-        return new MethodTest(clazz, method);
+    public static MethodTest buildMethodTest(Method method) {
+        return new MethodTest(method);
     }
 
     public static Map<Method, MethodTest> buildMethodTests(Class<?> clazz) {
@@ -32,7 +31,7 @@ public class TestBuilder {
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
             if (method.getAnnotation(Test.class) != null) {
-                methodTests.put(method, buildMethodTest(clazz, method));
+                methodTests.put(method, buildMethodTest(method));
             }
         }
         return methodTests;

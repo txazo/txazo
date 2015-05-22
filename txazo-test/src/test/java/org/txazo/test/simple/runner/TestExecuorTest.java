@@ -15,12 +15,10 @@ import java.lang.reflect.Method;
  */
 public class TestExecuorTest {
 
-    private TestExecuor execuor = new TestExecuor();
-
     @Test
     public void testGetInstance() throws InstantiationException, IllegalAccessException {
-        TestExecuorTest test1 = execuor.getInstance(TestExecuorTest.class);
-        TestExecuorTest test2 = execuor.getInstance(TestExecuorTest.class);
+        TestExecuorTest test1 = TestExecuor.getInstance(TestExecuorTest.class);
+        TestExecuorTest test2 = TestExecuor.getInstance(TestExecuorTest.class);
         Assert.assertSame(test1, test2);
         Assert.assertSame(test1.getClass(), TestExecuorTest.class);
     }
@@ -38,12 +36,12 @@ public class TestExecuorTest {
     @Test
     public void testExecute1() throws NoSuchMethodException {
         Method method = TestExecuorTest.class.getDeclaredMethod("test", null);
-        execuor.executeNoneStaticMethod(method);
+        TestExecuor.executeNoneStaticMethod(method);
     }
 
     @Test
     public void testExecute2() {
-        execuor.executeAnnotationMethods(TestExecuorTest.class, Before.class, false);
+        TestExecuor.executeAnnotationMethods(TestExecuorTest.class, Before.class, false);
     }
 
     @Test

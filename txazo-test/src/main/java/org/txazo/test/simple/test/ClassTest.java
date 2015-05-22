@@ -1,8 +1,10 @@
 package org.txazo.test.simple.test;
 
+import org.txazo.test.simple.AfterClass;
+import org.txazo.test.simple.BeforeClass;
 import org.txazo.test.simple.builder.TestBuilder;
-import org.txazo.test.simple.listener.AbstractTestListener;
-import org.txazo.test.simple.register.Registery;
+import org.txazo.test.simple.listener.TestListener;
+import org.txazo.test.simple.runner.TestExecuor;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -33,18 +35,18 @@ public class ClassTest extends AbstractTest {
 
     @Override
     public void test() {
+        TestExecuor.executeAnnotationMethods(clazz, BeforeClass.class, true);
         for (Iterator<Map.Entry<Method, MethodTest>> i = methodTests.entrySet().iterator(); i.hasNext(); ) {
             i.next().getValue().runTest();
         }
+        TestExecuor.executeAnnotationMethods(clazz, AfterClass.class, true);
     }
 
     @Override
-    public void registerListener(AbstractTestListener listener) {
+    public void registerListener(TestListener listener) {
         super.registerListener(listener);
-        MethodTest methodTest = null;
         for (Iterator<Map.Entry<Method, MethodTest>> i = methodTests.entrySet().iterator(); i.hasNext(); ) {
-            methodTest = i.next().getValue();
-            methodTest.registerListener(Registery.getRegisterTestListener(methodTest.getClass(), listener.getWriter()));
+            i.next().getValue().registerListener(listener);
         }
     }
 
@@ -53,6 +55,9 @@ public class ClassTest extends AbstractTest {
     }
 
     public synchronized void addMethodTest(MethodTest methodTest) {
+        if (clazz == null) {
+            clazz = methodTest.getClazz();
+        }
         if (!methodTests.containsKey(methodTest.getMethod())) {
             methodTests.put(methodTest.getMethod(), methodTest);
         }

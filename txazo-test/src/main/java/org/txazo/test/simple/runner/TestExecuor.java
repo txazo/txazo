@@ -18,12 +18,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * @email txazo1218@163.com
  * @since 22.05.2015
  */
-public class TestExecuor {
+public abstract class TestExecuor {
 
-    private ReentrantLock lock = new ReentrantLock();
-    private Map<Class<?>, Object> instances = new HashMap<Class<?>, Object>();
+    private static ReentrantLock lock = new ReentrantLock();
+    private static Map<Class<?>, Object> instances = new HashMap<Class<?>, Object>();
 
-    protected <T> T getInstance(Class<T> clazz) throws IllegalAccessException, InstantiationException {
+    protected static <T> T getInstance(Class<T> clazz) throws IllegalAccessException, InstantiationException {
         AssertUtils.assertNotNull(clazz);
         if (instances.containsKey(clazz)) {
             return (T) instances.get(clazz);
@@ -44,7 +44,7 @@ public class TestExecuor {
         return instance;
     }
 
-    public void executeStaticMethod(Method method) {
+    public static void executeStaticMethod(Method method) {
         AssertUtils.assertNotNull(method);
         if (!Modifier.isStatic(method.getModifiers())) {
             throw new TestException("method " + method.getName() + "() must be static");
@@ -59,7 +59,7 @@ public class TestExecuor {
         }
     }
 
-    public void executeNoneStaticMethod(Method method) {
+    public static void executeNoneStaticMethod(Method method) {
         AssertUtils.assertNotNull(method);
         if (Modifier.isStatic(method.getModifiers())) {
             throw new TestException("method " + method.getName() + "() must be not static");
@@ -74,7 +74,7 @@ public class TestExecuor {
         }
     }
 
-    public void executeAnnotationMethods(Class<?> clazz, Class<? extends Annotation> annotationClass, boolean isStatic) {
+    public static void executeAnnotationMethods(Class<?> clazz, Class<? extends Annotation> annotationClass, boolean isStatic) {
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
             if (method.getAnnotation(annotationClass) != null) {

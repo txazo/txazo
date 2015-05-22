@@ -1,6 +1,6 @@
 package org.txazo.test.simple.runner;
 
-import org.txazo.test.simple.register.Registery;
+import org.txazo.test.simple.listener.SuiteTestListener;
 import org.txazo.test.simple.suite.Suite;
 import org.txazo.test.simple.test.ClassTest;
 import org.txazo.test.simple.test.MethodTest;
@@ -24,41 +24,41 @@ import java.util.Set;
 public class SimpleTestRunner implements TestRunner {
 
     @Override
-    public void run(String className) {
-        this.run(ReflectionUtils.getClass(className));
+    public void run(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
+        run(ReflectionUtils.getMethod(clazz, methodName, parameterTypes));
     }
 
     @Override
-    public void run(String packageName, boolean recursive) {
-        this.run(PackageUtils.getClassesWithAnnotation(packageName, Suite.class, recursive));
+    public void run(Method method) {
+        run(TestBuilder.buildSuiteTest(TestBuilder.buildMethodTest(method)));
+    }
+
+    @Override
+    public void run(String className) {
+        run(ReflectionUtils.getClass(className));
     }
 
     @Override
     public void run(Class<?> clazz) {
-        this.run(TestBuilder.buildSuiteTest(TestBuilder.buildClassTest(clazz)));
+        run(TestBuilder.buildSuiteTest(TestBuilder.buildClassTest(clazz)));
     }
 
     @Override
-    public void run(Class<?> clazz, Method method) {
-        this.run(TestBuilder.buildSuiteTest(TestBuilder.buildMethodTest(clazz, method)));
-    }
-
-    @Override
-    public void run(Class<?> clazz, String methodName, Class<?>[] paramTypes) {
-        this.run(clazz, ReflectionUtils.getMethod(clazz, methodName, paramTypes));
+    public void run(String packageName, boolean recursive) {
+        run(PackageUtils.getClassesWithAnnotation(packageName, Suite.class, recursive));
     }
 
     @Override
     public void run(Set<Class<?>> classes) {
-        this.run(TestBuilder.buildSuiteTest(classes));
+        run(TestBuilder.buildSuiteTest(classes));
     }
 
     private void run(MethodTest methodTest) {
-        this.run(TestBuilder.buildSuiteTest(methodTest));
+        run(TestBuilder.buildSuiteTest(methodTest));
     }
 
     private void run(ClassTest classTest) {
-        this.run(TestBuilder.buildSuiteTest(classTest));
+        run(TestBuilder.buildSuiteTest(classTest));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SimpleTestRunner implements TestRunner {
         AssertUtils.assertNotNull(suiteTest);
 
         PrintStream writer = System.err;
-        suiteTest.registerListener(Registery.getRegisterTestListener(suiteTest.getClass(), writer));
+        suiteTest.registerListener(new SuiteTestListener(writer));
 
         suiteTest.runTest();
     }

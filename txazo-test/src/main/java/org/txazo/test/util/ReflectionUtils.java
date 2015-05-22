@@ -24,12 +24,12 @@ public abstract class ReflectionUtils {
         return clazz;
     }
 
-    public static Method getMethod(Class<?> clazz, String methodName, Class<?>[] paramTypes) {
-        AssertUtils.assertNotNull(clazz, paramTypes);
+    public static Method getMethod(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
+        AssertUtils.assertNotNull(clazz);
         AssertUtils.assertNotBlank(methodName);
         Method method = null;
         try {
-            method = clazz.getMethod(methodName, paramTypes);
+            method = clazz.getMethod(methodName, parameterTypes);
         } catch (NoSuchMethodException e) {
             throw new TestException(e);
         }

@@ -1,5 +1,7 @@
 package org.txazo.test.simple.listener;
 
+import org.txazo.test.simple.test.AbstractTest;
+
 /**
  * TestListener
  *
@@ -9,8 +11,8 @@ package org.txazo.test.simple.listener;
  */
 public interface TestListener {
 
-    public void testBefore();
+    public void testBefore(AbstractTest test);
 
-    public void testAfter();
+    public void testAfter(AbstractTest test);
 
 }

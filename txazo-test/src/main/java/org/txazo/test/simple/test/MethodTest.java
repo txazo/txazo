@@ -1,5 +1,7 @@
 package org.txazo.test.simple.test;
 
+import org.txazo.test.simple.After;
+import org.txazo.test.simple.Before;
 import org.txazo.test.simple.runner.TestExecuor;
 
 import java.lang.reflect.Method;
@@ -16,15 +18,16 @@ public class MethodTest extends AbstractTest {
     private Class<?> clazz;
     private Method method;
 
-    private static TestExecuor execuor = new TestExecuor();
-
-    public MethodTest(Class<?> clazz, Method method) {
-        this.clazz = clazz;
+    public MethodTest(Method method) {
+        this.clazz = method.getDeclaringClass();
         this.method = method;
     }
 
     @Override
     public void test() {
+        TestExecuor.executeAnnotationMethods(clazz, Before.class, false);
+        TestExecuor.executeNoneStaticMethod(method);
+        TestExecuor.executeAnnotationMethods(clazz, After.class, false);
     }
 
     public Class<?> getClazz() {

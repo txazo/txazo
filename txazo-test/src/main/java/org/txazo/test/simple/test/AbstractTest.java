@@ -1,6 +1,6 @@
 package org.txazo.test.simple.test;
 
-import org.txazo.test.simple.listener.AbstractTestListener;
+import org.txazo.test.simple.listener.TestListener;
 
 /**
  * AbstractTest
@@ -11,17 +11,17 @@ import org.txazo.test.simple.listener.AbstractTestListener;
  */
 public abstract class AbstractTest {
 
-    protected AbstractTestListener listener;
+    protected TestListener listener;
 
     public final void runTest() {
-        listener.testBefore();
+        listener.testBefore(this);
         test();
-        listener.testAfter();
+        listener.testAfter(this);
     }
 
     public abstract void test();
 
-    public void registerListener(AbstractTestListener listener) {
+    public void registerListener(TestListener listener) {
         this.listener = listener;
     }
 

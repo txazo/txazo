@@ -14,15 +14,15 @@ import java.util.Set;
  */
 public interface TestRunner {
 
-    public void run(String className);
+    public void run(Class<?> clazz, String methodName, Class<?>... parameterTypes);
 
-    public void run(String packageName, boolean recursive);
+    public void run(Method method);
+
+    public void run(String className);
 
     public void run(Class<?> clazz);
 
-    public void run(Class<?> clazz, Method method);
-
-    public void run(Class<?> clazz, String methodName, Class<?>[] paramTypes);
+    public void run(String packageName, boolean recursive);
 
     public void run(Set<Class<?>> classes);
 
