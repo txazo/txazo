@@ -7,7 +7,9 @@ import org.txazo.test.simple.test.SuiteTest;
 import org.txazo.test.util.AssertUtils;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -24,28 +26,32 @@ public class TestBuilder {
         return new MethodTest(clazz, method);
     }
 
-    public static Set<MethodTest> buildMethodTests(Class<?> clazz) {
+    public static Map<Method, MethodTest> buildMethodTests(Class<?> clazz) {
         AssertUtils.assertNotNull(clazz);
-        Set<MethodTest> methodTests = new HashSet<MethodTest>();
+        Map<Method, MethodTest> methodTests = new HashMap<Method, MethodTest>();
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
             if (method.getAnnotation(Test.class) != null) {
-                methodTests.add(buildMethodTest(clazz, method));
+                methodTests.put(method, buildMethodTest(clazz, method));
             }
         }
         return methodTests;
     }
 
     public static ClassTest buildClassTest(Class<?> clazz) {
-        AssertUtils.assertNotNull(clazz);
-        return new ClassTest(clazz);
+        return buildClassTest(clazz, true);
     }
 
-    public static Set<ClassTest> buildClassTests(Set<Class<?>> classes) {
+    public static ClassTest buildClassTest(Class<?> clazz, boolean init) {
+        AssertUtils.assertNotNull(clazz);
+        return new ClassTest(clazz, init);
+    }
+
+    public static Map<Class<?>, ClassTest> buildClassTests(Set<Class<?>> classes) {
         AssertUtils.assertNotNull(classes);
-        Set<ClassTest> classTests = new HashSet<ClassTest>();
+        Map<Class<?>, ClassTest> classTests = new HashMap<Class<?>, ClassTest>();
         for (Class<?> clazz : classes) {
-            classTests.add(buildClassTest(clazz));
+            classTests.put(clazz, buildClassTest(clazz));
         }
         return classTests;
     }
@@ -55,13 +61,13 @@ public class TestBuilder {
         return new SuiteTest(classes);
     }
 
-    public static SuiteTest wrapSuiteTest(MethodTest methodTest) {
+    public static SuiteTest buildSuiteTest(MethodTest methodTest) {
         ClassTest classTest = new ClassTest();
         classTest.addMethodTest(methodTest);
-        return wrapSuiteTest(classTest);
+        return buildSuiteTest(classTest);
     }
 
-    public static SuiteTest wrapSuiteTest(ClassTest classTest) {
+    public static SuiteTest buildSuiteTest(ClassTest classTest) {
         SuiteTest suiteTest = new SuiteTest();
         suiteTest.addClassTest(classTest);
         return suiteTest;

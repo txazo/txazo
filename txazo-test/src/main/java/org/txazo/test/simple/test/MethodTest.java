@@ -21,6 +21,16 @@ public class MethodTest extends AbstractTest {
 
     @Override
     public void test() {
+        listener.testBefore();
+        listener.testAfter();
+    }
+
+    public Class<?> getClazz() {
+        return clazz;
+    }
+
+    public Method getMethod() {
+        return method;
     }
 
 }

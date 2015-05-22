@@ -28,17 +28,17 @@ public class SimpleTestRunner implements TestRunner {
 
     @Override
     public void run(String packageName, boolean recursive) {
-        this.run(PackageUtils.getClassesWithAnnotation(packageName, Suite.class));
+        this.run(PackageUtils.getClassesWithAnnotation(packageName, Suite.class, recursive));
     }
 
     @Override
     public void run(Class<?> clazz) {
-        this.run(TestBuilder.wrapSuiteTest(TestBuilder.buildClassTest(clazz)));
+        this.run(TestBuilder.buildSuiteTest(TestBuilder.buildClassTest(clazz)));
     }
 
     @Override
     public void run(Class<?> clazz, Method method) {
-        this.run(TestBuilder.wrapSuiteTest(TestBuilder.buildMethodTest(clazz, method)));
+        this.run(TestBuilder.buildSuiteTest(TestBuilder.buildMethodTest(clazz, method)));
     }
 
     @Override
@@ -52,11 +52,11 @@ public class SimpleTestRunner implements TestRunner {
     }
 
     private void run(MethodTest methodTest) {
-        this.run(TestBuilder.wrapSuiteTest(methodTest));
+        this.run(TestBuilder.buildSuiteTest(methodTest));
     }
 
     private void run(ClassTest classTest) {
-        this.run(TestBuilder.wrapSuiteTest(classTest));
+        this.run(TestBuilder.buildSuiteTest(classTest));
     }
 
     @Override

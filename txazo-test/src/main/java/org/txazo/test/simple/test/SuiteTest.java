@@ -1,10 +1,14 @@
 package org.txazo.test.simple.test;
 
 import org.txazo.test.simple.builder.TestBuilder;
+import org.txazo.test.simple.suite.Suite;
+import org.txazo.test.util.PackageUtils;
 import org.txazo.test.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,46 +20,63 @@ import java.util.Set;
  */
 public class SuiteTest extends AbstractTest {
 
-    private Set<Class<?>> classes;
-    private Set<ClassTest> classTests = new HashSet<ClassTest>();
+    private Map<Class<?>, ClassTest> classTests = new HashMap<Class<?>, ClassTest>();
 
     public SuiteTest() {
     }
 
     public SuiteTest(Set<Class<?>> classes) {
-        this.classes = classes;
         this.classTests = TestBuilder.buildClassTests(classes);
     }
 
     @Override
     public void test() {
-
+        listener.testBefore();
+        for (Iterator<Map.Entry<Class<?>, ClassTest>> i = classTests.entrySet().iterator(); i.hasNext(); ) {
+            i.next().getValue().test();
+        }
+        listener.testAfter();
     }
 
-    public void addClassTest(ClassTest classTest) {
-        classTests.add(classTest);
+    public synchronized void addClassTest(ClassTest classTest) {
+        if (!classTests.containsKey(classTest.getClazz())) {
+            classTests.put(classTest.getClazz(), classTest);
+        }
+    }
+
+    public synchronized void addMethodTest(MethodTest methodTest) {
+        if (classTests.containsKey(methodTest.getClazz())) {
+            classTests.get(methodTest.getClazz()).addMethodTest(methodTest);
+        } else {
+            ClassTest classTest = TestBuilder.buildClassTest(methodTest.getClazz(), false);
+            classTest.addMethodTest(methodTest);
+            addClassTest(classTest);
+        }
     }
 
     public void addSuiteTest(String className) {
-        this.addSuiteTest(ReflectionUtils.getClass(className));
+        addSuiteTest(ReflectionUtils.getClass(className));
     }
 
     public void addSuiteTest(String packageName, boolean recursive) {
+        addSuiteTest(PackageUtils.getClassesWithAnnotation(packageName, Suite.class, recursive));
     }
 
     public void addSuiteTest(Class<?> clazz) {
-        classTests.add(TestBuilder.buildClassTest(clazz));
+        addClassTest(TestBuilder.buildClassTest(clazz));
     }
 
     public void addSuiteTest(Class<?> clazz, Method method) {
+        addMethodTest(TestBuilder.buildMethodTest(clazz, method));
     }
 
     public void addSuiteTest(Class<?> clazz, String method, Class<?>[] paramTypes) {
+        addSuiteTest(clazz, ReflectionUtils.getMethod(clazz, method, paramTypes));
     }
 
-    public void addSuiteTest(Set<Class<?>> classes) {
-        Set<ClassTest> classTests = TestBuilder.buildClassTests(classes);
-        this.classTests.addAll(classTests);
+    public synchronized void addSuiteTest(Set<Class<?>> classes) {
+        Map<Class<?>, ClassTest> classTests = TestBuilder.buildClassTests(classes);
+        this.classTests.putAll(classTests);
     }
 
 }

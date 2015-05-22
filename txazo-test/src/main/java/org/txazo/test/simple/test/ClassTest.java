@@ -2,8 +2,10 @@ package org.txazo.test.simple.test;
 
 import org.txazo.test.simple.builder.TestBuilder;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * ClassTest
@@ -15,36 +17,35 @@ import java.util.Set;
 public class ClassTest extends AbstractTest {
 
     private Class<?> clazz;
-    private Set<MethodTest> methodTests = new HashSet<MethodTest>();
+    private Map<Method, MethodTest> methodTests = new HashMap<Method, MethodTest>();
 
     public ClassTest() {
     }
 
-    public ClassTest(Class<?> clazz) {
+    public ClassTest(Class<?> clazz, boolean init) {
         this.clazz = clazz;
-        this.methodTests = TestBuilder.buildMethodTests(clazz);
+        if (init) {
+            this.methodTests = TestBuilder.buildMethodTests(clazz);
+        }
     }
 
     @Override
     public void test() {
-
+        listener.testBefore();
+        for (Iterator<Map.Entry<Method, MethodTest>> i = methodTests.entrySet().iterator(); i.hasNext(); ) {
+            i.next().getValue().test();
+        }
+        listener.testAfter();
     }
 
-    public void addMethodTest(MethodTest methodTest) {
-        methodTests.add(methodTest);
+    public Class<?> getClazz() {
+        return clazz;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ClassTest classTest = (ClassTest) o;
-        return !(clazz != null ? !clazz.equals(classTest.clazz) : classTest.clazz != null);
-
+    public synchronized void addMethodTest(MethodTest methodTest) {
+        if (!methodTests.containsKey(methodTest.getMethod())) {
+            methodTests.put(methodTest.getMethod(), methodTest);
+        }
     }
 
-    @Override
-    public int hashCode() {
-        return clazz != null ? clazz.hashCode() : 0;
-    }
 }

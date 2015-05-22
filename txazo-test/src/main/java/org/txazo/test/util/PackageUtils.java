@@ -27,11 +27,15 @@ public abstract class PackageUtils {
     }
 
     public static Set<Class<?>> getClassesWithAnnotation(String packageName, Class<? extends Annotation> annotation) {
+        return getClassesWithAnnotation(packageName, annotation, true);
+    }
+
+    public static Set<Class<?>> getClassesWithAnnotation(String packageName, Class<? extends Annotation> annotation, boolean recursive) {
         AssertUtils.assertNotNull(annotation);
         AssertUtils.assertNotBlank(packageName);
         Class<?> superClass = null;
         Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
-        for (Class<?> clazz : getClasses(packageName)) {
+        for (Class<?> clazz : getClasses(packageName, recursive)) {
             superClass = clazz;
             while (superClass != Object.class) {
                 if (superClass == null || superClass.isInterface() || superClass.isAnnotation()) {
@@ -48,8 +52,11 @@ public abstract class PackageUtils {
     }
 
     public static Set<Class<?>> getClasses(String packageName) {
+        return getClasses(packageName, true);
+    }
+
+    public static Set<Class<?>> getClasses(String packageName, boolean recursive) {
         AssertUtils.assertNotBlank(packageName);
-        boolean recursive = true;
         String packageDir = packageName.replace(".", "/");
         Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
 

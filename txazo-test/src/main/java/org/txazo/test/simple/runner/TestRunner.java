@@ -22,7 +22,7 @@ public interface TestRunner {
 
     public void run(Class<?> clazz, Method method);
 
-    public void run(Class<?> clazz, String method, Class<?>[] paramTypes);
+    public void run(Class<?> clazz, String methodName, Class<?>[] paramTypes);
 
     public void run(Set<Class<?>> classes);
 
