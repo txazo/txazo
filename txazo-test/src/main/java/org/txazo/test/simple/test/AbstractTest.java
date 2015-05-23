@@ -1,6 +1,9 @@
 package org.txazo.test.simple.test;
 
+import org.txazo.test.exception.TestException;
 import org.txazo.test.simple.listener.TestListener;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * AbstractTest
@@ -13,16 +16,22 @@ public abstract class AbstractTest {
 
     protected TestListener listener;
 
-    public final void runTest() {
-        listener.testBefore(this);
+    public final void runTest(TestListener listener) {
+        this.listener = listener;
+
+        this.listener.testBefore(this);
         test();
-        listener.testAfter(this);
+        this.listener.testAfter(this);
     }
 
     public abstract void test();
 
-    public void registerListener(TestListener listener) {
-        this.listener = listener;
+    public Throwable getCauseThrowable(TestException exception) {
+        if (exception.getCause() instanceof InvocationTargetException) {
+            InvocationTargetException target = (InvocationTargetException) exception.getCause();
+            return target.getTargetException();
+        }
+        return exception;
     }
 
 }

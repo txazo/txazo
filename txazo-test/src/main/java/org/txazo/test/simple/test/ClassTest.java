@@ -1,9 +1,9 @@
 package org.txazo.test.simple.test;
 
+import org.txazo.test.exception.TestException;
 import org.txazo.test.simple.AfterClass;
 import org.txazo.test.simple.BeforeClass;
 import org.txazo.test.simple.builder.TestBuilder;
-import org.txazo.test.simple.listener.TestListener;
 import org.txazo.test.simple.runner.TestExecuor;
 
 import java.lang.reflect.Method;
@@ -35,18 +35,24 @@ public class ClassTest extends AbstractTest {
 
     @Override
     public void test() {
-        TestExecuor.executeAnnotationMethods(clazz, BeforeClass.class, true);
-        for (Iterator<Map.Entry<Method, MethodTest>> i = methodTests.entrySet().iterator(); i.hasNext(); ) {
-            i.next().getValue().runTest();
+        try {
+            TestExecuor.executeAnnotationMethods(clazz, BeforeClass.class, true);
+        } catch (TestException e) {
+            listener.addThrowable(this, getCauseThrowable(e));
+        } catch (Throwable t) {
+            listener.addThrowable(this, t);
         }
-        TestExecuor.executeAnnotationMethods(clazz, AfterClass.class, true);
-    }
 
-    @Override
-    public void registerListener(TestListener listener) {
-        super.registerListener(listener);
         for (Iterator<Map.Entry<Method, MethodTest>> i = methodTests.entrySet().iterator(); i.hasNext(); ) {
-            i.next().getValue().registerListener(listener);
+            i.next().getValue().runTest(listener);
+        }
+
+        try {
+            TestExecuor.executeAnnotationMethods(clazz, AfterClass.class, true);
+        } catch (TestException e) {
+            listener.addThrowable(this, getCauseThrowable(e));
+        } catch (Throwable t) {
+            listener.addThrowable(this, t);
         }
     }
 

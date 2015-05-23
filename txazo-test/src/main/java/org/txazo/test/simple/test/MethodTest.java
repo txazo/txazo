@@ -1,5 +1,6 @@
 package org.txazo.test.simple.test;
 
+import org.txazo.test.exception.TestException;
 import org.txazo.test.simple.After;
 import org.txazo.test.simple.Before;
 import org.txazo.test.simple.runner.TestExecuor;
@@ -15,27 +16,37 @@ import java.lang.reflect.Method;
  */
 public class MethodTest extends AbstractTest {
 
-    private Class<?> clazz;
     private Method method;
 
     public MethodTest(Method method) {
-        this.clazz = method.getDeclaringClass();
         this.method = method;
     }
 
     @Override
     public void test() {
-        TestExecuor.executeAnnotationMethods(clazz, Before.class, false);
-        TestExecuor.executeNoneStaticMethod(method);
-        TestExecuor.executeAnnotationMethods(clazz, After.class, false);
+        try {
+            TestExecuor.executeAnnotationMethods(getClazz(), Before.class, false);
+            TestExecuor.executeNoneStaticMethod(method);
+            TestExecuor.executeAnnotationMethods(getClazz(), After.class, false);
+            listener.addSuccess(this);
+        } catch (TestException e) {
+            listener.addError(this, getCauseThrowable(e));
+        } catch (Throwable t) {
+            listener.addError(this, t);
+        }
     }
 
     public Class<?> getClazz() {
-        return clazz;
+        return method.getDeclaringClass();
     }
 
     public Method getMethod() {
         return method;
+    }
+
+    @Override
+    public String toString() {
+        return getClazz().getName() + "." + method.getName() + "()";
     }
 
 }

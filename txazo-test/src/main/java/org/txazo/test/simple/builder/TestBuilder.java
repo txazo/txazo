@@ -1,5 +1,6 @@
 package org.txazo.test.simple.builder;
 
+import org.txazo.test.simple.Ignore;
 import org.txazo.test.simple.Test;
 import org.txazo.test.simple.test.ClassTest;
 import org.txazo.test.simple.test.MethodTest;
@@ -8,7 +9,6 @@ import org.txazo.test.util.AssertUtils;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,7 +30,7 @@ public class TestBuilder {
         Map<Method, MethodTest> methodTests = new HashMap<Method, MethodTest>();
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
-            if (method.getAnnotation(Test.class) != null) {
+            if (method.getAnnotation(Test.class) != null && method.getAnnotation(Ignore.class) == null) {
                 methodTests.put(method, buildMethodTest(method));
             }
         }

@@ -17,8 +17,5 @@ public abstract class AbstractTestListener implements TestListener {
         this.writer = writer;
     }
 
-    public PrintStream getWriter() {
-        return writer;
-    }
 
 }

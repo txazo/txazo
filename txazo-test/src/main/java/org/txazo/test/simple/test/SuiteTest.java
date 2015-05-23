@@ -1,11 +1,14 @@
 package org.txazo.test.simple.test;
 
 import org.txazo.test.simple.builder.TestBuilder;
-import org.txazo.test.simple.listener.TestListener;
+import org.txazo.test.simple.listener.SuiteTestListener;
+import org.txazo.test.simple.result.SuiteTestResult;
+import org.txazo.test.simple.result.TestResult;
 import org.txazo.test.simple.suite.Suite;
 import org.txazo.test.util.PackageUtils;
 import org.txazo.test.util.ReflectionUtils;
 
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,16 +36,14 @@ public class SuiteTest extends AbstractTest {
     @Override
     public void test() {
         for (Iterator<Map.Entry<Class<?>, ClassTest>> i = classTests.entrySet().iterator(); i.hasNext(); ) {
-            i.next().getValue().runTest();
+            i.next().getValue().runTest(listener);
         }
     }
 
-    @Override
-    public void registerListener(TestListener listener) {
-        super.registerListener(listener);
-        for (Iterator<Map.Entry<Class<?>, ClassTest>> i = classTests.entrySet().iterator(); i.hasNext(); ) {
-            i.next().getValue().registerListener(listener);
-        }
+    public TestResult run(PrintStream writer) {
+        listener = new SuiteTestListener(writer);
+        runTest(listener);
+        return new SuiteTestResult(writer, listener);
     }
 
     public synchronized void addClassTest(ClassTest classTest) {

@@ -54,8 +54,8 @@ public abstract class TestExecuor {
         }
         try {
             method.invoke(null, null);
-        } catch (Exception e) {
-            throw new TestException(e);
+        } catch (Throwable t) {
+            throw new TestException(t);
         }
     }
 
@@ -69,8 +69,8 @@ public abstract class TestExecuor {
         }
         try {
             method.invoke(getInstance(method.getDeclaringClass()), null);
-        } catch (Exception e) {
-            throw new TestException(e);
+        } catch (Throwable t) {
+            throw new TestException(t);
         }
     }
 
