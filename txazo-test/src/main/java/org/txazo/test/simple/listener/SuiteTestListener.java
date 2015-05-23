@@ -23,6 +23,9 @@ import java.util.Map;
  */
 public class SuiteTestListener extends AbstractTestListener {
 
+    private final String lineSeparator = System.getProperty("line.separator");
+    private final String testSeparator = "----------------------------------------";
+
     private MethodTestWriter methodWriter = new MethodTestWriter();
     private ClassTestWriter classWriter = new ClassTestWriter();
     private SuiteTestWriter suiteWriter = new SuiteTestWriter();
@@ -30,6 +33,8 @@ public class SuiteTestListener extends AbstractTestListener {
     private List<AbstractTest> testSuccesses = new ArrayList<AbstractTest>();
     private List<TestFailure> testErrors = new ArrayList<TestFailure>();
     private List<TestFailure> testFailures = new ArrayList<TestFailure>();
+
+    private Map<AbstractTest, TestFailureWarpper> failureWarppers = new HashMap<AbstractTest, TestFailureWarpper>();
 
     public SuiteTestListener(PrintStream writer) {
         super(writer);
@@ -57,10 +62,16 @@ public class SuiteTestListener extends AbstractTestListener {
         }
     }
 
+    private synchronized TestFailureWarpper getTestFailureWarpper(AbstractTest test) {
+        if (!failureWarppers.containsKey(test)) {
+            failureWarppers.put(test, new TestFailureWarpper());
+        }
+        return failureWarppers.get(test);
+    }
+
     @Override
     public void addSuccess(AbstractTest test) {
         testSuccesses.add(test);
-        print(" success");
     }
 
     @Override
@@ -75,7 +86,6 @@ public class SuiteTestListener extends AbstractTestListener {
 
     private void addError(TestFailure failure) {
         testErrors.add(failure);
-        print(" error");
     }
 
     @Override
@@ -85,12 +95,31 @@ public class SuiteTestListener extends AbstractTestListener {
 
     private void addFailure(TestFailure failure) {
         testFailures.add(failure);
-        print(" fail");
     }
 
     @Override
     public void addThrowable(AbstractTest test, Throwable throwable) {
         throwable.printStackTrace(writer);
+    }
+
+    private String getTestStatus(AbstractTest test) {
+        if (testSuccesses.contains(test)) {
+            return "success";
+        } else if (containsTest(test, testFailures)) {
+            return "failure";
+        } else if (containsTest(test, testErrors)) {
+            return "error";
+        }
+        return null;
+    }
+
+    private boolean containsTest(AbstractTest test, List<TestFailure> failures) {
+        for (TestFailure failure : failures) {
+            if (failure.getTest() == test) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void print(Object object) {
@@ -148,12 +177,11 @@ public class SuiteTestListener extends AbstractTestListener {
 
         @Override
         public void beforeTest(MethodTest test) {
-            print("\t + " + test.getMethod().getName());
         }
 
         @Override
         public void afterTest(MethodTest test) {
-            println(" (" + getRunTime(test) + "s)");
+            println("+ " + test.getMethod().getName() + "() " + getTestStatus(test) + " " + getRunTime(test) + "s");
         }
 
     }
@@ -162,12 +190,12 @@ public class SuiteTestListener extends AbstractTestListener {
 
         @Override
         public void beforeTest(ClassTest test) {
-            println(test.getClazz().getName());
+            println("Running " + test.getClazz().getName());
         }
 
         @Override
         public void afterTest(ClassTest test) {
-            println("----------------------------------------");
+            println(testSeparator);
         }
 
     }
@@ -176,19 +204,58 @@ public class SuiteTestListener extends AbstractTestListener {
 
         @Override
         public void beforeTest(SuiteTest test) {
-            println("----------------------------------------");
-            println("T E S T");
-            println("----------------------------------------");
+            StringBuilder sb = new StringBuilder();
+            sb.append(testSeparator);
+            sb.append(lineSeparator);
+            sb.append(" T E S T");
+            sb.append(lineSeparator);
+            sb.append(testSeparator);
+            println(sb.toString());
         }
 
         @Override
         public void afterTest(SuiteTest test) {
-            println("E N D");
-            print("Total: " + (testSuccesses.size() + testFailures.size() + testErrors.size()));
-            print(", success (" + testSuccesses.size() + ")");
-            print(", failure (" + testFailures.size() + ")");
-            println(", error (" + testErrors.size() + ")");
-            println("----------------------------------------");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Tests run: " + (testSuccesses.size() + testFailures.size() + testErrors.size()));
+            sb.append(", Successes: " + testSuccesses.size());
+            sb.append(", Failures: " + testFailures.size());
+            sb.append(", Errors: " + testErrors.size());
+            sb.append(lineSeparator);
+            sb.append(testSeparator);
+            println(sb.toString());
+        }
+
+    }
+
+    private class TestFailureWarpper {
+
+        private List<TestFailure> testErrors = new ArrayList<TestFailure>();
+        private List<TestFailure> testFailures = new ArrayList<TestFailure>();
+        private List<AbstractTest> testSuccesses = new ArrayList<AbstractTest>();
+
+        public void addSuccess(AbstractTest test) {
+            testSuccesses.add(test);
+        }
+
+        public void addError(AbstractTest test, Throwable throwable) {
+            TestFailure failure = new TestFailure(test, throwable);
+            if (failure.isFailure()) {
+                addFailure(failure);
+            } else {
+                addError(failure);
+            }
+        }
+
+        private void addError(TestFailure failure) {
+            testErrors.add(failure);
+        }
+
+        public void addFailure(AbstractTest test, AssertionFailedError error) {
+            addFailure(new TestFailure(test, error));
+        }
+
+        private void addFailure(TestFailure failure) {
+            testFailures.add(failure);
         }
 
     }

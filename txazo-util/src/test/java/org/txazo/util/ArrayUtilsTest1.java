@@ -7,7 +7,7 @@ import org.junit.Test;
 public class ArrayUtilsTest1 {
 
     @BeforeClass
-    public static void before() {
+    public void before() {
         String str = null;
     }
 

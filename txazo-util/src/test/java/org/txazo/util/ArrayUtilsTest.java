@@ -5,9 +5,9 @@ import org.junit.*;
 public class ArrayUtilsTest {
 
     @Before
-    public static void before() {
+    public void before() {
         String str = null;
-        String a = str.toString();
+        //String a = str.toString();
     }
 
     @Test
