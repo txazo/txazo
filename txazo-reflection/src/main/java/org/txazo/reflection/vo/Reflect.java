@@ -1,5 +1,7 @@
 package org.txazo.reflection.vo;
 
+import java.io.Serializable;
+
 /**
  * Reflect
  *
@@ -7,7 +9,7 @@ package org.txazo.reflection.vo;
  * @email txazo1218@163.com
  * @since 24.05.2015
  */
-public class Reflect {
+public class Reflect implements Serializable {
 
     public static int NUM;
 

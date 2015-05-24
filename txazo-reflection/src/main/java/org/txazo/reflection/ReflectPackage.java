@@ -20,23 +20,22 @@ import java.util.jar.Manifest;
  * @author txazo
  * @email txazo1218@163.com
  * @see java.lang.Package
+ * @see java.util.jar.Manifest
  * @since 13.05.2015
  */
 public class ReflectPackage extends SuiteTest {
 
     @Test
     public void test1() {
+        /** Package */
         Package pkg = CollectionUtils.class.getPackage();
-
         print(pkg.getName());
-
-        System.out.println(pkg.getSpecificationVersion());
-        System.out.println(pkg.getSpecificationTitle());
-        System.out.println(pkg.getSpecificationVendor());
-
-        System.out.println(pkg.getImplementationVersion());
-        System.out.println(pkg.getImplementationTitle());
-        System.out.println(pkg.getImplementationVendor());
+        print(pkg.getSpecificationTitle());
+        print(pkg.getSpecificationVendor());
+        print(pkg.getSpecificationVersion());
+        print(pkg.getImplementationTitle());
+        print(pkg.getImplementationVendor());
+        print(pkg.getImplementationVersion());
     }
 
     @Test

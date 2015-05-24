@@ -46,6 +46,7 @@ public class ReflectionClass extends SuiteTest {
         Package pkg = clazz.getPackage();
         Assert.assertEquals("org.txazo.reflection.vo", pkg.getName());
 
+        Class<?>[] classes = clazz.getInterfaces();
     }
 
 }
