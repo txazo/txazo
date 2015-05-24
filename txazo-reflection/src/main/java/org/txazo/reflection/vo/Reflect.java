@@ -1,26 +1,23 @@
 package org.txazo.reflection.vo;
 
-import org.txazo.reflection.anno.FieldAnno;
-
 /**
- * ReflectionField
+ * Reflect
  *
  * @author txazo
  * @email txazo1218@163.com
- * @since 16.05.2015
+ * @since 24.05.2015
  */
-public class FieldVo {
+public class Reflect {
 
     public static int NUM;
 
-    @FieldAnno(desc = "id")
     private int id;
     private String name;
 
-    public FieldVo() {
+    public Reflect() {
     }
 
-    public FieldVo(int id, String name) {
+    public Reflect(int id, String name) {
         this.id = id;
         this.name = name;
     }
