@@ -17,7 +17,11 @@ public abstract class AbstractTest extends Assert {
     private static final String pattern = "yyyy-MM-dd HH:mm:ss";
 
     protected static void print(Object msg) {
-        System.err.println(DateFormatUtils.format(new Date(), pattern) + " [INFO] " + msg);
+        System.out.println(DateFormatUtils.format(new Date(), pattern) + " [INFO] " + msg);
+    }
+
+    protected static void println(Object msg) {
+        System.out.println(DateFormatUtils.format(new Date(), pattern) + " [INFO] " + msg);
     }
 
 }

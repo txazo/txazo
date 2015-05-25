@@ -1,5 +1,6 @@
 package org.txazo.test.assertion;
 
+import org.txazo.test.SuiteTest;
 import org.txazo.test.annotation.Test;
 
 /**
@@ -9,7 +10,7 @@ import org.txazo.test.annotation.Test;
  * @email txazo1218@163.com
  * @since 23.05.2015
  */
-public class AssertTest {
+public class AssertTest extends SuiteTest {
 
     @Test
     public void testAssertTrue() {

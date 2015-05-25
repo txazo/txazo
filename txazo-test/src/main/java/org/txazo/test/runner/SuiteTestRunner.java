@@ -20,7 +20,7 @@ import java.util.Set;
  * @email txazo1218@163.com
  * @since 21.05.2015
  */
-public class SimpleTestRunner implements TestRunner {
+public class SuiteTestRunner implements TestRunner {
 
     @Override
     public void run(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
