@@ -1,6 +1,5 @@
 package org.txazo.test.util;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.txazo.test.exception.TestException;
 import org.txazo.test.filter.ClassFileFilter;
 

@@ -1,9 +1,6 @@
 package org.txazo.test;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.txazo.test.assertion.Assert;
-
-import java.util.Date;
 
 /**
  * AbstractTest
@@ -14,14 +11,12 @@ import java.util.Date;
  */
 public abstract class AbstractTest extends Assert {
 
-    private static final String pattern = "yyyy-MM-dd HH:mm:ss";
-
     protected static void print(Object msg) {
-        System.out.println(DateFormatUtils.format(new Date(), pattern) + " [INFO] " + msg);
+        System.out.println("[INFO] " + msg);
     }
 
     protected static void println(Object msg) {
-        System.out.println(DateFormatUtils.format(new Date(), pattern) + " [INFO] " + msg);
+        System.out.println("[INFO] " + msg);
     }
 
 }

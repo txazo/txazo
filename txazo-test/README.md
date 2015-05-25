@@ -4,18 +4,17 @@
     txazo-test
 </h2>
 <ul>
-    <li><a href="#user-content-txazo-test-1">1. 集成Junit4单元测试</a></li>
-    <li><a href="#user-content-txazo-test-2">2. 集成Junit4套件测试</a></li>
+    <li><a href="#user-content-txazo-test-suite">套件测试</a></li>
 </ul>
 
 <h3>
-    <a id="user-content-txazo-test-1" class="anchor" href="#txazo-test-v1.0" aria-hidden="true">
+    <a id="user-content-txazo-test-suite" class="anchor" href="#txazo-test-suite" aria-hidden="true">
     <span class="octicon octicon-link"></span></a>
-    集成Junit4单元测试
+    套件测试
 </h3>
 <pre>
-import org.junit.Test;
-import org.txazo.test.AbstractTest;
+import org.txazo.test.SuiteTest;
+import org.txazo.test.annotation.Test;
 
 public class MyTest extends AbstractTest {
 
@@ -24,32 +23,15 @@ public class MyTest extends AbstractTest {
     }
 
 }
-</pre>
 
-<h3>
-    <a id="user-content-txazo-test-2" class="anchor" href="#txazo-test-v1.0" aria-hidden="true">
-    <span class="octicon octicon-link"></span></a>
-    集成Junit4套件测试
-</h3>
-<pre>
-import org.junit.Test;
-import SuiteTest;
+import org.txazo.test.runner.SuiteTestRunner;
+import org.txazo.test.runner.TestRunner;
 
-public class MyTest extends SuiteTest {
-
-    @Test
-    public void test() {
-    }
-
-}
-</pre>
-<pre>
-import SuiteRunTest;
-
-public class SuiteRunTestTest {
+public class RunnerTest {
 
     public static void main(String[] args) {
-        new SuiteRunTest("org.txazo.test").run();
+        TestRunner runner = new SuiteTestRunner();
+        runner.run("org.txazo.test", true);
     }
 
 }

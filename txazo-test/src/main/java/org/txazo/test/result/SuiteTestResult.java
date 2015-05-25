@@ -1,8 +1,8 @@
 package org.txazo.test.result;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.txazo.test.listener.SuiteTestListener;
 import org.txazo.test.listener.TestListener;
+import org.txazo.test.util.CollectionUtils;
 
 import java.io.PrintStream;
 import java.util.List;

@@ -1,9 +1,9 @@
 package org.txazo.test.runner;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.txazo.test.annotation.Test;
 import org.txazo.test.assertion.AssertionFailedError;
 import org.txazo.test.exception.TestException;
+import org.txazo.test.util.ArrayUtils;
 import org.txazo.test.util.AssertUtils;
 
 import java.lang.annotation.Annotation;
