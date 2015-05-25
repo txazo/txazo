@@ -1,8 +1,8 @@
 package org.txazo.test.util;
 
-import org.junit.Test;
-import org.txazo.test.junit4.suite.SuiteTest;
-import org.txazo.test.junit4.suite.Suite;
+import org.txazo.test.SuiteTest;
+import org.txazo.test.annotation.Suite;
+import org.txazo.test.annotation.Test;
 
 import java.io.IOException;
 

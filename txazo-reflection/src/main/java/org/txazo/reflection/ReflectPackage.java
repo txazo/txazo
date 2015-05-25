@@ -4,7 +4,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.txazo.reflection.anno.PkgAnno;
-import org.txazo.test.junit4.suite.SuiteTest;
+import org.txazo.test.SuiteTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;

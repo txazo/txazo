@@ -1,6 +1,6 @@
 package org.txazo.reflection;
 
-import org.txazo.test.junit4.suite.SuiteTest;
+import org.txazo.test.SuiteTest;
 
 /**
  * ReflectionMethod
