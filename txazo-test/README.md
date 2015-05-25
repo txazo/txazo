@@ -14,12 +14,14 @@
 </h3>
 <pre>
 import org.txazo.test.SuiteTest;
+import org.txazo.test.assertion.Assert;
 import org.txazo.test.annotation.Test;
 
-public class MyTest extends AbstractTest {
+public class MyTest extends SuiteTest {
 
     @Test
     public void test() {
+        Assert.assertTrue(true);
     }
 
 }
