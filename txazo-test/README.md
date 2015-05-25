@@ -34,7 +34,7 @@ public class RunnerTest {
 
     public static void main(String[] args) {
         TestRunner runner = new SuiteTestRunner();
-        runner.run("org.txazo.test", true);
+        runner.run(MyTest.class);
     }
 
 }
