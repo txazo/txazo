@@ -1,5 +1,6 @@
 package org.txazo.test.test;
 
+import org.txazo.test.annotation.Test;
 import org.txazo.test.exception.TestException;
 import org.txazo.test.annotation.After;
 import org.txazo.test.annotation.Before;
@@ -25,8 +26,9 @@ public class MethodTest extends AbstractTest {
     @Override
     public void test() {
         try {
+            Test test = method.getAnnotation(Test.class);
             TestExecuor.executeAnnotationMethods(getClazz(), Before.class, false);
-            TestExecuor.executeNoneStaticMethod(method);
+            TestExecuor.executeNoneStaticMethod(method, test.expected(), test.timeout());
             TestExecuor.executeAnnotationMethods(getClazz(), After.class, false);
             listener.addSuccess(this);
         } catch (TestException e) {

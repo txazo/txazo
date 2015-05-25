@@ -67,7 +67,7 @@ public class SuiteTest extends AbstractTest {
     }
 
     public void addSuiteTest(String packageName, boolean recursive) {
-        addSuiteTest(PackageUtils.getClassesWithAnnotation(packageName, Suite.class, recursive));
+        addSuiteTest(PackageUtils.getClassesWithAnnotation(packageName, Suite.class, org.txazo.test.SuiteTest.class, recursive));
     }
 
     public void addSuiteTest(Class<?> clazz) {

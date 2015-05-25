@@ -27,16 +27,19 @@ public abstract class PackageUtils {
     }
 
     public static Set<Class<?>> getClassesWithAnnotation(String packageName, Class<? extends Annotation> annotation) {
-        return getClassesWithAnnotation(packageName, annotation, true);
+        return getClassesWithAnnotation(packageName, annotation, null, true);
     }
 
-    public static Set<Class<?>> getClassesWithAnnotation(String packageName, Class<? extends Annotation> annotation, boolean recursive) {
+    public static Set<Class<?>> getClassesWithAnnotation(String packageName, Class<? extends Annotation> annotation, Class<?> excludeClass, boolean recursive) {
         AssertUtils.assertNotNull(annotation);
         AssertUtils.assertNotBlank(packageName);
         Class<?> superClass = null;
         Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
         for (Class<?> clazz : getClasses(packageName, recursive)) {
             superClass = clazz;
+            if (superClass == excludeClass) {
+                continue;
+            }
             while (superClass != Object.class) {
                 if (superClass == null || superClass.isInterface() || superClass.isAnnotation()) {
                     break;

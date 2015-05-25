@@ -3,13 +3,13 @@ package org.txazo.test.annotation;
 import org.txazo.test.SuiteTest;
 
 /**
- * TestAnnotationTest
+ * AnnotationTest
  *
  * @author txazo
  * @email txazo1218@163.com
  * @since 25.05.2015
  */
-public class TestAnnotationTest extends SuiteTest {
+public class AnnotationTest extends SuiteTest {
 
     @BeforeClass
     public static void beforeClass() {
@@ -32,16 +32,23 @@ public class TestAnnotationTest extends SuiteTest {
     }
 
     @Test
-    public static void test() {
-        println("Test");
+    public void test() {
+        println("test");
     }
 
-    @Test(timeout = 1200)
-    public static void testTimeout() {
+    @Test(timeout = 2000)
+    public void testTimeout() {
+        println("testTimeout");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test(expected = RuntimeException.class)
-    public static void testException() {
+    public void testException() {
+        println("testException");
     }
 
 }

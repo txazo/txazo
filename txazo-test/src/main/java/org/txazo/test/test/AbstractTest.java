@@ -1,5 +1,6 @@
 package org.txazo.test.test;
 
+import org.txazo.test.assertion.AssertionFailedError;
 import org.txazo.test.exception.TestException;
 import org.txazo.test.listener.TestListener;
 
@@ -18,7 +19,6 @@ public abstract class AbstractTest {
 
     public final void runTest(TestListener listener) {
         this.listener = listener;
-
         this.listener.testBefore(this);
         test();
         this.listener.testAfter(this);
@@ -27,6 +27,9 @@ public abstract class AbstractTest {
     public abstract void test();
 
     public Throwable getCauseThrowable(TestException exception) {
+        if (exception.getCause() instanceof AssertionFailedError) {
+            return exception.getCause();
+        }
         if (exception.getCause() instanceof InvocationTargetException) {
             InvocationTargetException target = (InvocationTargetException) exception.getCause();
             return target.getTargetException();

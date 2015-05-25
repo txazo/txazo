@@ -1,5 +1,6 @@
 package org.txazo.test.runner;
 
+import org.txazo.test.SuiteTest;
 import org.txazo.test.annotation.Test;
 import org.txazo.test.assertion.Assert;
 
@@ -10,7 +11,7 @@ import org.txazo.test.assertion.Assert;
  * @email txazo1218@163.com
  * @since 22.05.2015
  */
-public class TestExecuorTest {
+public class TestExecuorTest extends SuiteTest {
 
     @Test
     public void testGetInstance() throws InstantiationException, IllegalAccessException {

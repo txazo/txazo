@@ -44,7 +44,7 @@ public class SuiteTestRunner implements TestRunner {
 
     @Override
     public void run(String packageName, boolean recursive) {
-        run(PackageUtils.getClassesWithAnnotation(packageName, Suite.class, recursive));
+        run(PackageUtils.getClassesWithAnnotation(packageName, Suite.class, org.txazo.test.SuiteTest.class, recursive));
     }
 
     @Override

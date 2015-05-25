@@ -56,11 +56,11 @@ public abstract class Assert {
     }
 
     public static void assertSame(Object expected, Object actual) {
-        assertTrue(expected == actual, "expected and actual is not same");
+        assertTrue(expected == actual, "expected and actual must be not same");
     }
 
     public static void assertNotSame(Object expected, Object actual) {
-        assertTrue(expected != actual, "expected and actual is same");
+        assertTrue(expected != actual, "expected and actual must be same");
     }
 
 }

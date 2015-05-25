@@ -1,7 +1,7 @@
 package org.txazo.test.runner;
 
 /**
- * SimpleTestRunnerTest
+ * SuiteTestRunnerTest
  *
  * @author txazo
  * @email txazo1218@163.com

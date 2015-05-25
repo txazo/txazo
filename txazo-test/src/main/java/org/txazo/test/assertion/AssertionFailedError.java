@@ -16,4 +16,8 @@ public class AssertionFailedError extends AssertionError {
         super(message);
     }
 
+    public AssertionFailedError(Throwable cause) {
+        super(cause);
+    }
+
 }
