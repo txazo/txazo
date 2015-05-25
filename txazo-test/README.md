@@ -23,7 +23,8 @@ public class MyTest extends AbstractTest {
     }
 
 }
-
+</pre>
+<pre>
 import org.txazo.test.runner.SuiteTestRunner;
 import org.txazo.test.runner.TestRunner;
 
