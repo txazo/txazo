@@ -1,9 +1,8 @@
 package org.txazo.reflection;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.txazo.reflection.vo.Reflect;
 import org.txazo.test.SuiteTest;
+import org.txazo.test.annotation.Test;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -20,11 +19,19 @@ public class ReflectionConstructor extends SuiteTest {
 
     @Test
     public void test1() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Constructor<Reflect> constructor = Reflect.class.getConstructor(null);
-        Reflect reflect = constructor.newInstance(null);
-        Assert.assertNotNull(reflect);
+        Class<Reflect> clazz = Reflect.class;
 
-        Constructor<?>[] constructors = Reflect.class.getConstructors();
+        Constructor<Reflect> constructor = clazz.getConstructor(null);
+        assertNotNull(constructor);
+        Reflect reflect = constructor.newInstance(null);
+        assertNotNull(reflect);
+
+        constructor = clazz.getDeclaredConstructor(new Class[]{int.class, String.class});
+        assertNotNull(constructor);
+        reflect = constructor.newInstance(5, "txazo");
+        assertEquals(5, reflect.getId());
+
+        Constructor<?>[] constructors = clazz.getConstructors();
         for (Constructor<?> c : constructors) {
             print(c.getName());
         }

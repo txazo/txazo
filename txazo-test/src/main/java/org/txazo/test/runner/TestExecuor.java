@@ -84,30 +84,29 @@ public abstract class TestExecuor {
     public static Object executeNoneStaticMethod(final Method method, Class<? extends Throwable> clazz, long timeout) {
         boolean throwed = false;
         try {
-            if (timeout <= 0) {
-                return executeNoneStaticMethod(method);
-            } else {
-                FutureTask task = new FutureTask(new Callable() {
+            FutureTask task = new FutureTask(new Callable() {
 
-                    @Override
-                    public Object call() throws Exception {
-                        return executeNoneStaticMethod(method);
-                    }
-
-                });
-
-                Thread thread = new Thread(task);
-                thread.setDaemon(true);
-                thread.start();
-
-                try {
-                    return task.get(timeout, TimeUnit.MILLISECONDS);
-                } catch (Throwable t) {
-                    if (t instanceof TimeoutException) {
-                        t = new AssertionFailedError(t);
-                    }
-                    throw new TestException(t);
+                @Override
+                public Object call() throws Exception {
+                    return executeNoneStaticMethod(method);
                 }
+
+            });
+
+            Thread thread = new Thread(task);
+            thread.setDaemon(true);
+            thread.start();
+
+            try {
+                if (timeout <= 0) {
+                    return task.get();
+                }
+                return task.get(timeout, TimeUnit.MILLISECONDS);
+            } catch (Throwable t) {
+                if (t instanceof TimeoutException) {
+                    t = new AssertionFailedError(t);
+                }
+                throw new TestException(t);
             }
         } catch (TestException e) {
             throwed = true;
@@ -115,7 +114,9 @@ public abstract class TestExecuor {
                 throw e;
             }
             if (!(((InvocationTargetException) e.getCause()).getTargetException().getClass() == clazz)) {
-                throw new TestException(new AssertionFailedError("expected and actual Throwable must be same"));
+                if (clazz != Test.None.class) {
+                    throw new TestException(new AssertionFailedError("expected and actual Throwable must be same"));
+                }
             }
         } finally {
             if (!throwed && clazz != Test.None.class) {

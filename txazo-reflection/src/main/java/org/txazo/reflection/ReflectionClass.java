@@ -1,9 +1,9 @@
 package org.txazo.reflection;
 
-import org.junit.Assert;
-import org.junit.Test;
+
 import org.txazo.reflection.vo.Reflect;
 import org.txazo.test.SuiteTest;
+import org.txazo.test.annotation.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -25,26 +25,26 @@ public class ReflectionClass extends SuiteTest {
         Class<?> r2 = new Reflect().getClass();
         Class<?> r3 = Class.forName("org.txazo.reflection.vo.Reflect");
         Class<?> r4 = Thread.currentThread().getContextClassLoader().loadClass("org.txazo.reflection.vo.Reflect");
-        Assert.assertSame(r1, r2);
-        Assert.assertSame(r1, r4);
+        assertSame(r1, r2);
+        assertSame(r1, r4);
 
         /** 基本数据类型的class */
         Field field = r1.getDeclaredField("id");
-        Assert.assertSame(field.getType(), int.class);
+        assertSame(field.getType(), int.class);
     }
 
     @Test
     public void test2() {
         Class<?> clazz = Reflect.class;
         /** 类名 */
-        Assert.assertEquals("Reflect", clazz.getSimpleName());
+        assertEquals("Reflect", clazz.getSimpleName());
         /** 全限定类名 */
-        Assert.assertEquals("org.txazo.reflection.vo.Reflect", clazz.getName());
+        assertEquals("org.txazo.reflection.vo.Reflect", clazz.getName());
         /** 修饰符 */
-        Assert.assertTrue(Modifier.isPublic(clazz.getModifiers()));
+        assertTrue(Modifier.isPublic(clazz.getModifiers()));
         /** 包信息 */
         Package pkg = clazz.getPackage();
-        Assert.assertEquals("org.txazo.reflection.vo", pkg.getName());
+        assertEquals("org.txazo.reflection.vo", pkg.getName());
 
         Class<?>[] classes = clazz.getInterfaces();
     }

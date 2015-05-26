@@ -1,9 +1,9 @@
 package org.txazo.reflection;
 
-import org.junit.Test;
 import org.txazo.reflection.anno.FieldAnno;
 import org.txazo.reflection.vo.Reflect;
 import org.txazo.test.SuiteTest;
+import org.txazo.test.annotation.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

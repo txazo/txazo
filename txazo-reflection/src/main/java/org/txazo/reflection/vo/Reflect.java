@@ -1,5 +1,7 @@
 package org.txazo.reflection.vo;
 
+import org.txazo.reflection.anno.FieldAnno;
+
 import java.io.Serializable;
 
 /**
@@ -13,6 +15,7 @@ public class Reflect implements Serializable {
 
     public static int NUM;
 
+    @FieldAnno(desc = "id")
     private int id;
     private String name;
 

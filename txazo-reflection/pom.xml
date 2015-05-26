@@ -19,11 +19,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.txazo</groupId>
             <artifactId>txazo-test</artifactId>
         </dependency>

@@ -1,10 +1,9 @@
 package org.txazo.reflection;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.junit.Assert;
-import org.junit.Test;
 import org.txazo.reflection.anno.PkgAnno;
 import org.txazo.test.SuiteTest;
+import org.txazo.test.annotation.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,13 +42,13 @@ public class ReflectPackage extends SuiteTest {
         Package pkg = Package.getPackage("org.txazo.reflection");
 
         /** package-info包注解 */
-        Assert.assertNotNull(pkg.getAnnotation(PkgAnno.class));
+        assertNotNull(pkg.getAnnotation(PkgAnno.class));
 
         /** package-info包类 */
-        Assert.assertEquals(1, new PkgClass().pkg());
+        assertEquals(1, new PkgClass().pkg());
 
         /** package-info包常量 */
-        Assert.assertEquals(1, PkgConstant.NUM);
+        assertEquals(1, PkgConstant.NUM);
     }
 
     @Test
