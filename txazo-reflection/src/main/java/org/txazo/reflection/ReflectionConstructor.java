@@ -21,20 +21,24 @@ public class ReflectionConstructor extends SuiteTest {
     public void test1() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Class<Reflect> clazz = Reflect.class;
 
+        /** 获取Constructor */
         Constructor<Reflect> constructor = clazz.getConstructor(null);
         assertNotNull(constructor);
+        /** Constructor实例化类 */
         Reflect reflect = constructor.newInstance(null);
         assertNotNull(reflect);
 
         constructor = clazz.getDeclaredConstructor(new Class[]{int.class, String.class});
         assertNotNull(constructor);
+        /** 构造方法参数 */
+        assertSame(int.class, constructor.getParameterTypes()[0]);
+        assertSame(String.class, constructor.getParameterTypes()[1]);
         reflect = constructor.newInstance(5, "txazo");
         assertEquals(5, reflect.getId());
 
+        /** 获取所有的public Constructor */
         Constructor<?>[] constructors = clazz.getConstructors();
-        for (Constructor<?> c : constructors) {
-            print(c.getName());
-        }
+        assertEquals(2, constructors.length);
     }
 
 }

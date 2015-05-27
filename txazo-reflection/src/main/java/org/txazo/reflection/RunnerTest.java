@@ -14,7 +14,7 @@ public class RunnerTest {
 
     public static void main(String[] args) {
         TestRunner runner = new SuiteTestRunner();
-        runner.run(RunnerTest.class.getPackage().getName(), true);
+        runner.run(ReflectionField.class);
     }
 
 }

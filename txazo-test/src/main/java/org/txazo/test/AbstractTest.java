@@ -12,7 +12,7 @@ import org.txazo.test.assertion.Assert;
 public abstract class AbstractTest extends Assert {
 
     protected static void print(Object msg) {
-        System.out.println("[INFO] " + msg);
+        System.out.print("[INFO] " + msg);
     }
 
     protected static void println(Object msg) {

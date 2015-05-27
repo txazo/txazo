@@ -2,8 +2,6 @@ package org.txazo.reflection.vo;
 
 import org.txazo.reflection.anno.FieldAnno;
 
-import java.io.Serializable;
-
 /**
  * Reflect
  *
@@ -11,7 +9,7 @@ import java.io.Serializable;
  * @email txazo1218@163.com
  * @since 24.05.2015
  */
-public class Reflect implements Serializable {
+public class Reflect extends SuperReflect implements ReflectInterface {
 
     public static int NUM;
 

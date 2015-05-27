@@ -22,9 +22,7 @@ public class ReflectionField extends SuiteTest {
     public void test1() throws Exception {
         /** 获取全部的Field */
         Field[] fields = Reflect.class.getDeclaredFields();
-        for (Field field : fields) {
-            print(field.getName());
-        }
+        assertEquals(3, fields.length);
     }
 
     @Test

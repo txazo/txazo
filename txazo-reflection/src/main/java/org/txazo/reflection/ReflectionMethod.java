@@ -1,6 +1,7 @@
 package org.txazo.reflection;
 
 import org.txazo.test.SuiteTest;
+import org.txazo.test.annotation.Test;
 
 /**
  * ReflectionMethod
@@ -11,5 +12,10 @@ import org.txazo.test.SuiteTest;
  * @since 24.05.2015
  */
 public class ReflectionMethod extends SuiteTest {
+
+    @Test
+    public void test1() {
+
+    }
 
 }

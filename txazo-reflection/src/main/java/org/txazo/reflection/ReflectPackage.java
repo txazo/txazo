@@ -1,11 +1,11 @@
 package org.txazo.reflection;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.txazo.reflection.anno.PkgAnno;
 import org.txazo.test.SuiteTest;
 import org.txazo.test.annotation.Test;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
@@ -27,14 +27,14 @@ public class ReflectPackage extends SuiteTest {
     @Test
     public void test1() {
         /** Package */
-        Package pkg = CollectionUtils.class.getPackage();
-        print(pkg.getName());
-        print(pkg.getSpecificationTitle());
-        print(pkg.getSpecificationVendor());
-        print(pkg.getSpecificationVersion());
-        print(pkg.getImplementationTitle());
-        print(pkg.getImplementationVendor());
-        print(pkg.getImplementationVersion());
+        Package pkg = Class.class.getPackage();
+        assertEquals("java.lang", pkg.getName());
+        assertEquals("Java Platform API Specification", pkg.getSpecificationTitle());
+        assertEquals("Oracle Corporation", pkg.getSpecificationVendor());
+        assertEquals("1.7", pkg.getSpecificationVersion());
+        assertEquals("Java Runtime Environment", pkg.getImplementationTitle());
+        assertEquals("Oracle Corporation", pkg.getImplementationVendor());
+        assertEquals("1.7.0_75", pkg.getImplementationVersion());
     }
 
     @Test
@@ -54,15 +54,21 @@ public class ReflectPackage extends SuiteTest {
     @Test
     public void test3() throws IOException {
         /** Manifest */
-        String jarFile = "/Users/txazo/TxazoCode/txazo/txazo-reflection/target/txazo-reflection-1.0.jar";
+        String classPath = this.getClass().getResource("/").getPath();
+        String jarFile = classPath + "../txazo-reflection-1.0.jar";
         JarInputStream jis = new JarInputStream(new FileInputStream(jarFile), false);
         Manifest manifest = jis.getManifest();
         Attributes attr = manifest.getMainAttributes();
         Map.Entry entry = null;
         for (Iterator<Map.Entry<Object, Object>> i = attr.entrySet().iterator(); i.hasNext(); ) {
             entry = i.next();
-            print(entry.getKey() + " : " + entry.getValue());
+            println(entry.getKey() + " : " + entry.getValue());
         }
+
+        /** MANIFEST.MF读入  */
+        manifest.read(new FileInputStream(this.getClass().getResource("/manifest.mf").getPath()));
+        /** MANIFEST.MF写出 */
+        manifest.write(new FileOutputStream(this.getClass().getResource("/manifest.mf").getPath()));
     }
 
 }
