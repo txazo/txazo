@@ -11,7 +11,7 @@ import org.txazo.reflection.anno.FieldAnno;
  */
 public class Reflect extends SuperReflect implements ReflectInterface {
 
-    public static int NUM;
+    public static int NUM = 1;
 
     @FieldAnno(desc = "id")
     private int id;
@@ -23,6 +23,10 @@ public class Reflect extends SuperReflect implements ReflectInterface {
     public Reflect(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public static void setNUM(int NUM) {
+        Reflect.NUM = NUM;
     }
 
     public int getId() {

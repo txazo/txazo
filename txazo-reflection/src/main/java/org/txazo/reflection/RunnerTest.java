@@ -14,7 +14,7 @@ public class RunnerTest {
 
     public static void main(String[] args) {
         TestRunner runner = new SuiteTestRunner();
-        runner.run(ReflectionField.class);
+        runner.run("org.txazo.reflection", true);
     }
 
 }
