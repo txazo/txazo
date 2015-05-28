@@ -24,7 +24,7 @@ import java.util.Map;
 public class SuiteTestListener extends AbstractTestListener {
 
     private final String lineSeparator = System.getProperty("line.separator");
-    private final String testSeparator = "----------------------------------------";
+    private final String testSeparator = "--------------------------------------------------------------------------------";
 
     private MethodTestWriter methodWriter = new MethodTestWriter();
     private ClassTestWriter classWriter = new ClassTestWriter();
@@ -181,7 +181,7 @@ public class SuiteTestListener extends AbstractTestListener {
 
         @Override
         public void afterTest(MethodTest test) {
-            println("+ " + test.getMethod().getName() + "() " + getTestStatus(test) + " " + getRunTime(test) + "s");
+            println("\t+ " + test.getMethod().getName() + "() " + getTestStatus(test) + " " + getRunTime(test) + "s");
         }
 
     }
@@ -207,7 +207,7 @@ public class SuiteTestListener extends AbstractTestListener {
             StringBuilder sb = new StringBuilder();
             sb.append(testSeparator);
             sb.append(lineSeparator);
-            sb.append(" T E S T");
+            sb.append("T E S T");
             sb.append(lineSeparator);
             sb.append(testSeparator);
             println(sb.toString());

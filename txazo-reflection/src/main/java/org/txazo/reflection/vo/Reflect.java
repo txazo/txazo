@@ -25,6 +25,9 @@ public class Reflect extends SuperReflect implements ReflectInterface {
         this.name = name;
     }
 
+    private void privateMethod() {
+    }
+
     public static void setNUM(int NUM) {
         Reflect.NUM = NUM;
     }

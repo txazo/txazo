@@ -45,6 +45,7 @@ public class ReflectionField extends SuiteTest {
 
         /** Field的get/set */
         Reflect reflect = new Reflect(1, "txazo");
+        /** 访问private的变量 */
         field.setAccessible(true);
         assertEquals(1, field.get(reflect));
         field.set(reflect, 5);

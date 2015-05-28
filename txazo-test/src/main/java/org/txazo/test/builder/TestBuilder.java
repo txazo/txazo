@@ -5,12 +5,11 @@ import org.txazo.test.annotation.Test;
 import org.txazo.test.test.ClassTest;
 import org.txazo.test.test.MethodTest;
 import org.txazo.test.test.SuiteTest;
+import org.txazo.test.util.ArrayUtils;
 import org.txazo.test.util.AssertUtils;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * TestBuilder
@@ -29,6 +28,7 @@ public class TestBuilder {
         AssertUtils.assertNotNull(clazz);
         Map<Method, MethodTest> methodTests = new HashMap<Method, MethodTest>();
         Method[] methods = clazz.getMethods();
+        Arrays.sort(methods, new MethodComparator());
         for (Method method : methods) {
             if (method.getAnnotation(Test.class) != null && method.getAnnotation(Ignore.class) == null) {
                 methodTests.put(method, buildMethodTest(method));
@@ -70,6 +70,15 @@ public class TestBuilder {
         SuiteTest suiteTest = new SuiteTest();
         suiteTest.addClassTest(classTest);
         return suiteTest;
+    }
+
+    private static class MethodComparator implements Comparator<Method> {
+
+        @Override
+        public int compare(Method m1, Method m2) {
+            return m1.getName().compareToIgnoreCase(m2.getName());
+        }
+
     }
 
 }

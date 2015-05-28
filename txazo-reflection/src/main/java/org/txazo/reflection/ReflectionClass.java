@@ -1,6 +1,5 @@
 package org.txazo.reflection;
 
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.txazo.reflection.vo.Reflect;
 import org.txazo.reflection.vo.ReflectInterface;

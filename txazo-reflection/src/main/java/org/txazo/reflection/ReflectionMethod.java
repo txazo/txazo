@@ -36,6 +36,11 @@ public class ReflectionMethod extends SuiteTest {
         method.invoke(reflect, 5);
         assertEquals(5, reflect.getId());
 
+        /** 私有方法调用 */
+        method = clazz.getDeclaredMethod("privateMethod", null);
+        method.setAccessible(true);
+        method.invoke(reflect, null);
+
         /** 静态方法调用 */
         clazz.getMethod("setNUM", int.class).invoke(null, 10);
         assertEquals(10, Reflect.NUM);

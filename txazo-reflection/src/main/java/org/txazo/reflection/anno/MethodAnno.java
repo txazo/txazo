@@ -6,16 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * FieldAnno
+ * MethodAnno
  *
  * @author txazo
  * @email txazo1218@163.com
- * @since 16.05.2015
+ * @since 28.05.2015
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
-public @interface FieldAnno {
-
-    String desc() default "";
+@Target({ElementType.METHOD})
+public @interface MethodAnno {
 
 }
