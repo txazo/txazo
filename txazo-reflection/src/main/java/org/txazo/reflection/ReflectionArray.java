@@ -33,8 +33,8 @@ public class ReflectionArray extends SuiteTest {
     @Test
     public void test2() throws ClassNotFoundException {
         /** 获取数组class的三种方式 */
-        assertEquals(int[].class, Class.forName("[I"));
-        assertEquals(int[].class, Array.newInstance(int.class, 0).getClass());
+        assertSame(int[].class, Class.forName("[I"));
+        assertSame(int[].class, Array.newInstance(int.class, 0).getClass());
 
         /** 数组的class name */
         assertEquals("[I", int[].class.getName());

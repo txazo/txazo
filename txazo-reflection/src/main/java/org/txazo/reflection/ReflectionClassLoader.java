@@ -15,8 +15,11 @@ public class ReflectionClassLoader extends SuiteTest {
 
     @Test
     public void test1() {
+        /** AppClassLoader  */
         ClassLoader application = this.getClass().getClassLoader();
+        /** ExtClassLoader */
         ClassLoader extension = application.getParent();
+        /** BootstrpLoader */
         ClassLoader system = extension.getParent();
         assertEquals("sun.misc.Launcher$AppClassLoader", application.getClass().getName());
         assertEquals("sun.misc.Launcher$ExtClassLoader", extension.getClass().getName());
@@ -29,5 +32,17 @@ public class ReflectionClassLoader extends SuiteTest {
         assertNotNull(clazz);
     }
 
+    private class MyClassLoader extends ClassLoader {
+
+        public MyClassLoader(ClassLoader parent) {
+            super(parent);
+        }
+
+        @Override
+        public Class<?> loadClass(String name) throws ClassNotFoundException {
+            return super.loadClass(name);
+        }
+
+    }
 
 }

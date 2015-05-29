@@ -12,7 +12,7 @@ import org.txazo.test.runner.TestRunner;
  */
 public class RunnerTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
         TestRunner runner = new SuiteTestRunner();
         runner.run("org.txazo.reflection", true);
     }

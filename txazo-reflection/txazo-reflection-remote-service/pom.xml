@@ -10,37 +10,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
-    <artifactId>txazo-reflection</artifactId>
+    <artifactId>txazo-reflection-remote-service</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>txazo-reflection</name>
+    <name>txazo-reflection-remote-service</name>
     <url>https://github.com/txazo/txazo</url>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.txazo</groupId>
             <artifactId>txazo-reflection-remote-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.txazo</groupId>
-            <artifactId>txazo-reflection-remote-service</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.txazo</groupId>
-            <artifactId>txazo-test</artifactId>
         </dependency>
     </dependencies>
 
