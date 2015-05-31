@@ -1,6 +1,7 @@
 package org.txazo.reflection.classloader;
 
 import org.txazo.reflection.remote.api.VersionApi;
+import org.txazo.reflection.vo.Reflect;
 import org.txazo.test.SuiteTest;
 import org.txazo.test.annotation.Test;
 
@@ -38,6 +39,18 @@ public class JarClassLoaderTest extends SuiteTest {
 
         assertSame(versionApiClass, versionApiClass1);
         assertSame(versionApiClass, versionApiClass2);
+    }
+
+    @Test
+    public void test3() throws MalformedURLException {
+        URL url = new URL("file:");
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException {
+        Reflect reflect = null;
+        Class.forName("org.txazo.reflection.vo.Reflect");
+        Thread.currentThread().getContextClassLoader().loadClass("org.txazo.reflection.vo.Reflect");
+        Thread.currentThread().getContextClassLoader().loadClass("org.txazo.reflection.vo.Reflect");
     }
 
 }

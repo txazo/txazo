@@ -14,7 +14,7 @@ public class RunnerTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
         TestRunner runner = new SuiteTestRunner();
-        runner.run("org.txazo.reflection", true);
+        runner.run(ReflectionClass.class);
     }
 
 }

@@ -33,23 +33,19 @@ public class ReflectionClass extends SuiteTest {
         assertSame(r1, r2);
         assertSame(r1, r3);
         assertSame(r1, r4);
-
-        /** 基本数据类型的class */
-        Field field = r1.getDeclaredField("id");
-        assertSame(int.class, field.getType());
     }
 
     @Test
     public void test2() {
         Class<?> clazz = Reflect.class;
+        /** 包名 */
+        assertEquals("org.txazo.reflection.vo", clazz.getPackage().getName());
+        /** 修饰符 */
+        assertTrue(Modifier.isPublic(clazz.getModifiers()));
         /** 类名 */
         assertEquals("Reflect", clazz.getSimpleName());
         /** 全限定类名 */
         assertEquals("org.txazo.reflection.vo.Reflect", clazz.getName());
-        /** 修饰符 */
-        assertTrue(Modifier.isPublic(clazz.getModifiers()));
-        /** 包信息 */
-        assertEquals("org.txazo.reflection.vo", clazz.getPackage().getName());
         /** 父类 */
         assertSame(SuperReflect.class, clazz.getSuperclass());
         assertSame(Object.class, clazz.getSuperclass().getSuperclass());
@@ -79,10 +75,30 @@ public class ReflectionClass extends SuiteTest {
     public void test4() throws ClassNotFoundException {
         /** 避免产生编译警告 */
         Class<? extends List> subClass = ArrayList.class.asSubclass(List.class);
+        //System.out.println(subClass.getName());
+        //System.out.println(subClass.getSimpleName());
+        //System.out.println(subClass.getCanonicalName());
         assertEquals("java.util.ArrayList", subClass.getCanonicalName());
 
         Class<? extends SuperReflect> clazz = Class.forName("org.txazo.reflection.vo.Reflect").asSubclass(SuperReflect.class);
         assertNotNull(clazz);
+    }
+
+    @Test
+    public void test5() {
+        assertClassName(int.class, "int", "int", "int");
+        assertClassName(int[].class, "[I", "int[]", "int[]");
+        assertClassName(int[][].class, "[[I", "int[][]", "int[][]");
+        assertClassName(Reflect.class, "org.txazo.reflection.vo.Reflect", "Reflect", "org.txazo.reflection.vo.Reflect");
+        assertClassName(Reflect[].class, "[Lorg.txazo.reflection.vo.Reflect;", "Reflect[]", "org.txazo.reflection.vo.Reflect[]");
+        assertClassName(Reflect[][].class, "[[Lorg.txazo.reflection.vo.Reflect;", "Reflect[][]", "org.txazo.reflection.vo.Reflect[][]");
+    }
+
+    private void assertClassName(Class<?> clazz, String name, String simpleName, String canonicalName) {
+        assertEquals(name, clazz.getName());
+        assertEquals(simpleName, clazz.getSimpleName());
+        assertEquals(canonicalName, clazz.getCanonicalName());
+        println(clazz.getTypeName());
     }
 
 }
