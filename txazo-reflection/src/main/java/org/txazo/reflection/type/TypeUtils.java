@@ -94,7 +94,7 @@ public class TypeUtils extends SuiteTest {
         assertEquals("Map<T, List<? super ArrayList>[]>", parseType(TypeUtils.MyClass.class.getDeclaredField("map").getGenericType()));
         assertEquals("List<Map<? extends List, T>>[]", parseType(TypeUtils.MyClass.class.getMethod("get").getGenericReturnType()));
         assertEquals("List<List<Map<T, ? super ArrayList>>[]>", parseType(TypeUtils.MyClass.class.getMethod("set", List.class).getGenericParameterTypes()[0]));
-        assertEquals("T extends List & Serializable", parseType(MyInterface.class.getTypeParameters()[0]));
+        assertEquals("T extends List & Serializable", parseType(TypeUtils.MyInterface.class.getTypeParameters()[0]));
     }
 
 }
