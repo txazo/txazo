@@ -76,7 +76,7 @@ public class TestBuilder {
 
         @Override
         public int compare(Method m1, Method m2) {
-            return m1.getName().compareToIgnoreCase(m2.getName());
+            return m2.getName().compareToIgnoreCase(m1.getName());
         }
 
     }
