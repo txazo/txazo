@@ -4,7 +4,7 @@ import org.txazo.test.SuiteTest;
 import org.txazo.test.annotation.Test;
 
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.TypeVariable;
+import java.lang.reflect.Type;
 
 /**
  * ParameterizedType - 参数化类型
@@ -16,34 +16,23 @@ import java.lang.reflect.TypeVariable;
  */
 public class ParameterizedTypeTest extends SuiteTest {
 
-    private interface Interface<T> {
-
-        public T method();
+    private abstract class AbstractClass<K, V> {
 
     }
 
-    private abstract class AbstractClass<T> implements Interface<T> {
-
-    }
-
-    private class MyClass<T, K> extends AbstractClass<T> implements Interface<T> {
-
-        @Override
-        public T method() {
-            return null;
-        }
+    private class MyClass extends AbstractClass<String, Integer> {
 
     }
 
     @Test
     public void test1() {
-        MyClass<Integer, String> myClass = new MyClass<Integer, String>();
-
-        TypeVariable<? extends Class<? extends MyClass>>[] typeVariables = myClass.getClass().getTypeParameters();
-
-        ParameterizedType pt = (ParameterizedType) myClass.getClass().getGenericSuperclass();
-        Class<?> clazz = (Class) pt.getActualTypeArguments()[0];
-        println(clazz.getName());
+        Type type = MyClass.class.getGenericSuperclass();
+        assertTrue(type instanceof ParameterizedType);
+        ParameterizedType pType = (ParameterizedType) type;
+        assertSame(String.class, pType.getActualTypeArguments()[0]);
+        assertSame(Integer.class, pType.getActualTypeArguments()[1]);
+        assertSame(ParameterizedTypeTest.class, pType.getOwnerType());
+        assertSame(ParameterizedTypeTest.AbstractClass.class, pType.getRawType());
     }
 
 }

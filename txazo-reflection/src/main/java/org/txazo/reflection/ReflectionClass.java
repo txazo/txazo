@@ -10,8 +10,7 @@ import org.txazo.test.annotation.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * ReflectionClass
@@ -23,16 +22,32 @@ import java.util.List;
  */
 public class ReflectionClass extends SuiteTest {
 
+    private class InnerClass {
+
+    }
+
     @Test
     public void test1() throws ClassNotFoundException, NoSuchFieldException {
         /** class对象的获取 */
-        Class<?> r1 = Reflect.class;
-        Class<?> r2 = new Reflect().getClass();
-        Class<?> r3 = Class.forName("org.txazo.reflection.vo.Reflect");
-        Class<?> r4 = Thread.currentThread().getContextClassLoader().loadClass("org.txazo.reflection.vo.Reflect");
-        assertSame(r1, r2);
-        assertSame(r1, r3);
-        assertSame(r1, r4);
+
+        /** 对象、原始数据类型、void、Void */
+        assertNotNull(Reflect.class);
+        /** 原始数据类型的包装类 Void */
+        assertSame(int.class, Integer.TYPE);
+        /** 对象的getClass() */
+        assertSame(Reflect.class, new Reflect().getClass());
+        /** Class.forName() */
+        assertSame(Reflect.class, Class.forName("org.txazo.reflection.vo.Reflect"));
+        /** ClassLoader的loadClass() */
+        assertSame(Reflect.class, Thread.currentThread().getContextClassLoader().loadClass("org.txazo.reflection.vo.Reflect"));
+        /** 父类class */
+        assertSame(AbstractList.class, ArrayList.class.getSuperclass());
+        /** 外部类class */
+        assertSame(ReflectionClass.class, ReflectionClass.InnerClass.class.getEnclosingClass());
+        /** 内部类class(public、可递归继承) */
+        assertTrue(ArrayUtils.isEmpty(ReflectionClass.class.getClasses()));
+        /** 内部类class(private、不可继承) */
+        assertSame(ReflectionClass.InnerClass.class, ReflectionClass.class.getDeclaredClasses()[0]);
     }
 
     @Test
@@ -98,7 +113,6 @@ public class ReflectionClass extends SuiteTest {
         assertEquals(name, clazz.getName());
         assertEquals(simpleName, clazz.getSimpleName());
         assertEquals(canonicalName, clazz.getCanonicalName());
-        println(clazz.getTypeName());
     }
 
 }
