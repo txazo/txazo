@@ -1,5 +1,6 @@
 package org.txazo.reflection;
 
+import org.txazo.reflection.type.ParameterizedTypeTest;
 import org.txazo.test.runner.SuiteTestRunner;
 import org.txazo.test.runner.TestRunner;
 
@@ -14,7 +15,7 @@ public class RunnerTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
         TestRunner runner = new SuiteTestRunner();
-        runner.run(ReflectionClass.class);
+        runner.run(ParameterizedTypeTest.class);
     }
 
 }
