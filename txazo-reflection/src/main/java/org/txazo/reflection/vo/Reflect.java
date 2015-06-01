@@ -1,5 +1,6 @@
 package org.txazo.reflection.vo;
 
+import org.txazo.reflection.anno.ClassAnno;
 import org.txazo.reflection.anno.FieldAnno;
 
 /**
@@ -9,6 +10,7 @@ import org.txazo.reflection.anno.FieldAnno;
  * @email txazo1218@163.com
  * @since 24.05.2015
  */
+@ClassAnno
 public class Reflect extends SuperReflect implements ReflectInterface {
 
     public static int NUM = 1;

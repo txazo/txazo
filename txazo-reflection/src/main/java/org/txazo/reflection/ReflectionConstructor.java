@@ -18,18 +18,20 @@ import java.lang.reflect.InvocationTargetException;
 public class ReflectionConstructor extends SuiteTest {
 
     @Test
-    public void test1() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public void test1() throws Exception {
         Class<Reflect> clazz = Reflect.class;
 
         /** 获取Constructor */
-        Constructor<Reflect> constructor = clazz.getConstructor(null);
+        Constructor<Reflect> constructor = clazz.getConstructor();
         assertNotNull(constructor);
+
         /** Constructor实例化类 */
-        Reflect reflect = constructor.newInstance(null);
+        Reflect reflect = constructor.newInstance();
         assertNotNull(reflect);
 
-        constructor = clazz.getDeclaredConstructor(new Class[]{int.class, String.class});
+        constructor = clazz.getDeclaredConstructor(int.class, String.class);
         assertNotNull(constructor);
+
         /** 构造方法参数 */
         assertSame(int.class, constructor.getParameterTypes()[0]);
         assertSame(String.class, constructor.getParameterTypes()[1]);

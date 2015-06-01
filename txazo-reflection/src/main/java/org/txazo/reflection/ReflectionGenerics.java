@@ -50,21 +50,21 @@ public class ReflectionGenerics extends SuiteTest {
 
     @Test
     public void test1() throws NoSuchFieldException {
-        /** 范型变量类型 */
+        /** 泛型变量类型 */
         Type fieldGenericType = MapClass.class.getDeclaredField("map").getGenericType();
         assertTrue(Arrays.equals(getGenericTypeClass(fieldGenericType), new Class<?>[]{String.class, Integer.class}));
     }
 
     @Test
     public void test2() throws NoSuchFieldException, NoSuchMethodException {
-        /** 范型方法返回类型 */
+        /** 泛型方法返回类型 */
         Type genericReturnType = MapClass.class.getMethod("getMap", null).getGenericReturnType();
         assertTrue(Arrays.equals(getGenericTypeClass(genericReturnType), new Class<?>[]{String.class, Integer.class}));
     }
 
     @Test
     public void test3() throws NoSuchMethodException {
-        /** 范型方法参数类型 */
+        /** 泛型方法参数类型 */
         Type[] genericParameterTypes = MapClass.class.getMethod("setMap", Map.class, List.class).getGenericParameterTypes();
         assertTrue(Arrays.equals(getGenericTypeClass(genericParameterTypes[0]), new Class<?>[]{String.class, Integer.class}));
         assertTrue(Arrays.equals(getGenericTypeClass(genericParameterTypes[1]), new Class<?>[]{String.class}));

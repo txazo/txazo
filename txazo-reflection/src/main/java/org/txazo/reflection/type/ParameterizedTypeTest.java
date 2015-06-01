@@ -7,7 +7,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * ParameterizedType - 参数化类型
+ * ParameterizedType - 参数化泛型
  *
  * @author txazo
  * @email txazo1218@163.com

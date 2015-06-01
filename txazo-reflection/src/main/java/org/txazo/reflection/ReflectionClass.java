@@ -1,6 +1,7 @@
 package org.txazo.reflection;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.txazo.reflection.anno.ClassAnno;
 import org.txazo.reflection.vo.Reflect;
 import org.txazo.reflection.vo.ReflectInterface;
 import org.txazo.reflection.vo.SuperInterface;
@@ -8,7 +9,6 @@ import org.txazo.reflection.vo.SuperReflect;
 import org.txazo.test.SuiteTest;
 import org.txazo.test.annotation.Test;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
@@ -44,7 +44,7 @@ public class ReflectionClass extends SuiteTest {
         assertSame(AbstractList.class, ArrayList.class.getSuperclass());
         /** 外部类class */
         assertSame(ReflectionClass.class, ReflectionClass.InnerClass.class.getEnclosingClass());
-        /** 内部类class(public、可递归继承) */
+        /** 内部类class(public、递归继承) */
         assertTrue(ArrayUtils.isEmpty(ReflectionClass.class.getClasses()));
         /** 内部类class(private、不可继承) */
         assertSame(ReflectionClass.InnerClass.class, ReflectionClass.class.getDeclaredClasses()[0]);
@@ -55,6 +55,8 @@ public class ReflectionClass extends SuiteTest {
         Class<?> clazz = Reflect.class;
         /** 包名 */
         assertEquals("org.txazo.reflection.vo", clazz.getPackage().getName());
+        /** 类注解 */
+        assertTrue(clazz.isAnnotationPresent(ClassAnno.class));
         /** 修饰符 */
         assertTrue(Modifier.isPublic(clazz.getModifiers()));
         /** 类名 */
@@ -88,19 +90,14 @@ public class ReflectionClass extends SuiteTest {
 
     @Test
     public void test4() throws ClassNotFoundException {
-        /** 避免产生编译警告 */
-        Class<? extends List> subClass = ArrayList.class.asSubclass(List.class);
-        //System.out.println(subClass.getName());
-        //System.out.println(subClass.getSimpleName());
-        //System.out.println(subClass.getCanonicalName());
-        assertEquals("java.util.ArrayList", subClass.getCanonicalName());
-
+        /** asSubclass */
         Class<? extends SuperReflect> clazz = Class.forName("org.txazo.reflection.vo.Reflect").asSubclass(SuperReflect.class);
         assertNotNull(clazz);
     }
 
     @Test
     public void test5() {
+        /** getName、getSimpleName、getCanonicalName */
         assertClassName(int.class, "int", "int", "int");
         assertClassName(int[].class, "[I", "int[]", "int[]");
         assertClassName(int[][].class, "[[I", "int[][]", "int[][]");

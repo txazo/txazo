@@ -31,21 +31,21 @@ public class ReflectionField extends SuiteTest {
         Field field = Reflect.class.getDeclaredField("id");
         assertNotNull(field);
 
+        /** Field的修饰符 */
+        assertTrue(Modifier.isPrivate(field.getModifiers()));
+
+        /** Field的名称 */
+        assertEquals("id", field.getName());
+
         /** Field的类型 */
-        Class<?> fieldType = field.getType();
-        assertSame(int.class, fieldType);
+        assertSame(int.class, field.getType());
 
         /** Field的注解 */
-        FieldAnno fieldAnno = field.getAnnotation(FieldAnno.class);
-        assertEquals("id", fieldAnno.desc());
-
-        /** Field的修饰符 */
-        int modifiers = field.getModifiers();
-        assertTrue(Modifier.isPrivate(modifiers));
+        assertEquals("id", field.getAnnotation(FieldAnno.class).desc());
 
         /** Field的get/set */
         Reflect reflect = new Reflect(1, "txazo");
-        /** 访问private的变量 */
+        /** 访问private的Field */
         field.setAccessible(true);
         assertEquals(1, field.get(reflect));
         field.set(reflect, 5);
@@ -54,7 +54,7 @@ public class ReflectionField extends SuiteTest {
 
     @Test
     public void test3() throws NoSuchFieldException, IllegalAccessException {
-        /** 静态变量的Field */
+        /** 静态的Field */
         Reflect.NUM = 1;
         Field field = Reflect.class.getDeclaredField("NUM");
         assertEquals(1, field.get(null));

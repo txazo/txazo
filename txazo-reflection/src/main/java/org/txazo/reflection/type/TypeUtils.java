@@ -43,11 +43,11 @@ public class TypeUtils extends SuiteTest {
         } else if (type instanceof TypeVariable) {
             TypeVariable vType = (TypeVariable) type;
             out.append(vType.getName());
-            Type[] bTypes = vType.getBounds();
-            if (ArrayUtils.isNotEmpty(bTypes) && !Arrays.asList(bTypes).contains(Object.class)) {
-                for (int i = 0; i < bTypes.length; i++) {
+            Type[] types = vType.getBounds();
+            if (ArrayUtils.isNotEmpty(types) && !Arrays.asList(types).contains(Object.class)) {
+                for (int i = 0; i < types.length; i++) {
                     out.append(i == 0 ? " extends " : " & ");
-                    parseType(bTypes[i], out);
+                    parseType(types[i], out);
                 }
             }
         } else if (type instanceof WildcardType) {

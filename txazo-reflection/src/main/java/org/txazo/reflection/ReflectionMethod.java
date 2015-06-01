@@ -20,7 +20,7 @@ public class ReflectionMethod extends SuiteTest {
     @Test
     public void test1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<Reflect> clazz = Reflect.class;
-        /** 获取所有方法，包括继承自父类的方法 */
+        /** 获取所有public方法，包括继承自父类的方法 */
         Method[] methods = clazz.getMethods();
         assertEquals(5 + 9, methods.length);
 

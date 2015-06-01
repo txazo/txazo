@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
 /**
- * GenericArrayType - 数组类型参数
+ * GenericArrayType - 数组泛型
  *
  * @author txazo
  * @email txazo1218@163.com
@@ -43,6 +43,7 @@ public class GenericArrayTypeTest extends SuiteTest {
         assertTrue(cType instanceof TypeVariable);
         TypeVariable vType = (TypeVariable) cType;
         assertEquals("T", vType.getName());
+        /** 默认T extends Object */
         assertSame(Object.class, vType.getBounds()[0]);
         assertSame(GenericArrayTypeTest.MyClass.class, vType.getGenericDeclaration());
     }

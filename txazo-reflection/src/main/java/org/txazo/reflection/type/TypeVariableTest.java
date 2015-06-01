@@ -39,7 +39,7 @@ public class TypeVariableTest extends SuiteTest {
     private void assertT(TypeVariable t) {
         /** 泛型参数名称 */
         assertEquals("T", t.getName());
-        /** 泛型上级类型  */
+        /** 泛型的父类型  */
         assertSame(List.class, t.getBounds()[0]);
         assertSame(Serializable.class, t.getBounds()[1]);
         /** 泛型声明的类 */
