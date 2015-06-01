@@ -15,11 +15,11 @@ public class ReflectionClassLoader extends SuiteTest {
 
     @Test
     public void test1() {
-        /** AppClassLoader  */
+        /** System ClassLoader: classpath, java.class.path */
         ClassLoader application = this.getClass().getClassLoader();
-        /** ExtClassLoader */
+        /** Extension ClassLoader: %JAVA_HOME%/lib/ext, java.ext.dirs */
         ClassLoader extension = application.getParent();
-        /** BootstrpLoader */
+        /** Bootstrap ClassLoader: %JAVA_HOME%/lib, sun.boot.class.path */
         ClassLoader system = extension.getParent();
         assertEquals("sun.misc.Launcher$AppClassLoader", application.getClass().getName());
         assertEquals("sun.misc.Launcher$ExtClassLoader", extension.getClass().getName());
