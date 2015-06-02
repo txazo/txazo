@@ -9,8 +9,20 @@ package org.txazo.log;
  */
 public abstract class LoggerUtils {
 
-    public static void log(Object obj) {
-        System.out.println(obj);
+    public static void log(Object msg) {
+        LoggerFactory.getLogger().info(msg);
+    }
+
+    public static void log(Object msg, Throwable t) {
+        LoggerFactory.getLogger().info(msg, t);
+    }
+
+    public static void log(String msg, Object... params) {
+        LoggerFactory.getLogger().info(msg, params);
+    }
+
+    public static void log(String msg, Throwable t) {
+        LoggerFactory.getLogger().info(msg, t);
     }
 
 }
