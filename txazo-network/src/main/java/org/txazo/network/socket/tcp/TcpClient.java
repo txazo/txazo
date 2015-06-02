@@ -16,18 +16,29 @@ import java.net.Socket;
 public class TcpClient {
 
     private transient boolean isRunning;
+    private String host;
+    private int port;
     private Socket socket;
     private BufferedReader input;
     private PrintStream output;
 
-    public TcpClient() {
-        this.isRunning = true;
+    public TcpClient(String host, int port) {
+        this.isRunning = false;
+        this.host = host;
+        this.port = port;
     }
 
-    public void connect(String host, int port) {
+    public void connect() {
+        if (isRunning) {
+            throw new RuntimeException("the client is already running");
+        }
+        isRunning = true;
+
         try {
             /** 建立连接 */
             socket = new Socket(host, port);
+
+            /** 获取输入输出流 */
             input = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
             output = new PrintStream(socket.getOutputStream(), true, "UTF-8");
 
@@ -45,13 +56,17 @@ public class TcpClient {
                     isRunning = false;
                 }
             }
-
-            /** 关闭连接 */
-            output.close();
-            input.close();
-            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            /** 关闭连接 */
+            try {
+                output.close();
+                input.close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -61,7 +76,7 @@ public class TcpClient {
 
                 @Override
                 public void run() {
-                    new TcpClient().connect("127.0.0.1", 6666);
+                    new TcpClient("127.0.0.1", 6666).connect();
                 }
 
             }).start();

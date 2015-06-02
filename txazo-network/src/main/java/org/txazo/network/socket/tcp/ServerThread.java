@@ -21,13 +21,18 @@ public class ServerThread implements Runnable {
     private PrintStream output;
 
     public ServerThread(Socket socket) {
-        this.isRunning = true;
+        this.isRunning = false;
         this.socket = socket;
     }
 
     @Override
     public void run() {
         try {
+            if (isRunning) {
+                throw new RuntimeException("the server is already started");
+            }
+            isRunning = true;
+
             System.out.println("新的连接");
 
             /** 获取输入输出流 */
@@ -47,13 +52,17 @@ public class ServerThread implements Runnable {
                     isRunning = false;
                 }
             }
-
-            /** 关闭连接 */
-            output.close();
-            input.close();
-            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            /** 关闭连接 */
+            try {
+                output.close();
+                input.close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

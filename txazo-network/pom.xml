@@ -19,8 +19,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
         </dependency>
 
         <dependency>
@@ -30,7 +40,7 @@
 
         <dependency>
             <groupId>org.txazo</groupId>
-            <artifactId>txazo-test</artifactId>
+            <artifactId>txazo-log</artifactId>
         </dependency>
     </dependencies>
 

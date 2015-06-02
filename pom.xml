@@ -14,6 +14,7 @@
     <modules>
         <module>txazo-freemarker</module>
         <module>txazo-java</module>
+        <module>txazo-log</module>
         <module>txazo-network</module>
         <module>txazo-reflection</module>
         <module>txazo-reflection/txazo-reflection-remote-api</module>
@@ -30,6 +31,7 @@
         <org.apache.commons.commons-collections4.version>4.0</org.apache.commons.commons-collections4.version>
         <org.apache.commons.commons-lang3.version>3.4</org.apache.commons.commons-lang3.version>
         <org.springframework.version>4.1.5.RELEASE</org.springframework.version>
+        <org.txazo.txazo-log.version>1.0</org.txazo.txazo-log.version>
         <org.txazo.txazo-reflection-remote-api.version>1.0</org.txazo.txazo-reflection-remote-api.version>
         <org.txazo.txazo-reflection-remote-service.version>1.0</org.txazo.txazo-reflection-remote-service.version>
         <org.txazo.txazo-test.version>1.0</org.txazo.txazo-test.version>
@@ -73,6 +75,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.txazo</groupId>
+                <artifactId>txazo-log</artifactId>
+                <version>${org.txazo.txazo-log.version}</version>
             </dependency>
 
             <dependency>

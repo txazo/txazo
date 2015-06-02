@@ -14,7 +14,7 @@ import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 
 /**
- * ReflectPackage
+ * ReflectionPackage
  *
  * @author txazo
  * @email txazo1218@163.com
@@ -22,7 +22,7 @@ import java.util.jar.Manifest;
  * @see java.util.jar.Manifest
  * @since 13.05.2015
  */
-public class ReflectPackage extends SuiteTest {
+public class ReflectionPackage extends SuiteTest {
 
     @Test
     public void test1() {

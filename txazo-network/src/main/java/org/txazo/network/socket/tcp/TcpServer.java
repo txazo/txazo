@@ -14,10 +14,12 @@ import java.net.Socket;
 public class TcpServer {
 
     private transient boolean isRunning;
+    private int port;
     private ServerSocket serverSocket;
 
     public TcpServer(int port) {
-        this.isRunning = true;
+        this.isRunning = false;
+        this.port = port;
         try {
             this.serverSocket = new ServerSocket(port);
         } catch (IOException e) {
@@ -26,15 +28,27 @@ public class TcpServer {
     }
 
     public void start() {
+        if (isRunning) {
+            throw new RuntimeException("the server is already started");
+        }
+        isRunning = true;
+
+        System.out.println("server start, listening on port: " + port);
+
         try {
             while (isRunning) {
+                /** 监听连接 */
                 Socket socket = serverSocket.accept();
                 new Thread(new ServerThread(socket)).start();
             }
-
-            serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
