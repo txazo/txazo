@@ -14,6 +14,7 @@
     <modules>
         <module>txazo-freemarker</module>
         <module>txazo-java</module>
+        <module>txazo-network</module>
         <module>txazo-reflection</module>
         <module>txazo-reflection/txazo-reflection-remote-api</module>
         <module>txazo-reflection/txazo-reflection-remote-service</module>
