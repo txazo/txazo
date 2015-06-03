@@ -1,12 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <parent>
-        <groupId>org.txazo</groupId>
-        <artifactId>txazo-parent</artifactId>
-        <version>1.0</version>
-    </parent>
-
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
@@ -20,5 +14,202 @@
     <modules>
         <module>txazo-spring-web-pom</module>
     </modules>
+
+    <properties>
+        <commons-codec.commons-codec.version>1.10</commons-codec.commons-codec.version>
+        <commons-io.commons-io.version>2.4</commons-io.commons-io.version>
+        <javax.javaee-api.version>7.0</javax.javaee-api.version>
+        <javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
+        <junit.junit.version>4.12</junit.junit.version>
+        <org.apache.commons.commons-collections4.version>4.0</org.apache.commons.commons-collections4.version>
+        <org.apache.commons.commons-lang3.version>3.4</org.apache.commons.commons-lang3.version>
+        <org.apache.httpcomponents.httpclient.version>4.4.1</org.apache.httpcomponents.httpclient.version>
+        <org.springframework.version>4.1.5.RELEASE</org.springframework.version>
+        <org.txazo.txazo-log.version>1.0</org.txazo.txazo-log.version>
+        <org.txazo.txazo-reflection-remote-api.version>1.0</org.txazo.txazo-reflection-remote-api.version>
+        <org.txazo.txazo-reflection-remote-service.version>1.0</org.txazo.txazo-reflection-remote-service.version>
+        <org.txazo.txazo-test.version>1.0</org.txazo.txazo-test.version>
+        <org.txazo.txazo-util.version>1.0</org.txazo.txazo-util.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.commons-codec.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.commons-io.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${javax.javaee-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${javax.servlet.jstl.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.junit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${org.apache.commons.commons-collections4.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${org.apache.commons.commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${org.apache.httpcomponents.httpclient.version}</version>
+            </dependency>
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-instrument</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-oxm</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+            <!-- Spring -->
+
+            <dependency>
+                <groupId>org.txazo</groupId>
+                <artifactId>txazo-log</artifactId>
+                <version>${org.txazo.txazo-log.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.txazo</groupId>
+                <artifactId>txazo-reflection-remote-api</artifactId>
+                <version>${org.txazo.txazo-reflection-remote-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.txazo</groupId>
+                <artifactId>txazo-reflection-remote-service</artifactId>
+                <version>${org.txazo.txazo-reflection-remote-service.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.txazo</groupId>
+                <artifactId>txazo-test</artifactId>
+                <version>${org.txazo.txazo-test.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.txazo</groupId>
+                <artifactId>txazo-util</artifactId>
+                <version>${org.txazo.txazo-util.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

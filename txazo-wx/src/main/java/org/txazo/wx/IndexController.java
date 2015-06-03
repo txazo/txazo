@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 03.06.2015
  */
 @Controller
-//@RequestMapping("/")
 public class IndexController {
 
     @RequestMapping("/index.wx")

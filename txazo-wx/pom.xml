@@ -3,7 +3,7 @@
 
     <parent>
         <groupId>org.txazo</groupId>
-        <artifactId>txazo-spring-web-pom</artifactId>
+        <artifactId>txazo-parent</artifactId>
         <version>1.0</version>
     </parent>
 
@@ -19,8 +19,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
+            <groupId>org.txazo</groupId>
+            <artifactId>txazo-spring-web-pom</artifactId>
+            <version>1.0</version>
+            <type>pom</type>
         </dependency>
 
         <dependency>
@@ -49,8 +51,19 @@
         </dependency>
 
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.txazo</groupId>
+            <artifactId>txazo-log</artifactId>
         </dependency>
     </dependencies>
 
