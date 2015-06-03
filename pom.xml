@@ -17,6 +17,7 @@
         <module>txazo-java</module>
         <module>txazo-log</module>
         <module>txazo-network</module>
+        <module>txazo-pom</module>
         <module>txazo-reflection</module>
         <module>txazo-reflection/txazo-reflection-remote-api</module>
         <module>txazo-reflection/txazo-reflection-remote-service</module>

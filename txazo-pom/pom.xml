@@ -3,30 +3,22 @@
 
     <parent>
         <groupId>org.txazo</groupId>
-        <artifactId>txazo-spring-web-pom</artifactId>
+        <artifactId>txazo-parent</artifactId>
         <version>1.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
-    <artifactId>txazo-index</artifactId>
+    <artifactId>txazo-pom</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
-    <name>txazo-index</name>
+    <name>txazo-pom</name>
     <url>https://github.com/txazo/txazo</url>
 
-    <dependencies>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>txazo-spring-web-pom</module>
+    </modules>
 
 </project>
