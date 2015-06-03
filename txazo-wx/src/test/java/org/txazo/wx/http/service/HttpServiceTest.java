@@ -23,8 +23,8 @@ public class HttpServiceTest extends SpringAbstractTest {
     @Test
     public void testGet() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("id", 1);
-        String result = httpService.get("http://wx.txazo.com/index.wx", map);
+        map.put("corpid", 1);
+        String result = httpService.get("https://qyapi.weixin.qq.com/cgi-bin/gettoken", map);
         LoggerUtils.log(result);
     }
 

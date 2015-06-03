@@ -15,4 +15,6 @@ public interface HttpClient {
 
     public String post(String url, Map<String, Object> params);
 
+    public String post(String url, Map<String, Object> params, String body);
+
 }

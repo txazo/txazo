@@ -11,6 +11,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -67,7 +68,12 @@ public class PoolHttpClient implements HttpClient {
 
     @Override
     public String post(String url, Map<String, Object> params) {
-        return executeHttp(new HttpPostCallable(url, params, httpClient));
+        return executeHttp(new HttpPostCallable(url, params, null, httpClient));
+    }
+
+    @Override
+    public String post(String url, Map<String, Object> params, String body) {
+        return executeHttp(new HttpPostCallable(url, params, body, httpClient));
     }
 
     private String executeHttp(Callable<String> callable) {
@@ -121,8 +127,11 @@ public class PoolHttpClient implements HttpClient {
 
     private class HttpPostCallable extends HttpCallable {
 
-        public HttpPostCallable(final String url, final Map<String, Object> params, final CloseableHttpClient httpClient) {
+        private String body;
+
+        public HttpPostCallable(final String url, final Map<String, Object> params, final String body, final CloseableHttpClient httpClient) {
             super(url, params, httpClient);
+            this.body = body;
         }
 
         @Override
@@ -130,7 +139,11 @@ public class PoolHttpClient implements HttpClient {
             String result = null;
             CloseableHttpResponse response = null;
             HttpPost httpPost = new HttpPost(url);
-            if (MapUtils.isNotEmpty(params)) {
+            if (StringUtils.isNotBlank(body)) {
+                httpPost = new HttpPost(HttpUtils.getURL(url, params));
+                httpPost.setEntity(new StringEntity(body, Consts.UTF_8));
+            } else if (MapUtils.isNotEmpty(params)) {
+                httpPost = new HttpPost(url);
                 String key = null;
                 Object value = null;
                 List<NameValuePair> formParams = new ArrayList<NameValuePair>();
