@@ -1,4 +1,4 @@
-package org.txazo.index;
+package org.txazo.wx;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //@RequestMapping("/")
 public class IndexController {
 
-    @RequestMapping("/index")
+    @RequestMapping("/index.wx")
     public String index() {
         return "index";
     }

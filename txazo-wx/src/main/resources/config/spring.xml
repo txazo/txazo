@@ -7,6 +7,6 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="org.txazo.index"/>
+    <context:component-scan base-package="org.txazo.wx"/>
 
 </beans>

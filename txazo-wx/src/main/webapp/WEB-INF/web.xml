@@ -25,14 +25,18 @@
 
     <!-- Spring DispatcherServlet -->
     <servlet>
-        <servlet-name>index</servlet-name>
+        <servlet-name>wx</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:config/wx-servlet.xml</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern>*.html</url-pattern>
+        <servlet-name>wx</servlet-name>
+        <url-pattern>*.wx</url-pattern>
     </servlet-mapping>
 
     <!-- Spring ContextConfigLocation -->

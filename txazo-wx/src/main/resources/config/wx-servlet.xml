@@ -9,11 +9,11 @@
 
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="org.txazo.index"/>
+    <context:component-scan base-package="org.txazo.wx"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/page/"/>
-        <property name="suffix" value=".html"/>
+        <property name="suffix" value=".jsp"/>
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
     </bean>
 
