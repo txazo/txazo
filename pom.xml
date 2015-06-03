@@ -13,7 +13,6 @@
 
     <modules>
         <module>txazo-freemarker</module>
-        <module>txazo-index</module>
         <module>txazo-java</module>
         <module>txazo-log</module>
         <module>txazo-network</module>
@@ -23,6 +22,7 @@
         <module>txazo-reflection/txazo-reflection-remote-service</module>
         <module>txazo-test</module>
         <module>txazo-util</module>
+        <module>txazo-wx</module>
     </modules>
 
     <properties>

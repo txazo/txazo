@@ -10,11 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
-    <artifactId>txazo-index</artifactId>
+    <artifactId>txazo-wx</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>txazo-index</name>
+    <name>txazo-wx</name>
     <url>https://github.com/txazo/txazo</url>
 
     <dependencies>
