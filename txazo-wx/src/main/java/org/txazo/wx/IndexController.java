@@ -18,4 +18,9 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/html5.wx")
+    public String html5() {
+        return "html5";
+    }
+
 }
