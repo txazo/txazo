@@ -1,0 +1,25 @@
+<project name="txazo-wx" basedir="target" default="run">
+
+    <property name="project" value="txazo-wx"/>
+    <property name="build-war" value="txazo-wx-1.0.war"/>
+
+    <property name="server" value="112.124.6.220"/>
+    <property name="user" value="www"/>
+    <property name="password" value="www1218"/>
+    <property name="port" value="22"/>
+    <property name="path" value="/www"/>
+
+    <property name="restart" value="sudo /usr/local/tomcat/bin/shutdown.sh; sudo /usr/local/tomcat/bin/startup.sh"/>
+    <property name="exec" value="cd ${path}; unzip -oq -d ${project} ${build-war}; ${restart}"/>
+
+    <target name="scp">
+        <scp file="${build-war}" todir="${user}:${password}@${server}:${path}" port="${port}" trust="true"
+             verbose="true"/>
+    </target>
+
+    <target name="run" depends="scp">
+        <sshexec host="${server}" username="${user}" password="${password}" port="${port}" trust="true"
+                 command="${exec}"/>
+    </target>
+
+</project>
