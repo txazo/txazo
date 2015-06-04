@@ -23,4 +23,14 @@ public class IndexController {
         return "html5";
     }
 
+    @RequestMapping("/html5_1.wx")
+    public String html5_1() {
+        return "html5_1";
+    }
+
+    @RequestMapping("/html5_2.wx")
+    public String html5_2() {
+        return "html5_2";
+    }
+
 }

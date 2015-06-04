@@ -7,10 +7,11 @@
 
     <import resource="spring-jdbc.xml"/>
     <import resource="spring-mybatis.xml"/>
+    <import resource="spring-redis.xml"/>
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="classpath:config/spring/jdbc.properties"/>
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <context:component-scan base-package="org.txazo.wx"/>
 
