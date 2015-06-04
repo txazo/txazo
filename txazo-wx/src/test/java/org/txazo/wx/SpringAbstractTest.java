@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @since 03.06.2015
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:config/spring.xml"})
+@ContextConfiguration(locations = {"classpath:config/spring/spring.xml"})
 public abstract class SpringAbstractTest {
 
 }
