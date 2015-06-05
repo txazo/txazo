@@ -1,5 +1,6 @@
 package org.txazo.wx.http.client;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -16,5 +17,7 @@ public interface HttpClient {
     public String post(String url, Map<String, Object> params);
 
     public String post(String url, Map<String, Object> params, String body);
+
+    public String post(String url, Map<String, Object> params, File file);
 
 }

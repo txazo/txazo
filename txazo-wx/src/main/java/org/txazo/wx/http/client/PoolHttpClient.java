@@ -17,8 +17,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.txazo.wx.http.ssl.SSLManager;
 import org.txazo.wx.http.util.HttpUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -47,7 +49,10 @@ public class PoolHttpClient implements HttpClient {
         connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(200);
         connectionManager.setDefaultMaxPerRoute(20);
-        httpClient = HttpClients.custom().setConnectionManager(connectionManager).build();
+        httpClient = HttpClients.custom()
+                .setConnectionManager(connectionManager)
+                        // .setSSLSocketFactory(SSLManager.buildSSLSocketFactory())
+                .build();
     }
 
     public static PoolHttpClient getInstance() {
@@ -74,6 +79,11 @@ public class PoolHttpClient implements HttpClient {
     @Override
     public String post(String url, Map<String, Object> params, String body) {
         return executeHttp(new HttpPostCallable(url, params, body, httpClient));
+    }
+
+    @Override
+    public String post(String url, Map<String, Object> params, File file) {
+        return null;
     }
 
     private String executeHttp(Callable<String> callable) {

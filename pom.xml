@@ -223,6 +223,12 @@
             <!-- Spring -->
 
             <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>1.5.0.RELEASE</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
                 <version>${org.mybatis.mybatis.version}</version>
@@ -262,6 +268,12 @@
                 <groupId>org.txazo</groupId>
                 <artifactId>txazo-util</artifactId>
                 <version>${org.txazo.txazo-util.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>2.7.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
