@@ -1,4 +1,4 @@
-package org.txazo.wx.http.client;
+package org.txazo.weixin.http;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -20,8 +20,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.txazo.wx.http.ssl.SSLManager;
-import org.txazo.wx.http.util.HttpUtils;
+import org.txazo.weixin.http.util.HttpUtils;
 
 import java.io.File;
 import java.io.IOException;

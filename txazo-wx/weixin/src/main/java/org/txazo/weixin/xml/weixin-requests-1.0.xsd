@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.txazo.com/schema/weixin"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.txazo.com/schema/weixin"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+    <xsd:element name="requests">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="request" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="request">
+        <xsd:complexType>
+            <xsd:attribute name="uri" type="string" use="required"/>
+            <xsd:attribute name="contentType" type="contentType" use="required"/>
+            <xsd:attribute name="requireParams" type="string" use="optional"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="contentType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="XML"/>
+            <xsd:enumeration value="JSON"/>
+            <xsd:enumeration value="STREAM"/>
+            <xsd:enumeration value="DEFAULT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="string">
+        <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="replace"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

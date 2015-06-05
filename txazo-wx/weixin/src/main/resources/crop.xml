@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<crop xmlns="http://www.txazo.com/schema/weixin"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.txazo.com/schema/weixin weixin-crop-1.0.xsd">
+
+    <corpid>1</corpid>
+    <corpsecret>1</corpsecret>
+
+</crop>

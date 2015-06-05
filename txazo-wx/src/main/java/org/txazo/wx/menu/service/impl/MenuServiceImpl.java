@@ -46,7 +46,7 @@ public class MenuServiceImpl implements MenuService {
                 "      \"sub_button\": [\n" +
                 "        {\n" +
                 "          \"type\": \"view\",\n" +
-                "          \"name\": \"搜索\",\n" +
+                "          \"name\": \"搜搜\",\n" +
                 "          \"url\": \"http://www.soso.com/\"\n" +
                 "        },\n" +
                 "        {\n" +

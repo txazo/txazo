@@ -1,15 +1,11 @@
-package org.txazo.wx.weixin;
+package org.txazo.weixin;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.JSONSerializer;
-import com.alibaba.fastjson.serializer.SerializeConfig;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.txazo.log.LoggerUtils;
-import org.txazo.wx.http.client.HttpClient;
-import org.txazo.wx.http.client.PoolHttpClient;
-import org.txazo.wx.weixin.agent.Agent;
-import org.txazo.wx.weixin.media.MediaType;
-import org.txazo.wx.weixin.util.EnumUtils;
+import org.txazo.weixin.agent.Agent;
+import org.txazo.weixin.holder.AccessTokenHolder;
+import org.txazo.weixin.http.HttpClient;
+import org.txazo.weixin.http.PoolHttpClient;
+import org.txazo.weixin.util.EnumUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,16 +18,18 @@ import java.util.Map;
  * @email txazo1218@163.com
  * @since 04.06.2015
  */
-public abstract class WeiXinUtils {
+public class WeiXinHandler {
 
-    private static HttpClient httpClient = PoolHttpClient.getInstance();
+    private WeiXin weiXin;
+    private AccessTokenHolder tokenHolder = AccessTokenHolder.getInstance();
+    private HttpClient httpClient = PoolHttpClient.getInstance();
 
     /**
      * 获取企业号应用
      *
      * @return
      */
-    public static Agent getAgent() {
+    public Agent getAgent() {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("access_token", "qWhQlZJxcDfyYcQ1WMtMK528qTSS05De_nXClXLSZ-DwsUYcCQr70XPCnDXMHEsz");
         // map.put("agentid", "0");
@@ -40,7 +38,7 @@ public abstract class WeiXinUtils {
         return null;
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         getAgent();
     }
 
@@ -49,7 +47,7 @@ public abstract class WeiXinUtils {
      *
      * @param agent
      */
-    public static void setAgent(Agent agent) {
+    public void setAgent(Agent agent) {
     }
 
     /**
@@ -57,7 +55,7 @@ public abstract class WeiXinUtils {
      *
      * @return
      */
-    public static List<Agent> listAgent() {
+    public List<Agent> listAgent() {
         return null;
     }
 

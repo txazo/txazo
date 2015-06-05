@@ -1,4 +1,4 @@
-package org.txazo.wx.weixin.agent;
+package org.txazo.weixin.agent;
 
 /**
  * Agent

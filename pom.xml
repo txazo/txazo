@@ -23,6 +23,7 @@
         <module>txazo-test</module>
         <module>txazo-util</module>
         <module>txazo-wx</module>
+        <module>txazo-wx/weixin</module>
     </modules>
 
     <properties>
@@ -39,6 +40,7 @@
         <org.apache.commons.commons-collections4.version>4.0</org.apache.commons.commons-collections4.version>
         <org.apache.commons.commons-lang3.version>3.4</org.apache.commons.commons-lang3.version>
         <org.apache.httpcomponents.httpclient.version>4.4.1</org.apache.httpcomponents.httpclient.version>
+        <org.apache.httpcomponents.httpmime.version>4.4.1</org.apache.httpcomponents.httpmime.version>
         <org.springframework.version>4.1.5.RELEASE</org.springframework.version>
         <org.mybatis.mybatis.version>3.3.0</org.mybatis.mybatis.version>
         <org.mybatis.mybatis-spring.version>1.2.2</org.mybatis.mybatis-spring.version>
@@ -122,6 +124,12 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${org.apache.httpcomponents.httpclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${org.apache.httpcomponents.httpmime.version}</version>
             </dependency>
 
             <!-- Spring -->

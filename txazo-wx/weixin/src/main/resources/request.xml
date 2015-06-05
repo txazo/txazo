@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<requests xmlns="http://www.txazo.com/schema/weixin"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.txazo.com/schema/weixin weixin-requests-1.0.xsd">
+
+    <!-- 建立连接 -->
+    <request uri="/cgi-bin/gettoken" contentType="DEFAULT" requireParams="corpid,corpsecret"/>
+    <request uri="/cgi-bin/getcallbackip" contentType="DEFAULT" requireParams="access_token"/>
+
+    <!-- 管理通讯录 -->
+    <request uri="/cgi-bin/user/authsucc" contentType="DEFAULT" requireParams="access_token,userid"/>
+
+    <!-- 管理多媒体文件 -->
+    <request uri="/cgi-bin/media/upload" contentType="STREAM" requireParams="access_token,type,media"/>
+    <request uri="/cgi-bin/media/get" contentType="DEFAULT" requireParams="access_token,media_id"/>
+
+    <!-- 管理企业号应用 -->
+    <request uri="/cgi-bin/agent/get" contentType="DEFAULT" requireParams="access_token,agentid"/>
+    <request uri="/cgi-bin/agent/set" contentType="JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/agent/list" contentType="DEFAULT" requireParams="access_token"/>
+
+</requests>

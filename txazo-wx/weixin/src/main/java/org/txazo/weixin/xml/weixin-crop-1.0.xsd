@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.txazo.com/schema/weixin"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.txazo.com/schema/weixin"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+    <xsd:element name="crop">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="corpid" type="string"/>
+                <xsd:element name="corpsecret" type="string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="string">
+        <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="replace"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
