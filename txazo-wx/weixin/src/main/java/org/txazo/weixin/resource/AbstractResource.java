@@ -17,6 +17,9 @@ import java.net.URL;
  */
 public abstract class AbstractResource implements Resource {
 
+    public AbstractResource() {
+    }
+
     @Override
     public boolean exists() {
         try {
