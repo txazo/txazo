@@ -7,11 +7,20 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.config.AuthSchemes;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
@@ -19,15 +28,15 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
+import org.txazo.log.LoggerUtils;
+import org.txazo.weixin.http.ssl.SSLManager;
 import org.txazo.weixin.http.util.HttpUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -46,14 +55,35 @@ public class PoolHttpClient implements HttpClient {
     private CloseableHttpClient httpClient;
     private PoolingHttpClientConnectionManager connectionManager;
     private ExecutorService pool = Executors.newFixedThreadPool(50);
+    private ResponseHandler<String> responseHandler = new DefaultResponseHandler();
 
     private PoolHttpClient() {
-        connectionManager = new PoolingHttpClientConnectionManager();
+        connectionManager = new PoolingHttpClientConnectionManager(getSocketFactoryRegistry());
         connectionManager.setMaxTotal(200);
         connectionManager.setDefaultMaxPerRoute(20);
         httpClient = HttpClients.custom()
                 .setConnectionManager(connectionManager)
-                        // .setSSLSocketFactory(SSLManager.buildSSLSocketFactory())
+                .setDefaultRequestConfig(this.getRequestConfig())
+                .setSSLSocketFactory(SSLManager.buildSSLSocketFactory())
+                .build();
+    }
+
+    protected Registry<ConnectionSocketFactory> getSocketFactoryRegistry() {
+        return RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("http", PlainConnectionSocketFactory.INSTANCE)
+                .register("https", new SSLConnectionSocketFactory(SSLContexts.createSystemDefault()))
+                .build();
+    }
+
+    protected RequestConfig getRequestConfig() {
+        return RequestConfig.custom()
+                .setCookieSpec(CookieSpecs.DEFAULT)
+                .setExpectContinueEnabled(true)
+                .setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM, AuthSchemes.DIGEST))
+                .setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC))
+                .setSocketTimeout(5000)
+                .setConnectTimeout(5000)
+                .setConnectionRequestTimeout(5000)
                 .build();
     }
 
@@ -272,12 +302,10 @@ public class PoolHttpClient implements HttpClient {
             }
 
             try {
-                response = httpClient.execute(request);
-                HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    result = EntityUtils.toString(entity);
-                }
+                result = httpClient.execute(request, responseHandler);
             } catch (IOException e) {
+                LoggerUtils.log("HttpClient request failed", e);
+            } finally {
                 IOUtils.closeQuietly(response);
             }
             return result;
