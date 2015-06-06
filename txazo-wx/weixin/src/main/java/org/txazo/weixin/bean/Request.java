@@ -1,7 +1,12 @@
 package org.txazo.weixin.bean;
 
+import org.apache.commons.lang3.StringUtils;
 import org.txazo.weixin.enums.EntityPath;
 import org.txazo.weixin.xml.XmlEntity;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Request
@@ -27,8 +32,8 @@ public class Request implements XmlEntity {
         return uri;
     }
 
-    public String getRequireParams() {
-        return requireParams;
+    public List<String> getRequireParams() {
+        return StringUtils.isBlank(requireParams) ? (List<String>) Collections.EMPTY_LIST : Arrays.asList(requireParams.split(","));
     }
 
     public ContentType getContentType() {

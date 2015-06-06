@@ -73,7 +73,7 @@ public class DefaultXmlEntityHandler<T extends XmlEntity> extends XmlEntityHandl
             for (Iterator<Map.Entry<String, String>> iterator = fieldPaths.entrySet().iterator(); iterator.hasNext(); ) {
                 entry = iterator.next();
                 fieldName = entry.getValue().toString();
-                if ((path + SEP_ATTR + fieldName).equals(entry.getKey())) {
+                if ((path + SEP_ATTR + fieldName).equals(entry.getKey()) && attributes.getIndex(fieldName) >= 0) {
                     attributeValue = attributes.getValue(fieldName);
                     field = clazz.getDeclaredField(fieldName);
                     field.setAccessible(true);

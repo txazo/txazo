@@ -1,8 +1,8 @@
 package org.txazo.weixin.holder;
 
+import org.txazo.log.LoggerUtils;
+import org.txazo.weixin.WeiXinUtils;
 import org.txazo.weixin.bean.AccessToken;
-import org.txazo.weixin.http.HttpClient;
-import org.txazo.weixin.http.PoolHttpClient;
 
 /**
  * AccessTokenHolder
@@ -13,27 +13,41 @@ import org.txazo.weixin.http.PoolHttpClient;
  */
 public class AccessTokenHolder {
 
-    private AccessToken accessToken;
-    private HttpClient httpClient = PoolHttpClient.getInstance();
+    private static AccessTokenHolder instance = new AccessTokenHolder();
 
-    private static AccessTokenHolder instance;
+    private volatile AccessToken accessToken;
+
+    private AccessTokenHolder() {
+        Thread thread = new Thread(new AccessTokenThread());
+        thread.setDaemon(true);
+        thread.start();
+    }
 
     public static AccessTokenHolder getInstance() {
-        if (instance == null) {
-            synchronized (AccessTokenHolder.class) {
-                if (instance == null) {
-                    instance = new AccessTokenHolder();
-                }
-            }
-        }
         return instance;
     }
 
     public String getAccessToken() {
-        if (accessToken == null) {
+        return accessToken == null ? null : accessToken.getAccess_token();
+    }
 
+    private class AccessTokenThread implements Runnable {
+
+        @Override
+        public void run() {
+            while (true) {
+                if (accessToken == null || accessToken.isExpire()) {
+                    accessToken = WeiXinUtils.getAccessToken();
+                }
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    LoggerUtils.log(e);
+                }
+            }
         }
-        return null;
+
     }
 
 }

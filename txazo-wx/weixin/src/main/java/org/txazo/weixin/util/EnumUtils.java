@@ -15,6 +15,12 @@ import java.util.*;
  */
 public abstract class EnumUtils {
 
+    /**
+     * 枚举转JSON
+     *
+     * @param object
+     * @return
+     */
     public static String toJSONString(Object object) {
         Map<String, Object> jsonMap = new HashMap<String, Object>();
         if (object.getClass().isEnum()) {

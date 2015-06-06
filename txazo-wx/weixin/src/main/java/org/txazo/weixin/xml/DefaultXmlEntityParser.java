@@ -20,6 +20,8 @@ public class DefaultXmlEntityParser<T extends XmlEntity> implements XmlEntityPar
     public DefaultXmlEntityParser() {
         factory = SAXParserFactory.newInstance();
         try {
+            factory.setFeature("http://xml.org/sax/features/namespaces", true);
+            factory.setFeature("http://xml.org/sax/features/validation", true);
             parser = factory.newSAXParser();
         } catch (Exception e) {
             throw new RuntimeException("DefaultXmlEntityParser init failed");

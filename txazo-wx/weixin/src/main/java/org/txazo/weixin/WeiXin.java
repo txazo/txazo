@@ -1,5 +1,14 @@
 package org.txazo.weixin;
 
+import org.txazo.weixin.bean.Crop;
+import org.txazo.weixin.bean.Request;
+import org.txazo.weixin.xml.DefaultXmlEntityLoader;
+import org.txazo.weixin.xml.XmlEntityLoader;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * WeiXin
  *
@@ -9,15 +18,39 @@ package org.txazo.weixin;
  */
 public class WeiXin {
 
-    private String corpid;
-    private String corpsecret;
+    private static WeiXin instance;
 
-    public String getCorpid() {
-        return corpid;
+    private Crop crop;
+    private Map<String, Request> requests = new HashMap<String, Request>();
+
+    private WeiXin() {
+        XmlEntityLoader loader = DefaultXmlEntityLoader.getInstance();
+        List<Crop> crops = loader.load(Crop.class);
+        crop = crops.get(0);
+
+        List<Request> requestList = loader.load(Request.class);
+        for (Request request : requestList) {
+            requests.put(request.getUri(), request);
+        }
     }
 
-    public String getCorpsecret() {
-        return corpsecret;
+    public static WeiXin getInstance() {
+        if (instance == null) {
+            synchronized (WeiXin.class) {
+                if (instance == null) {
+                    instance = new WeiXin();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public Crop getCrop() {
+        return crop;
+    }
+
+    public Request getRequest(String uri) {
+        return requests.get(uri);
     }
 
 }

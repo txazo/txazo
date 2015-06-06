@@ -13,7 +13,11 @@ public class AccessToken {
 
     private String access_token;
     private long expires_in;
-    private Date accessTime;
+    private Date accessTime = new Date();
+
+    public boolean isExpire() {
+        return (System.currentTimeMillis() - accessTime.getTime()) >= expires_in;
+    }
 
     public String getAccess_token() {
         return access_token;
