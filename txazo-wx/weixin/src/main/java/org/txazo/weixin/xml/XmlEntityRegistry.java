@@ -11,6 +11,6 @@ public interface XmlEntityRegistry<T extends XmlEntity> extends XmlEntityDefinit
 
     void registerXmlEntity(String path, Class<T> clazz);
 
-    public String getRegisteredPath(Class<T> clazz);
+    String getRegisteredPath(Class<T> clazz);
 
 }

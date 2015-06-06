@@ -1,6 +1,6 @@
 package org.txazo.weixin.xml;
 
-import org.txazo.log.LoggerUtils;
+import org.apache.commons.io.IOUtils;
 import org.txazo.weixin.bean.Crop;
 import org.txazo.weixin.bean.Request;
 import org.txazo.weixin.resource.DefaultResourceLoader;
@@ -46,11 +46,14 @@ public class DefaultXmlEntityLoader<T extends XmlEntity> implements XmlEntityLoa
             return null;
         }
 
+        InputStream inputStream = null;
         try {
-            InputStream inputStream = resource.getInputStream();
+            inputStream = resource.getInputStream();
             return xmlEntityParser.parse(inputStream, clazz);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
         }
     }
 
@@ -63,12 +66,6 @@ public class DefaultXmlEntityLoader<T extends XmlEntity> implements XmlEntityLoa
             }
         }
         return instance;
-    }
-
-    public static void main(String[] args) {
-        XmlEntityLoader loader = new DefaultXmlEntityLoader();
-        List<Request> list = loader.load(Request.class);
-        LoggerUtils.log("Success");
     }
 
 }
