@@ -23,18 +23,18 @@
         </xsd:complexType>
     </xsd:element>
 
+    <xsd:simpleType name="string">
+        <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="replace"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
     <xsd:simpleType name="contentType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="XML"/>
             <xsd:enumeration value="JSON"/>
             <xsd:enumeration value="STREAM"/>
             <xsd:enumeration value="DEFAULT"/>
-        </xsd:restriction>
-    </xsd:simpleType>
-
-    <xsd:simpleType name="string">
-        <xsd:restriction base="xsd:string">
-            <xsd:whiteSpace value="replace"/>
         </xsd:restriction>
     </xsd:simpleType>
 
