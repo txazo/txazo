@@ -12,12 +12,12 @@ import java.util.Map;
  */
 public interface HttpClient {
 
-    public String get(String url, Map<String, Object> params);
+    String get(String url, Map<String, Object> params);
 
-    public String post(String url, Map<String, Object> params);
+    String post(String url, Map<String, Object> params);
 
-    public String post(String url, Map<String, Object> params, String body);
+    String post(String url, Map<String, Object> params, String body);
 
-    public String post(String url, Map<String, Object> params, File file);
+    String post(String url, Map<String, Object> params, File file);
 
 }

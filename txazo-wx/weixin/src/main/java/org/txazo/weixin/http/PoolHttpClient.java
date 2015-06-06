@@ -64,6 +64,7 @@ public class PoolHttpClient implements HttpClient {
         httpClient = HttpClients.custom()
                 .setConnectionManager(connectionManager)
                 .setDefaultRequestConfig(this.getRequestConfig())
+                .setRetryHandler(new DefaultHttpRequestRetryHandler())
                 .setSSLSocketFactory(SSLManager.buildSSLSocketFactory())
                 .build();
     }
@@ -105,7 +106,7 @@ public class PoolHttpClient implements HttpClient {
 
     @Override
     public String post(String url, Map<String, Object> params) {
-        return executeHttp(new HttpReuqestCallable(url, params, httpClient, HttpRequestType.POST_SIMPLE));
+        return executeHttp(new HttpReuqestCallable(url, params, httpClient, HttpRequestType.POST_FORM));
     }
 
     @Override
@@ -131,7 +132,7 @@ public class PoolHttpClient implements HttpClient {
 
     private enum HttpRequestType {
 
-        REQUEST, POST_SIMPLE, POST_STRING, POST_IMAGE
+        REQUEST, POST_FORM, POST_STRING, POST_IMAGE
 
     }
 
@@ -264,23 +265,9 @@ public class PoolHttpClient implements HttpClient {
                     request = new HttpGet(HttpUtils.getURL(url, params));
                     break;
                 }
-                case POST_SIMPLE: {
+                case POST_FORM: {
                     HttpPost httpPost = new HttpPost(url);
-                    String key = null;
-                    Object value = null;
-                    List<NameValuePair> formParams = new ArrayList<NameValuePair>();
-                    for (Iterator<String> i = params.keySet().iterator(); i.hasNext(); ) {
-                        key = i.next();
-                        value = params.get(key);
-                        if (StringUtils.isBlank(key)) {
-                            continue;
-                        }
-                        formParams.add(new BasicNameValuePair(key, value == null ? StringUtils.EMPTY : value.toString()));
-                    }
-                    if (CollectionUtils.isNotEmpty(formParams)) {
-                        UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(formParams, Consts.UTF_8);
-                        httpPost.setEntity(formEntity);
-                    }
+                    httpPost.setEntity(getFormEntity(params));
                     request = httpPost;
                     break;
                 }
@@ -310,6 +297,22 @@ public class PoolHttpClient implements HttpClient {
             }
             return result;
         }
+
+        private HttpEntity getFormEntity(Map<String, Object> params) {
+            List<NameValuePair> formParams = new ArrayList<NameValuePair>();
+            if (MapUtils.isNotEmpty(params)) {
+                Map.Entry<String, Object> entry = null;
+                for (Iterator<Map.Entry<String, Object>> i = params.entrySet().iterator(); i.hasNext(); ) {
+                    entry = i.next();
+                    if (StringUtils.isBlank(entry.getKey())) {
+                        continue;
+                    }
+                    formParams.add(new BasicNameValuePair(entry.getKey(), entry.getValue() == null ? StringUtils.EMPTY : entry.getValue().toString()));
+                }
+            }
+            return new UrlEncodedFormEntity(formParams, Consts.UTF_8);
+        }
+
     }
 
 }

@@ -9,8 +9,8 @@ package org.txazo.weixin.resource;
  */
 public interface ResourceLoader {
 
-    static String CLASSPATH_URL_PREFIX = "classpath:";
+    String CLASSPATH_URL_PREFIX = "classpath:";
 
-    public Resource getResource(String path);
+    Resource getResource(String path);
 
 }

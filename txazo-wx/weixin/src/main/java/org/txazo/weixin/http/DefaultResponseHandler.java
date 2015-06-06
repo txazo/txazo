@@ -22,7 +22,10 @@ public class DefaultResponseHandler implements ResponseHandler<String> {
         int status = response.getStatusLine().getStatusCode();
         if (status >= 200 && status < 300) {
             HttpEntity entity = response.getEntity();
-            return entity != null ? EntityUtils.toString(entity) : null;
+            if (entity == null) {
+                throw new ClientProtocolException("Response contains no content");
+            }
+            return EntityUtils.toString(entity);
         } else {
             throw new ClientProtocolException("Unexpected response status: " + status);
         }

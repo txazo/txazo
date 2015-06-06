@@ -2,7 +2,7 @@
 
 <requests xmlns="http://www.txazo.com/schema/weixin"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://www.txazo.com/schema/weixin weixin-requests-1.0.xsd">
+          xsi:schemaLocation="http://www.txazo.com/schema/weixin http://www.txazo.com/schema/weixin/weixin-requests-1.0.xsd">
 
     <!-- 建立连接 -->
     <request uri="/cgi-bin/gettoken" contentType="DEFAULT" requireParams="corpid,corpsecret"/>

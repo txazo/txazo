@@ -13,7 +13,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 
     @Override
     public Resource getResource(String path) {
-        AssertUtils.assertNotNull(path);
+        AssertUtils.assertNotNull(path, "path must not be null");
         if (path.startsWith(CLASSPATH_URL_PREFIX)) {
             return new ClassPathResource(path.substring(CLASSPATH_URL_PREFIX.length()));
         }

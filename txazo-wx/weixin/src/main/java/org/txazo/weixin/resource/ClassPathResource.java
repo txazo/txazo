@@ -20,7 +20,7 @@ public class ClassPathResource extends AbstractResource {
     private final String path;
 
     public ClassPathResource(String path) {
-        AssertUtils.assertNotNull(path);
+        AssertUtils.assertNotNull(path, "path must not be null");
         this.path = path;
     }
 
@@ -40,12 +40,20 @@ public class ClassPathResource extends AbstractResource {
 
     @Override
     public String getFileName() {
-        return super.getFileName();
+        if (this.path == null) {
+            return null;
+        }
+        int index = this.path.lastIndexOf("/");
+        return index != -1 ? this.path.substring(index + 1) : this.path;
     }
 
     @Override
     public InputStream getInputStream() throws IOException {
-        return null;
+        InputStream is = ClassLoader.getSystemResourceAsStream(this.path);
+        if (is == null) {
+            throw new FileNotFoundException("stream can not be open");
+        }
+        return is;
     }
 
     @Override

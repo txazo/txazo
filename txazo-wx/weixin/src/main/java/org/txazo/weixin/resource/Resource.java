@@ -13,12 +13,12 @@ import java.net.URL;
  */
 public interface Resource extends InputStreamSource {
 
-    public boolean exists();
+    boolean exists();
 
-    public File getFile() throws IOException;
+    File getFile() throws IOException;
 
-    public String getFileName();
+    String getFileName();
 
-    public URL getURL() throws IOException;
+    URL getURL() throws IOException;
 
 }

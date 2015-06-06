@@ -11,6 +11,12 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class AssertUtils {
 
+    public static void assertNotNull(Object object, String message) {
+        if (object == null) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
     public static void assertNotNull(Object... objs) {
         if (objs == null) {
             throw new IllegalArgumentException("args is null");
