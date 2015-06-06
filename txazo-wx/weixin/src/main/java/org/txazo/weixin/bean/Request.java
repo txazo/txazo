@@ -1,6 +1,7 @@
 package org.txazo.weixin.bean;
 
-import java.io.Serializable;
+import org.txazo.weixin.enums.EntityPath;
+import org.txazo.weixin.xml.XmlEntity;
 
 /**
  * Request
@@ -9,18 +10,29 @@ import java.io.Serializable;
  * @email txazo1218@163.com
  * @since 05.06.2015
  */
-public class Request implements XmlBean, Serializable {
+@EntityPath(path = "requests.request")
+public class Request implements XmlEntity {
 
-    private static final long serialVersionUID = -8735999882685588711L;
-
+    @EntityPath(path = "requests.request#uri")
     private String uri;
+    @EntityPath(path = "requests.request#requireParams")
     private String requireParams;
-    private ContentType contentType;
+    @EntityPath(path = "requests.request#contentType")
+    private String contentType;
 
-    Request(String uri, String params, ContentType contentType) {
-        this.uri = uri;
-        this.requireParams = params;
-        this.contentType = contentType;
+    public Request() {
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public String getRequireParams() {
+        return requireParams;
+    }
+
+    public ContentType getContentType() {
+        return ContentType.valueOf(contentType);
     }
 
 }

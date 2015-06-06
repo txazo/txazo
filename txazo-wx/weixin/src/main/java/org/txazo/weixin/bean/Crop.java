@@ -1,6 +1,7 @@
 package org.txazo.weixin.bean;
 
-import java.io.Serializable;
+import org.txazo.weixin.enums.EntityPath;
+import org.txazo.weixin.xml.XmlEntity;
 
 /**
  * Crop
@@ -9,32 +10,23 @@ import java.io.Serializable;
  * @email txazo1218@163.com
  * @since 05.06.2015
  */
-public class Crop implements XmlBean, Serializable {
+@EntityPath(path = "crop")
+public class Crop implements XmlEntity {
 
-    private static final long serialVersionUID = 7586766818534635880L;
-
+    @EntityPath(path = "crop.corpid")
     private String corpid;
+    @EntityPath(path = "crop.corpsecret")
     private String corpsecret;
 
-    public Crop(String corpid, String corpsecret) {
-        this.corpid = corpid;
-        this.corpsecret = corpsecret;
+    public Crop() {
     }
 
     public String getCorpid() {
         return corpid;
     }
 
-    public void setCorpid(String corpid) {
-        this.corpid = corpid;
-    }
-
     public String getCorpsecret() {
         return corpsecret;
-    }
-
-    public void setCorpsecret(String corpsecret) {
-        this.corpsecret = corpsecret;
     }
 
 }
