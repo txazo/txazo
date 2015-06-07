@@ -44,8 +44,8 @@ public class WeiXinExecutor {
         if (!checkRequireParams(request, params)) {
             return null;
         }
-        if (params.containsKey("access_token")) {
-            params.put("params", WeiXinUtils.getAccessToken());
+        if (request.getRequireParams().contains("access_token")) {
+            params.put("access_token", WeiXinUtils.getAccessToken().getAccess_token());
         }
         String url = WEI_XIN_DOMAIN + request.getUri();
         ContentType contentType = request.getContentType();

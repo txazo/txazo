@@ -2,6 +2,7 @@ package org.txazo.weixin;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.ArrayUtils;
+import org.junit.Test;
 import org.txazo.log.LoggerUtils;
 import org.txazo.weixin.bean.AccessToken;
 import org.txazo.weixin.bean.Crop;
@@ -16,7 +17,7 @@ import java.util.Map;
  * @email txazo1218@163.com
  * @since 05.06.2015
  */
-public abstract class WeiXinUtils {
+public class WeiXinUtils {
 
     private static WeiXin weiXin = WeiXin.getInstance();
     private static WeiXinExecutor executor = new WeiXinExecutor();
@@ -42,6 +43,46 @@ public abstract class WeiXinUtils {
             LoggerUtils.log("getAccessToken failed", e);
         }
         return accessToken;
+    }
+
+    /**
+     * 创建应用菜单
+     *
+     * @param agentid
+     * @param menu
+     */
+    public static void createMenu(int agentid, String menu) {
+        String json = executor.executeRequest("/cgi-bin/menu/create", createParams("agentid", String.valueOf(agentid)), menu);
+        LoggerUtils.log(json);
+    }
+
+    @Test
+    public void testCreateMenu() {
+        String menu = "{\n" +
+                "  \"button\": [\n" +
+                "    {\n" +
+                "      \"type\": \"click\",\n" +
+                "      \"name\": \"今日歌曲111\",\n" +
+                "      \"key\": \"V1001_TODAY_MUSIC\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"name\": \"菜单\",\n" +
+                "      \"sub_button\": [\n" +
+                "        {\n" +
+                "          \"type\": \"view\",\n" +
+                "          \"name\": \"搜索\",\n" +
+                "          \"url\": \"http://www.soso.com/\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"type\": \"click\",\n" +
+                "          \"name\": \"赞一下我们\",\n" +
+                "          \"key\": \"V1001_GOOD\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        WeiXinUtils.createMenu(3, menu);
     }
 
 }
