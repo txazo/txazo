@@ -19,7 +19,7 @@ import java.util.List;
 public class Request implements XmlEntity {
 
     @EntityPath(path = "requests.request#domain")
-    private String domain;
+    private String domain = "https://qyapi.weixin.qq.com";
     @EntityPath(path = "requests.request#uri")
     private String uri;
     @EntityPath(path = "requests.request#requireParams")
