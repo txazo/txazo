@@ -4,7 +4,6 @@ import org.txazo.log.LoggerUtils;
 import org.txazo.weixin.agent.Agent;
 import org.txazo.weixin.bean.ContentType;
 import org.txazo.weixin.bean.Request;
-import org.txazo.weixin.holder.AccessTokenHolder;
 import org.txazo.weixin.http.HttpClient;
 import org.txazo.weixin.http.PoolHttpClient;
 import org.txazo.weixin.util.EnumUtils;

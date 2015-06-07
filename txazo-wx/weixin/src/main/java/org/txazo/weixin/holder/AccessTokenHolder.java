@@ -28,6 +28,13 @@ public class AccessTokenHolder {
     }
 
     public String getAccessToken() {
+        if (accessToken == null) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                LoggerUtils.log(e);
+            }
+        }
         return accessToken == null ? null : accessToken.getAccess_token();
     }
 

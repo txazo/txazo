@@ -5,7 +5,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.txazo.log.LoggerUtils;
 import org.txazo.weixin.bean.AccessToken;
 import org.txazo.weixin.bean.Crop;
-import org.txazo.weixin.holder.AccessTokenHolder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,11 +42,6 @@ public abstract class WeiXinUtils {
             LoggerUtils.log("getAccessToken failed", e);
         }
         return accessToken;
-    }
-
-    public static void main(String[] args) {
-        AccessTokenHolder holder = AccessTokenHolder.getInstance();
-        LoggerUtils.log(holder.getAccessToken());
     }
 
 }

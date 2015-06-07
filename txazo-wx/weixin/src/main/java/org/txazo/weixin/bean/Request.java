@@ -18,6 +18,8 @@ import java.util.List;
 @EntityPath(path = "requests.request")
 public class Request implements XmlEntity {
 
+    @EntityPath(path = "requests.request#domain")
+    private String domain;
     @EntityPath(path = "requests.request#uri")
     private String uri;
     @EntityPath(path = "requests.request#requireParams")

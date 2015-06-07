@@ -20,6 +20,7 @@
             <xsd:attribute name="uri" type="string" use="required"/>
             <xsd:attribute name="contentType" type="contentType" use="required"/>
             <xsd:attribute name="requireParams" type="string" use="optional"/>
+            <xsd:attribute name="domain" type="string" use="optional" default="https://qyapi.weixin.qq.com"/>
         </xsd:complexType>
     </xsd:element>
 
