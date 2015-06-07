@@ -26,8 +26,14 @@ public class Request implements XmlEntity {
     private String requireParams;
     @EntityPath(path = "requests.request#contentType")
     private String contentType;
+    @EntityPath(path = "requests.request#suffix")
+    private String suffix;
 
     public Request() {
+    }
+
+    public String getDomain() {
+        return domain;
     }
 
     public String getUri() {
@@ -40,6 +46,10 @@ public class Request implements XmlEntity {
 
     public ContentType getContentType() {
         return ContentType.valueOf(contentType);
+    }
+
+    public String getSuffix() {
+        return suffix;
     }
 
 }

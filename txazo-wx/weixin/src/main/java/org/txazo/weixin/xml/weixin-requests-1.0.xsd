@@ -17,10 +17,11 @@
 
     <xsd:element name="request">
         <xsd:complexType>
+            <xsd:attribute name="domain" type="string" use="optional"/>
             <xsd:attribute name="uri" type="string" use="required"/>
             <xsd:attribute name="contentType" type="contentType" use="required"/>
             <xsd:attribute name="requireParams" type="string" use="optional"/>
-            <xsd:attribute name="domain" type="string" use="optional"/>
+            <xsd:attribute name="suffix" type="string" use="optional"/>
         </xsd:complexType>
     </xsd:element>
 

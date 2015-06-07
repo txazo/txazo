@@ -5,18 +5,21 @@
           xsi:schemaLocation="http://www.txazo.com/schema/weixin http://www.txazo.com/schema/weixin/weixin-requests-1.0.xsd">
 
     <!-- 建立连接 -->
-    <!-- 主动调用 -->
+    <!-- 获取AccessToken -->
     <request uri="/cgi-bin/gettoken" contentType="DEFAULT" requireParams="corpid,corpsecret"/>
-    <!-- 回调模式 -->
+    <!-- 获取微信服务器的ip段 -->
     <request uri="/cgi-bin/getcallbackip" contentType="DEFAULT" requireParams="access_token"/>
 
     <!-- 管理通讯录 -->
-    <!-- 成员关注企业号 -->
+    <!-- 二次验证 -->
     <request uri="/cgi-bin/user/authsucc" contentType="DEFAULT" requireParams="access_token,userid"/>
-    <!-- 管理部门 -->
+    <!-- 创建部门 -->
     <request uri="/cgi-bin/department/create" contentType="JSON" requireParams="access_token"/>
+    <!-- 更新部门 -->
     <request uri="/cgi-bin/department/update" contentType="JSON" requireParams="access_token"/>
+    <!-- 删除部门 -->
     <request uri="/cgi-bin/department/delete" contentType="DEFAULT" requireParams="access_token,id"/>
+    <!-- 获取部门列表 -->
     <request uri="/cgi-bin/department/list" contentType="DEFAULT" requireParams="access_token,id"/>
     <!-- 管理成员 -->
     <!-- 管理标签 -->
@@ -50,11 +53,10 @@
 
     <!-- OAuth2验证接口 -->
     <!-- 企业获取code -->
-    <request uri="/connect/oauth2/authorize" contentType="DEFAULT"
-             requireParams="appid,redirect_uri,response_type,scope"
-             domain="https://qyapi.weixin.qq.com"/>
+    <request domain="https://qyapi.weixin.qq.com" uri="/connect/oauth2/authorize" contentType="DEFAULT"
+             requireParams="appid,redirect_uri,response_type,scope" suffix="#wechat_redirect "/>
     <!-- 根据code获取成员信息 -->
-    <request uri="/cgi-bin/menu/get" contentType="DEFAULT" requireParams="access_token,agentid"/>
+    <request uri="/cgi-bin/user/getuserinfo" contentType="DEFAULT" requireParams="access_token,code,agentid"/>
 
     <!-- 微信JS接口 -->
 
