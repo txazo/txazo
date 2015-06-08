@@ -34,7 +34,6 @@ public abstract class EnumUtils {
                     jsonMap.put(field.getName(), field.get(object));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return JSONArray.toJSONString(jsonMap);

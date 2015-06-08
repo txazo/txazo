@@ -28,11 +28,13 @@ public class AccessTokenHolder {
     }
 
     public String getAccessToken() {
-        if (accessToken == null) {
+        int repeatCount = 3;
+        if (accessToken == null && repeatCount > 0) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
-                LoggerUtils.log(e);
+            } finally {
+                repeatCount--;
             }
         }
         return accessToken == null ? null : accessToken.getAccess_token();
