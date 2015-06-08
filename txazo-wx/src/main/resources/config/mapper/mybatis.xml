@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="Remind" type="org.txazo.wx.application.remind.bean.Remind"/>
+        <typeAlias alias="Remind" type="org.txazo.wx.app.remind.bean.Remind"/>
     </typeAliases>
 
     <mappers>

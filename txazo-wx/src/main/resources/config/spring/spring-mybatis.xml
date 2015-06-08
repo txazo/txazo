@@ -9,7 +9,7 @@
     </bean>
 
     <bean id="remindMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="org.txazo.wx.application.remind.mapper.RemindMapper"/>
+        <property name="mapperInterface" value="org.txazo.wx.app.remind.mapper.RemindMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 

@@ -1,4 +1,4 @@
-package org.txazo.wx.application.remind.controller;
+package org.txazo.wx.app.remind.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RemindController {
 
     @RequestMapping("/add.wx")
-    public void add() {
-
+    public String add() {
+        return "remind/add";
     }
 
 }

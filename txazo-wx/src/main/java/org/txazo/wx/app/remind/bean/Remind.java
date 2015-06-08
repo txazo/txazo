@@ -1,4 +1,4 @@
-package org.txazo.wx.application.remind.bean;
+package org.txazo.wx.app.remind.bean;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,9 +1,9 @@
-package org.txazo.wx.application.remind.mapper;
+package org.txazo.wx.app.remind.mapper;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.txazo.wx.SpringAbstractTest;
-import org.txazo.wx.application.remind.bean.Remind;
+import org.txazo.wx.app.remind.bean.Remind;
 
 /**
  * RemindMapperTest

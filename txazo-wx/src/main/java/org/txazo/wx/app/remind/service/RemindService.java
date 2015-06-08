@@ -1,17 +1,17 @@
-package org.txazo.wx.application.remind.mapper;
+package org.txazo.wx.app.remind.service;
 
-import org.txazo.wx.application.remind.bean.Remind;
+import org.txazo.wx.app.remind.bean.Remind;
 
 import java.util.List;
 
 /**
- * RemindMapper
+ * RemindService
  *
  * @author txazo
  * @email txazo1218@163.com
  * @since 04.06.2015
  */
-public interface RemindMapper {
+public interface RemindService {
 
     public void addRemind(Remind remind);
 

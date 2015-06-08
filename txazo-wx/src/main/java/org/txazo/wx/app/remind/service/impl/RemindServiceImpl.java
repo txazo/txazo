@@ -1,9 +1,9 @@
-package org.txazo.wx.application.remind.service.impl;
+package org.txazo.wx.app.remind.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.txazo.wx.application.remind.bean.Remind;
-import org.txazo.wx.application.remind.mapper.RemindMapper;
-import org.txazo.wx.application.remind.service.RemindService;
+import org.txazo.wx.app.remind.bean.Remind;
+import org.txazo.wx.app.remind.mapper.RemindMapper;
+import org.txazo.wx.app.remind.service.RemindService;
 
 import java.util.List;
 
