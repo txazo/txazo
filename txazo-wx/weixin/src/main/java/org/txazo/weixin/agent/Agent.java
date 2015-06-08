@@ -9,14 +9,14 @@ package org.txazo.weixin.agent;
  */
 public enum Agent {
 
-    AGENT_0("3", "0", "1Fsf1JSfESzv2bDtiaQoi59J-RasfysootIvQ6R9m3N91Gk-FTo7MgBCnp76HFmBn", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
-    AGENT_2("2", "0", "", "开发社区", "开发社区", "wx.txazo.com ", 0, 0),
-    AGENT_3("3", "0", "", "开发社区", "开发社区", "wx.txazo.com ", 0, 0),
-    AGENT_4("4", "0", "", "开发社区", "开发社区", "wx.txazo.com ", 0, 0),
-    AGENT_5("5", "0", "", "开发社区", "开发社区", "wx.txazo.com ", 0, 0),
-    AGENT_6("6", "0", "", "开发社区", "开发社区", "wx.txazo.com ", 0, 0),
-    AGENT_7("7", "0", "", "开发社区", "开发社区", "wx.txazo.com ", 0, 0),
-    AGENT_8("8", "0", "", "开发社区", "开发社区", "wx.txazo.com ", 0, 0);
+    AGENT_0("0", "0", "1Fsf1JSfESzv2bDtiaQoi59J-RasfysootIvQ6R9m3N91Gk-FTo7MgBCnp76HFmBn", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
+    AGENT_2("2", "0", "1GqqFaB8zS_2NeKRbHtgTsnifFDu-CwR0hDYow0Zm1nAzL-ELQQ-i6tgWHC9XBa6B", "生活小助手", "生活小助手", "wx.txazo.com", 0, 0),
+    AGENT_3("3", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
+    AGENT_4("4", "0", "1AZNg0AZMFSVr-GsTVJtZJujfe5FiO5UPkL-OdmDtIvQiPlOJO8EV7Ze1YUEA74Qs", "邮件系统", "邮件系统", "wx.txazo.com", 0, 0),
+    AGENT_5("5", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
+    AGENT_6("6", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
+    AGENT_7("7", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
+    AGENT_8("8", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0);
 
     /** 企业应用的id */
     private String agentid;

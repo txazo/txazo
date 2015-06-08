@@ -16,10 +16,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.txazo.weixin.WeiXinUtils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * DefaultHttpRequestHandler
@@ -66,6 +63,7 @@ public class DefaultHttpRequestHandler implements HttpRequestHandler {
         if (request == null) {
             return new Response(Response.ERROR, "request must not be null");
         }
+        params = (params == null) ? new HashMap<String, Object>() : params;
         if (!checkRequireParams(request, params)) {
             return new Response(Response.ERROR, "required parameter is missing");
         }

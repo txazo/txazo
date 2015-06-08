@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.txazo.log.LoggerUtils;
+import org.txazo.weixin.agent.Agent;
 import org.txazo.weixin.bean.AccessToken;
 import org.txazo.weixin.bean.Crop;
+import org.txazo.weixin.util.EnumUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,6 +86,29 @@ public class WeiXinUtils {
                 "  ]\n" +
                 "}";
         WeiXinUtils.createMenu(3, menu);
+    }
+
+    @Test
+    public void test1() {
+        String json = executor.executeRequest("/cgi-bin/media/upload", createParams("type", "image"), "media", new File(this.getClass().getResource("/icon_4.jpg").getPath()));
+        LoggerUtils.log(json);
+    }
+
+    @Test
+    public void test2() {
+        String json = executor.executeRequest("/cgi-bin/media/get", createParams("media_id", "1GqqFaB8zS_2NeKRbHtgTsnifFDu-CwR0hDYow0Zm1nAzL-ELQQ-i6tgWHC9XBa6B"));
+        LoggerUtils.log(json);
+    }
+
+    public static void setAgent() {
+        LoggerUtils.log(EnumUtils.toJSONString(Agent.AGENT_2));
+        String json = executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_4));
+        LoggerUtils.log(json);
+    }
+
+    @Test
+    public void test3() {
+        WeiXinUtils.setAgent();
     }
 
 }

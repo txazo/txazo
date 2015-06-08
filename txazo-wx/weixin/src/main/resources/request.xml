@@ -27,7 +27,7 @@
 
     <!-- 管理多媒体文件 -->
     <!-- 上传媒体文件 -->
-    <request uri="/cgi-bin/media/upload" requestType="POST_FILE" requireParams="access_token,type,media"/>
+    <request uri="/cgi-bin/media/upload" requestType="POST_FILE" requireParams="access_token,type"/>
     <!-- 获取媒体文件 -->
     <request uri="/cgi-bin/media/get" requireParams="access_token,media_id"/>
 
