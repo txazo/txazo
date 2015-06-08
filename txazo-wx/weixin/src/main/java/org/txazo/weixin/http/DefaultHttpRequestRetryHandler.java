@@ -6,7 +6,6 @@ import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.protocol.HttpContext;
-import org.txazo.log.LoggerUtils;
 
 import javax.net.ssl.SSLException;
 import java.io.IOException;
@@ -41,7 +40,6 @@ public class DefaultHttpRequestRetryHandler implements HttpRequestRetryHandler {
         if (exception instanceof SSLException) {
             return false;
         }
-        LoggerUtils.log("retryRequest failed", exception);
         HttpClientContext clientContext = HttpClientContext.adapt(context);
         HttpRequest request = clientContext.getRequest();
         return !(request instanceof HttpEntityEnclosingRequest);

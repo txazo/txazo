@@ -62,7 +62,7 @@ public class WeiXinUtils {
                 "  \"button\": [\n" +
                 "    {\n" +
                 "      \"type\": \"click\",\n" +
-                "      \"name\": \"今日歌曲111\",\n" +
+                "      \"name\": \"今日歌2222\",\n" +
                 "      \"key\": \"V1001_TODAY_MUSIC\"\n" +
                 "    },\n" +
                 "    {\n" +

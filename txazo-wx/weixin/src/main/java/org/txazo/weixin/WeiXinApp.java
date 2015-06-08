@@ -1,6 +1,6 @@
 package org.txazo.weixin;
 
-import org.txazo.weixin.bean.Request;
+import org.txazo.weixin.http.Request;
 import org.txazo.weixin.xml.DefaultXmlEntityLoader;
 import org.txazo.weixin.xml.XmlEntityLoader;
 

@@ -6,56 +6,56 @@
 
     <!-- 建立连接 -->
     <!-- 获取AccessToken -->
-    <request uri="/cgi-bin/gettoken" contentType="DEFAULT" requireParams="corpid,corpsecret"/>
+    <request uri="/cgi-bin/gettoken" requireParams="corpid,corpsecret"/>
     <!-- 获取微信服务器的ip段 -->
-    <request uri="/cgi-bin/getcallbackip" contentType="DEFAULT" requireParams="access_token"/>
+    <request uri="/cgi-bin/getcallbackip" requireParams="access_token"/>
 
     <!-- 管理通讯录 -->
     <!-- 二次验证 -->
-    <request uri="/cgi-bin/user/authsucc" contentType="DEFAULT" requireParams="access_token,userid"/>
+    <request uri="/cgi-bin/user/authsucc" requireParams="access_token,userid"/>
     <!-- 创建部门 -->
-    <request uri="/cgi-bin/department/create" contentType="JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/department/create" requestType="POST_JSON" requireParams="access_token"/>
     <!-- 更新部门 -->
-    <request uri="/cgi-bin/department/update" contentType="JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/department/update" requestType="POST_JSON" requireParams="access_token"/>
     <!-- 删除部门 -->
-    <request uri="/cgi-bin/department/delete" contentType="DEFAULT" requireParams="access_token,id"/>
+    <request uri="/cgi-bin/department/delete" requireParams="access_token,id"/>
     <!-- 获取部门列表 -->
-    <request uri="/cgi-bin/department/list" contentType="DEFAULT" requireParams="access_token,id"/>
+    <request uri="/cgi-bin/department/list" requireParams="access_token,id"/>
     <!-- 管理成员 -->
     <!-- 管理标签 -->
     <!-- 异步任务接口 -->
 
     <!-- 管理多媒体文件 -->
     <!-- 上传媒体文件 -->
-    <request uri="/cgi-bin/media/upload" contentType="STREAM" requireParams="access_token,type,media"/>
+    <request uri="/cgi-bin/media/upload" requestType="POST_FILE" requireParams="access_token,type,media"/>
     <!-- 获取媒体文件 -->
-    <request uri="/cgi-bin/media/get" contentType="DEFAULT" requireParams="access_token,media_id"/>
+    <request uri="/cgi-bin/media/get" requireParams="access_token,media_id"/>
 
     <!-- 管理企业号应用 -->
     <!-- 获取企业号应用 -->
-    <request uri="/cgi-bin/agent/get" contentType="DEFAULT" requireParams="access_token,agentid"/>
+    <request uri="/cgi-bin/agent/get" requireParams="access_token,agentid"/>
     <!-- 设置企业号应用 -->
-    <request uri="/cgi-bin/agent/set" contentType="JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/agent/set" requestType="POST_JSON" requireParams="access_token"/>
     <!-- 获取应用概况列表 -->
-    <request uri="/cgi-bin/agent/list" contentType="DEFAULT" requireParams="access_token"/>
+    <request uri="/cgi-bin/agent/list" requireParams="access_token"/>
 
     <!-- 接收消息与事件 -->
 
     <!-- 发送消息 -->
     <!-- 发送接口 -->
-    <request uri="/cgi-bin/message/send" contentType="JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/message/send" requestType="POST_JSON" requireParams="access_token"/>
 
     <!-- 自定义菜单 -->
     <!-- 创建应用菜单 -->
-    <request uri="/cgi-bin/menu/create" contentType="JSON" requireParams="access_token,agentid"/>
+    <request uri="/cgi-bin/menu/create" requestType="POST_JSON" requireParams="access_token,agentid"/>
     <!-- 删除菜单 -->
-    <request uri="/cgi-bin/menu/delete" contentType="DEFAULT" requireParams="access_token,agentid"/>
+    <request uri="/cgi-bin/menu/delete" requireParams="access_token,agentid"/>
     <!-- 获取菜单列表 -->
-    <request uri="/cgi-bin/menu/get" contentType="DEFAULT" requireParams="access_token,agentid"/>
+    <request uri="/cgi-bin/menu/get" requireParams="access_token,agentid"/>
 
     <!-- OAuth2验证接口 -->
     <!-- 根据code获取成员信息 -->
-    <request uri="/cgi-bin/user/getuserinfo" contentType="DEFAULT" requireParams="access_token,code,agentid"/>
+    <request uri="/cgi-bin/user/getuserinfo" requireParams="access_token,code,agentid"/>
 
     <!-- 微信JS接口 -->
 

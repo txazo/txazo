@@ -1,41 +1,23 @@
 package org.txazo.weixin.http;
 
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Consts;
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.AuthSchemes;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContexts;
-import org.apache.http.util.EntityUtils;
-import org.txazo.log.LoggerUtils;
-import org.txazo.weixin.bean.Request;
 import org.txazo.weixin.http.ssl.SSLManager;
-import org.txazo.weixin.http.util.HttpUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
@@ -53,8 +35,8 @@ public class PoolHttpClient implements HttpClient {
 
     private static PoolHttpClient instance;
 
-    private CloseableHttpClient httpClient;
-    private PoolingHttpClientConnectionManager connectionManager;
+    private final CloseableHttpClient httpClient;
+    private final PoolingHttpClientConnectionManager connectionManager;
     private ExecutorService pool = Executors.newFixedThreadPool(50);
     private ResponseHandler<String> responseHandler = new DefaultResponseHandler();
 
@@ -101,43 +83,8 @@ public class PoolHttpClient implements HttpClient {
     }
 
     @Override
-    public String get(String url, Map<String, Object> params) {
-        return executeHttp(new HttpReuqestCallable(url, params, httpClient, HttpRequestType.REQUEST));
-    }
-
-    @Override
-    public String post(String url, Map<String, Object> params) {
-        return executeHttp(new HttpReuqestCallable(url, params, httpClient, HttpRequestType.POST_FORM));
-    }
-
-    @Override
-    public String post(String url, Map<String, Object> params, String content) {
-        return executeHttp(new HttpReuqestCallable(url, params, content, httpClient, HttpRequestType.POST_STRING));
-    }
-
-    @Override
-    public String post(String url, Map<String, Object> params, File file) {
-        return executeHttp(new HttpReuqestCallable(url, params, file, httpClient, HttpRequestType.POST_IMAGE));
-    }
-
-    @Override
-    public String get(Request request, Map<String, Object> params) {
-        return null;
-    }
-
-    @Override
-    public String post(Request request, Map<String, Object> params) {
-        return null;
-    }
-
-    @Override
-    public String post(Request request, Map<String, Object> params, String body) {
-        return null;
-    }
-
-    @Override
-    public String post(Request request, Map<String, Object> params, File file) {
-        return null;
+    public String process(HttpRequestBase httpRequest) {
+        return executeHttp(new HttpReuqestCallable(httpRequest, httpClient));
     }
 
     private String executeHttp(Callable<String> callable) {
@@ -146,192 +93,31 @@ public class PoolHttpClient implements HttpClient {
         try {
             result = future.get(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         } catch (Throwable t) {
-            t.printStackTrace();
+            throw new HttpRequestException(t);
         }
         return result;
     }
 
-    private enum HttpRequestType {
-
-        REQUEST, POST_FORM, POST_STRING, POST_IMAGE
-
-    }
-
-    private abstract class HttpCallable implements Callable<String> {
-
-        protected String url;
-        protected Map<String, Object> params;
-        protected CloseableHttpClient httpClient;
-
-        public HttpCallable(final String url, final Map<String, Object> params, final CloseableHttpClient httpClient) {
-            this.url = url;
-            this.params = params;
-            this.httpClient = httpClient;
-        }
-
-    }
-
-    private class HttpGetCallable extends HttpCallable {
-
-        public HttpGetCallable(final String url, final Map<String, Object> params, final CloseableHttpClient httpClient) {
-            super(url, params, httpClient);
-        }
-
-        @Override
-        public String call() {
-            String result = null;
-            CloseableHttpResponse response = null;
-            HttpGet httpGet = new HttpGet(HttpUtils.getURL(url, params));
-            try {
-                response = httpClient.execute(httpGet);
-                HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    result = EntityUtils.toString(entity);
-                }
-            } catch (IOException e) {
-                IOUtils.closeQuietly(response);
-            }
-            return result;
-        }
-    }
-
-    private class HttpPostCallable extends HttpCallable {
-
-        private String body;
-
-        public HttpPostCallable(final String url, final Map<String, Object> params, final String body, final CloseableHttpClient httpClient) {
-            super(url, params, httpClient);
-            this.body = body;
-        }
-
-        @Override
-        public String call() {
-            String result = null;
-            CloseableHttpResponse response = null;
-            HttpPost httpPost = new HttpPost(url);
-            if (StringUtils.isNotBlank(body)) {
-                httpPost = new HttpPost(HttpUtils.getURL(url, params));
-                httpPost.setEntity(new StringEntity(body, Consts.UTF_8));
-            } else if (MapUtils.isNotEmpty(params)) {
-                httpPost = new HttpPost(url);
-                String key = null;
-                Object value = null;
-                List<NameValuePair> formParams = new ArrayList<NameValuePair>();
-                for (Iterator<String> i = params.keySet().iterator(); i.hasNext(); ) {
-                    key = i.next();
-                    value = params.get(key);
-                    if (StringUtils.isBlank(key)) {
-                        continue;
-                    }
-                    formParams.add(new BasicNameValuePair(key, value == null ? StringUtils.EMPTY : value.toString()));
-                }
-                if (CollectionUtils.isNotEmpty(formParams)) {
-                    UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(formParams, Consts.UTF_8);
-                    httpPost.setEntity(formEntity);
-                }
-            } else {
-
-            }
-            try {
-                response = httpClient.execute(httpPost);
-                HttpEntity entity = response.getEntity();
-                if (entity != null) {
-                    result = EntityUtils.toString(entity);
-                }
-            } catch (IOException e) {
-                IOUtils.closeQuietly(response);
-            }
-            return result;
-        }
-    }
-
     private class HttpReuqestCallable implements Callable<String> {
 
-        private String url;
-        private Map<String, Object> params;
-        private String content;
-        private File file;
-        private CloseableHttpClient httpClient;
-        private HttpRequestType requestType;
+        private HttpRequestBase request;
+        protected CloseableHttpClient httpClient;
 
-        public HttpReuqestCallable(String url, Map<String, Object> params, CloseableHttpClient httpClient, HttpRequestType requestType) {
-            this(url, params, null, null, httpClient, requestType);
-        }
-
-        public HttpReuqestCallable(String url, Map<String, Object> params, String content, CloseableHttpClient httpClient, HttpRequestType requestType) {
-            this(url, params, content, null, httpClient, requestType);
-        }
-
-        public HttpReuqestCallable(String url, Map<String, Object> params, File file, CloseableHttpClient httpClient, HttpRequestType requestType) {
-            this(url, params, null, file, httpClient, requestType);
-        }
-
-        public HttpReuqestCallable(String url, Map<String, Object> params, String content, File file, CloseableHttpClient httpClient, HttpRequestType requestType) {
-            this.url = url;
-            this.params = params;
-            this.content = content;
-            this.file = file;
+        public HttpReuqestCallable(final HttpRequestBase request, final CloseableHttpClient httpClient) {
+            this.request = request;
             this.httpClient = httpClient;
-            this.requestType = requestType;
         }
 
         @Override
-        public String call() {
+        public String call() throws IOException {
             String result = null;
-            HttpRequestBase request = null;
             CloseableHttpResponse response = null;
-
-            switch (requestType) {
-                case REQUEST: {
-                    request = new HttpGet(HttpUtils.getURL(url, params));
-                    break;
-                }
-                case POST_FORM: {
-                    HttpPost httpPost = new HttpPost(url);
-                    httpPost.setEntity(getFormEntity(params));
-                    request = httpPost;
-                    break;
-                }
-                case POST_STRING: {
-                    HttpPost httpPost = new HttpPost(HttpUtils.getURL(url, params));
-                    httpPost.setEntity(new StringEntity(content, Consts.UTF_8));
-                    request = httpPost;
-                    break;
-                }
-                case POST_IMAGE: {
-                    HttpPost httpPost = new HttpPost(HttpUtils.getURL(url, params));
-                    HttpEntity httpEntity = MultipartEntityBuilder.create()
-                            .addPart("media", new FileBody(file))
-                            .build();
-                    httpPost.setEntity(httpEntity);
-                    request = httpPost;
-                    break;
-                }
-            }
-
             try {
                 result = httpClient.execute(request, responseHandler);
-            } catch (IOException e) {
-                LoggerUtils.log("HttpClient request failed", e);
             } finally {
                 IOUtils.closeQuietly(response);
             }
             return result;
-        }
-
-        private HttpEntity getFormEntity(Map<String, Object> params) {
-            List<NameValuePair> formParams = new ArrayList<NameValuePair>();
-            if (MapUtils.isNotEmpty(params)) {
-                Map.Entry<String, Object> entry = null;
-                for (Iterator<Map.Entry<String, Object>> i = params.entrySet().iterator(); i.hasNext(); ) {
-                    entry = i.next();
-                    if (StringUtils.isBlank(entry.getKey())) {
-                        continue;
-                    }
-                    formParams.add(new BasicNameValuePair(entry.getKey(), entry.getValue() == null ? StringUtils.EMPTY : entry.getValue().toString()));
-                }
-            }
-            return new UrlEncodedFormEntity(formParams, Consts.UTF_8);
         }
 
     }

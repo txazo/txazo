@@ -19,7 +19,7 @@
         <xsd:complexType>
             <xsd:attribute name="domain" type="string" use="optional"/>
             <xsd:attribute name="uri" type="string" use="required"/>
-            <xsd:attribute name="contentType" type="contentType" use="required"/>
+            <xsd:attribute name="requestType" type="requestType" use="optional"/>
             <xsd:attribute name="requireParams" type="string" use="optional"/>
             <xsd:attribute name="suffix" type="string" use="optional"/>
         </xsd:complexType>
@@ -31,12 +31,12 @@
         </xsd:restriction>
     </xsd:simpleType>
 
-    <xsd:simpleType name="contentType">
+    <xsd:simpleType name="requestType">
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="XML"/>
-            <xsd:enumeration value="JSON"/>
-            <xsd:enumeration value="STREAM"/>
-            <xsd:enumeration value="DEFAULT"/>
+            <xsd:enumeration value="GET"/>
+            <xsd:enumeration value="POST"/>
+            <xsd:enumeration value="POST_JSON"/>
+            <xsd:enumeration value="POST_FILE"/>
         </xsd:restriction>
     </xsd:simpleType>
 

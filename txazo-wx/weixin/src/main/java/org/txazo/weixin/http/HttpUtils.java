@@ -1,7 +1,8 @@
-package org.txazo.weixin.http.util;
+package org.txazo.weixin.http;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.txazo.weixin.util.AssertUtils;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -15,9 +16,11 @@ import java.util.Map;
  */
 public abstract class HttpUtils {
 
-    public static String getURL(String url, Map<String, Object> params) {
+    public static String getURL(Request request, Map<String, Object> params) {
+        AssertUtils.assertNotNull(request, "request must not be null");
         String paramsString = getParamsString(params);
-        return StringUtils.isBlank(paramsString) ? url : url + "?" + paramsString;
+        return StringUtils.isBlank(paramsString) ? request.getURL() : request.getURL() + "?" +
+                paramsString + (request.getSuffix() == null ? StringUtils.EMPTY : request.getSuffix());
     }
 
     public static String getParamsString(Map<String, Object> params) {

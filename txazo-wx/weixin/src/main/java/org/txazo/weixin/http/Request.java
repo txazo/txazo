@@ -1,4 +1,4 @@
-package org.txazo.weixin.bean;
+package org.txazo.weixin.http;
 
 import org.apache.commons.lang3.StringUtils;
 import org.txazo.weixin.enums.EntityPath;
@@ -19,17 +19,21 @@ import java.util.List;
 public class Request implements XmlEntity {
 
     @EntityPath(path = "requests.request#domain")
-    private String domain = "https://qyapi.weixin.qq.com";
+    private String domain = "https://qyapi.weixin.qq.com"; // 域名
     @EntityPath(path = "requests.request#uri")
-    private String uri;
+    private String uri; // uri
     @EntityPath(path = "requests.request#requireParams")
-    private String requireParams;
-    @EntityPath(path = "requests.request#contentType")
-    private String contentType;
+    private String requireParams; // 必须参数
+    @EntityPath(path = "requests.request#requestType")
+    private String requestType = RequestType.GET.name(); // 请求类型
     @EntityPath(path = "requests.request#suffix")
-    private String suffix;
+    private String suffix; // 后缀
 
     public Request() {
+    }
+
+    public String getURL() {
+        return domain + uri;
     }
 
     public String getDomain() {
@@ -44,8 +48,8 @@ public class Request implements XmlEntity {
         return StringUtils.isBlank(requireParams) ? (List<String>) Collections.EMPTY_LIST : Arrays.asList(requireParams.split(","));
     }
 
-    public ContentType getContentType() {
-        return ContentType.valueOf(contentType);
+    public RequestType getRequestType() {
+        return RequestType.valueOf(requestType);
     }
 
     public String getSuffix() {
