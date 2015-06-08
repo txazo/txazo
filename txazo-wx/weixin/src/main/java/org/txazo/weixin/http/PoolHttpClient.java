@@ -37,8 +37,8 @@ public class PoolHttpClient implements HttpClient {
 
     private final CloseableHttpClient httpClient;
     private final PoolingHttpClientConnectionManager connectionManager;
-    private ExecutorService pool = Executors.newFixedThreadPool(50);
-    private ResponseHandler<String> responseHandler = new DefaultResponseHandler();
+    private final ExecutorService pool = Executors.newFixedThreadPool(50);
+    private final ResponseHandler<String> responseHandler = new DefaultResponseHandler();
 
     private PoolHttpClient() {
         connectionManager = new PoolingHttpClientConnectionManager(getSocketFactoryRegistry());
@@ -46,7 +46,7 @@ public class PoolHttpClient implements HttpClient {
         connectionManager.setDefaultMaxPerRoute(20);
         httpClient = HttpClients.custom()
                 .setConnectionManager(connectionManager)
-                .setDefaultRequestConfig(this.getRequestConfig())
+                .setDefaultRequestConfig(getRequestConfig())
                 .setRetryHandler(new DefaultHttpRequestRetryHandler())
                 .setSSLSocketFactory(SSLManager.buildSSLSocketFactory())
                 .build();

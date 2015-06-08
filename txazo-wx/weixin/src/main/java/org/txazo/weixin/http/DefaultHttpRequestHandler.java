@@ -35,23 +35,23 @@ public class DefaultHttpRequestHandler implements HttpRequestHandler {
     }
 
     @Override
-    public Response handle(Request request, Map<String, Object> params) {
-        return handle(request, params, null, null, null);
-    }
-
-    @Override
     public Response handle(Request request, String body) {
         return handle(request, null, body, null, null);
     }
 
     @Override
-    public Response handle(Request request, Map<String, Object> params, String body) {
-        return handle(request, params, body, null, null);
+    public Response handle(Request request, String key, File file) {
+        return handle(request, null, null, key, file);
     }
 
     @Override
-    public Response handle(Request request, String key, File file) {
-        return handle(request, null, null, key, file);
+    public Response handle(Request request, Map<String, Object> params) {
+        return handle(request, params, null, null, null);
+    }
+
+    @Override
+    public Response handle(Request request, Map<String, Object> params, String body) {
+        return handle(request, params, body, null, null);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class DefaultHttpRequestHandler implements HttpRequestHandler {
         }
     }
 
-    private boolean checkRequireParams(final Request request, Map<String, Object> params) {
+    private boolean checkRequireParams(final Request request, final Map<String, Object> params) {
         if (params == null) {
             return true;
         }
