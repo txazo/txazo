@@ -31,6 +31,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 import org.txazo.log.LoggerUtils;
+import org.txazo.weixin.bean.Request;
 import org.txazo.weixin.http.ssl.SSLManager;
 import org.txazo.weixin.http.util.HttpUtils;
 
@@ -117,6 +118,26 @@ public class PoolHttpClient implements HttpClient {
     @Override
     public String post(String url, Map<String, Object> params, File file) {
         return executeHttp(new HttpReuqestCallable(url, params, file, httpClient, HttpRequestType.POST_IMAGE));
+    }
+
+    @Override
+    public String get(Request request, Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public String post(Request request, Map<String, Object> params) {
+        return null;
+    }
+
+    @Override
+    public String post(Request request, Map<String, Object> params, String body) {
+        return null;
+    }
+
+    @Override
+    public String post(Request request, Map<String, Object> params, File file) {
+        return null;
     }
 
     private String executeHttp(Callable<String> callable) {

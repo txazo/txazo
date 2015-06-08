@@ -42,6 +42,8 @@
     <!-- 接收消息与事件 -->
 
     <!-- 发送消息 -->
+    <!-- 发送接口 -->
+    <request uri="/cgi-bin/message/send" contentType="JSON" requireParams="access_token"/>
 
     <!-- 自定义菜单 -->
     <!-- 创建应用菜单 -->
@@ -52,9 +54,6 @@
     <request uri="/cgi-bin/menu/get" contentType="DEFAULT" requireParams="access_token,agentid"/>
 
     <!-- OAuth2验证接口 -->
-    <!-- 企业获取code -->
-    <request domain="https://qyapi.weixin.qq.com" uri="/connect/oauth2/authorize" contentType="DEFAULT"
-             requireParams="appid,redirect_uri,response_type,scope" suffix="#wechat_redirect "/>
     <!-- 根据code获取成员信息 -->
     <request uri="/cgi-bin/user/getuserinfo" contentType="DEFAULT" requireParams="access_token,code,agentid"/>
 
