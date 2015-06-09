@@ -1,4 +1,4 @@
-package org.txazo.weixin.bean;
+package org.txazo.weixin.develop.accesstoken;
 
 import java.util.Date;
 
@@ -11,12 +11,15 @@ import java.util.Date;
  */
 public class AccessToken {
 
+    /** AccessToken */
     private String access_token;
+    /** AccessToken的有效时间(秒) */
     private long expires_in;
-    private Date accessTime = new Date();
+    /** AccessToken的创建时间 */
+    private Date createTime = new Date();
 
     public boolean isExpire() {
-        return (System.currentTimeMillis() - accessTime.getTime()) >= expires_in;
+        return (System.currentTimeMillis() - createTime.getTime()) >= expires_in * 1000;
     }
 
     public String getAccess_token() {
@@ -27,20 +30,8 @@ public class AccessToken {
         this.access_token = access_token;
     }
 
-    public long getExpires_in() {
-        return expires_in;
-    }
-
     public void setExpires_in(long expires_in) {
         this.expires_in = expires_in;
-    }
-
-    public Date getAccessTime() {
-        return accessTime;
-    }
-
-    public void setAccessTime(Date accessTime) {
-        this.accessTime = accessTime;
     }
 
 }

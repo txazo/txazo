@@ -2,7 +2,7 @@ package org.txazo.weixin.develop.message;
 
 import com.alibaba.fastjson.JSON;
 import org.txazo.log.LoggerUtils;
-import org.txazo.weixin.WeiXinExecutor;
+import org.txazo.weixin.WeiXinHolder;
 
 /**
  * MessageUtils
@@ -11,9 +11,7 @@ import org.txazo.weixin.WeiXinExecutor;
  * @email txazo1218@163.com
  * @since 09.06.2015
  */
-public abstract class MessageUtils {
-
-    private static WeiXinExecutor executor = WeiXinExecutor.getInstance();
+public abstract class MessageUtils extends WeiXinHolder {
 
     private static void sendMessage(Message message) {
         String result = executor.executeRequest("/cgi-bin/message/send", JSON.toJSONString(message));

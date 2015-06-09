@@ -68,7 +68,7 @@ public class DefaultHttpRequestHandler implements HttpRequestHandler {
             return new Response(Response.ERROR, "required parameter is missing");
         }
         if (request.getRequireParams().contains("access_token")) {
-            params.put("access_token", WeiXinUtils.getAccessToken().getAccess_token());
+            params.put("access_token", WeiXinUtils.getAccessToken());
         }
 
         Response response = null;

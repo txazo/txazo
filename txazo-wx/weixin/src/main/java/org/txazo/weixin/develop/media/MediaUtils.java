@@ -3,7 +3,7 @@ package org.txazo.weixin.develop.media;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.txazo.log.LoggerUtils;
-import org.txazo.weixin.WeiXinUtils;
+import org.txazo.weixin.WeiXinHolder;
 import org.txazo.weixin.resource.DefaultResourceLoader;
 import org.txazo.weixin.resource.Resource;
 import org.txazo.weixin.resource.ResourceLoader;
@@ -15,7 +15,7 @@ import org.txazo.weixin.resource.ResourceLoader;
  * @email txazo1218@163.com
  * @since 09.06.2015
  */
-public abstract class MediaUtils extends WeiXinUtils {
+public abstract class MediaUtils extends WeiXinHolder {
 
     private static MediaHolder mediaHolder = new MediaHolder();
     private static ResourceLoader resourceLoader = new DefaultResourceLoader();
