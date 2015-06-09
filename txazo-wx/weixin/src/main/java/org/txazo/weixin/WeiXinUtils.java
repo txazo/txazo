@@ -101,9 +101,14 @@ public class WeiXinUtils {
     }
 
     public static void setAgent() {
-        LoggerUtils.log(EnumUtils.toJSONString(Agent.AGENT_2));
-        String json = executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_4));
-        LoggerUtils.log(json);
+        executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_0));
+        executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_2));
+        executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_3));
+        executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_4));
+        executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_5));
+        executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_6));
+        executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_7));
+        executor.executeRequest("/cgi-bin/agent/set", EnumUtils.toJSONString(Agent.AGENT_8));
     }
 
     @Test

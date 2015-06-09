@@ -1,5 +1,7 @@
 package org.txazo.weixin.agent;
 
+import org.txazo.weixin.media.MediaUtils;
+
 /**
  * Agent
  *
@@ -9,14 +11,25 @@ package org.txazo.weixin.agent;
  */
 public enum Agent {
 
-    AGENT_0("0", "0", "1Fsf1JSfESzv2bDtiaQoi59J-RasfysootIvQ6R9m3N91Gk-FTo7MgBCnp76HFmBn", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
-    AGENT_2("2", "0", "1GqqFaB8zS_2NeKRbHtgTsnifFDu-CwR0hDYow0Zm1nAzL-ELQQ-i6tgWHC9XBa6B", "生活小助手", "生活小助手", "wx.txazo.com", 0, 0),
-    AGENT_3("3", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
-    AGENT_4("4", "0", "1AZNg0AZMFSVr-GsTVJtZJujfe5FiO5UPkL-OdmDtIvQiPlOJO8EV7Ze1YUEA74Qs", "邮件系统", "邮件系统", "wx.txazo.com", 0, 0),
-    AGENT_5("5", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
-    AGENT_6("6", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
-    AGENT_7("7", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
-    AGENT_8("8", "0", "", "开发社区", "开发社区", "wx.txazo.com", 0, 0);
+    AGENT_0("0", "0", "开发社区", "开发社区", "wx.txazo.com", 0, 0),
+    AGENT_2("2", "0", "提醒事项", "提醒事项", "wx.txazo.com", 0, 0),
+    AGENT_3("3", "0", "生活助手", "生活助手", "wx.txazo.com", 0, 0),
+    AGENT_4("4", "0", "邮件系统", "邮件系统", "wx.txazo.com", 0, 0),
+    AGENT_5("5", "0", "职业规划", "职业规划", "wx.txazo.com", 0, 0),
+    AGENT_6("6", "0", "数据平台", "数据平台", "wx.txazo.com", 0, 0),
+    AGENT_7("7", "0", "后台系统", "后台系统", "wx.txazo.com", 0, 0),
+    AGENT_8("8", "0", "帮助中心", "帮助中心", "wx.txazo.com", 0, 0);
+
+    static {
+        AGENT_0.setLogo_mediaid(MediaUtils.getMediaId("classpath:images/agent_0.jpg"));
+        AGENT_2.setLogo_mediaid(MediaUtils.getMediaId("classpath:images/agent_2.jpg"));
+        AGENT_3.setLogo_mediaid(MediaUtils.getMediaId("classpath:images/agent_3.jpg"));
+        AGENT_4.setLogo_mediaid(MediaUtils.getMediaId("classpath:images/agent_4.jpg"));
+        AGENT_5.setLogo_mediaid(MediaUtils.getMediaId("classpath:images/agent_5.jpg"));
+        AGENT_6.setLogo_mediaid(MediaUtils.getMediaId("classpath:images/agent_6.jpg"));
+        AGENT_7.setLogo_mediaid(MediaUtils.getMediaId("classpath:images/agent_7.jpg"));
+        AGENT_8.setLogo_mediaid(MediaUtils.getMediaId("classpath:images/agent_8.jpg"));
+    }
 
     /** 企业应用的id */
     private String agentid;
@@ -35,15 +48,18 @@ public enum Agent {
     /** 是否上报用户进入应用事件(0－不接受，1－接受) */
     private int isreportenter;
 
-    Agent(String agentid, String report_location_flag, String logo_mediaid, String name, String description, String redirect_domain, int isreportuser, int isreportenter) {
+    Agent(String agentid, String report_location_flag, String name, String description, String redirect_domain, int isreportuser, int isreportenter) {
         this.agentid = agentid;
         this.report_location_flag = report_location_flag;
-        this.logo_mediaid = logo_mediaid;
         this.name = name;
         this.description = description;
         this.redirect_domain = redirect_domain;
         this.isreportuser = isreportuser;
         this.isreportenter = isreportenter;
+    }
+
+    public void setLogo_mediaid(String logo_mediaid) {
+        this.logo_mediaid = logo_mediaid;
     }
 
     public String getAgentid() {
