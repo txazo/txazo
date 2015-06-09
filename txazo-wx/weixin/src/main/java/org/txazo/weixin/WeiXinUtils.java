@@ -8,6 +8,7 @@ import org.txazo.weixin.agent.Agent;
 import org.txazo.weixin.bean.AccessToken;
 import org.txazo.weixin.bean.Crop;
 import org.txazo.weixin.util.EnumUtils;
+import org.txazo.weixin.verify.VerifyUtils;
 
 import java.io.File;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import java.util.Map;
  */
 public class WeiXinUtils {
 
-    private static WeiXin weiXin = WeiXin.getInstance();
+    protected static WeiXin weiXin = WeiXin.getInstance();
     protected static WeiXinExecutor executor = WeiXinExecutor.getInstance();
 
     protected static Map<String, Object> createParams(String... params) {
@@ -114,6 +115,10 @@ public class WeiXinUtils {
     @Test
     public void test3() {
         WeiXinUtils.setAgent();
+    }
+
+    public static String verifyURL(String msg_signature, String timestamp, String nonce, String echostr) {
+        return VerifyUtils.verifyURL(msg_signature, timestamp, nonce, echostr);
     }
 
 }

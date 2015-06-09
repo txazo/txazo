@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
 <xsd:schema xmlns="http://www.txazo.com/schema/weixin"
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:s="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             targetNamespace="http://www.txazo.com/schema/weixin"
             elementFormDefault="qualified">
 
@@ -21,17 +21,10 @@
                 <xsd:element name="stoken" type="string"/>
                 <xsd:element name="sencodingaeskey" type="string"/>
             </xsd:sequence>
-            <s:attribute name="url" type="xsd:ID" use="required"/>
         </xsd:complexType>
     </xsd:element>
 
     <xsd:simpleType name="string">
-        <xsd:restriction base="xsd:string">
-            <xsd:whiteSpace value="replace"/>
-        </xsd:restriction>
-    </xsd:simpleType>
-
-    <xsd:simpleType name="ID" id="ID">
         <xsd:restriction base="xsd:string">
             <xsd:whiteSpace value="replace"/>
         </xsd:restriction>

@@ -4,12 +4,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.txazo.com/schema/weixin http://www.txazo.com/schema/weixin/weixin-verifys-1.0.xsd">
 
-    <verify url="/verify/verify1.wx">
+    <verify>
         <stoken>idvstxzgnvNR94XWdFdnC1tbt7vV</stoken>
         <sencodingaeskey>NwEgnXH97SmWo2yXhSRFz79t9eNfS6yEXkEDHKFzB9q</sencodingaeskey>
     </verify>
 
-    <verify url="/verify/verify.wx">
+    <verify>
         <stoken>idvstxzgnvNR94XWdFdnC1tbt7vV</stoken>
         <sencodingaeskey>NwEgnXH97SmWo2yXhSRFz79t9eNfS6yEXkEDHKFzB9q</sencodingaeskey>
     </verify>

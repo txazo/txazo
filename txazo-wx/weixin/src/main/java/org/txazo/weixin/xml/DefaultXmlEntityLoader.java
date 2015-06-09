@@ -2,6 +2,7 @@ package org.txazo.weixin.xml;
 
 import org.apache.commons.io.IOUtils;
 import org.txazo.weixin.bean.Crop;
+import org.txazo.weixin.bean.Verify;
 import org.txazo.weixin.http.Request;
 import org.txazo.weixin.resource.DefaultResourceLoader;
 import org.txazo.weixin.resource.Resource;
@@ -32,6 +33,7 @@ public class DefaultXmlEntityLoader<T extends XmlEntity> implements XmlEntityLoa
     private void initLoader() {
         registerXmlEntiry("classpath:crop.xml", Crop.class);
         registerXmlEntiry("classpath:request.xml", Request.class);
+        registerXmlEntiry("classpath:verify.xml", Verify.class);
     }
 
     private void registerXmlEntiry(String path, Class<? extends XmlEntity> clazz) {
