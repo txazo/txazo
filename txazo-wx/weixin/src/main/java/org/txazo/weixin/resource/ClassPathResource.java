@@ -30,7 +30,14 @@ public class ClassPathResource extends AbstractResource {
     }
 
     private URL resolveURL() {
-        return ClassLoader.getSystemResource(this.path);
+        URL url = ClassLoader.getSystemResource(this.path);
+        if (url == null) {
+            url = Thread.currentThread().getContextClassLoader().getResource(this.path);
+        }
+        if (url == null) {
+            url = this.getClass().getResource(this.path);
+        }
+        return url;
     }
 
     @Override

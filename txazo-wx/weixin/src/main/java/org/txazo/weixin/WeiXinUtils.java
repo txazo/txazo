@@ -23,9 +23,9 @@ import java.util.Map;
 public class WeiXinUtils {
 
     private static WeiXin weiXin = WeiXin.getInstance();
-    private static WeiXinExecutor executor = WeiXinExecutor.getInstance();
+    protected static WeiXinExecutor executor = WeiXinExecutor.getInstance();
 
-    private static Map<String, Object> createParams(String... params) {
+    protected static Map<String, Object> createParams(String... params) {
         if (ArrayUtils.isEmpty(params)) {
             return null;
         }
