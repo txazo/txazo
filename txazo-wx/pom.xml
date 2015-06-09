@@ -102,6 +102,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.txazo</groupId>
+            <artifactId>weixin</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
