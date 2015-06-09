@@ -99,13 +99,13 @@ public class DefaultHttpRequestHandler implements HttpRequestHandler {
                 httpRequest = new HttpGet(HttpUtils.getURL(request, params));
                 break;
             }
-            case POST: {
+            case POST_FORM: {
                 HttpPost httpPost = new HttpPost(request.getURL());
                 httpPost.setEntity(getFormEntity(params));
                 httpRequest = httpPost;
                 break;
             }
-            case POST_JSON: {
+            case POST_TEXT: {
                 HttpPost httpPost = new HttpPost(HttpUtils.getURL(request, params));
                 httpPost.setEntity(new StringEntity(body, Consts.UTF_8));
                 httpRequest = httpPost;

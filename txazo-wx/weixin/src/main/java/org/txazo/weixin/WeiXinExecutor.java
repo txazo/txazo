@@ -14,8 +14,26 @@ import java.util.Map;
  */
 public class WeiXinExecutor {
 
-    private WeiXin weiXin = WeiXin.getInstance();
-    private HttpRequestHandler requestHandler = new DefaultHttpRequestHandler();
+    public static WeiXinExecutor instance;
+
+    private WeiXin weiXin;
+    private HttpRequestHandler requestHandler;
+
+    private WeiXinExecutor() {
+        weiXin = WeiXin.getInstance();
+        requestHandler = new DefaultHttpRequestHandler();
+    }
+
+    public static WeiXinExecutor getInstance() {
+        if (instance == null) {
+            synchronized (WeiXin.class) {
+                if (instance == null) {
+                    instance = new WeiXinExecutor();
+                }
+            }
+        }
+        return instance;
+    }
 
     public String executeRequest(String uri) {
         return requestHandler.handle(weiXin.getRequest(uri)).getContent();

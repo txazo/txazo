@@ -1,5 +1,7 @@
 package org.txazo.weixin.message;
 
+import java.io.Serializable;
+
 /**
  * ImageMessage
  *
@@ -8,6 +10,8 @@ package org.txazo.weixin.message;
  * @since 09.06.2015
  */
 public class ImageMessage extends Message {
+
+    private static final long serialVersionUID = -6497578874816058464L;
 
     private Image image;
 
@@ -19,9 +23,15 @@ public class ImageMessage extends Message {
         this.image = image;
     }
 
-    public class Image {
+    public static class Image implements Serializable {
+
+        private static final long serialVersionUID = -352429904232575299L;
 
         private String media_id;
+
+        public Image(String media_id) {
+            this.media_id = media_id;
+        }
 
         public String getMedia_id() {
             return media_id;

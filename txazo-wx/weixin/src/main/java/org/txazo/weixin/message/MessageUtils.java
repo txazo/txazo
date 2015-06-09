@@ -1,5 +1,9 @@
 package org.txazo.weixin.message;
 
+import com.alibaba.fastjson.JSON;
+import org.txazo.log.LoggerUtils;
+import org.txazo.weixin.WeiXinExecutor;
+
 /**
  * MessageUtils
  *
@@ -9,8 +13,11 @@ package org.txazo.weixin.message;
  */
 public abstract class MessageUtils {
 
-    private static void sendMessage(Message message) {
+    private static WeiXinExecutor executor = WeiXinExecutor.getInstance();
 
+    private static void sendMessage(Message message) {
+        String result = executor.executeRequest("/cgi-bin/message/send", JSON.toJSONString(message));
+        LoggerUtils.log(result);
     }
 
     public static void sendTextMessage(TextMessage message) {
@@ -19,6 +26,10 @@ public abstract class MessageUtils {
 
     public static void sendImageMessage(ImageMessage message) {
         sendMessage(message);
+    }
+
+    public static void main(String[] args) {
+        MessageUtils.sendTextMessage(new TextMessage("txazo1218", null, null, "text", "2", "0", new TextMessage.Text("hello")));
     }
 
 }

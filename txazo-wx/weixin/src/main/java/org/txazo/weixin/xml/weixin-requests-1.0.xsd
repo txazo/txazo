@@ -34,9 +34,10 @@
     <xsd:simpleType name="requestType">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="GET"/>
-            <xsd:enumeration value="POST"/>
-            <xsd:enumeration value="POST_JSON"/>
+            <xsd:enumeration value="POST_FORM"/>
+            <xsd:enumeration value="POST_TEXT"/>
             <xsd:enumeration value="POST_FILE"/>
+            <xsd:enumeration value="POST_STREAM"/>
         </xsd:restriction>
     </xsd:simpleType>
 

@@ -9,6 +9,6 @@ package org.txazo.weixin.http;
  */
 public enum RequestType {
 
-    GET, POST, POST_JSON, POST_FILE
+    GET, POST_FORM, POST_TEXT, POST_FILE, POST_STREAM
 
 }

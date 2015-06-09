@@ -23,7 +23,7 @@ import java.util.Map;
 public class WeiXinUtils {
 
     private static WeiXin weiXin = WeiXin.getInstance();
-    private static WeiXinExecutor executor = new WeiXinExecutor();
+    private static WeiXinExecutor executor = WeiXinExecutor.getInstance();
 
     private static Map<String, Object> createParams(String... params) {
         if (ArrayUtils.isEmpty(params)) {

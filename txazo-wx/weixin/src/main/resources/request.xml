@@ -14,9 +14,9 @@
     <!-- 二次验证 -->
     <request uri="/cgi-bin/user/authsucc" requireParams="access_token,userid"/>
     <!-- 创建部门 -->
-    <request uri="/cgi-bin/department/create" requestType="POST_JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/department/create" requestType="POST_TEXT" requireParams="access_token"/>
     <!-- 更新部门 -->
-    <request uri="/cgi-bin/department/update" requestType="POST_JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/department/update" requestType="POST_TEXT" requireParams="access_token"/>
     <!-- 删除部门 -->
     <request uri="/cgi-bin/department/delete" requireParams="access_token,id"/>
     <!-- 获取部门列表 -->
@@ -35,7 +35,7 @@
     <!-- 获取企业号应用 -->
     <request uri="/cgi-bin/agent/get" requireParams="access_token,agentid"/>
     <!-- 设置企业号应用 -->
-    <request uri="/cgi-bin/agent/set" requestType="POST_JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/agent/set" requestType="POST_TEXT" requireParams="access_token"/>
     <!-- 获取应用概况列表 -->
     <request uri="/cgi-bin/agent/list" requireParams="access_token"/>
 
@@ -43,11 +43,11 @@
 
     <!-- 发送消息 -->
     <!-- 发送接口 -->
-    <request uri="/cgi-bin/message/send" requestType="POST_JSON" requireParams="access_token"/>
+    <request uri="/cgi-bin/message/send" requestType="POST_TEXT" requireParams="access_token"/>
 
     <!-- 自定义菜单 -->
     <!-- 创建应用菜单 -->
-    <request uri="/cgi-bin/menu/create" requestType="POST_JSON" requireParams="access_token,agentid"/>
+    <request uri="/cgi-bin/menu/create" requestType="POST_TEXT" requireParams="access_token,agentid"/>
     <!-- 删除菜单 -->
     <request uri="/cgi-bin/menu/delete" requireParams="access_token,agentid"/>
     <!-- 获取菜单列表 -->

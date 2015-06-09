@@ -11,6 +11,8 @@ import java.io.Serializable;
  */
 public class Message implements Serializable {
 
+    private static final long serialVersionUID = 4698404694062986198L;
+
     /** 成员ID列表 */
     private String touser;
     /** 部门ID列表 */
@@ -19,7 +21,7 @@ public class Message implements Serializable {
     private String totag;
     /** 消息类型 */
     private String msgtype;
-    /** 消息内容 */
+    /** 企业应用的id */
     private String agentid;
     /** 是否是保密消息 */
     private String safe;
