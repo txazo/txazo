@@ -1,4 +1,4 @@
-package org.txazo.weixin.media;
+package org.txazo.weixin.develop.media;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

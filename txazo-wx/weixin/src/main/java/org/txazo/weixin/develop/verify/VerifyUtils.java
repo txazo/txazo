@@ -1,4 +1,4 @@
-package org.txazo.weixin.verify;
+package org.txazo.weixin.develop.verify;
 
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 import org.txazo.weixin.WeiXinUtils;

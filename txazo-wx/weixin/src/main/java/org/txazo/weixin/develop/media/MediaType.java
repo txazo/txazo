@@ -1,4 +1,4 @@
-package org.txazo.weixin.media;
+package org.txazo.weixin.develop.media;
 
 /**
  * MediaType

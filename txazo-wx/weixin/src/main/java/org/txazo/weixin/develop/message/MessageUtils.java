@@ -1,4 +1,4 @@
-package org.txazo.weixin.message;
+package org.txazo.weixin.develop.message;
 
 import com.alibaba.fastjson.JSON;
 import org.txazo.log.LoggerUtils;

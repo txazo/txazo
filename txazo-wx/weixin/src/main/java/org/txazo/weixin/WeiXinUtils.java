@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.txazo.log.LoggerUtils;
-import org.txazo.weixin.agent.Agent;
+import org.txazo.weixin.develop.agent.Agent;
 import org.txazo.weixin.bean.AccessToken;
 import org.txazo.weixin.bean.Crop;
 import org.txazo.weixin.util.EnumUtils;
-import org.txazo.weixin.verify.VerifyUtils;
+import org.txazo.weixin.develop.verify.VerifyUtils;
 
 import java.io.File;
 import java.util.HashMap;

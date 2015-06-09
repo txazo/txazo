@@ -1,6 +1,6 @@
-package org.txazo.weixin.agent;
+package org.txazo.weixin.develop.agent;
 
-import org.txazo.weixin.media.MediaUtils;
+import org.txazo.weixin.develop.media.MediaUtils;
 
 /**
  * Agent

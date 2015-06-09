@@ -1,7 +1,7 @@
 package org.txazo.weixin.filter;
 
 import org.apache.commons.io.IOUtils;
-import org.txazo.weixin.verify.VerifyUtils;
+import org.txazo.weixin.develop.verify.VerifyUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

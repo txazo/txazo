@@ -1,15 +1,12 @@
-package org.txazo.weixin.media;
+package org.txazo.weixin.develop.media;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.txazo.log.LoggerUtils;
 import org.txazo.weixin.WeiXinUtils;
 import org.txazo.weixin.resource.DefaultResourceLoader;
 import org.txazo.weixin.resource.Resource;
 import org.txazo.weixin.resource.ResourceLoader;
-
-import java.io.*;
 
 /**
  * MediaUtils
