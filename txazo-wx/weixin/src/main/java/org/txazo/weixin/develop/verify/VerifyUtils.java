@@ -13,7 +13,7 @@ import java.util.Set;
  * @email txazo1218@163.com
  * @since 09.06.2015
  */
-public class VerifyUtils extends WeiXinHolder {
+public abstract class VerifyUtils extends WeiXinHolder {
 
     public static String verifyURL(String msg_signature, String timestamp, String nonce, String echostr) {
         WXBizMsgCrypt wxcpt = null;

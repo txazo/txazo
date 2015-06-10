@@ -1,7 +1,7 @@
-package org.txazo.weixin.filter;
+package org.txazo.weixin.develop.verify;
 
 import org.apache.commons.io.IOUtils;
-import org.txazo.weixin.develop.verify.VerifyUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -10,18 +10,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * AgentVerifyFilter
+ * WeiXinVerifyFilter
  *
  * @author txazo
  * @email txazo1218@163.com
  * @since 09.06.2015
  */
-public class AgentVerifyFilter implements Filter {
+public class WeiXinVerifyFilter implements Filter {
 
-    private static final String WEIXIN_VERIFY_URL = "/weixin/verify";
+    private static final String WEIXIN_VERIFY_DEFAULT_URI = "/weixin/filter/verify";
+
+    private String weiXinVerifyUri;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        weiXinVerifyUri = filterConfig.getInitParameter("uri");
+        if (StringUtils.isBlank(weiXinVerifyUri)) {
+            weiXinVerifyUri = WEIXIN_VERIFY_DEFAULT_URI;
+        }
     }
 
     @Override
@@ -29,7 +35,7 @@ public class AgentVerifyFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        if (request.getRequestURI().equals(WEIXIN_VERIFY_URL)) {
+        if (request.getRequestURI().equals(weiXinVerifyUri)) {
             String msg_signature = request.getParameter("msg_signature");
             String timestamp = request.getParameter("timestamp");
             String nonce = request.getParameter("nonce");

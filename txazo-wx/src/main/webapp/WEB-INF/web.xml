@@ -23,6 +23,32 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!-- WeiXinVerifyFilter -->
+    <filter>
+        <filter-name>weiXinVerifyFilter</filter-name>
+        <filter-class>org.txazo.weixin.develop.verify.WeiXinVerifyFilter</filter-class>
+        <init-param>
+            <param-name>uri</param-name>
+            <param-value>/weixin/filter/verify</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>weiXinVerifyFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- WeiXinVerifyServlet -->
+    <servlet>
+        <servlet-name>weiXinVerifyServlet</servlet-name>
+        <servlet-class>org.txazo.weixin.develop.verify.WeiXinVerifyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>weiXinVerifyServlet</servlet-name>
+        <url-pattern>/weixin/servlet/verify</url-pattern>
+    </servlet-mapping>
+
     <!-- Spring DispatcherServlet -->
     <servlet>
         <servlet-name>wx</servlet-name>
