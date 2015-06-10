@@ -69,7 +69,6 @@ public class WeiXinUtilsTest {
         article.setDigest("asasasasa");
         article.setShow_cover_pic("1");
         LoggerUtils.log(WeiXinUtils.sendMessage(MessageBuilder.buildMPNewsMessage("txazo1218", null, null, "8", "0", article)));
-
     }
 
 }

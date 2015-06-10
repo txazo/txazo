@@ -16,12 +16,10 @@ public class WeiXinExecutor {
 
     public static WeiXinExecutor instance;
 
-    private WeiXin weiXin;
-    private HttpRequestHandler requestHandler;
+    private WeiXin weiXin = WeiXin.getInstance();
+    private HttpRequestHandler requestHandler = new DefaultHttpRequestHandler();
 
     private WeiXinExecutor() {
-        weiXin = WeiXin.getInstance();
-        requestHandler = new DefaultHttpRequestHandler();
     }
 
     public static WeiXinExecutor getInstance() {
