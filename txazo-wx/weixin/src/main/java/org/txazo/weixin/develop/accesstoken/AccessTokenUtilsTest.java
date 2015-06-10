@@ -6,6 +6,7 @@ public class AccessTokenUtilsTest {
 
     public static void main(String[] args) {
         LoggerUtils.log(AccessTokenUtils.getAccessToken());
+        LoggerUtils.log(AccessTokenUtils.getAccessToken());
     }
 
 }

@@ -1,5 +1,7 @@
 package org.txazo.weixin.develop.accesstoken;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * AccessTokenHolder
  *
@@ -32,7 +34,7 @@ class AccessTokenHolder {
         if (accessToken == null) {
             synchronized (lock) {
                 int repeatCount = REPEAT_COUNT;
-                if (accessToken == null && repeatCount > 0) {
+                while (accessToken == null && repeatCount > 0) {
                     try {
                         Thread.sleep(REPEAT_WAIT_TIME);
                     } catch (InterruptedException e) {
@@ -42,7 +44,7 @@ class AccessTokenHolder {
                 }
             }
         }
-        return accessToken == null ? null : accessToken.getAccess_token();
+        return accessToken == null ? StringUtils.EMPTY : accessToken.getAccess_token();
     }
 
     private class AccessTokenRefreshThread implements Runnable {
