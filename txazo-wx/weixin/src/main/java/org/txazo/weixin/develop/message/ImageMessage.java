@@ -11,9 +11,18 @@ import java.io.Serializable;
  */
 public class ImageMessage extends Message {
 
-    private static final long serialVersionUID = -6497578874816058464L;
+    private static final long serialVersionUID = -1166214437756985122L;
 
     private Image image;
+
+    public ImageMessage() {
+        super("image");
+    }
+
+    public ImageMessage(String touser, String toparty, String totag, String agentid, String safe, Image image) {
+        super(touser, toparty, totag, "image", agentid, safe);
+        this.image = image;
+    }
 
     public Image getImage() {
         return image;
@@ -25,9 +34,13 @@ public class ImageMessage extends Message {
 
     public static class Image implements Serializable {
 
-        private static final long serialVersionUID = -352429904232575299L;
+        private static final long serialVersionUID = -1125915216446818173L;
 
+        /** 图片media_id */
         private String media_id;
+
+        public Image() {
+        }
 
         public Image(String media_id) {
             this.media_id = media_id;

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @email txazo1218@163.com
  * @since 09.06.2015
  */
-public class Message implements Serializable {
+public abstract class Message implements Serializable {
 
     private static final long serialVersionUID = 4698404694062986198L;
 
@@ -27,6 +27,10 @@ public class Message implements Serializable {
     private String safe;
 
     public Message() {
+    }
+
+    public Message(String msgtype) {
+        this.msgtype = msgtype;
     }
 
     public Message(String touser, String toparty, String totag, String msgtype, String agentid, String safe) {

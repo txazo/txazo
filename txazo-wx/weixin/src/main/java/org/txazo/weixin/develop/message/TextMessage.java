@@ -11,15 +11,16 @@ import java.io.Serializable;
  */
 public class TextMessage extends Message {
 
-    private static final long serialVersionUID = -7039732560673428855L;
+    private static final long serialVersionUID = -5286782242685748633L;
 
     private Text text;
 
     public TextMessage() {
+        super("text");
     }
 
-    public TextMessage(String touser, String toparty, String totag, String msgtype, String agentid, String safe, Text text) {
-        super(touser, toparty, totag, msgtype, agentid, safe);
+    public TextMessage(String touser, String toparty, String totag, String agentid, String safe, Text text) {
+        super(touser, toparty, totag, "text", agentid, safe);
         this.text = text;
     }
 
@@ -33,9 +34,13 @@ public class TextMessage extends Message {
 
     public static class Text implements Serializable {
 
-        private static final long serialVersionUID = 8449831999138239975L;
+        private static final long serialVersionUID = -5479304718949081585L;
 
+        /** 消息内容 */
         private String content;
+
+        public Text() {
+        }
 
         public Text(String content) {
             this.content = content;
