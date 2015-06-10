@@ -18,6 +18,7 @@ import java.util.Map;
 public abstract class WeiXinHolder {
 
     protected static final String URI_GET_TOKEN = "/cgi-bin/gettoken";
+    protected static final String URI_MEDIA_UPLOAD = "/cgi-bin/media/upload";
 
     protected static WeiXin weiXin = WeiXin.getInstance();
     protected static WeiXinExecutor executor = WeiXinExecutor.getInstance();

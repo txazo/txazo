@@ -36,7 +36,7 @@ public class Media implements Serializable {
     }
 
     public boolean isVaild() {
-        return System.currentTimeMillis() - created_at <= MEDIA_ID_VALID_TIME;
+        return (System.currentTimeMillis() - created_at) <= MEDIA_ID_VALID_TIME;
     }
 
     public String getPath() {

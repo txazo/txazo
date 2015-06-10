@@ -1,6 +1,7 @@
 package org.txazo.weixin.develop.verify;
 
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+import org.apache.commons.lang3.StringUtils;
 import org.txazo.weixin.WeiXinHolder;
 
 import java.util.Set;
@@ -24,8 +25,7 @@ public class VerifyUtils extends WeiXinHolder {
             } catch (Throwable t) {
             }
         }
-        return null;
+        return StringUtils.EMPTY;
     }
-
 
 }

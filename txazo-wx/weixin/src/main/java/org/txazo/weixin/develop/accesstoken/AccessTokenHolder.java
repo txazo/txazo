@@ -15,7 +15,7 @@ class AccessTokenHolder {
 
     private static AccessTokenHolder instance = new AccessTokenHolder();
 
-    private Object lock = new Object();
+    private final Object lock = new Object();
     private volatile AccessToken accessToken;
 
     private AccessTokenHolder() {
