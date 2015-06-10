@@ -7,7 +7,7 @@ package org.txazo.weixin.develop.accesstoken;
  * @email txazo1218@163.com
  * @since 05.06.2015
  */
-public class AccessTokenHolder {
+class AccessTokenHolder {
 
     private static final int REPEAT_COUNT = 3;
     private static final int REPEAT_WAIT_TIME = 2000;

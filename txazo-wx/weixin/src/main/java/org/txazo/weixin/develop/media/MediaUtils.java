@@ -4,9 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.txazo.log.LoggerUtils;
 import org.txazo.weixin.WeiXinHolder;
-import org.txazo.weixin.resource.DefaultResourceLoader;
 import org.txazo.weixin.resource.Resource;
-import org.txazo.weixin.resource.ResourceLoader;
 
 /**
  * MediaUtils
@@ -18,7 +16,6 @@ import org.txazo.weixin.resource.ResourceLoader;
 public abstract class MediaUtils extends WeiXinHolder {
 
     private static MediaHolder mediaHolder = new MediaHolder();
-    private static ResourceLoader resourceLoader = new DefaultResourceLoader();
 
     public static String getMediaId(String path) {
         String mediaId = mediaHolder.getMediaId(path);

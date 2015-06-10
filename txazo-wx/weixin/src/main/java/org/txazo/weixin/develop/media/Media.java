@@ -16,10 +16,15 @@ public class Media implements Serializable {
     /** media_id有效时间(2天23小时50分钟) */
     private static final long MEDIA_ID_VALID_TIME = (3 * 24 * 60 - 10) * 60 * 1000;
 
+    /** 媒体文件路径 */
     private String path;
+    /** 媒体文件hash */
     private String hash;
+    /** 媒体文件类型 */
     private String type;
+    /** 媒体文件唯一标识 */
     private String media_id;
+    /** 媒体文件上传时间戳 */
     private long created_at;
 
     public Media() {
@@ -34,12 +39,12 @@ public class Media implements Serializable {
         return System.currentTimeMillis() - created_at <= MEDIA_ID_VALID_TIME;
     }
 
-    public long getCreated_at() {
-        return created_at;
+    public String getPath() {
+        return path;
     }
 
-    public void setCreated_at(long created_at) {
-        this.created_at = created_at;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getHash() {
@@ -50,6 +55,14 @@ public class Media implements Serializable {
         this.hash = hash;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getMedia_id() {
         return media_id;
     }
@@ -58,20 +71,12 @@ public class Media implements Serializable {
         this.media_id = media_id;
     }
 
-    public String getPath() {
-        return path;
+    public long getCreated_at() {
+        return created_at;
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setCreated_at(long created_at) {
+        this.created_at = created_at;
     }
 
 }

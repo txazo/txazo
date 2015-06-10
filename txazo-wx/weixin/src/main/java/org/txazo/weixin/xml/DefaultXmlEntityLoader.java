@@ -2,7 +2,7 @@ package org.txazo.weixin.xml;
 
 import org.apache.commons.io.IOUtils;
 import org.txazo.weixin.bean.Crop;
-import org.txazo.weixin.bean.Verify;
+import org.txazo.weixin.develop.verify.Verify;
 import org.txazo.weixin.http.Request;
 import org.txazo.weixin.resource.DefaultResourceLoader;
 import org.txazo.weixin.resource.Resource;

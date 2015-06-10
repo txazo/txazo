@@ -1,4 +1,4 @@
-package org.txazo.weixin.bean;
+package org.txazo.weixin.develop.verify;
 
 import org.txazo.weixin.enums.EntityPath;
 import org.txazo.weixin.xml.XmlEntity;

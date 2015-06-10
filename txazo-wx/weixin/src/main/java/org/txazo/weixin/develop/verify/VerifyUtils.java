@@ -2,7 +2,6 @@ package org.txazo.weixin.develop.verify;
 
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 import org.txazo.weixin.WeiXinHolder;
-import org.txazo.weixin.bean.Verify;
 
 import java.util.Set;
 

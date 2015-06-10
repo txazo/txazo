@@ -1,7 +1,5 @@
 package org.txazo.weixin.develop.accesstoken;
 
-import java.util.Date;
-
 /**
  * AccessToken
  *
@@ -9,17 +7,22 @@ import java.util.Date;
  * @email txazo1218@163.com
  * @since 05.06.2015
  */
-public class AccessToken {
+class AccessToken {
 
     /** AccessToken */
     private String access_token;
     /** AccessToken的有效时间(秒) */
     private long expires_in;
     /** AccessToken的创建时间 */
-    private Date createTime = new Date();
+    private long createTime = System.currentTimeMillis();
 
+    /**
+     * 是否过期
+     *
+     * @return
+     */
     public boolean isExpire() {
-        return (System.currentTimeMillis() - createTime.getTime()) >= expires_in * 1000;
+        return (System.currentTimeMillis() - createTime) >= (expires_in - 60) * 1000;
     }
 
     public String getAccess_token() {

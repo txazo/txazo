@@ -18,7 +18,7 @@ import java.io.PrintWriter;
  */
 public class AgentVerifyFilter implements Filter {
 
-    private static final String AGENT_VERIFY_URL = "/weixin/verify";
+    private static final String WEIXIN_VERIFY_URL = "/weixin/verify";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -29,7 +29,7 @@ public class AgentVerifyFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        if (request.getRequestURI().equals(AGENT_VERIFY_URL)) {
+        if (request.getRequestURI().equals(WEIXIN_VERIFY_URL)) {
             String msg_signature = request.getParameter("msg_signature");
             String timestamp = request.getParameter("timestamp");
             String nonce = request.getParameter("nonce");
@@ -43,9 +43,9 @@ public class AgentVerifyFilter implements Filter {
             } finally {
                 IOUtils.closeQuietly(out);
             }
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
-
-        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
