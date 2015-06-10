@@ -32,30 +32,16 @@ public class Remind implements Serializable {
     private int repeatTimes;
     /** 重复结束时间 */
     private Date repeatEndTime;
-    /** 备注 */
-    private String remark;
     /** 已提醒次数 */
     private int remindedTimes;
+    /** 是否在运行 */
+    private int isRun;
+    /** 备注 */
+    private String remark;
     /** 创建时间 */
     private Date createTime;
     /** 更新时间 */
     private Date updateTime;
-
-    public int getAheadRemindTime() {
-        return aheadRemindTime;
-    }
-
-    public void setAheadRemindTime(int aheadRemindTime) {
-        this.aheadRemindTime = aheadRemindTime;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     public long getId() {
         return id;
@@ -65,20 +51,20 @@ public class Remind implements Serializable {
         this.id = id;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getUser() {
+        return user;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public int getRemindedTimes() {
-        return remindedTimes;
+    public String getTitle() {
+        return title;
     }
 
-    public void setRemindedTimes(int remindedTimes) {
-        this.remindedTimes = remindedTimes;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getRemindTime() {
@@ -89,12 +75,20 @@ public class Remind implements Serializable {
         this.remindTime = remindTime;
     }
 
-    public Date getRepeatEndTime() {
-        return repeatEndTime;
+    public int getAheadRemindTime() {
+        return aheadRemindTime;
     }
 
-    public void setRepeatEndTime(Date repeatEndTime) {
-        this.repeatEndTime = repeatEndTime;
+    public void setAheadRemindTime(int aheadRemindTime) {
+        this.aheadRemindTime = aheadRemindTime;
+    }
+
+    public int getRepeatType() {
+        return repeatType;
+    }
+
+    public void setRepeatType(int repeatType) {
+        this.repeatType = repeatType;
     }
 
     public int getRepeatEndType() {
@@ -113,20 +107,44 @@ public class Remind implements Serializable {
         this.repeatTimes = repeatTimes;
     }
 
-    public int getRepeatType() {
-        return repeatType;
+    public Date getRepeatEndTime() {
+        return repeatEndTime;
     }
 
-    public void setRepeatType(int repeatType) {
-        this.repeatType = repeatType;
+    public void setRepeatEndTime(Date repeatEndTime) {
+        this.repeatEndTime = repeatEndTime;
     }
 
-    public String getTitle() {
-        return title;
+    public int getRemindedTimes() {
+        return remindedTimes;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setRemindedTimes(int remindedTimes) {
+        this.remindedTimes = remindedTimes;
+    }
+
+    public int getIsRun() {
+        return isRun;
+    }
+
+    public void setIsRun(int isRun) {
+        this.isRun = isRun;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Date getUpdateTime() {
@@ -135,14 +153,6 @@ public class Remind implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
 }
