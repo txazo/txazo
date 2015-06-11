@@ -48,7 +48,7 @@ public class PoolHttpClient implements HttpClient {
                 .setConnectionManager(connectionManager)
                 .setDefaultRequestConfig(getRequestConfig())
                 .setRetryHandler(new DefaultHttpRequestRetryHandler())
-                .setSSLSocketFactory(SSLManager.buildSSLSocketFactory())
+                //.setSSLSocketFactory(SSLManager.buildSSLSocketFactory())
                 .build();
     }
 

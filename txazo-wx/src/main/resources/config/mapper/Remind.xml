@@ -6,7 +6,36 @@
 <mapper namespace="org.txazo.wx.app.remind.mapper.RemindMapper">
 
     <insert id="addRemind" parameterType="Remind" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO Remind (title, createTime) VALUES (#{title}, now())
+        INSERT INTO Remind (account, title, description, cronExpression, beginTime, endTime, totalTimes, createTime)
+          VALUES (#{account}, #{title}, #{description}, #{cronExpression}, #{beginTime}, #{endTime}, #{totalTimes}, now())
     </insert>
+
+    <update id="updateRemind" parameterType="Remind">
+        UPDATE Remind SET
+          account = #{account},
+          title = #{title},
+          description = #{description},
+          cronExpression = #{cronExpression},
+          beginTime = #{beginTime},
+          endTime = #{endTime},
+          totalTimes = #{totalTimes}
+        WHERE id = #{id} LIMIT 1
+    </update>
+
+    <delete id="deleteRemind" parameterType="int">
+        UPDATE Remind SET isDeleted = 1 WHERE id = #{id} LIMIT 1
+    </delete>
+
+    <select id="getRemind" parameterType="int" resultType="Remind">
+        SELECT * FROM Remind WHERE id = #{id} LIMIT 1
+    </select>
+
+    <select id="getAllReminds" parameterType="string" resultType="Remind">
+        SELECT * FROM Remind WHERE account = #{account} AND isDeleted = 0
+    </select>
+
+    <update id="increaseRemindedTimes" parameterType="int">
+        UPDATE Remind SET remindedTimes = remindedTimes + 1 WHERE id = #{id} LIMIT 1
+    </update>
 
 </mapper>

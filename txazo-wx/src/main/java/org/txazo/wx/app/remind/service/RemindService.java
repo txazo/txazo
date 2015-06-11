@@ -13,8 +13,18 @@ import java.util.List;
  */
 public interface RemindService {
 
-    public void addRemind(Remind remind);
+    public boolean addRemind(Remind remind);
 
-    public List<Remind> getAllReminds();
+    public boolean updateRemind(Remind remind);
+
+    public boolean deleteRemind(int id);
+
+    public Remind getRemind(int id);
+
+    public List<Remind> getAllReminds(String account);
+
+    public List<Remind> getAllValidReminds(String account);
+
+    public boolean increaseRemindedTimes(int id);
 
 }

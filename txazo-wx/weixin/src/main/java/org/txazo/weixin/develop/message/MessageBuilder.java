@@ -17,6 +17,15 @@ public abstract class MessageBuilder {
      *
      * @return
      */
+    public static Message buildTextMessage(String touser, String agentid, String content) {
+        return buildTextMessage(touser, null, null, agentid, "0", content);
+    }
+
+    /**
+     * 创建text消息
+     *
+     * @return
+     */
     public static Message buildTextMessage(String touser, String toparty, String totag, String agentid, String safe, String content) {
         return new TextMessage(touser, toparty, totag, agentid, safe, new TextMessage.Text(content));
     }

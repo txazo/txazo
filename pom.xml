@@ -44,6 +44,7 @@
         <org.springframework.version>4.1.5.RELEASE</org.springframework.version>
         <org.mybatis.mybatis.version>3.3.0</org.mybatis.mybatis.version>
         <org.mybatis.mybatis-spring.version>1.2.2</org.mybatis.mybatis-spring.version>
+        <org.quartz-scheduler.quartz.version>2.2.1</org.quartz-scheduler.quartz.version>
         <org.txazo.txazo-log.version>1.0</org.txazo.txazo-log.version>
         <org.txazo.txazo-reflection-remote-api.version>1.0</org.txazo.txazo-reflection-remote-api.version>
         <org.txazo.txazo-reflection-remote-service.version>1.0</org.txazo.txazo-reflection-remote-service.version>
@@ -246,6 +247,18 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
                 <version>${org.mybatis.mybatis-spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${org.quartz-scheduler.quartz.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz-jobs</artifactId>
+                <version>${org.quartz-scheduler.quartz.version}</version>
             </dependency>
 
             <dependency>

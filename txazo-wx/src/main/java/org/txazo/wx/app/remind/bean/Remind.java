@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Remind
+ * Remind - 提醒事项
  *
  * @author txazo
  * @email txazo1218@163.com
@@ -15,104 +15,96 @@ public class Remind implements Serializable {
     private static final long serialVersionUID = 9039470282185415874L;
 
     /** ID */
-    private long id;
-    /** 用户 */
-    private String user;
-    /** 提醒事项 */
+    private int id;
+    /** 账号 */
+    private String account;
+    /** 标题 */
     private String title;
-    /** 提醒时间 */
-    private Date remindTime;
-    /** 提前提醒时间(分钟) */
-    private int aheadRemindTime;
-    /** 重复类型 */
-    private int repeatType;
-    /** 重复结束类型 */
-    private int repeatEndType;
-    /** 重复次数 */
-    private int repeatTimes;
-    /** 重复结束时间 */
-    private Date repeatEndTime;
+    /** 描述 */
+    private String description;
+    /** 时间表达式 */
+    private String cronExpression;
+    /** 开始时间 */
+    private Date beginTime;
+    /** 结束时间 */
+    private Date endTime;
     /** 已提醒次数 */
     private int remindedTimes;
-    /** 是否在运行 */
-    private int isRun;
-    /** 备注 */
-    private String remark;
+    /** 总次数 */
+    private int totalTimes;
+    /** 是否已删除(0-未删除, 1-删除) */
+    private int isDeleted;
     /** 创建时间 */
     private Date createTime;
     /** 更新时间 */
     private Date updateTime;
 
-    public long getId() {
+    public void increaseRemindedTimes() {
+        remindedTimes += 1;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public Date getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(Date beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCronExpression() {
+        return cronExpression;
+    }
+
+    public void setCronExpression(String cronExpression) {
+        this.cronExpression = cronExpression;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
+    public int getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getRemindTime() {
-        return remindTime;
-    }
-
-    public void setRemindTime(Date remindTime) {
-        this.remindTime = remindTime;
-    }
-
-    public int getAheadRemindTime() {
-        return aheadRemindTime;
-    }
-
-    public void setAheadRemindTime(int aheadRemindTime) {
-        this.aheadRemindTime = aheadRemindTime;
-    }
-
-    public int getRepeatType() {
-        return repeatType;
-    }
-
-    public void setRepeatType(int repeatType) {
-        this.repeatType = repeatType;
-    }
-
-    public int getRepeatEndType() {
-        return repeatEndType;
-    }
-
-    public void setRepeatEndType(int repeatEndType) {
-        this.repeatEndType = repeatEndType;
-    }
-
-    public int getRepeatTimes() {
-        return repeatTimes;
-    }
-
-    public void setRepeatTimes(int repeatTimes) {
-        this.repeatTimes = repeatTimes;
-    }
-
-    public Date getRepeatEndTime() {
-        return repeatEndTime;
-    }
-
-    public void setRepeatEndTime(Date repeatEndTime) {
-        this.repeatEndTime = repeatEndTime;
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public int getRemindedTimes() {
@@ -123,28 +115,20 @@ public class Remind implements Serializable {
         this.remindedTimes = remindedTimes;
     }
 
-    public int getIsRun() {
-        return isRun;
+    public String getTitle() {
+        return title;
     }
 
-    public void setIsRun(int isRun) {
-        this.isRun = isRun;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getRemark() {
-        return remark;
+    public int getTotalTimes() {
+        return totalTimes;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setTotalTimes(int totalTimes) {
+        this.totalTimes = totalTimes;
     }
 
     public Date getUpdateTime() {

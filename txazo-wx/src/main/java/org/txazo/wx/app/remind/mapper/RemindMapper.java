@@ -13,8 +13,16 @@ import java.util.List;
  */
 public interface RemindMapper {
 
-    public void addRemind(Remind remind);
+    public int addRemind(Remind remind);
 
-    public List<Remind> getAllReminds();
+    public int updateRemind(Remind remind);
+
+    public int deleteRemind(int id);
+
+    public Remind getRemind(int id);
+
+    public List<Remind> getAllReminds(String account);
+
+    public int increaseRemindedTimes(int id);
 
 }
