@@ -13,7 +13,7 @@
 
     <modules>
         <module>txazo-freemarker</module>
-        <module>txazo-hadoop</module>
+        <!--<module>txazo-hadoop</module>-->
         <module>txazo-java</module>
         <module>txazo-log</module>
         <module>txazo-network</module>
@@ -123,6 +123,7 @@
                 <version>${org.apache.commons.commons-lang3.version}</version>
             </dependency>
 
+            <!--
             <dependency>
                 <groupId>org.apache.hadoop</groupId>
                 <artifactId>hadoop-client</artifactId>
@@ -140,6 +141,7 @@
                 <artifactId>hadoop-hdfs</artifactId>
                 <version>${org.apache.hadoop.version}</version>
             </dependency>
+            -->
 
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
