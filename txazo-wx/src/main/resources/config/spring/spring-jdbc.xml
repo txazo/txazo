@@ -8,10 +8,12 @@
         <property name="driverClass" value="${jdbc.driverClass}"/>
         <property name="user" value="${jdbc.user}"/>
         <property name="password" value="${jdbc.password}"/>
+        <!--
         <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
         <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
         <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
         <property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
+        -->
     </bean>
 
     <bean id="wxDataSource" parent="parentDataSource">

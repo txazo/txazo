@@ -52,7 +52,7 @@ public class Remind implements Serializable {
     }
 
     public String getMessage() {
-        return title + LINE_SEPARATOR + description + "/::D";
+        return title + "：" + LINE_SEPARATOR + description;
     }
 
     public void increaseRemindedTimes() {
