@@ -23,12 +23,7 @@ public class RemindServiceTest extends SpringAbstractTest {
 
     @Test
     public void testAddRemind() {
-        Remind remind = new Remind();
-        remind.setAccount("txazo");
-        remind.setTitle("txazo");
-        remind.setDescription("12112121212");
-        remind.setCronExpression("* * * * *");
-        remind.setTotalTimes(10);
+        Remind remind = new Remind("txazo1218", "健康提醒", "喝水啦～～做做运动啦！！！", "*/20 * * * * ?");
         Assert.assertTrue(remindService.addRemind(remind));
     }
 

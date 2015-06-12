@@ -16,12 +16,10 @@ public class RemindJob extends LimitJob {
     @Override
     protected void executeJob(JobExecutionContext context) throws Throwable {
         if (context.getJobDetail() instanceof RemindJobDetail) {
-            System.out.println("---------- RemindJob begin");
             RemindJobDetail jobDetail = (RemindJobDetail) context.getJobDetail();
             Remind remind = jobDetail.getRemind();
             RemindService remindService = jobDetail.getRemindService();
             remindService.remindMessage(remind);
-            System.out.println("---------- RemindJob end");
         }
     }
 

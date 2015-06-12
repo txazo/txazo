@@ -18,11 +18,9 @@ public class QuartzSchedulerInit {
     private List<Runnable> initThreads;
 
     public QuartzSchedulerInit() {
-        System.out.println("----------QuartzSchedulerInit before");
         Thread thread = new Thread(new QuartzSchedulerInitThread());
         thread.setDaemon(true);
         thread.start();
-        System.out.println("----------QuartzSchedulerInit after");
     }
 
     public List<Runnable> getInitThreads() {
@@ -45,7 +43,6 @@ public class QuartzSchedulerInit {
             if (CollectionUtils.isNotEmpty(initThreads)) {
                 for (Runnable runnable : initThreads) {
                     try {
-                        System.out.println("----------QuartzSchedulerInit thread start");
                         new Thread(runnable).start();
                     } catch (Throwable t) {
                     }

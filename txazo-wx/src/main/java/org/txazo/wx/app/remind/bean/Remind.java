@@ -14,6 +14,8 @@ public class Remind implements Serializable {
 
     private static final long serialVersionUID = 9039470282185415874L;
 
+    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
     /** ID */
     private int id;
     /** 账号 */
@@ -38,6 +40,20 @@ public class Remind implements Serializable {
     private Date createTime;
     /** 更新时间 */
     private Date updateTime;
+
+    public Remind() {
+    }
+
+    public Remind(String account, String title, String description, String cronExpression) {
+        this.account = account;
+        this.title = title;
+        this.description = description;
+        this.cronExpression = cronExpression;
+    }
+
+    public String getMessage() {
+        return title + LINE_SEPARATOR + description + "/::D";
+    }
 
     public void increaseRemindedTimes() {
         remindedTimes += 1;

@@ -78,7 +78,7 @@ public class RemindServiceImpl implements RemindService {
         List<Remind> reminds = getAllReminds(account);
         for (Iterator<Remind> iterator = reminds.iterator(); iterator.hasNext(); ) {
             remind = iterator.next();
-            if (!checkRemind(remind) || remind.getRemindedTimes() >= remind.getTotalTimes()) {
+            if (!checkRemind(remind) || (remind.getTotalTimes() != 0 && remind.getRemindedTimes() >= remind.getTotalTimes())) {
                 iterator.remove();
             }
         }
@@ -92,11 +92,11 @@ public class RemindServiceImpl implements RemindService {
 
     @Override
     public void remindMessage(Remind remind) throws Throwable {
-        if (remind == null || remind.getRemindedTimes() >= remind.getTotalTimes()) {
+        if (remind == null || (remind.getTotalTimes() != 0 && remind.getRemindedTimes() >= remind.getTotalTimes())) {
             return;
         }
 
-        WeiXinUtils.sendMessage(MessageBuilder.buildTextMessage(remind.getAccount(), REMIND_AGENT_ID, remind.getTitle()));
+        WeiXinUtils.sendMessage(MessageBuilder.buildTextMessage(remind.getAccount(), REMIND_AGENT_ID, remind.getMessage()));
         remind.increaseRemindedTimes();
         increaseRemindedTimes(remind.getId());
     }

@@ -20,7 +20,6 @@ public class RemindInitThread implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("----------RemindInitThread run");
         List<Remind> reminds = remindService.getAllValidReminds("txazo1218");
         for (Remind remind : reminds) {
             quartzScheduler.scheduleRemindJob(remind);
