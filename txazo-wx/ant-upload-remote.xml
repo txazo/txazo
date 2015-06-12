@@ -10,7 +10,7 @@
     <property name="path" value="/www"/>
 
     <property name="restart" value="sudo /usr/local/tomcat/bin/shutdown.sh; sudo /usr/local/tomcat/bin/startup.sh"/>
-    <property name="exec" value="cd ${path}; unzip -oq -d ${project} ${build-war}; ${restart}"/>
+    <property name="exec" value="cd ${path}; sudo rm -rf ${project}; unzip -oq -d ${project} ${build-war}; ${restart}"/>
 
     <target name="scp">
         <scp file="${build-war}" todir="${user}:${password}@${server}:${path}" port="${port}" trust="true"

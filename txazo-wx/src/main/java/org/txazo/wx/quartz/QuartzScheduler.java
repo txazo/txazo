@@ -11,6 +11,8 @@ import org.txazo.wx.quartz.job.RemindJobDetail;
 
 import javax.annotation.Resource;
 
+import java.util.TimeZone;
+
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
@@ -44,7 +46,7 @@ public class QuartzScheduler {
 
     public void scheduleRemindJob(Remind remind) {
         try {
-            scheduler.scheduleJob(buildJobDetail(RemindJob.class, remind), newTrigger().withSchedule(cronSchedule(remind.getCronExpression())).build());
+            scheduler.scheduleJob(buildJobDetail(RemindJob.class, remind), newTrigger().withSchedule(cronSchedule(remind.getCronExpression()).inTimeZone(TimeZone.getTimeZone("Asia/Beijing"))).build());
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
