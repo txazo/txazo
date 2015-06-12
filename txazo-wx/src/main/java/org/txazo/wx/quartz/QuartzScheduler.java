@@ -37,7 +37,7 @@ public class QuartzScheduler {
         job.setRemind(remind);
         job.setRemindService(remindService);
         JobDataMap dataMap = new JobDataMap();
-        dataMap.put("limit", new JobLimit(remind.getBeginTime(), remind.getEndTime(), remind.getTotalTimes()));
+        dataMap.put("jobLimit", new JobLimit(remind.getBeginTime(), remind.getEndTime(), remind.getTotalTimes() - remind.getRemindedTimes()));
         job.setJobDataMap(dataMap);
         return job;
     }

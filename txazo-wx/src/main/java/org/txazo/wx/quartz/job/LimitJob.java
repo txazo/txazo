@@ -6,6 +6,7 @@ import org.txazo.wx.quartz.bean.JobLimit;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * TimeLimitJob
@@ -16,44 +17,59 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public abstract class LimitJob implements Job {
 
-    private Map<JobExecutionContext, Integer> executeTimes = new ConcurrentHashMap<JobExecutionContext, Integer>();
+    private Map<JobExecutionContext, AtomicInteger> executeTimes = new ConcurrentHashMap<JobExecutionContext, AtomicInteger>();
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         if (canExecute(context)) {
             try {
                 executeJob(context);
+            } catch (Throwable t) {
+                t.printStackTrace();
+            } finally {
                 increaseTimes(context);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
 
     private boolean canExecute(JobExecutionContext context) {
+        JobLimit limit = null;
         JobDataMap dataMap = context.getMergedJobDataMap();
+        if (dataMap == null || (limit = (JobLimit) dataMap.get("jobLimit")) == null) {
+            return true;
+        }
         try {
             Date now = new Date();
-            JobLimit limit = (JobLimit) dataMap.get("limit");
-            if (limit.getBeginTime() != null && limit.getBeginTime().before(now)) {
+            if (limit.getBeginTime() != null && limit.getBeginTime().after(now)) {
                 return false;
             }
-            if (limit.getEndTime() != null && limit.getEndTime().after(now)) {
+            if (limit.getEndTime() != null && limit.getEndTime().before(now)) {
                 return false;
             }
-            Integer times = null;
-            return limit.getTotalTimes() == 0 || ((times = executeTimes.get(context)) == null || limit.getTotalTimes() > times);
+            return limit.getTotalTimes() == 0 || (limit.getTotalTimes() > getTimes(context));
         } catch (Exception e) {
             return false;
         }
     }
 
-    private void increaseTimes(JobExecutionContext context) {
-        Integer times = executeTimes.get(context);
-        times = times == null ? 0 : times;
-        executeTimes.put(context, times + 1);
+    private int getTimes(JobExecutionContext context) {
+        AtomicInteger times = executeTimes.get(context);
+        if (times == null) {
+            times = new AtomicInteger(0);
+            executeTimes.put(context, times);
+        }
+        return times.get();
     }
 
-    protected abstract void executeJob(JobExecutionContext context) throws Exception;
+    private void increaseTimes(JobExecutionContext context) {
+        AtomicInteger times = executeTimes.get(context);
+        if (times == null) {
+            times = new AtomicInteger(0);
+        }
+        times.incrementAndGet();
+        executeTimes.put(context, times);
+    }
+
+    protected abstract void executeJob(JobExecutionContext context) throws Throwable;
 
 }

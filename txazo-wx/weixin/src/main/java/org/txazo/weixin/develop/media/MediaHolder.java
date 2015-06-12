@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 class MediaHolder {
 
-    private static final String MEDIA_DATA_FILE = "classpath:media.data";
+    private static final String MEDIA_DATA_FILE = "classpath:weixin-media.data";
 
     private ResourceLoader resourceLoader = new DefaultResourceLoader();
     /** media_id缓存 */

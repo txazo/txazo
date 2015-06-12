@@ -27,4 +27,6 @@ public interface RemindService {
 
     public boolean increaseRemindedTimes(int id);
 
+    public void remindMessage(Remind remind) throws Throwable;
+
 }

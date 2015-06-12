@@ -37,12 +37,8 @@ public class QuartzSchedulerInit {
 
         @Override
         public void run() {
-            int repeatCount = 100;
             try {
                 Thread.sleep(5000);
-                while (CollectionUtils.isEmpty(initThreads) && repeatCount-- > 0) {
-                    Thread.sleep(100);
-                }
             } catch (InterruptedException e) {
             }
 

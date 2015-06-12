@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.txazo.weixin.WeiXinUtils;
+import org.txazo.weixin.develop.message.MessageBuilder;
 import org.txazo.wx.app.remind.bean.Remind;
 import org.txazo.wx.app.remind.mapper.RemindMapper;
 import org.txazo.wx.app.remind.service.RemindService;
@@ -21,6 +23,8 @@ import java.util.List;
  */
 @Service("remindService")
 public class RemindServiceImpl implements RemindService {
+
+    private static final String REMIND_AGENT_ID = "2";
 
     @Autowired
     private RemindMapper remindMapper;
@@ -70,9 +74,11 @@ public class RemindServiceImpl implements RemindService {
 
     @Override
     public List<Remind> getAllValidReminds(String account) {
+        Remind remind = null;
         List<Remind> reminds = getAllReminds(account);
         for (Iterator<Remind> iterator = reminds.iterator(); iterator.hasNext(); ) {
-            if (!checkRemind(iterator.next())) {
+            remind = iterator.next();
+            if (!checkRemind(remind) || remind.getRemindedTimes() >= remind.getTotalTimes()) {
                 iterator.remove();
             }
         }
@@ -82,6 +88,17 @@ public class RemindServiceImpl implements RemindService {
     @Override
     public boolean increaseRemindedTimes(int id) {
         return id > 0 && remindMapper.increaseRemindedTimes(id) > 0;
+    }
+
+    @Override
+    public void remindMessage(Remind remind) throws Throwable {
+        if (remind == null || remind.getRemindedTimes() >= remind.getTotalTimes()) {
+            return;
+        }
+
+        WeiXinUtils.sendMessage(MessageBuilder.buildTextMessage(remind.getAccount(), REMIND_AGENT_ID, remind.getTitle()));
+        remind.increaseRemindedTimes();
+        increaseRemindedTimes(remind.getId());
     }
 
 }

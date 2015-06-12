@@ -58,6 +58,12 @@ public class ClassPathResource extends AbstractResource {
     public InputStream getInputStream() throws IOException {
         InputStream is = ClassLoader.getSystemResourceAsStream(this.path);
         if (is == null) {
+            is = Thread.currentThread().getContextClassLoader().getResourceAsStream(this.path);
+        }
+        if (is == null) {
+            return this.getClass().getResourceAsStream(this.path);
+        }
+        if (is == null) {
             throw new FileNotFoundException("stream can not be open");
         }
         return is;

@@ -31,9 +31,9 @@ public class DefaultXmlEntityLoader<T extends XmlEntity> implements XmlEntityLoa
     }
 
     private void initLoader() {
-        registerXmlEntiry("classpath:crop.xml", Crop.class);
-        registerXmlEntiry("classpath:request.xml", Request.class);
-        registerXmlEntiry("classpath:verify.xml", Verify.class);
+        registerXmlEntiry("classpath:weixin-crop.xml", Crop.class);
+        registerXmlEntiry("classpath:weixin-request.xml", Request.class);
+        registerXmlEntiry("classpath:weixin-verify.xml", Verify.class);
     }
 
     private void registerXmlEntiry(String path, Class<? extends XmlEntity> clazz) {
