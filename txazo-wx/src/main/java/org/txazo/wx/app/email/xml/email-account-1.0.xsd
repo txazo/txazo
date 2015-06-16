@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.txazo.com/schema/email"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.txazo.com/schema/email"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+    <xsd:element name="email">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="account" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="account">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="user" type="string"/>
+                <xsd:element name="passwd" type="string"/>
+                <xsd:element name="mail.store.protocol" type="protocol"/>
+                <xsd:element name="mail.pop3.host" type="string"/>
+                <xsd:element name="mail.pop3.auth" type="string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="string">
+        <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="replace"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="protocol">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="smtp"/>
+            <xsd:enumeration value="pop3"/>
+            <xsd:enumeration value="imap"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

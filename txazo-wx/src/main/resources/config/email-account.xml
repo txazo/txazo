@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<email xmlns="http://www.txazo.com/schema/email"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.txazo.com/schema/email http://www.txazo.com/schema/email/email-account-1.0.xsd">
+
+    <account>
+        <user>xxx</user>
+        <passwd>xxx</passwd>
+        <mail.store.protocol>pop3</mail.store.protocol>
+        <mail.pop3.host>pop.qq.com</mail.pop3.host>
+        <mail.pop3.auth>true</mail.pop3.auth>
+    </account>
+
+    <account>
+        <user>xxx</user>
+        <passwd>xxx</passwd>
+        <mail.store.protocol>pop3</mail.store.protocol>
+        <mail.pop3.host>pop.163.com</mail.pop3.host>
+        <mail.pop3.auth>true</mail.pop3.auth>
+    </account>
+
+</email>
