@@ -9,6 +9,16 @@ package org.txazo.wx.app.email.enums;
  */
 public enum Protocol {
 
-    SMTP, POP3, IMAP
+    SMTP("smtp"), POP3("pop3"), IMAP("imap");
+
+    private String id;
+
+    Protocol(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 
 }

@@ -1,5 +1,10 @@
 package org.txazo.wx.app.email.service;
 
+import org.txazo.wx.app.email.bean.Account;
+import org.txazo.wx.app.email.bean.Email;
+
+import java.util.List;
+
 /**
  * EmailService
  *
@@ -9,6 +14,6 @@ package org.txazo.wx.app.email.service;
  */
 public interface EmailService {
 
-    void receiveEmail();
+    List<Email> receiveEmail(Account account) throws Exception;
 
 }

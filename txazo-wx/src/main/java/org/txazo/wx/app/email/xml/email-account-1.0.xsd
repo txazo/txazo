@@ -10,7 +10,7 @@
     <xsd:element name="email">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="account" maxOccurs="unbounded"/>
+                <xsd:element ref="account" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -20,9 +20,9 @@
             <xsd:sequence>
                 <xsd:element name="user" type="string"/>
                 <xsd:element name="passwd" type="string"/>
-                <xsd:element name="mail.store.protocol" type="protocol"/>
-                <xsd:element name="mail.pop3.host" type="string"/>
-                <xsd:element name="mail.pop3.auth" type="string"/>
+                <xsd:element name="protocol" type="protocol"/>
+                <xsd:element name="host" type="string"/>
+                <xsd:element name="auth" type="boolean"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -38,6 +38,13 @@
             <xsd:enumeration value="smtp"/>
             <xsd:enumeration value="pop3"/>
             <xsd:enumeration value="imap"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="boolean">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="true"/>
+            <xsd:enumeration value="false"/>
         </xsd:restriction>
     </xsd:simpleType>
 

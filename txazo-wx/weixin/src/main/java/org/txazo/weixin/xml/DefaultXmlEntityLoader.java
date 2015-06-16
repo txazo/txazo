@@ -36,7 +36,7 @@ public class DefaultXmlEntityLoader<T extends XmlEntity> implements XmlEntityLoa
         registerXmlEntiry("classpath:weixin-verify.xml", Verify.class);
     }
 
-    private void registerXmlEntiry(String path, Class<? extends XmlEntity> clazz) {
+    public void registerXmlEntiry(String path, Class<? extends XmlEntity> clazz) {
         xmlEntityRegistry.registerXmlEntity(path, clazz);
     }
 
