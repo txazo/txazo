@@ -14,11 +14,11 @@ import org.txazo.wx.SpringAbstractTest;
 public class EmailReceiverTest extends SpringAbstractTest {
 
     @Autowired
-    private EmailReceiver receiver;
+    private EmailReceiver emailReceiver;
 
     @Test
     public void testReceiveEmail() {
-        receiver.receiveEmail();
+        emailReceiver.receiveEmail();
     }
 
 }

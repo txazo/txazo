@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.txazo.wx.app.email.bean.Account;
 import org.txazo.wx.app.email.bean.Email;
-import org.txazo.wx.app.email.service.EmailService;
+import org.txazo.wx.app.email.service.EmailReceiveService;
 
 import java.util.List;
 
@@ -22,14 +22,14 @@ public class EmailReceiver {
     private AccountLoader accountLoader = AccountLoader.getInstance();
 
     @Autowired
-    private EmailService emailService;
+    private EmailReceiveService emailReceiveService;
 
     public void receiveEmail() {
         List<Account> accounts = accountLoader.getAccounts();
         if (CollectionUtils.isNotEmpty(accounts)) {
             for (Account account : accounts) {
                 try {
-                    List<Email> emails = emailService.receiveEmail(account);
+                    List<Email> emails = emailReceiveService.receiveEmail(account);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

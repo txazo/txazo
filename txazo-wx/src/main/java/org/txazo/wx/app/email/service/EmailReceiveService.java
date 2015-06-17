@@ -12,7 +12,7 @@ import java.util.List;
  * @email txazo1218@163.com
  * @since 15.06.2015
  */
-public interface EmailService {
+public interface EmailReceiveService {
 
     List<Email> receiveEmail(Account account) throws Exception;
 

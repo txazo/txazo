@@ -1,31 +1,27 @@
 package org.txazo.wx.app.email.service.impl;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.txazo.weixin.util.AssertUtils;
 import org.txazo.wx.app.email.bean.Account;
 import org.txazo.wx.app.email.bean.Email;
-import org.txazo.wx.app.email.service.EmailService;
+import org.txazo.wx.app.email.bean.MimeEmail;
+import org.txazo.wx.app.email.service.EmailReceiveService;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 /**
- * EmailServiceImpl
+ * EmailReceiveService
  *
  * @author txazo
  * @email txazo1218@163.com
  * @since 16.06.2015
  */
 @Service
-public class EmailServiceImpl implements EmailService {
+public class EmailReceiveServiceImpl implements EmailReceiveService {
 
     private static final String MAIL_STORE_PROTOCOL = "mail.store.protocol";
     private static final String MAIL_POP3_HOST = "mail.pop3.host";
@@ -79,28 +75,11 @@ public class EmailServiceImpl implements EmailService {
 
     private Email buildEmail(MimeMessage message) {
         try {
-            Email email = new Email();
-            email.setTitle(MimeUtility.decodeText(message.getSubject()));
-            email.setFrom(getAddress((InternetAddress[]) message.getFrom()));
-            email.setTo(getAddress((InternetAddress[]) message.getRecipients(Message.RecipientType.TO)));
-            email.setSendTime(message.getSentDate());
-            email.setMessageId(message.getMessageID());
-            email.setContent("");
-            return email;
+            return new Email(new MimeEmail(message));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private String getAddress(InternetAddress[] addresses) throws UnsupportedEncodingException {
-        if (ArrayUtils.isEmpty(addresses)) {
-            return null;
-        }
-        String personal = addresses[0].getPersonal();
-        String address = addresses[0].getAddress();
-        address = address != null ? MimeUtility.decodeText(address) : address;
-        return StringUtils.isBlank(personal) ? address : MimeUtility.decodeText(personal) + "<" + address + ">";
     }
 
 }
