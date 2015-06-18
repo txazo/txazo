@@ -7,6 +7,7 @@ import org.txazo.wx.app.email.bean.Account;
 import org.txazo.wx.app.email.bean.Email;
 import org.txazo.wx.app.email.service.EmailReceiveService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,17 +25,22 @@ public class EmailReceiver {
     @Autowired
     private EmailReceiveService emailReceiveService;
 
-    public void receiveEmail() {
+    public List<Email> receiveEmail() {
+        List<Email> emails = new ArrayList<Email>();
         List<Account> accounts = accountLoader.getAccounts();
         if (CollectionUtils.isNotEmpty(accounts)) {
             for (Account account : accounts) {
                 try {
-                    List<Email> emails = emailReceiveService.receiveEmail(account);
+                    List<Email> receiveEmails = emailReceiveService.receiveEmail(account);
+                    if (CollectionUtils.isNotEmpty(receiveEmails)) {
+                        emails.addAll(receiveEmails);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
+        return emails;
     }
 
 }

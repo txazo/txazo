@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.3//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.txazo.wx.app.email.mapper.EmailMapper">
+
+    <insert id="addEmail" parameterType="Email" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Email (`from`, `to`, subject, sendTime, contentId, attachment, messageId, createTime)
+          VALUES (#{from}, #{to}, #{subject}, #{sendTime}, #{contentId}, #{attachment}, #{messageId}, now())
+    </insert>
+
+    <select id="getEmail" parameterType="int" resultType="Email">
+        SELECT * FROM Email WHERE id = #{id} LIMIT 1
+    </select>
+
+</mapper>

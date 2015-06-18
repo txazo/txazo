@@ -13,4 +13,14 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
+    <bean id="emailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="org.txazo.wx.app.email.mapper.EmailMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="emailContentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="org.txazo.wx.app.email.mapper.EmailContentMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
 </beans>

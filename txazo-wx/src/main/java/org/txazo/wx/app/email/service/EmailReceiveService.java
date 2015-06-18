@@ -6,7 +6,7 @@ import org.txazo.wx.app.email.bean.Email;
 import java.util.List;
 
 /**
- * EmailService
+ * EmailReceiveService
  *
  * @author txazo
  * @email txazo1218@163.com

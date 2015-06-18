@@ -15,13 +15,28 @@ public class Email implements Serializable {
     private static final long serialVersionUID = -7973406313524794859L;
 
     private int id;
+    /** 发件人 */
     private String from;
+    /** 收件人 */
     private String to;
+    /** 邮件主题 */
     private String subject;
+    /** 发送时间 */
     private Date sendTime;
-    private String messageId;
+    /** contentId */
+    private int contentId;
+    /** 附件 */
     private String attachment;
-    private String content;
+    /** messageId */
+    private String messageId;
+    /** 创建时间 */
+    private Date createTime;
+
+    /** 邮件内容 */
+    private EmailContent emailContent;
+
+    public Email() {
+    }
 
     public Email(MimeEmail email) {
         this.from = email.getFrom();
@@ -30,7 +45,15 @@ public class Email implements Serializable {
         this.sendTime = email.getSendTime();
         this.messageId = email.getMessageId();
         this.attachment = email.getAttachment();
-        this.content = email.getContent();
+        this.emailContent = new EmailContent(email.getContent());
+    }
+
+    public String getContent() {
+        return emailContent.getContent();
+    }
+
+    public void setContent(String content) {
+        this.emailContent = new EmailContent(content);
     }
 
     public String getAttachment() {
@@ -41,12 +64,28 @@ public class Email implements Serializable {
         this.attachment = attachment;
     }
 
-    public String getContent() {
-        return content;
+    public int getContentId() {
+        return contentId;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContentId(int contentId) {
+        this.contentId = contentId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public EmailContent getEmailContent() {
+        return emailContent;
+    }
+
+    public void setEmailContent(EmailContent emailContent) {
+        this.emailContent = emailContent;
     }
 
     public String getFrom() {
