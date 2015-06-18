@@ -3,7 +3,6 @@ package org.txazo.wx.app.email;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.txazo.wx.app.email.bean.Account;
 import org.txazo.wx.app.email.bean.Email;
 import org.txazo.wx.app.email.service.EmailReceiveService;
