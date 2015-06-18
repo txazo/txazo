@@ -1,5 +1,7 @@
 package org.txazo.wx.app.email.bean;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -52,6 +54,14 @@ public class Email implements Serializable {
         this.messageId = email.getMessageId();
         this.attachment = email.getAttachment();
         this.emailContent = new EmailContent(email.getContent());
+    }
+
+    public String getFrom() {
+        return StringUtils.isNoneBlank(fromPerson) ? fromPerson : fromEmail;
+    }
+
+    public String getTo() {
+        return toEmail;
     }
 
     public String getContent() {

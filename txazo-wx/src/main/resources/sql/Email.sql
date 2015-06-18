@@ -3,9 +3,9 @@ drop table Email;
 create table Email (
     id int(11) unsigned not null auto_increment comment 'id',
     fromEmail varchar(50) not null default '' comment 'fromEmail',
-    fromPerson varchar(50) not null default '' comment 'fromPerson',
+    fromPerson varchar(50) default null comment 'fromPerson',
     toEmail varchar(50) not null default '' comment 'toEmail',
-    toPerson varchar(50) not null default '' comment 'toPerson',
+    toPerson varchar(50) default null comment 'toPerson',
     subject varchar(100) not null default '' comment 'subject',
     sendTime datetime default null comment 'sendTime',
     contentId int(11) unsigned not null default 0 comment 'contentId',

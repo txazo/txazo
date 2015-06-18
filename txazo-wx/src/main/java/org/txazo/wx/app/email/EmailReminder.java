@@ -38,12 +38,11 @@ public class EmailReminder {
 
     private Message buildEmailMessage(Email email) {
         NewsMessage.Article article = new NewsMessage.Article();
-        article.setTitle("163邮件提醒");
+        article.setTitle(email.getSubject());
         StringBuilder sb = new StringBuilder();
-        sb.append("<font style=\"color:red;\">发件人: " + email.getFromEmail() + "</font>\n");
-        sb.append("收件人: " + email.getToEmail() + "\n");
+        sb.append("发件人: " + email.getFrom() + "\n");
+        sb.append("收件人: " + email.getTo() + "\n");
         sb.append("时间: " + DateFormatUtils.format(email.getSendTime(), "yyyy-MM-dd HH:mm:ss") + "\n");
-        sb.append("内容: " + email.getSubject());
         article.setDescription(sb.toString());
         article.setUrl("http://wx.txazo.com/email/read/" + email.getId() + ".wx");
         return MessageBuilder.buildNewsMessage(WeiXinApp.ACCOUNT, null, null, WeiXinApp.APP_EMAIL_ID, "0", article);
