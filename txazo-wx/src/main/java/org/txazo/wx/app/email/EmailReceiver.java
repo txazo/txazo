@@ -2,6 +2,7 @@ package org.txazo.wx.app.email;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.txazo.wx.app.email.bean.Account;
 import org.txazo.wx.app.email.bean.Email;
@@ -17,7 +18,7 @@ import java.util.List;
  * @email txazo1218@163.com
  * @since 15.06.2015
  */
-@Service
+@Component
 public class EmailReceiver {
 
     private AccountLoader accountLoader = AccountLoader.getInstance();
@@ -26,12 +27,13 @@ public class EmailReceiver {
     private EmailReceiveService emailReceiveService;
 
     public List<Email> receiveEmail() {
+        List<Email> receiveEmails = null;
         List<Email> emails = new ArrayList<Email>();
         List<Account> accounts = accountLoader.getAccounts();
         if (CollectionUtils.isNotEmpty(accounts)) {
             for (Account account : accounts) {
                 try {
-                    List<Email> receiveEmails = emailReceiveService.receiveEmail(account);
+                    receiveEmails = emailReceiveService.receiveEmail(account);
                     if (CollectionUtils.isNotEmpty(receiveEmails)) {
                         emails.addAll(receiveEmails);
                     }

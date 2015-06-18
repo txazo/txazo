@@ -15,4 +15,6 @@ public interface EmailMapper {
 
     public Email getEmail(int id);
 
+    public Email queryEmail(Email email);
+
 }

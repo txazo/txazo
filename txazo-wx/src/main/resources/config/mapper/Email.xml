@@ -14,4 +14,8 @@
         SELECT * FROM Email WHERE id = #{id} LIMIT 1
     </select>
 
+    <select id="queryEmail" parameterType="Email" resultType="Email">
+        SELECT * FROM Email WHERE `from` = #{from} AND `to` = #{to} AND subject = #{subject} AND sendTime = #{sendTime} LIMIT 1
+    </select>
+
 </mapper>

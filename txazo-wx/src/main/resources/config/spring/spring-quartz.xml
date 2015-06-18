@@ -3,7 +3,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="emailTrigger"/>
+            </list>
+        </property>
+        <property name="autoStartup" value="true"/>
+    </bean>
+
+    <bean id="emailJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="emailJob"/>
+        <property name="targetMethod" value="execute"/>
+    </bean>
+
+    <bean id="emailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="emailJobDetail"/>
+        <property name="cronExpression" value="${job.email.cron}"/>
+    </bean>
 
     <bean id="remindInitThread" class="org.txazo.wx.quartz.thread.RemindInitThread">
         <property name="remindService" ref="remindService"/>

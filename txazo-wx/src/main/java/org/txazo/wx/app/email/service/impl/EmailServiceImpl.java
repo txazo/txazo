@@ -31,6 +31,11 @@ public class EmailServiceImpl implements EmailService {
         }
 
         try {
+            Email otherEmail = emailMapper.queryEmail(email);
+            if (otherEmail != null) {
+                return false;
+            }
+
             EmailContent emailContent = email.getEmailContent();
             emailContentMapper.addEmailContent(emailContent);
             if (emailContent.getId() <= 0) {
