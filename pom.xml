@@ -15,6 +15,7 @@
         <module>txazo-freemarker</module>
         <!--<module>txazo-hadoop</module>-->
         <module>txazo-java</module>
+        <module>txazo-java/txazo-java-security</module>
         <module>txazo-log</module>
         <module>txazo-network</module>
         <module>txazo-pom</module>
