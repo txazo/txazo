@@ -6,8 +6,8 @@
 <mapper namespace="org.txazo.wx.app.email.mapper.EmailMapper">
 
     <insert id="addEmail" parameterType="Email" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO Email (`from`, `to`, subject, sendTime, contentId, attachment, messageId, createTime)
-          VALUES (#{from}, #{to}, #{subject}, #{sendTime}, #{contentId}, #{attachment}, #{messageId}, now())
+        INSERT INTO Email (fromEmail, fromPerson, toEmail, toPerson, subject, sendTime, contentId, attachment, messageId, createTime)
+          VALUES (#{fromEmail}, #{fromPerson}, #{toEmail}, #{toPerson}, #{subject}, #{sendTime}, #{contentId}, #{attachment}, #{messageId}, now())
     </insert>
 
     <select id="getEmail" parameterType="int" resultType="Email">
@@ -15,7 +15,7 @@
     </select>
 
     <select id="queryEmail" parameterType="Email" resultType="Email">
-        SELECT * FROM Email WHERE `from` = #{from} AND `to` = #{to} AND subject = #{subject} AND sendTime = #{sendTime} LIMIT 1
+        SELECT * FROM Email WHERE fromEmail = #{fromEmail} AND toEmail = #{toEmail} AND subject = #{subject} AND sendTime = #{sendTime} LIMIT 1
     </select>
 
 </mapper>

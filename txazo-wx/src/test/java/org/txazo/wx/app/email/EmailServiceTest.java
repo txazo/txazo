@@ -24,8 +24,8 @@ public class EmailServiceTest extends SpringAbstractTest {
     @Test
     public void testAddEmail() {
         Email email = new Email();
-        email.setFrom("txazo1218@163.com");
-        email.setTo("784990655@qq.com");
+        email.setFromEmail("txazo1218@163.com");
+        email.setToEmail("784990655@qq.com");
         email.setSubject("邮件主题");
         email.setSendTime(new Date());
         email.setMessageId("messageId");

@@ -2,8 +2,10 @@ drop table Email;
 
 create table Email (
     id int(11) unsigned not null auto_increment comment 'id',
-    `from` varchar(100) not null default '' comment 'from',
-    `to` varchar(100) not null default '' comment 'to',
+    fromEmail varchar(50) not null default '' comment 'fromEmail',
+    fromPerson varchar(50) not null default '' comment 'fromPerson',
+    toEmail varchar(50) not null default '' comment 'toEmail',
+    toPerson varchar(50) not null default '' comment 'toPerson',
     subject varchar(100) not null default '' comment 'subject',
     sendTime datetime default null comment 'sendTime',
     contentId int(11) unsigned not null default 0 comment 'contentId',
@@ -11,8 +13,8 @@ create table Email (
     messageId varchar(100) default null comment 'messageId',
     createTime datetime default null comment 'createTime',
     primary key (id),
-    key (`from`),
-    key (`to`),
+    key (fromEmail),
+    key (toEmail),
     key (subject),
     key (createTime)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Email';

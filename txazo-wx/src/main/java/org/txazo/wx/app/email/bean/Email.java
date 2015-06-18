@@ -15,10 +15,14 @@ public class Email implements Serializable {
     private static final long serialVersionUID = -7973406313524794859L;
 
     private int id;
+    /** 发件人Email */
+    private String fromEmail;
     /** 发件人 */
-    private String from;
+    private String fromPerson;
+    /** 收件人Email */
+    private String toEmail;
     /** 收件人 */
-    private String to;
+    private String toPerson;
     /** 邮件主题 */
     private String subject;
     /** 发送时间 */
@@ -39,8 +43,10 @@ public class Email implements Serializable {
     }
 
     public Email(MimeEmail email) {
-        this.from = email.getFrom();
-        this.to = email.getTo();
+        this.fromEmail = email.getFromEmail();
+        this.fromPerson = email.getFromPerson();
+        this.toEmail = email.getToEmail();
+        this.toPerson = email.getToPerson();
         this.subject = email.getSubject();
         this.sendTime = email.getSendTime();
         this.messageId = email.getMessageId();
@@ -88,14 +94,6 @@ public class Email implements Serializable {
         this.emailContent = emailContent;
     }
 
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
     public int getId() {
         return id;
     }
@@ -128,12 +126,36 @@ public class Email implements Serializable {
         this.subject = subject;
     }
 
-    public String getTo() {
-        return to;
+    public String getFromEmail() {
+        return fromEmail;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setFromEmail(String fromEmail) {
+        this.fromEmail = fromEmail;
+    }
+
+    public String getFromPerson() {
+        return fromPerson;
+    }
+
+    public void setFromPerson(String fromPerson) {
+        this.fromPerson = fromPerson;
+    }
+
+    public String getToEmail() {
+        return toEmail;
+    }
+
+    public void setToEmail(String toEmail) {
+        this.toEmail = toEmail;
+    }
+
+    public String getToPerson() {
+        return toPerson;
+    }
+
+    public void setToPerson(String toPerson) {
+        this.toPerson = toPerson;
     }
 
 }

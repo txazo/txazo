@@ -27,8 +27,10 @@ public class MimeEmail {
     private MimeMessage message;
 
     private String messageId;
-    private String from;
-    private String to;
+    private String fromEmail;
+    private String fromPerson;
+    private String toEmail;
+    private String toPerson;
     private Date sendTime;
     private String subject;
     private StringBuilder content = new StringBuilder();
@@ -41,21 +43,31 @@ public class MimeEmail {
 
     private void build() throws Exception {
         this.messageId = message.getMessageID();
-        this.from = getAddress((InternetAddress[]) message.getFrom());
-        this.to = getAddress((InternetAddress[]) message.getRecipients(Message.RecipientType.TO));
+        this.fromEmail = getEmail((InternetAddress[]) message.getFrom());
+        this.fromPerson = getPerson((InternetAddress[]) message.getFrom());
+        this.toEmail = getEmail((InternetAddress[]) message.getRecipients(Message.RecipientType.TO));
+        this.toPerson = getPerson((InternetAddress[]) message.getRecipients(Message.RecipientType.TO));
         this.sendTime = message.getSentDate();
         this.subject = MimeUtility.decodeText(message.getSubject());
         parsePart(message);
     }
 
-    private String getAddress(InternetAddress[] addresses) throws UnsupportedEncodingException {
+    private String getEmail(InternetAddress[] addresses) throws UnsupportedEncodingException {
         if (ArrayUtils.isEmpty(addresses)) {
             return null;
         }
-        String personal = addresses[0].getPersonal();
-        String address = addresses[0].getAddress();
-        address = address != null ? MimeUtility.decodeText(address) : address;
-        return StringUtils.isBlank(personal) ? address : MimeUtility.decodeText(personal) + "<" + address + ">";
+        return decodeText(addresses[0].getAddress());
+    }
+
+    private String getPerson(InternetAddress[] addresses) throws UnsupportedEncodingException {
+        if (ArrayUtils.isEmpty(addresses)) {
+            return null;
+        }
+        return decodeText(addresses[0].getPersonal());
+    }
+
+    private String decodeText(String text) throws UnsupportedEncodingException {
+        return StringUtils.isNotBlank(text) ? MimeUtility.decodeText(text) : text;
     }
 
     private void parsePart(Part part) throws Exception {
@@ -85,10 +97,6 @@ public class MimeEmail {
         return content.toString();
     }
 
-    public String getFrom() {
-        return from;
-    }
-
     public String getMessageId() {
         return messageId;
     }
@@ -101,8 +109,20 @@ public class MimeEmail {
         return subject;
     }
 
-    public String getTo() {
-        return to;
+    public String getFromEmail() {
+        return fromEmail;
+    }
+
+    public String getFromPerson() {
+        return fromPerson;
+    }
+
+    public String getToEmail() {
+        return toEmail;
+    }
+
+    public String getToPerson() {
+        return toPerson;
     }
 
 }

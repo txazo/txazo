@@ -40,8 +40,8 @@ public class EmailReminder {
         NewsMessage.Article article = new NewsMessage.Article();
         article.setTitle("163邮件提醒");
         StringBuilder sb = new StringBuilder();
-        sb.append("<font style=\"color:red;\">发件人: " + email.getFrom() + "</font>\n");
-        sb.append("收件人: " + email.getTo() + "\n");
+        sb.append("<font style=\"color:red;\">发件人: " + email.getFromEmail() + "</font>\n");
+        sb.append("收件人: " + email.getToEmail() + "\n");
         sb.append("时间: " + DateFormatUtils.format(email.getSendTime(), "yyyy-MM-dd HH:mm:ss") + "\n");
         sb.append("内容: " + email.getSubject());
         article.setDescription(sb.toString());
