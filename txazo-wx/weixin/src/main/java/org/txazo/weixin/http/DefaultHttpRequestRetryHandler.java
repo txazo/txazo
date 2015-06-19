@@ -21,7 +21,7 @@ import java.net.UnknownHostException;
  */
 public class DefaultHttpRequestRetryHandler implements HttpRequestRetryHandler {
 
-    private static final int MAX_RETRY_COUNT = 3;
+    private static final int MAX_RETRY_COUNT = 1;
 
     @Override
     public boolean retryRequest(IOException exception, int executionCount, HttpContext context) {

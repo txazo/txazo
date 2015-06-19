@@ -16,7 +16,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.ssl.SSLContexts;
-import org.txazo.weixin.http.ssl.SSLManager;
 
 import java.io.IOException;
 import java.util.*;
@@ -31,7 +30,7 @@ import java.util.concurrent.*;
  */
 public class PoolHttpClient implements HttpClient {
 
-    public static final int DEFAULT_TIMEOUT_SECONDS = 5;
+    public static final int DEFAULT_TIMEOUT_SECONDS = 15;
 
     private static PoolHttpClient instance;
 
@@ -48,7 +47,6 @@ public class PoolHttpClient implements HttpClient {
                 .setConnectionManager(connectionManager)
                 .setDefaultRequestConfig(getRequestConfig())
                 .setRetryHandler(new DefaultHttpRequestRetryHandler())
-                //.setSSLSocketFactory(SSLManager.buildSSLSocketFactory())
                 .build();
     }
 
@@ -65,9 +63,9 @@ public class PoolHttpClient implements HttpClient {
                 .setExpectContinueEnabled(true)
                 .setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM, AuthSchemes.DIGEST))
                 .setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC))
-                .setSocketTimeout(5000)
-                .setConnectTimeout(5000)
-                .setConnectionRequestTimeout(5000)
+                .setSocketTimeout(15000)
+                .setConnectTimeout(15000)
+                .setConnectionRequestTimeout(15000)
                 .build();
     }
 
