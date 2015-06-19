@@ -42,12 +42,12 @@ public class EmailReminder {
         NewsMessage.Article article = new NewsMessage.Article();
         article.setTitle(email.getFrom());
         StringBuilder sb = new StringBuilder();
+        sb.append(email.getSubject());
+        sb.append(LINE_SEPARATOR);
+        sb.append(LINE_SEPARATOR);
         sb.append("收件人: " + email.getTo());
         sb.append(LINE_SEPARATOR);
         sb.append("时    间: " + DateFormatUtils.format(email.getSendTime(), "yyyy年MM月dd日 HH:mm (E)"));
-        sb.append(LINE_SEPARATOR);
-        sb.append(LINE_SEPARATOR);
-        sb.append(email.getSubject());
         article.setDescription(sb.toString());
         article.setUrl("http://wx.txazo.com/email/read/" + email.getId() + ".wx");
         return MessageBuilder.buildNewsMessage(WeiXinApp.ACCOUNT, null, null, WeiXinApp.APP_EMAIL_ID, "0", article);

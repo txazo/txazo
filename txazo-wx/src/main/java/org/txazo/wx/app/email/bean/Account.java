@@ -21,8 +21,12 @@ public class Account implements XmlEntity {
     private String protocol;
     @EntityPath(path = "email.account.host")
     private String host;
+    @EntityPath(path = "email.account.port")
+    private String port;
     @EntityPath(path = "email.account.auth")
     private String auth;
+    @EntityPath(path = "email.account.ssl")
+    private String ssl;
 
     public Account() {
     }
@@ -43,8 +47,20 @@ public class Account implements XmlEntity {
         return host;
     }
 
+    public int getPort() {
+        try {
+            return Integer.parseInt(port);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
     public String getAuth() {
         return auth;
+    }
+
+    public boolean isSSL() {
+        return Boolean.parseBoolean(ssl);
     }
 
 }

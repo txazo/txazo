@@ -22,7 +22,9 @@
                 <xsd:element name="passwd" type="string"/>
                 <xsd:element name="protocol" type="protocol"/>
                 <xsd:element name="host" type="string"/>
+                <xsd:element name="port" type="xsd:int" minOccurs="0"/>
                 <xsd:element name="auth" type="boolean"/>
+                <xsd:element name="ssl" type="boolean" minOccurs="0"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

@@ -9,7 +9,9 @@
         <passwd>xxx</passwd>
         <protocol>pop3</protocol>
         <host>pop.qq.com</host>
+        <port>995</port>
         <auth>true</auth>
+        <ssl>true</ssl>
     </account>
 
     <account>
@@ -17,7 +19,9 @@
         <passwd>xxx</passwd>
         <protocol>pop3</protocol>
         <host>pop.163.com</host>
+        <port>995</port>
         <auth>true</auth>
+        <ssl>true</ssl>
     </account>
 
 </email>

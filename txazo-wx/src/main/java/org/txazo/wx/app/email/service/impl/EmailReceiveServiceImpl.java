@@ -9,6 +9,7 @@ import org.txazo.wx.app.email.service.EmailReceiveService;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -25,6 +26,7 @@ public class EmailReceiveServiceImpl implements EmailReceiveService {
 
     private static final String MAIL_STORE_PROTOCOL = "mail.store.protocol";
     private static final String MAIL_POP3_HOST = "mail.pop3.host";
+    private static final String MAIL_POP3_PORT = "mail.pop3.port";
     private static final String MAIL_POP3_AUTH = "mail.pop3.auth";
 
     @Override
@@ -61,9 +63,18 @@ public class EmailReceiveServiceImpl implements EmailReceiveService {
         Properties props = new Properties();
         props.setProperty(MAIL_STORE_PROTOCOL, account.getProtocol());
         props.setProperty(MAIL_POP3_HOST, account.getHost());
+        if (account.getPort() > 0) {
+            props.setProperty(MAIL_POP3_PORT, String.valueOf(account.getPort()));
+        }
         props.setProperty(MAIL_POP3_AUTH, account.getAuth());
 
-        return Session.getDefaultInstance(props, new Authenticator() {
+        if (account.isSSL()) {
+            Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+            props.setProperty("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.setProperty("mail.pop3.socketFactory.fallback", "false");
+        }
+
+        return Session.getInstance(props, new Authenticator() {
 
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
