@@ -48,7 +48,7 @@ public class MimeEmail {
         this.toEmail = getEmail((InternetAddress[]) message.getRecipients(Message.RecipientType.TO));
         this.toPerson = getPerson((InternetAddress[]) message.getRecipients(Message.RecipientType.TO));
         this.sendTime = message.getSentDate();
-        this.subject = MimeUtility.decodeText(message.getSubject());
+        this.subject = MimeUtility.decodeText(message.getSubject()).replaceAll("\\s*", "");
         parsePart(message);
     }
 
@@ -67,7 +67,7 @@ public class MimeEmail {
     }
 
     private String decodeText(String text) throws UnsupportedEncodingException {
-        return StringUtils.isNotBlank(text) ? MimeUtility.decodeText(text) : text;
+        return StringUtils.isNotBlank(text) ? MimeUtility.decodeText(text).replaceAll("\\s*", "") : text;
     }
 
     private void parsePart(Part part) throws Exception {

@@ -1,5 +1,6 @@
 package org.txazo.wx.app.email.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.txazo.wx.app.email.bean.Email;
@@ -26,7 +27,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public boolean addEmail(Email email) {
-        if (email == null || email.getEmailContent() == null) {
+        if (!checkEmail(email)) {
             return false;
         }
 
@@ -49,6 +50,15 @@ public class EmailServiceImpl implements EmailService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private boolean checkEmail(Email email) {
+        return email != null &&
+                email.getSendTime() != null &&
+                StringUtils.isNoneBlank(email.getFromEmail()) &&
+                StringUtils.isNoneBlank(email.getToEmail()) &&
+                StringUtils.isNoneBlank(email.getSubject()) &&
+                StringUtils.isNoneBlank(email.getContent());
     }
 
     @Override

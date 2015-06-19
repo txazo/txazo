@@ -24,6 +24,8 @@ import java.util.List;
 @Component
 public class EmailReminder {
 
+    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
     public void sendEmailRemind(List<Email> emails) {
         if (CollectionUtils.isEmpty(emails)) {
             return;
@@ -38,11 +40,14 @@ public class EmailReminder {
 
     private Message buildEmailMessage(Email email) {
         NewsMessage.Article article = new NewsMessage.Article();
-        article.setTitle(email.getSubject());
+        article.setTitle(email.getFrom());
         StringBuilder sb = new StringBuilder();
-        sb.append("发件人: " + email.getFrom() + "\n");
-        sb.append("收件人: " + email.getTo() + "\n");
-        sb.append("时间: " + DateFormatUtils.format(email.getSendTime(), "yyyy-MM-dd HH:mm:ss") + "\n");
+        sb.append("收件人: " + email.getTo());
+        sb.append(LINE_SEPARATOR);
+        sb.append("时    间: " + DateFormatUtils.format(email.getSendTime(), "yyyy年MM月dd日 HH:mm (E)"));
+        sb.append(LINE_SEPARATOR);
+        sb.append(LINE_SEPARATOR);
+        sb.append(email.getSubject());
         article.setDescription(sb.toString());
         article.setUrl("http://wx.txazo.com/email/read/" + email.getId() + ".wx");
         return MessageBuilder.buildNewsMessage(WeiXinApp.ACCOUNT, null, null, WeiXinApp.APP_EMAIL_ID, "0", article);

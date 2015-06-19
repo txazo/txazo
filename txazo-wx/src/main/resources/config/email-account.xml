@@ -3,8 +3,7 @@
 <email xmlns="http://www.txazo.com/schema/email"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.txazo.com/schema/email http://www.txazo.com/schema/email/email-account-1.0.xsd">
-
-    <!--
+    
     <account>
         <user>784990655@qq.com</user>
         <passwd>txazo605318424qq</passwd>
@@ -12,7 +11,6 @@
         <host>pop.qq.com</host>
         <auth>true</auth>
     </account>
-    -->
 
     <account>
         <user>txazo1218@163.com</user>
