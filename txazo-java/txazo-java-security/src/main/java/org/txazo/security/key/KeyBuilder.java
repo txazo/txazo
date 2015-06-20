@@ -1,5 +1,9 @@
 package org.txazo.security.key;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
+import org.junit.Test;
+
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.*;
@@ -11,7 +15,7 @@ import java.security.*;
  * @email txazo1218@163.com
  * @since 18.06.2015
  */
-public abstract class KeyBuilder {
+public class KeyBuilder {
 
     private static final int DEFAULT_KEY_SIZE = 1024;
 
@@ -31,6 +35,20 @@ public abstract class KeyBuilder {
         keyGenerator.init(new SecureRandom());
         SecretKey secretKey = keyGenerator.generateKey();
         return secretKey.getEncoded();
+    }
+
+    public static String buildSecretKeyBase64String(String algorithm) throws NoSuchAlgorithmException {
+        return Base64.encodeBase64String(buildSecretKey(algorithm));
+    }
+
+    public static String buildSecretKeyHexString(String algorithm) throws NoSuchAlgorithmException {
+        return Hex.encodeHexString(buildSecretKey(algorithm));
+    }
+
+    @Test
+    public void testBuildSecretKeyString() throws NoSuchAlgorithmException {
+        System.out.println(buildSecretKeyHexString("HmacMD5"));
+        System.out.println(buildSecretKeyHexString("DES"));
     }
 
 }

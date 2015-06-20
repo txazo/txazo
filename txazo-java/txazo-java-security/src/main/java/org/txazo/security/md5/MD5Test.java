@@ -17,8 +17,9 @@ import java.security.MessageDigest;
 public class MD5Test {
 
     /**
-     * MD5应用
-     * 1. 加密密码
+     * MD5
+     * 1. 单向加密
+     * 2. 加密密码
      */
 
     private static final String MD5 = "MD5";

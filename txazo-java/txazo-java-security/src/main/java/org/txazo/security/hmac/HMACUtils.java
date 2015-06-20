@@ -24,6 +24,19 @@ public abstract class HMACUtils {
      * @return
      * @throws Exception
      */
+    public static String hmacHex(HmacAlgorithm algorithm, String secretKey, String plainText) throws Exception {
+        return hmacHex(algorithm, secretKey.getBytes(), plainText.getBytes());
+    }
+
+    /**
+     * HMAC加密
+     *
+     * @param algorithm 算法
+     * @param secretKey 密钥
+     * @param plainText 明文
+     * @return
+     * @throws Exception
+     */
     public static String hmacHex(HmacAlgorithm algorithm, byte[] secretKey, byte[] plainText) throws Exception {
         Key key = new SecretKeySpec(secretKey, algorithm.getAlgorithm());
         Mac mac = Mac.getInstance(algorithm.getAlgorithm());

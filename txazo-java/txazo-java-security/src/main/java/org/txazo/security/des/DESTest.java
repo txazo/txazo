@@ -22,15 +22,15 @@ public class DESTest {
     private static final String DES = "DES";
 
     /** 明文 */
-    private String plainText = "des security";
+    private String plainText = "security des";
     /** 密文 */
-    private String cipherText = "84869f52dfd64d08793d76154d4636eb";
+    private String cipherText = "2f66f8400cd43ef7c34e8b217e1d773f";
     /** 密钥 */
-    private String secretKey = "435ea75d0168bc98";
+    private String secretKey = "cbabe019ab9264a8";
 
     @Test
     public void testJdkDES() throws Exception {
-        KeySpec keySpec = new DESKeySpec(secretKey.getBytes());
+        KeySpec keySpec = new DESKeySpec(Hex.decodeHex(secretKey.toCharArray()));
         SecretKeyFactory factory = SecretKeyFactory.getInstance(DES);
         Key key = factory.generateSecret(keySpec);
         Cipher cipher = Cipher.getInstance(DES);

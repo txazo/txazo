@@ -18,21 +18,23 @@ public class SHATest {
 
     /**
      * SHA应用
-     * 1. SSL证书
-     * 2. Open API(key + timestamp)
+     * 1. 单向加密
+     * 2. SSL证书
+     * 3. Open API(key + timestamp)
      */
 
     private static final String SHA1 = "SHA1";
 
     /** 明文 */
     private String plainText = "security sha1";
+    /** SHA1值 */
     private String sha1 = "528b6062db1e513304cc28bd5019e25a57a68b7c";
 
     @Test
     public void testJdkSHA1() throws Exception {
         MessageDigest md = MessageDigest.getInstance(SHA1);
-        byte[] shaBytes = md.digest(plainText.getBytes());
-        Assert.assertEquals(sha1, Hex.encodeHexString(shaBytes));
+        byte[] sha1Bytes = md.digest(plainText.getBytes());
+        Assert.assertEquals(sha1, Hex.encodeHexString(sha1Bytes));
     }
 
     @Test
