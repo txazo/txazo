@@ -1,5 +1,7 @@
 package org.txazo.security.key;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import java.security.*;
 
 /**
@@ -22,6 +24,13 @@ public abstract class KeyBuilder {
         keyPairGenerator.initialize(keySize);
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
         return new Key(keyPair.getPublic(), keyPair.getPrivate());
+    }
+
+    public static byte[] buildSecretKey(String algorithm) throws NoSuchAlgorithmException {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance(algorithm);
+        keyGenerator.init(new SecureRandom());
+        SecretKey secretKey = keyGenerator.generateKey();
+        return secretKey.getEncoded();
     }
 
 }

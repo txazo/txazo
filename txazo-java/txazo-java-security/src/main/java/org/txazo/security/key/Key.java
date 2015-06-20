@@ -1,6 +1,6 @@
 package org.txazo.security.key;
 
-import org.txazo.security.base64.Base64Utils;
+import org.apache.commons.codec.binary.Base64;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -23,11 +23,11 @@ public class Key {
     }
 
     public String getPublic() {
-        return Base64Utils.encode(publicKey.getEncoded());
+        return Base64.encodeBase64String(publicKey.getEncoded());
     }
 
     public String getPrivate() {
-        return Base64Utils.encode(privateKey.getEncoded());
+        return Base64.encodeBase64String(privateKey.getEncoded());
     }
 
     public PublicKey getPublicKey() {
