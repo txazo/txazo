@@ -1,13 +1,11 @@
 package org.txazo.security.des;
 
 import org.apache.commons.codec.binary.Hex;
-import org.txazo.security.key.KeyBuilder;
+import org.txazo.security.cipher.CipherUtils;
 
-import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import java.security.Key;
-import java.security.NoSuchAlgorithmException;
 import java.security.spec.KeySpec;
 
 /**
@@ -21,11 +19,7 @@ public abstract class DESUtils {
 
     private static final String DES = "DES";
 
-    public String generateKeyHex() throws NoSuchAlgorithmException {
-        return KeyBuilder.buildSecretKeyHexString(DES);
-    }
-
-    private Key generateKey(byte[] key) throws Exception {
+    private static Key generateKey(byte[] key) throws Exception {
         KeySpec keySpec = new DESKeySpec(key);
         SecretKeyFactory factory = SecretKeyFactory.getInstance(DES);
         return factory.generateSecret(keySpec);
@@ -39,11 +33,20 @@ public abstract class DESUtils {
      * @return
      * @throws Exception
      */
-    public String encryptHex(byte[] secretKey, byte[] plainText) throws Exception {
-        Cipher cipher = Cipher.getInstance(DES);
-        cipher.init(Cipher.ENCRYPT_MODE, generateKey(secretKey));
-        byte[] encryptBytes = cipher.doFinal(plainText);
-        return Hex.encodeHexString(encryptBytes);
+    public static String encryptHex(String secretKey, String plainText) throws Exception {
+        return encryptHex(Hex.decodeHex(secretKey.toCharArray()), plainText.getBytes());
+    }
+
+    /**
+     * DES加密
+     *
+     * @param secretBytes 密钥
+     * @param plainBytes  明文
+     * @return
+     * @throws Exception
+     */
+    public static String encryptHex(byte[] secretBytes, byte[] plainBytes) throws Exception {
+        return CipherUtils.encryptHex(DES, generateKey(secretBytes), plainBytes);
     }
 
     /**
@@ -54,11 +57,20 @@ public abstract class DESUtils {
      * @return
      * @throws Exception
      */
-    public String decryptHex(byte[] secretKey, byte[] cipherText) throws Exception {
-        Cipher cipher = Cipher.getInstance(DES);
-        cipher.init(Cipher.DECRYPT_MODE, generateKey(secretKey));
-        byte[] decryptBytes = cipher.doFinal(cipherText);
-        return new String(decryptBytes);
+    public static String decryptHex(String secretKey, String cipherText) throws Exception {
+        return decryptHex(Hex.decodeHex(secretKey.toCharArray()), cipherText);
+    }
+
+    /**
+     * DES解密
+     *
+     * @param secretBytes 密钥
+     * @param cipherText  密文
+     * @return
+     * @throws Exception
+     */
+    public static String decryptHex(byte[] secretBytes, String cipherText) throws Exception {
+        return CipherUtils.decryptHex(DES, generateKey(secretBytes), cipherText);
     }
 
 }

@@ -15,7 +15,7 @@ import java.security.*;
  * @email txazo1218@163.com
  * @since 18.06.2015
  */
-public class KeyBuilder {
+public abstract class KeyBuilder {
 
     private static final int DEFAULT_KEY_SIZE = 1024;
 
@@ -45,8 +45,7 @@ public class KeyBuilder {
         return Hex.encodeHexString(buildSecretKey(algorithm));
     }
 
-    @Test
-    public void testBuildSecretKeyString() throws NoSuchAlgorithmException {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         System.out.println(buildSecretKeyHexString("HmacMD5"));
         System.out.println(buildSecretKeyHexString("DES"));
     }
