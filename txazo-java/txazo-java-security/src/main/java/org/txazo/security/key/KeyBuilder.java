@@ -48,6 +48,7 @@ public abstract class KeyBuilder {
     public static void main(String[] args) throws NoSuchAlgorithmException {
         System.out.println(buildSecretKeyHexString("HmacMD5"));
         System.out.println(buildSecretKeyHexString("DES"));
+        System.out.println(buildSecretKeyHexString("AES"));
     }
 
 }

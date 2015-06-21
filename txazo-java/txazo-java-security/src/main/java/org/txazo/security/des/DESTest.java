@@ -12,6 +12,11 @@ import org.junit.Test;
  */
 public class DESTest {
 
+    /**
+     * DES
+     * 1. 对称加密
+     */
+
     /** 明文 */
     private String plainText = "security des";
     /** 密文 */

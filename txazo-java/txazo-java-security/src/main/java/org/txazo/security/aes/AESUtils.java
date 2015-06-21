@@ -1,32 +1,28 @@
-package org.txazo.security.des;
+package org.txazo.security.aes;
 
 import org.apache.commons.codec.binary.Hex;
 import org.txazo.security.cipher.CipherUtils;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
-import java.security.spec.KeySpec;
 
 /**
- * DESUtils
+ * AESUtils
  *
  * @author txazo
  * @email txazo1218@163.com
- * @since 20.06.2015
+ * @since 22.06.2015
  */
-public abstract class DESUtils {
+public abstract class AESUtils {
 
-    private static final String DES = "DES";
+    private static final String AES = "AES";
 
     private static Key generateKey(byte[] keyBytes) throws Exception {
-        KeySpec keySpec = new DESKeySpec(keyBytes);
-        SecretKeyFactory factory = SecretKeyFactory.getInstance(DES);
-        return factory.generateSecret(keySpec);
+        return new SecretKeySpec(keyBytes, AES);
     }
 
     /**
-     * DES加密
+     * AES加密
      *
      * @param secretKey 密钥
      * @param plainText 明文
@@ -38,7 +34,7 @@ public abstract class DESUtils {
     }
 
     /**
-     * DES加密
+     * AES加密
      *
      * @param secretBytes 密钥
      * @param plainBytes  明文
@@ -46,11 +42,11 @@ public abstract class DESUtils {
      * @throws Exception
      */
     public static String encryptHex(byte[] secretBytes, byte[] plainBytes) throws Exception {
-        return CipherUtils.encryptHex(DES, generateKey(secretBytes), plainBytes);
+        return CipherUtils.encryptHex(AES, generateKey(secretBytes), plainBytes);
     }
 
     /**
-     * DES解密
+     * AES解密
      *
      * @param secretKey  密钥
      * @param cipherText 密文
@@ -62,7 +58,7 @@ public abstract class DESUtils {
     }
 
     /**
-     * DES解密
+     * AES解密
      *
      * @param secretBytes 密钥
      * @param cipherText  密文
@@ -70,7 +66,7 @@ public abstract class DESUtils {
      * @throws Exception
      */
     public static String decryptHex(byte[] secretBytes, String cipherText) throws Exception {
-        return CipherUtils.decryptHex(DES, generateKey(secretBytes), cipherText);
+        return CipherUtils.decryptHex(AES, generateKey(secretBytes), cipherText);
     }
 
 }
