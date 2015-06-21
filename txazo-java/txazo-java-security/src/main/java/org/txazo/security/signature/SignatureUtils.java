@@ -16,6 +16,12 @@ import java.security.Signature;
 public abstract class SignatureUtils {
 
     /**
+     * 数字签名
+     * 1. 私钥签名、公钥验证
+     * 2. RSA、DSA、ECDSA
+     */
+
+    /**
      * 签名
      *
      * @param algorithm  算法
