@@ -1,12 +1,7 @@
 package org.txazo.security.rsa;
 
-import org.apache.commons.codec.binary.Hex;
 import org.txazo.security.cipher.CipherUtils;
 import org.txazo.security.key.KeyBuilder;
-
-import java.security.*;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 
 /**
  * RSAUtils
@@ -19,18 +14,6 @@ public abstract class RSAUtils {
 
     private static final String RSA = "RSA";
 
-    private static PublicKey getPublicKeyHex(String publicKey) throws Exception {
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Hex.decodeHex(publicKey.toCharArray()));
-        KeyFactory keyFactory = KeyFactory.getInstance(RSA);
-        return keyFactory.generatePublic(keySpec);
-    }
-
-    private static PrivateKey getPrivateKey(String privateKey) throws Exception {
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Hex.decodeHex(privateKey.toCharArray()));
-        KeyFactory keyFactory = KeyFactory.getInstance(RSA);
-        return keyFactory.generatePrivate(keySpec);
-    }
-
     /**
      * 公钥加密
      *
@@ -40,7 +23,7 @@ public abstract class RSAUtils {
      * @throws Exception
      */
     public static String publicEncryptHex(String publicKey, String plainText) throws Exception {
-        return CipherUtils.encryptHex(RSA, getPublicKeyHex(publicKey), plainText);
+        return CipherUtils.encryptHex(RSA, KeyBuilder.getPublicKeyHex(RSA, publicKey), plainText);
     }
 
     /**
@@ -52,7 +35,7 @@ public abstract class RSAUtils {
      * @throws Exception
      */
     public static String privateEncryptHex(String privateKey, String plainText) throws Exception {
-        return CipherUtils.encryptHex(RSA, getPrivateKey(privateKey), plainText);
+        return CipherUtils.encryptHex(RSA, KeyBuilder.getPrivateKeyHex(RSA, privateKey), plainText);
     }
 
     /**
@@ -64,7 +47,7 @@ public abstract class RSAUtils {
      * @throws Exception
      */
     public static String publicDecryptHex(String publicKey, String cipherText) throws Exception {
-        return CipherUtils.decryptHex(RSA, getPublicKeyHex(publicKey), cipherText);
+        return CipherUtils.decryptHex(RSA, KeyBuilder.getPublicKeyHex(RSA, publicKey), cipherText);
     }
 
     /**
@@ -76,7 +59,7 @@ public abstract class RSAUtils {
      * @throws Exception
      */
     public static String privateDecryptHex(String privateKey, String cipherText) throws Exception {
-        return CipherUtils.decryptHex(RSA, getPrivateKey(privateKey), cipherText);
+        return CipherUtils.decryptHex(RSA, KeyBuilder.getPrivateKeyHex(RSA, privateKey), cipherText);
     }
 
     public static void main(String[] args) throws Exception {
