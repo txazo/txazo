@@ -17,7 +17,7 @@ import java.security.MessageDigest;
 public class SHATest {
 
     /**
-     * SHA应用
+     * SHA
      * 1. 单向加密
      * 2. SSL证书
      * 3. Open API(key + timestamp)

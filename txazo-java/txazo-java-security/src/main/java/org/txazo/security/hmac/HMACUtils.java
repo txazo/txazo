@@ -25,7 +25,7 @@ public abstract class HMACUtils {
      * @throws Exception
      */
     public static String hmacHex(HmacAlgorithm algorithm, String secretKey, String plainText) throws Exception {
-        return hmacHex(algorithm, secretKey.getBytes(), plainText.getBytes());
+        return hmacHex(algorithm, Hex.decodeHex(secretKey.toCharArray()), plainText.getBytes());
     }
 
     /**

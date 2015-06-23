@@ -18,7 +18,7 @@ public class URLTest {
     /**
      * URL Encode Decode
      * 1. HTML Form
-     * 2. 编码规则: 数字和字母不变，空格变为"+"，其它被编码成"%"加上对应ascii的十六进制
+     * 2. 编码规则: 数字和字母不变, 空格变为"+", 其它被编码成"%"加上对应ascii的十六进制
      */
 
     /** 明文 */
@@ -30,10 +30,10 @@ public class URLTest {
     public void testUrl() throws Exception {
         /** URL Encode: 字符串以URL编码 */
         String encryptText = URLEncoder.encode(plainText, "UTF-8");
-        Assert.assertEquals(encryptText, cipherText);
+        Assert.assertEquals(cipherText, encryptText);
         /** URL Decode: 字符串进行URL解码 */
         String decryptText = URLDecoder.decode(cipherText, "UTF-8");
-        Assert.assertEquals(decryptText, plainText);
+        Assert.assertEquals(plainText, decryptText);
     }
 
 }

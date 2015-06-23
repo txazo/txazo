@@ -29,7 +29,7 @@ public class HMACTest {
 
     @Test
     public void testJdkHmacMD5() throws Exception {
-        String encryptText = HMACUtils.hmacHex(HmacAlgorithm.HMAC_MD5, Hex.decodeHex(secretKey.toCharArray()), plainText.getBytes());
+        String encryptText = HMACUtils.hmacHex(HmacAlgorithm.HMAC_MD5, secretKey, plainText);
         Assert.assertEquals(cipherText, encryptText);
     }
 
