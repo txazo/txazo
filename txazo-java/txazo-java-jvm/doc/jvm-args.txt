@@ -2,3 +2,31 @@
 -Xmx512M -Xms512M -verbose GC
 
 -XX:MaxPermSize=512M -XX:PermSize=256
+
+[vm type]
+-client -server
+
+[vm version]
+-showversion
+
+[vm compile type]
+-Xint -Xcomp -Xmixed
+
+-XX:+PrintCompilation
+
+-XX:+CITime
+
+-XX:+HeapDumpOnOutOfMemoryError
+
+-XX:HeapDumpPath=<path>
+
+-XX:OnOutOfMemoryError=
+
+-XX:InitialCodeCacheSize=
+-XX:ReservedCodeCacheSize=
+-XX:+UseCodeCacheFlushing
+
+-XX:NewSize=
+-XX:MaxNewSize=
+-XX:NewRatio=
+-XX:SurvivorRatio
