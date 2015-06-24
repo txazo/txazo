@@ -1,5 +1,5 @@
 [args]
--Xmx512M -Xms512M -verbose GC
+-Xmx512M -Xms512M
 
 -XX:MaxPermSize=512M -XX:PermSize=256
 
