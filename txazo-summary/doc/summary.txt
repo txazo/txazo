@@ -1,3 +1,141 @@
-----------<< Cache >>----------
-1. Memcached(内存 key/value 客户端分布式 O(1) LRU 内存分配 Slab 一致性hash)
+********** << 网络协议 >> **********
+1. DNS
+   1) 客户端 - 本地DNS服务器 - DNS根服务器 - 查询域DNS服务器 - 下级DNS服务器
+   2) TTL
+2. TCP
+   1) 三次握手: (SYN SYN-ACK ACK) 半连接 SYN攻击
+   2) 四次挥手: (FIN ACK FIN ACk)
+3. HTTP
+   1) 2xx: 成功200
+   2) 3xx: 重定向302 304
+   3) 4xx: 请求错误403 404
+   4) 5xx: 服务器错误500 503
+4. HTTPS
+   1) SSL
+5. SSL
+
+********** << JavaScript >> **********
+1. jQuery
+   1) DOM选择器
+   2) 事件
+   3) 动态效果
+   4) AJAX
+   5) 多浏览器兼容
+   6) 第三方插件
+2. LABjs
+   1) 异步并行加载
+   2) 同步等待执行
+   3) 控制加载顺序
+3. SeaJS
+   1) 模块化开发加载
+   2) 异步加载
+
+********** << 服务器 >> **********
+1. Nginx
+   1) upstream/proxy_pass
+   2) rewrite
+2. Tomcat
+3. Resin
+
+********** << JVM >> **********
+1. GC
+   1) GC对象标记
+   2) GC算法
+2. 内存泄露
+3. 内存溢出
+4. 类加载
+   1) Bootstrap-Extension-System-自定义
+   2) 双亲委派机制
+5. JVM结构: 程序计数器 Java虚拟机栈 本地方法栈 Java堆 方法区 运行时常量池
+6. 类初始化(clinit) 对象实例化(init)
+7. 语法糖: AutoBox Enum Foreach Generic If VariableParameter
+
+********** << 缓存 >> **********
+1. Memcached
+   1) 内存: Slab(1M) > Chunk
+   2) key/value
+   3) 时间复杂度: O(1)
+   4) LRU
+   5) hash: 客户端一致性hash, memcached节点hash
+   6) 分布式: 客户端
 2. Redis
+   1) 内存/持久化
+   2) 主从
+   3) key/value(string list set zset map)
+
+********** << RPC >> **********
+1. RPC
+   1) TCP/IP
+   2) 序列化和反序列化
+   3) 反射
+   4) 动态代理
+2. Hessian
+3. Thrift(Facebook)
+   1) 跨语言
+4. Protocol Buffer(Google)
+
+********** << 搜索 >> **********
+1. Lucene
+   1) 全文索引: (字符串 > 文件) 评分机制 排序
+   2) 索引过程: 分词 - 建立索引 - 存储索引
+   3) 检索过程: 分词 - 搜索索引 - 结果排序
+2. Solr
+
+********** << 消息 >> **********
+1. JMS
+   1) Queue: 队列 点对点 一对一
+   2) Topic: 主题 发布/订阅 一对多
+2. ActiveMQ
+
+********** << 负载均衡 >> **********
+1. 一致性hash
+   1) 环形hash: (0 ~ 2^32 - 1) 虚拟节点
+2. DNS负载均衡
+3. HTTP重定向负载均衡
+4. 反向代理负载均衡
+   1) nginx
+
+********** << Linux >> **********
+
+********** << Shell >> **********
+1. awk
+2. grep
+2. sed
+
+********** << 项目管理工具 >> **********
+1. Ant
+2. Maven
+
+********** << 版本控制工具 >> **********
+1. Git
+2. SVN
+
+********** << 开发工具 >> **********
+1. IDEA
+2. Eclipse
+
+********** << 技术架构一 >> **********
+1. LVS() + Nginx + Resin
+2. Spring MVC + Spring JDBC + Redis + Memcached + Hession
+3. MySQL(主从同步 分库分表)
+4. Shell + Hadoop离线分析生成数据报表
+5. jQuery + LABjs + SeaJS
+6. Ant + SVN
+
+********** << 技术架构二 >> **********
+1. Spring MVC + MyBatis
+2. MySQL
+3. Maven + Git
+4. Http优化
+   1) binary - gzip - encrypt - decrypt - gunzip - binary - md5
+   2) 复用TCP长连接
+
+********** << 项目介绍 >> **********
+1. Spring MVC
+
+********** << 高并发 >> **********
+1. 负载均衡
+2. 缓存
+3. 优化数据库查询
+4. 优化数据库表结构(索引)
+5. 分库分表
