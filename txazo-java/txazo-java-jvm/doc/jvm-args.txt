@@ -1,32 +1,48 @@
-[args]
--Xmx512M -Xms512M
+[JVM Args]
+1. 标准参数, java
+2. -X参数, java -X
+3. -XX参数, java
 
--XX:MaxPermSize=512M -XX:PermSize=256
+[VM Type]
+-client | -server
 
-[vm type]
--client -server
+[VM Version]
+-version | -showversion
 
-[vm version]
--showversion
+[VM Compile Type]
+-Xint | -Xcomp | -Xmixed
 
-[vm compile type]
--Xint -Xcomp -Xmixed
-
+[PrintCompilation]
 -XX:+PrintCompilation
 
+[Compile Time]
 -XX:+CITime
 
--XX:+HeapDumpOnOutOfMemoryError
+[Print -XX Args]
+-XX:+PrintFlagsFinal | -XX:+PrintFlagsInitial
 
+[Print Setted VM Args]
+-XX:+PrintCommandLineFlags
+
+[Set Heap Size]
+-Xmx256M -Xms256M
+-XX:InitialHeapSize=256M -XX:MaxHeapSize=256M
+
+[HeapDump On OutOfMemory]
+-XX:+HeapDumpOnOutOfMemoryError
 -XX:HeapDumpPath=<path>
 
--XX:OnOutOfMemoryError=
+[When OutOfMemory Execute]
+-XX:OnOutOfMemoryError="sh ~/notify.sh"
 
--XX:InitialCodeCacheSize=
--XX:ReservedCodeCacheSize=
+[Set Perm Size]
+-XX:PermSize=128M -XX:MaxPermSize=256M
+
+[Set Code Cache Size]
+-XX:InitialCodeCacheSize=128M -XX:ReservedCodeCacheSize=256M
 -XX:+UseCodeCacheFlushing
 
--XX:NewSize=
--XX:MaxNewSize=
--XX:NewRatio=
--XX:SurvivorRatio
+[Set Young Generation Size]
+-XX:NewSize=64M -XX:MaxNewSize=128M
+-XX:NewRatio=3
+-XX:SurvivorRatio=8
