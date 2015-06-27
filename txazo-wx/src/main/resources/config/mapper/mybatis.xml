@@ -7,11 +7,13 @@
         <typeAlias alias="Remind" type="org.txazo.wx.app.remind.bean.Remind"/>
         <typeAlias alias="Email" type="org.txazo.wx.app.email.bean.Email"/>
         <typeAlias alias="EmailContent" type="org.txazo.wx.app.email.bean.EmailContent"/>
+        <typeAlias alias="Memory" type="org.txazo.wx.app.memory.bean.Memory"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="config/mapper/Remind.xml"/>
         <mapper resource="config/mapper/Email.xml"/>
         <mapper resource="config/mapper/EmailContent.xml"/>
+        <mapper resource="config/mapper/Memory.xml"/>
     </mappers>
 </configuration>

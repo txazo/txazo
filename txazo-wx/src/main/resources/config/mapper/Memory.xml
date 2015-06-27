@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.3//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.txazo.wx.app.memory.mapper.MemoryMapper">
+
+    <insert id="addMemory" parameterType="Memory" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Memory (parentId, type, name, content, isDeleted, createTime)
+        VALUES (#{parentId}, #{type}, #{name}, #{content}, 0, now())
+    </insert>
+
+    <update id="deleteMemory" parameterType="int">
+        UPDATE Memory SET isDeleted = 1 WHERE id = #{id} LIMIT 1
+    </update>
+
+    <update id="updateMemory" parameterType="Memory">
+        UPDATE Memory SET
+        parentId = #{parentId},
+        type = #{type},
+        name = #{name},
+        content = #{content}
+        WHERE id = #{id} LIMIT 1
+    </update>
+
+    <select id="getMemoryById" parameterType="int" resultType="Memory">
+        SELECT * FROM Memory WHERE id = #{id} and isDeleted = 0 limit 1
+    </select>
+
+    <select id="listMemorysByParentId" parameterType="int" resultType="Memory">
+        SELECT * FROM Memory WHERE parentId = #{parentId} and isDeleted = 0
+    </select>
+
+    <select id="existsMemory" resultType="int">
+        SELECT COUNT(*) FROM Memory WHERE
+        parentId = #{parentId} and
+        type = #{type} and
+        name = #{name} and
+        isDeleted = 0 LIMIT 1
+    </select>
+
+</mapper>
