@@ -11,6 +11,7 @@ import org.txazo.wx.app.memory.service.MemoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * MemoryController
@@ -57,7 +58,8 @@ public class MemoryController {
      * @return
      */
     @RequestMapping("tree.wx")
-    public String tree() {
+    public String tree(HttpServletRequest request) {
+        request.setAttribute("memorys", memoryService.listMemorysByParentId(0));
         return "memory/tree";
     }
 

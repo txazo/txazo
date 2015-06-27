@@ -91,7 +91,11 @@ public class MemoryServiceImpl implements MemoryService {
 
     @Override
     public boolean existsMemory(int parentId, int type, String name) {
-        return memoryMapper.existsMemory(parentId, type, name) > 0;
+        Memory memory = new Memory();
+        memory.setParentId(parentId);
+        memory.setType(type);
+        memory.setName(name);
+        return memoryMapper.getMemory(memory) != null;
     }
 
 }

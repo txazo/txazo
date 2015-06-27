@@ -23,6 +23,6 @@ public interface MemoryMapper {
 
     public List<Memory> listMemorysByParentId(int parentId);
 
-    public int existsMemory(int parentId, int type, String name);
+    public Memory getMemory(Memory memory);
 
 }

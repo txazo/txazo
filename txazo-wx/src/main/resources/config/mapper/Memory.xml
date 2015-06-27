@@ -31,8 +31,8 @@
         SELECT * FROM Memory WHERE parentId = #{parentId} and isDeleted = 0
     </select>
 
-    <select id="existsMemory" resultType="int">
-        SELECT COUNT(*) FROM Memory WHERE
+    <select id="getMemory" parameterType="Memory" resultType="Memory">
+        SELECT * FROM Memory WHERE
         parentId = #{parentId} and
         type = #{type} and
         name = #{name} and

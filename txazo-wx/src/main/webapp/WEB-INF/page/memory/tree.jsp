@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -23,26 +25,17 @@
         </div>
     </div>
 
-    <form action="/memory/addNode.wx" method="post" class="form-horizontal" role="form" id="add-form">
-        <input type="hidden" name="parentId" id="parentId" value="${parentId}"/>
-        <input type="hidden" name="type" id="type" value="${type}"/>
-
-        <div class="row form-group">
-            <label for="name" class="col-xs-2 control-label">名称</label>
-
-            <div class="col-xs-10">
-                <input type="text" name="name" class="form-control" id="name" placeholder="输入名称" required/>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div style="width: 80%; margin: 0 auto;">
-                <button type="submit" class="btn btn-info" style="width:100%;">添加</button>
-            </div>
-        </div>
-    </form>
+    <div class="list-group">
+        <c:if test="${memorys != null && fn:length(memorys) > 0}">
+            <c:forEach items="${memorys}" var="m">
+                <a href="#" class="list-group-item list-group-item-success">
+                    <span class="badge">12</span>${m.name}
+                </a>
+            </c:forEach>
+        </c:if>
+    </div>
 </div>
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="/js/app/memory/add.js"></script>
 </body>
 </html>
