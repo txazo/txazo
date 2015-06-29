@@ -27,7 +27,12 @@ public class MemoryController {
 
     @RequestMapping("home.wx")
     public String home(HttpServletRequest request) {
-        return "redirect:/memory/showTree.wx?parentId=0";
+        request.setAttribute("type", 1);
+        request.setAttribute("parentId", 0);
+        request.setAttribute("title", "Home");
+        request.setAttribute("titles", memoryService.getParentNames(0));
+        request.setAttribute("memorys", memoryService.listMemorysByParentId(0));
+        return "/memory/tree";
     }
 
     @RequestMapping("show.wx")
@@ -46,28 +51,40 @@ public class MemoryController {
     @RequestMapping("showTree.wx")
     public String showTree(@RequestParam(value = "parentId", required = true) Integer parentId,
                            HttpServletRequest request) {
+        Memory memory = null;
+        if (parentId <= 0 || (memory = memoryService.getMemoryById(parentId)) == null) {
+            return "redirect:/memory/home.wx";
+        }
+        request.setAttribute("type", 0);
+        request.setAttribute("parentId", parentId);
+        request.setAttribute("title", memory.getName());
+        request.setAttribute("titles", memoryService.getParentNames(parentId));
+        request.setAttribute("memorys", memoryService.listMemorysByParentId(parentId));
         return "memory/tree";
     }
 
     @RequestMapping("showNode.wx")
     public String showNode(@RequestParam(value = "id", required = true) Integer id,
                            HttpServletRequest request) {
+        Memory memory = memoryService.getMemoryById(id);
+        request.setAttribute("memory", memory);
         return "memory/node";
     }
 
     @RequestMapping("add.wx")
     public String add(@RequestParam(value = "type", defaultValue = "0", required = false) Integer type,
-                      @RequestParam(value = "parentId", defaultValue = "0", required = true) Integer parentId,
+                      @RequestParam(value = "parentId", defaultValue = "0", required = false) Integer parentId,
                       HttpServletRequest request) {
         request.setAttribute("type", type);
         request.setAttribute("parentId", parentId);
+        request.setAttribute("titles", memoryService.getParentNames(parentId));
         return "memory/add";
     }
 
     @RequestMapping("addMemory.wx")
     public String addMemory(Memory memory) {
         if (memoryService.addMemory(memory)) {
-            return "redirect:/memory/toMemory.wx?id=" + memory.getParentId();
+            return "redirect:/memory/showTree.wx?parentId=" + memory.getParentId();
         }
         return "memory/add";
     }

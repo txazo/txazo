@@ -28,4 +28,6 @@ public interface MemoryService {
 
     public boolean existsMemory(int parentId, int type, String name);
 
+    public List<Map<String, Object>> getParentNames(int id);
+
 }

@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Add</title>
     <!-- Bootstrap -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-custom.css" rel="stylesheet">
@@ -28,12 +28,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/memory/home.wx">Home</a>
+            <a class="navbar-brand" href="/memory/home.wx">技术体系</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/memory/home.wx">Home</a></li>
-                <li><a href="/memory/add.wx">Add</a></li>
             </ul>
         </div>
     </div>
@@ -41,7 +40,14 @@
 
 <div class="container-fluid">
     <ol class="breadcrumb">
-        <li class="active">Home</li>
+        <c:forEach items="${titles}" var="t" varStatus="stat">
+            <c:if test="${stat.last}">
+                <li class="active">${t.name}</li>
+            </c:if>
+            <c:if test="${!stat.last}">
+                <li><a href="/memory/show.wx?id=${t.id}">${t.name}</a></li>
+            </c:if>
+        </c:forEach>
     </ol>
 
     <form action="/memory/addMemory.wx" method="post" class="form-horizontal" style="padding: 0px 15px;" id="add-form">
@@ -70,8 +76,8 @@
             </div>
         </div>
 
-        <div class="form-group" style="display: none;">
-            <div class="alert alert-danger" role="alert" id="alertDanger"></div>
+        <div class="form-group" id="alertDanger" style="display: none;">
+            <div class="alert alert-danger" role="alert" style="padding: 8px; margin-bottom: 0px;"></div>
         </div>
 
         <div class="form-group">

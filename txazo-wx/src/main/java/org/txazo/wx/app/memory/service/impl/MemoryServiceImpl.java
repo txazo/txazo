@@ -98,4 +98,28 @@ public class MemoryServiceImpl implements MemoryService {
         return memoryMapper.getMemory(memory) != null;
     }
 
+    @Override
+    public List<Map<String, Object>> getParentNames(int id) {
+        List<Map<String, Object>> names = new ArrayList<Map<String, Object>>();
+        addParentNames(id, names);
+        addName(0, "Home", names);
+        Collections.reverse(names);
+        return names;
+    }
+
+    private void addParentNames(int id, List<Map<String, Object>> names) {
+        Memory memory = null;
+        if (id > 0 && (memory = memoryMapper.getMemoryById(id)) != null) {
+            addName(memory.getId(), memory.getName(), names);
+            addParentNames(memory.getParentId(), names);
+        }
+    }
+
+    private void addName(int id, String name, List<Map<String, Object>> names) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id", id);
+        map.put("name", name);
+        names.add(map);
+    }
+
 }

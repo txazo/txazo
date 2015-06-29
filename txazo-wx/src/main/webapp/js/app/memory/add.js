@@ -13,16 +13,20 @@ $(function () {
             'name': name
         }, function (data) {
             if (!data) {
-                alert('操作出错');
+                showError('操作出错');
             }
 
             if (data.exists == "true") {
                 var $name = $('#name');
                 $name.closest('.form-group').addClass('has-error');
-                $('#alertDanger').html('名称已经存在').show();
+                showError('名称已经存在');
             } else {
                 that.submit();
             }
         });
     });
+
+    function showError(msg) {
+        $('#alertDanger').show().find('div').html(msg);
+    }
 });
