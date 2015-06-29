@@ -9,7 +9,7 @@ package org.txazo.wx.app.memory.enums;
  */
 public enum MemoryType {
 
-    ROOT(1), TREE(2), NODE(3);
+    TREE(1), NODE(2);
 
     private int id;
 

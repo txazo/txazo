@@ -19,7 +19,7 @@ $(function () {
             if (data.exists == "true") {
                 var $name = $('#name');
                 $name.closest('.form-group').addClass('has-error');
-                $('<span class="help-block control-label pull-left">输入的名称已存在</span>').insertAfter($name);
+                $('#alertDanger').html('名称已经存在').show();
             } else {
                 that.submit();
             }

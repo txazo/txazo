@@ -33,4 +33,9 @@ public class IndexController {
         return "html5_2";
     }
 
+    @RequestMapping("/model.wx")
+    public String model() {
+        return "model/model";
+    }
+
 }
