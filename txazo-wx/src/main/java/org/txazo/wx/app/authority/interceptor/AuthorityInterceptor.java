@@ -38,7 +38,11 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
             if (authorityControl == null || authorityControl.type() == AuthorityType.ALL) {
                 return true;
             }
-            return authorityService.checkAuthority(request, response, authorityControl.type());
+            if (authorityService.checkAuthority(request, response, authorityControl.type())) {
+                return true;
+            }
+            response.sendRedirect("/authority/error.wx");
+            return false;
         }
         return true;
     }

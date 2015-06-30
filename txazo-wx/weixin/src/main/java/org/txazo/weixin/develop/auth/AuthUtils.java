@@ -1,5 +1,7 @@
 package org.txazo.weixin.develop.auth;
 
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.txazo.weixin.WeiXinHolder;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +29,16 @@ public abstract class AuthUtils extends WeiXinHolder {
         sb.append("&state=").append(state);
         sb.append("#wechat_redirect");
         response.sendRedirect(sb.toString());
+    }
+
+    public static String getUserId(String code) {
+        String json = executor.executeRequest(URI_USER_GETUSERINFO, createParams("code", code));
+        try {
+            JSONObject jsonObject = JSONObject.parseObject(json);
+            return jsonObject == null ? StringUtils.EMPTY : (String) jsonObject.get("UserId");
+        } catch (Exception e) {
+            return StringUtils.EMPTY;
+        }
     }
 
 }

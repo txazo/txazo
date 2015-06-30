@@ -20,6 +20,7 @@ public abstract class WeiXinHolder {
     protected static final String URI_GET_TOKEN = "/cgi-bin/gettoken";
     protected static final String URI_MEDIA_UPLOAD = "/cgi-bin/media/upload";
     protected static final String URI_MESSAGE_SEND = "/cgi-bin/message/send";
+    protected static final String URI_USER_GETUSERINFO = "/cgi-bin/user/getuserinfo";
 
     protected static WeiXin weiXin = WeiXin.getInstance();
     protected static WeiXinExecutor executor = WeiXinExecutor.getInstance();

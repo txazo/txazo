@@ -75,6 +75,7 @@ public class MemoryController {
     }
 
     @RequestMapping("add.wx")
+    @AuthorityControl(type = AuthorityType.WRITE)
     public String add(@RequestParam(value = "type", defaultValue = "0", required = false) Integer type,
                       @RequestParam(value = "parentId", defaultValue = "0", required = false) Integer parentId,
                       HttpServletRequest request) {

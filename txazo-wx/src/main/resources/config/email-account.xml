@@ -5,8 +5,8 @@
        xsi:schemaLocation="http://www.txazo.com/schema/email http://www.txazo.com/schema/email/email-account-1.0.xsd">
 
     <account>
-        <user>784990655</user>
-        <passwd>txazoqqmail1218</passwd>
+        <user>xxx</user>
+        <passwd>xxx</passwd>
         <protocol>pop3</protocol>
         <host>pop.qq.com</host>
         <port>995</port>
@@ -15,8 +15,8 @@
     </account>
 
     <account>
-        <user>txazo1218@163.com</user>
-        <passwd>364825</passwd>
+        <user>xxx</user>
+        <passwd>xxx</passwd>
         <protocol>pop3</protocol>
         <host>pop.163.com</host>
         <port>995</port>

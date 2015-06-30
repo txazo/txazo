@@ -1,10 +1,14 @@
 package org.txazo.weixin;
 
 import org.txazo.weixin.develop.accesstoken.AccessTokenUtils;
+import org.txazo.weixin.develop.auth.AuthUtils;
 import org.txazo.weixin.develop.media.MediaUtils;
 import org.txazo.weixin.develop.message.Message;
 import org.txazo.weixin.develop.message.MessageUtils;
 import org.txazo.weixin.develop.verify.VerifyUtils;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * WeiXinUtils
@@ -29,6 +33,14 @@ public abstract class WeiXinUtils {
 
     public static String sendMessage(Message message) {
         return MessageUtils.sendMessage(message);
+    }
+
+    public static void redirectToAuth(String redirectUrl, String state, HttpServletResponse response) throws IOException {
+        AuthUtils.redirectToAuth(redirectUrl, state, response);
+    }
+
+    public static String getUserId(String code) {
+        return AuthUtils.getUserId(code);
     }
 
 }

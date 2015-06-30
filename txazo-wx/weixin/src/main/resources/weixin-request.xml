@@ -55,7 +55,7 @@
 
     <!-- OAuth2验证接口 -->
     <!-- 根据code获取成员信息 -->
-    <request uri="/cgi-bin/user/getuserinfo" requireParams="access_token,code,agentid"/>
+    <request uri="/cgi-bin/user/getuserinfo" requireParams="access_token,code"/>
 
     <!-- 微信JS接口 -->
 

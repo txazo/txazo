@@ -9,6 +9,16 @@ package org.txazo.wx.app.authority;
  */
 public enum AuthorityType {
 
-    WRITE, READ, ALL
+    WRITE(1), READ(2), ALL(3);
+
+    private int id;
+
+    AuthorityType(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
 }
