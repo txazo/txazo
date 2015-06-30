@@ -54,7 +54,7 @@
     <div class="list-group">
         <c:if test="${memorys != null && fn:length(memorys) > 0}">
             <c:forEach items="${memorys}" var="m">
-                <a href="/memory/show.wx?id=${m.id}" class="list-group-item list-group-margin list-group-item-info">${m.name}</a>
+                <a href="/memory/show.wx?id=${m.id}" class="list-group-item list-group-item-danger">${m.name}</a>
             </c:forEach>
         </c:if>
     </div>

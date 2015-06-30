@@ -1,6 +1,6 @@
 package org.txazo.weixin.xml;
 
-import org.txazo.weixin.enums.EntityPath;
+import org.txazo.weixin.annotation.EntityPath;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 

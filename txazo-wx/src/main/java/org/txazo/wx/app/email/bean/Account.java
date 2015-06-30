@@ -1,6 +1,6 @@
 package org.txazo.wx.app.email.bean;
 
-import org.txazo.weixin.enums.EntityPath;
+import org.txazo.weixin.annotation.EntityPath;
 import org.txazo.weixin.xml.XmlEntity;
 
 /**

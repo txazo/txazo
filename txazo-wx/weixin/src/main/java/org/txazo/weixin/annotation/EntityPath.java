@@ -1,4 +1,4 @@
-package org.txazo.weixin.enums;
+package org.txazo.weixin.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

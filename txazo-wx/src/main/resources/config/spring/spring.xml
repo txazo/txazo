@@ -7,6 +7,7 @@
 
     <context:property-placeholder location="classpath:config/**/*.properties"/>
 
+    <import resource="spring-ehcache.xml"/>
     <import resource="spring-jdbc.xml"/>
     <import resource="spring-mybatis.xml"/>
     <import resource="spring-quartz.xml"/>

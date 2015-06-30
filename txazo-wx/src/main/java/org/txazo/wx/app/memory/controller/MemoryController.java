@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.txazo.wx.app.authority.AuthorityType;
+import org.txazo.wx.app.authority.annotation.AuthorityControl;
 import org.txazo.wx.app.common.util.ResponseUtils;
 import org.txazo.wx.app.memory.bean.Memory;
 import org.txazo.wx.app.memory.service.MemoryService;
@@ -26,6 +28,7 @@ public class MemoryController {
     private MemoryService memoryService;
 
     @RequestMapping("home.wx")
+    @AuthorityControl(type = AuthorityType.READ)
     public String home(HttpServletRequest request) {
         request.setAttribute("type", 1);
         request.setAttribute("parentId", 0);

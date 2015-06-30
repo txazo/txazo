@@ -50,7 +50,8 @@
         </c:forEach>
     </ol>
 
-    <form action="/memory/addMemory.wx" method="post" class="form-horizontal" style="padding: 0px 15px;" id="add-form">
+    <form action="/memory/addMemory.wx" method="post" class="form-horizontal" style="padding: 0px 15px;" role="form"
+          id="add-form">
         <c:if test="${type != 0}">
             <input type="hidden" name="type" id="type" value="${type}"/>
         </c:if>
@@ -58,9 +59,11 @@
 
         <c:if test="${type == 0}">
             <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon" id="type-addon">类型</span>
-                    <select name="type" class="form-control" id="type" aria-describedby="type-addon">
+                <div class="col-xs-2" style="padding-top: 7px;">
+                    <label for="type" class="control-label">类型</label>
+                </div>
+                <div class="col-xs-10">
+                    <select name="type" class="form-control" id="type">
                         <option value="1">目录</option>
                         <option value="2">元素</option>
                     </select>
@@ -69,10 +72,11 @@
         </c:if>
 
         <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon" id="name-addon">名称</span>
-                <input type="text" name="name" class="form-control" id="name" placeholder="输入名称"
-                       aria-describedby="name-addon" required/>
+            <div class="col-xs-2" style="padding-top: 7px;">
+                <label for="name" class="control-label">名称</label>
+            </div>
+            <div class="col-xs-10">
+                <input type="text" name="name" class="form-control" id="name" placeholder="输入名称" required/>
             </div>
         </div>
 
@@ -82,7 +86,7 @@
 
         <div class="form-group">
             <div style="width: 60%; margin: 0 auto;">
-                <button type="submit" class="btn btn-info" style="width:100%;">Add</button>
+                <button type="submit" class="btn btn-danger" style="width:100%;">Add</button>
             </div>
         </div>
     </form>

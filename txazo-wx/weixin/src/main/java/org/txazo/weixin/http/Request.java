@@ -1,7 +1,7 @@
 package org.txazo.weixin.http;
 
 import org.apache.commons.lang3.StringUtils;
-import org.txazo.weixin.enums.EntityPath;
+import org.txazo.weixin.annotation.EntityPath;
 import org.txazo.weixin.xml.XmlEntity;
 
 import java.util.Arrays;
