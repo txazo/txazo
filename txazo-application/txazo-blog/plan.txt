@@ -1,1 +1,19 @@
-1.
+1. api service web
+
+2. dubbo zookeeper
+
+3. BootStrap jQuery
+
+4. Nginx Tomcat
+
+5. Spring MVC + Sitemesh + Velocity
+
+6. Redis
+
+7. MyBatis
+
+8. MySQL
+
+9. 博客定时同步至Git
+
+10. 博客格式
