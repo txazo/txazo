@@ -133,6 +133,12 @@
 
         <dependency>
             <groupId>org.txazo</groupId>
+            <artifactId>txazo-util</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.txazo</groupId>
             <artifactId>weixin</artifactId>
             <version>1.0</version>
         </dependency>

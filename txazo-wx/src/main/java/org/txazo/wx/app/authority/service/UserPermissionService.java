@@ -1,6 +1,6 @@
 package org.txazo.wx.app.authority.service;
 
-import org.txazo.wx.app.authority.AuthorityType;
+import org.txazo.wx.app.authority.enums.AuthorityType;
 
 /**
  * UserPermissionService

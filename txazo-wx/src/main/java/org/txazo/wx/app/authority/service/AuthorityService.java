@@ -1,6 +1,6 @@
 package org.txazo.wx.app.authority.service;
 
-import org.txazo.wx.app.authority.AuthorityType;
+import org.txazo.wx.app.authority.enums.AuthorityType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

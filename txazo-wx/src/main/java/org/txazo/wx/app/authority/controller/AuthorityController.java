@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/authority")
 public class AuthorityController {
 
-    @RequestMapping("/error.wx")
-    public String error() {
-        return "authority/error";
+    @RequestMapping("/noaccess.wx")
+    public String noaccess() {
+        return "authority/noaccess";
     }
 
 }
