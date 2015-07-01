@@ -1,0 +1,5 @@
+/usr/local/zookeeper
+
+Conf: conf/zoo.cfg
+
+Start: bin/zkServer.sh start
