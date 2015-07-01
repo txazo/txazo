@@ -60,4 +60,26 @@ public abstract class CookieUtils {
         response.addCookie(cookie);
     }
 
+    public static void removeCookie(HttpServletRequest request, HttpServletResponse response, String cookieName) {
+        if (request == null || response == null || StringUtils.isBlank(cookieName)) {
+            return;
+        }
+
+        Cookie[] cookies = request.getCookies();
+        if (ArrayUtils.isEmpty(cookies)) {
+            return;
+        }
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(cookieName)) {
+                cookie.setPath("/");
+                cookie.setMaxAge(0);
+                cookie.setValue(null);
+
+                response.addCookie(cookie);
+                break;
+            }
+        }
+    }
+
 }

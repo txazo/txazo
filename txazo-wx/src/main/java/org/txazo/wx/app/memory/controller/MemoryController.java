@@ -20,15 +20,15 @@ import javax.servlet.http.HttpServletResponse;
  * @email txazo1218@163.com
  * @since 27.06.2015
  */
-@RequestMapping("/memory")
 @Controller
+@RequestMapping("/memory")
+@RequestConfig(authority = AuthorityType.MEMORY)
 public class MemoryController {
 
     @Autowired
     private MemoryService memoryService;
 
     @RequestMapping("home.wx")
-    @RequestConfig(authority = AuthorityType.MEMORY)
     public String home(HttpServletRequest request) {
         request.setAttribute("type", 1);
         request.setAttribute("parentId", 0);
@@ -75,7 +75,6 @@ public class MemoryController {
     }
 
     @RequestMapping("add.wx")
-    @RequestConfig(authority = AuthorityType.EMAIL)
     public String add(@RequestParam(value = "type", defaultValue = "0", required = false) Integer type,
                       @RequestParam(value = "parentId", defaultValue = "0", required = false) Integer parentId,
                       HttpServletRequest request) {

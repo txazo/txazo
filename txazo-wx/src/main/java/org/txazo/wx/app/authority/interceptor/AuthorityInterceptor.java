@@ -6,11 +6,9 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.txazo.wx.app.authority.annotation.RequestConfig;
 import org.txazo.wx.app.authority.service.AuthorityService;
-import org.txazo.wx.app.common.util.RequestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
 
 /**
  * AuthorityInterceptor
@@ -27,15 +25,6 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("Request: " + RequestUtils.getRequestURL(request));
-
-        String headerName = null;
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            headerName = headerNames.nextElement();
-            System.out.println(headerName + ": " + request.getHeader(headerName));
-        }
-
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             RequestConfig requestConfig = handlerMethod.getMethodAnnotation(RequestConfig.class);

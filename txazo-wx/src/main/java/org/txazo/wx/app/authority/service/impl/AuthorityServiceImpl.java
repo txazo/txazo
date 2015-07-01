@@ -29,7 +29,7 @@ import java.io.IOException;
 @Service
 public class AuthorityServiceImpl implements AuthorityService {
 
-    private static final int COOKIE_MAX_AGE = 300;
+    private static final int COOKIE_MAX_AGE = 600;
     private static final String AUTH_CODE_COOKIE = "auth_code";
     private static final String AUTH_COUNT_COOKIE = "auth_count";
     private static final int MAX_AUTH_COUNT = 2;
@@ -48,17 +48,14 @@ public class AuthorityServiceImpl implements AuthorityService {
             }
             return false;
         }
+
         if (type == AuthorityType.ALL) {
             return true;
         }
+
         String sessionId = request.getSession().getId();
         String authCode = CookieUtils.getCookieValue(AUTH_CODE_COOKIE, request);
         int authCount = NumberUtils.toInt(CookieUtils.getCookieValue(AUTH_COUNT_COOKIE, request), 0);
-
-        System.out.println("sessionId: " + sessionId);
-        System.out.println("authCode: " + authCode);
-        System.out.println("authCount: " + authCount);
-
         if (StringUtils.isBlank(authCode)) {
             if (authCount >= MAX_AUTH_COUNT) {
                 redirectToNoAccess(response);
@@ -68,21 +65,17 @@ public class AuthorityServiceImpl implements AuthorityService {
             String code = request.getParameter("code");
             String state = request.getParameter("state");
             String shaCode = DigestUtils.sha1Hex(request.getRequestURI());
-            System.out.println("code: " + code);
-            System.out.println("state: " + state);
             if (shaCode.equals(state)) {
                 /** 获取微信用户UserId */
                 String userId = WeiXinUtils.getUserId(code);
-                System.out.println("userId: " + userId);
                 if (userPermissionService.checkUserPermission(userId, type)) {
-                    System.out.println("auth success");
                     springEhCache.put(new Element(sessionId, code));
                     CookieUtils.setCookie(response, AUTH_CODE_COOKIE, code, COOKIE_MAX_AGE);
+                    CookieUtils.removeCookie(request, response, AUTH_COUNT_COOKIE);
                     return true;
                 }
             }
 
-            System.out.println("redirectToAuth");
             /** 重定向到微信OAuth */
             try {
                 CookieUtils.setCookie(response, AUTH_COUNT_COOKIE, String.valueOf(authCount + 1), COOKIE_MAX_AGE);
@@ -93,7 +86,6 @@ public class AuthorityServiceImpl implements AuthorityService {
             return false;
         }
 
-        System.out.println("cookie pass");
         Element element = springEhCache.get(sessionId);
         boolean passAuthority = element != null && authCode.equals(element.getObjectValue());
         if (!passAuthority) {

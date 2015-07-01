@@ -2,6 +2,8 @@ package org.txazo.wx.app.remind.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.txazo.wx.app.authority.annotation.RequestConfig;
+import org.txazo.wx.app.authority.enums.AuthorityType;
 
 /**
  * IndexController
@@ -12,11 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/remind")
+@RequestConfig(authority = AuthorityType.REMIND)
 public class RemindController {
-
-    @RequestMapping("/add.wx")
-    public String add() {
-        return "remind/add";
-    }
 
 }
