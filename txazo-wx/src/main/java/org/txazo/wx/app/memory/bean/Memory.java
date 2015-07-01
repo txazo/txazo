@@ -1,5 +1,9 @@
 package org.txazo.wx.app.memory.bean;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.txazo.wx.app.memory.enums.MemoryType;
 
 import java.io.Serializable;
@@ -14,6 +18,8 @@ import java.util.Date;
  * @since 27.06.2015
  */
 public class Memory implements Serializable {
+
+    private static final long serialVersionUID = -7325252487897935131L;
 
     /** id */
     private int id;
@@ -31,6 +37,37 @@ public class Memory implements Serializable {
     private Date createTime;
     /** 更新时间 */
     private Timestamp updateTime;
+
+    private ExtContent extContent;
+
+    public ExtContent getExtContent() {
+        if (extContent != null) {
+            return extContent;
+        }
+        if (extContent == null) {
+            extContent = new ExtContent();
+        }
+        if (StringUtils.isNotBlank(content)) {
+            try {
+                JSONObject jsonObject = JSON.parseObject(content);
+                if (jsonObject != null) {
+                    JSONArray jsonArray = (JSONArray) jsonObject.get("point");
+                    String[] arrays = new String[jsonArray.size()];
+                    jsonArray.toArray(arrays);
+                    extContent.setPoint(arrays);
+                }
+            } catch (Exception e) {
+            }
+        }
+        return extContent;
+    }
+
+    public void setExtContent(ExtContent extContent) {
+        if (extContent != null) {
+            this.content = JSON.toJSONString(extContent);
+        }
+        this.extContent = extContent;
+    }
 
     public boolean isTree() {
         return this.type == MemoryType.TREE.getId();

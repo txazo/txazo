@@ -55,6 +55,17 @@ public class MemoryServiceImpl implements MemoryService {
     }
 
     @Override
+    public boolean updateContentById(int id, String content) {
+        if (id <= 0) {
+            return false;
+        }
+        Memory memory = new Memory();
+        memory.setId(id);
+        memory.setContent(content);
+        return memoryMapper.updateContentById(memory) > 0;
+    }
+
+    @Override
     public Memory getMemoryById(int id) {
         return id > 0 ? memoryMapper.getMemoryById(id) : null;
     }

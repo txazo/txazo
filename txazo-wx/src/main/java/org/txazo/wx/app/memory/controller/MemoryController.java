@@ -1,5 +1,8 @@
 package org.txazo.wx.app.memory.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,10 @@ import org.txazo.wx.app.memory.service.MemoryService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * MemoryController
@@ -22,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/memory")
-@RequestConfig(authority = AuthorityType.MEMORY)
+@RequestConfig(authority = AuthorityType.ALL)
 public class MemoryController {
 
     @Autowired
@@ -30,12 +37,7 @@ public class MemoryController {
 
     @RequestMapping("home.wx")
     public String home(HttpServletRequest request) {
-        request.setAttribute("type", 1);
-        request.setAttribute("parentId", 0);
-        request.setAttribute("title", "Home");
-        request.setAttribute("titles", memoryService.getParentNames(0));
-        request.setAttribute("memorys", memoryService.listMemorysByParentId(0));
-        return "/memory/tree";
+        return "forward:/memory/showTree.wx?type=1&parentId=0";
     }
 
     @RequestMapping("show.wx")
@@ -46,21 +48,22 @@ public class MemoryController {
             return "redirect:/memory/home.wx";
         }
         if (memory.isTree()) {
-            return "redirect:/memory/showTree.wx?parentId=" + id;
+            return "forward:/memory/showTree.wx?parentId=" + id;
         }
-        return "redirect:/memory/showNode.wx?id=" + id;
+        return "forward:/memory/showNode.wx?id=" + id;
     }
 
     @RequestMapping("showTree.wx")
-    public String showTree(@RequestParam(value = "parentId", required = true) Integer parentId,
+    public String showTree(@RequestParam(value = "type", required = false, defaultValue = "0") Integer type,
+                           @RequestParam(value = "parentId", required = true) Integer parentId,
                            HttpServletRequest request) {
         Memory memory = null;
-        if (parentId <= 0 || (memory = memoryService.getMemoryById(parentId)) == null) {
+        if (parentId < 0 || (parentId > 0 && (memory = memoryService.getMemoryById(parentId)) == null)) {
             return "redirect:/memory/home.wx";
         }
-        request.setAttribute("type", 0);
+        request.setAttribute("type", type);
         request.setAttribute("parentId", parentId);
-        request.setAttribute("title", memory.getName());
+        request.setAttribute("title", parentId == 0 ? "Home" : memory.getName());
         request.setAttribute("titles", memoryService.getParentNames(parentId));
         request.setAttribute("memorys", memoryService.listMemorysByParentId(parentId));
         return "memory/tree";
@@ -70,7 +73,12 @@ public class MemoryController {
     public String showNode(@RequestParam(value = "id", required = true) Integer id,
                            HttpServletRequest request) {
         Memory memory = memoryService.getMemoryById(id);
+        if (memory == null) {
+            return "redirect:/memory/home.wx";
+        }
         request.setAttribute("memory", memory);
+        request.setAttribute("title", memory.getName());
+        request.setAttribute("titles", memoryService.getParentNames(id));
         return "memory/node";
     }
 
@@ -87,9 +95,34 @@ public class MemoryController {
     @RequestMapping("addMemory.wx")
     public String addMemory(Memory memory) {
         if (memoryService.addMemory(memory)) {
-            return "redirect:/memory/showTree.wx?parentId=" + memory.getParentId();
+            return "redirect:/memory/show.wx?id=" + memory.getParentId();
         }
         return "memory/add";
+    }
+
+    @RequestMapping("editNode.wx")
+    public String editNode(@RequestParam(value = "id", required = true) Integer id,
+                           HttpServletRequest request) {
+        Memory memory = memoryService.getMemoryById(id);
+        if (memory == null) {
+            return "redirect:/memory/home.wx";
+        }
+        request.setAttribute("memory", memory);
+        request.setAttribute("title", memory.getName());
+        request.setAttribute("titles", memoryService.getParentNames(id));
+        return "memory/node-edit";
+    }
+
+    @RequestMapping("updateNode.wx")
+    public String updateNode(@RequestParam(value = "id", required = true) Integer id,
+                             @RequestParam(value = "point", required = true) String[] point,
+                             HttpServletRequest request) {
+        Memory memory = memoryService.getMemoryById(id);
+        if (memory == null) {
+            return "redirect:/memory/home.wx";
+        }
+        memoryService.updateContentById(id, createJson("point", point));
+        return "redirect:/memory/show.wx?id=" + id;
     }
 
     @RequestMapping("checkMemory.wx")
@@ -99,6 +132,21 @@ public class MemoryController {
                             HttpServletResponse response) {
         boolean exists = memoryService.existsMemory(parentId, type, name);
         ResponseUtils.renderJson(response, "{\"exists\" : \"" + exists + "\"}");
+    }
+
+    private String createJson(String key, String[] values) {
+        if (StringUtils.isBlank(key) || ArrayUtils.isEmpty(values)) {
+            return null;
+        }
+        List<String> valueList = new ArrayList<String>();
+        for (String value : values) {
+            if (StringUtils.isNotBlank(value)) {
+                valueList.add(value);
+            }
+        }
+        Map<String, Object> jsonMap = new HashMap<String, Object>();
+        jsonMap.put(key, valueList);
+        return JSONArray.toJSONString(jsonMap);
     }
 
 }

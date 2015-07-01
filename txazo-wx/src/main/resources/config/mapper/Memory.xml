@@ -23,6 +23,12 @@
         WHERE id = #{id} LIMIT 1
     </update>
 
+    <update id="updateContentById" parameterType="Memory">
+        UPDATE Memory SET
+        content = #{content}
+        WHERE id = #{id} LIMIT 1
+    </update>
+
     <select id="getMemoryById" parameterType="int" resultType="Memory">
         SELECT * FROM Memory WHERE id = #{id} and isDeleted = 0 limit 1
     </select>

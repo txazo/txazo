@@ -20,6 +20,8 @@ public interface MemoryService {
 
     public boolean updateMemory(Memory memory);
 
+    public boolean updateContentById(int id, String content);
+
     public Memory getMemoryById(int id);
 
     public List<Memory> listMemorysByParentId(int parentId);

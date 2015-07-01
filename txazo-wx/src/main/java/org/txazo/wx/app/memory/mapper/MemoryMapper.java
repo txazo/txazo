@@ -19,6 +19,8 @@ public interface MemoryMapper {
 
     public int updateMemory(Memory memory);
 
+    public int updateContentById(Memory memory);
+
     public Memory getMemoryById(int id);
 
     public List<Memory> listMemorysByParentId(int parentId);
