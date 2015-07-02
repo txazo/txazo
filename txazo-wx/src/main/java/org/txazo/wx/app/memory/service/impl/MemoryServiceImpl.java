@@ -111,8 +111,15 @@ public class MemoryServiceImpl implements MemoryService {
 
     @Override
     public List<Map<String, Object>> getParentNames(int id) {
+        int maxSize = 3;
         List<Map<String, Object>> names = new ArrayList<Map<String, Object>>();
         addParentNames(id, names);
+        if (names.size() > maxSize) {
+            for (int index = names.size() - 1; index >= maxSize; index--) {
+                names.remove(index);
+            }
+            names.get(maxSize - 1).put("name", "..");
+        }
         addName(0, "Home", names);
         Collections.reverse(names);
         return names;

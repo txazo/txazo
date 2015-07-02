@@ -2,6 +2,8 @@ package org.txazo.weixin;
 
 import org.txazo.weixin.develop.accesstoken.AccessTokenUtils;
 import org.txazo.weixin.develop.auth.AuthUtils;
+import org.txazo.weixin.develop.jsapi.JsApiUtils;
+import org.txazo.weixin.develop.jsapi.JsConfig;
 import org.txazo.weixin.develop.media.MediaUtils;
 import org.txazo.weixin.develop.message.Message;
 import org.txazo.weixin.develop.message.MessageUtils;
@@ -41,6 +43,10 @@ public abstract class WeiXinUtils {
 
     public static String getUserId(String code) {
         return AuthUtils.getUserId(code);
+    }
+
+    public static JsConfig generateJsConfig(String url) {
+        return JsApiUtils.generateJsConfig(url);
     }
 
 }

@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/memory/home.wx">技术体系</a>
+            <a class="navbar-brand" href="/memory/home.wx">Technology</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">

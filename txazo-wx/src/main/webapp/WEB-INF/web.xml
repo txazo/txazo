@@ -49,6 +49,17 @@
         <url-pattern>/weixin/servlet/verify</url-pattern>
     </servlet-mapping>
 
+    <!-- WeiXinJsConfigServlet -->
+    <servlet>
+        <servlet-name>weiXinJsConfigServlet</servlet-name>
+        <servlet-class>org.txazo.weixin.develop.jsapi.WeiXinJsConfigServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>weiXinJsConfigServlet</servlet-name>
+        <url-pattern>/weixin/servlet/getjsconfig</url-pattern>
+    </servlet-mapping>
+
     <!-- Spring DispatcherServlet -->
     <servlet>
         <servlet-name>wx</servlet-name>

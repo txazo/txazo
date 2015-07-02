@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/memory/home.wx">技术体系</a>
+            <a class="navbar-brand" href="/memory/home.wx">Technology</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
@@ -69,6 +69,10 @@
 
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<!--
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="/js/app/memory/weixin-config.js"></script>
+-->
 </body>
 </html>
 

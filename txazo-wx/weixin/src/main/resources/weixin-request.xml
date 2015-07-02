@@ -58,6 +58,7 @@
     <request uri="/cgi-bin/user/getuserinfo" requireParams="access_token,code"/>
 
     <!-- 微信JS接口 -->
+    <request uri="/cgi-bin/get_jsapi_ticket" requireParams="access_token"/>
 
     <!-- 第三方应用授权 -->
 
