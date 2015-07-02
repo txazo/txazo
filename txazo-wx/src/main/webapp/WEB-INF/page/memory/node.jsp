@@ -53,8 +53,8 @@
 
     <div class="list-group">
         <c:if test="${memory.extContent != null && memory.extContent.point != null && fn:length(memory.extContent.point) > 0}">
-            <c:forEach items="${memory.extContent.point}" var="point">
-                <pre class="list-group-item list-group-margin list-group-item-info">${point}</pre>
+            <c:forEach items="${memory.extContent.point}" var="point" varStatus="stat">
+                <pre class="list-group-item list-group-margin list-group-item-info">${stat.count}. ${point}</pre>
             </c:forEach>
         </c:if>
     </div>
