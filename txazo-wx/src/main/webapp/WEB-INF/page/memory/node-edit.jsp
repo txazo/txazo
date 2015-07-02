@@ -55,6 +55,47 @@
         <input type="hidden" name="id" id="id" value="${memory.id}"/>
 
         <div id="points">
+            <c:choose>
+                <c:when test="${memory.extContent != null && memory.extContent.point != null && fn:length(memory.extContent.point) > 0}">
+                    <c:forEach items="${memory.extContent.point}" var="p" varStatus="stat">
+                        <div class="form-group">
+                            <div class="col-xs-1" style="padding-top: 12px;">
+                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-9">
+                                <textarea name="point" class="form-control" required="">${p}</textarea>
+                            </div>
+                            <div class="col-xs-1" style="padding-top: 12px;">
+                                <c:if test="${stat.first}">
+                                    <a href="javascript:;" onclick="plus();">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </a>
+                                </c:if>
+                                <c:if test="${!stat.first}">
+                                    <a href="javascript:;" onclick="minus(this);">
+                                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                    </a>
+                                </c:if>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div class="form-group">
+                        <div class="col-xs-1" style="padding-top: 12px;">
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-xs-9">
+                            <textarea name="point" class="form-control" required=""></textarea>
+                        </div>
+                        <div class="col-xs-1" style="padding-top: 12px;">
+                            <a href="javascript:;" onclick="plus();">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
 
         <div class="form-group">
@@ -65,18 +106,15 @@
     </form>
 </div>
 
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted" align="center">txazo.com © 粤ICP备14070725号</p>
+    </div>
+</footer>
+
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="/js/app/memory/node-edit.js"></script>
-<script>
-    $(function () {
-        <c:if test="${memory.extContent != null && memory.extContent.point != null && fn:length(memory.extContent.point) > 0}">
-            <c:forEach items="${memory.extContent.point}" var="p">
-                addPoint('${p}');
-            </c:forEach>
-        </c:if>
-    });
-</script>
 </body>
 </html>
 

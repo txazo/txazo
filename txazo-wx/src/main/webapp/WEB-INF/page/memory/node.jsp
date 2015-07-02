@@ -53,12 +53,18 @@
 
     <div class="list-group">
         <c:if test="${memory.extContent != null && memory.extContent.point != null && fn:length(memory.extContent.point) > 0}">
-            <c:forEach items="${memory.extContent.point }" var="point">
-                <a href="/memory/show.wx?id=${m.id}" class="list-group-item list-group-item-danger">${point}</a>
+            <c:forEach items="${memory.extContent.point}" var="point">
+                <pre class="list-group-item list-group-margin list-group-item-info">${point}</pre>
             </c:forEach>
         </c:if>
     </div>
 </div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted" align="center">txazo.com © 粤ICP备14070725号</p>
+    </div>
+</footer>
 
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
