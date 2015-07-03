@@ -4,6 +4,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.txazo.util.lang.string.CharacterUtils;
 import org.txazo.wx.app.memory.bean.Memory;
 import org.txazo.wx.app.memory.enums.MemoryType;
 import org.txazo.wx.app.memory.mapper.MemoryMapper;
@@ -113,7 +114,7 @@ public class MemoryServiceImpl implements MemoryService {
     public List<Map<String, Object>> getParentNames(int id) {
         int maxSize = 3;
         List<Map<String, Object>> names = new ArrayList<Map<String, Object>>();
-        addParentNames(id, names);
+        addParentNames(StringUtils.EMPTY, id, names);
         if (names.size() > maxSize) {
             for (int index = names.size() - 1; index >= maxSize; index--) {
                 names.remove(index);
@@ -125,11 +126,16 @@ public class MemoryServiceImpl implements MemoryService {
         return names;
     }
 
-    private void addParentNames(int id, List<Map<String, Object>> names) {
+    private void addParentNames(String merge, int id, List<Map<String, Object>> names) {
         Memory memory = null;
         if (id > 0 && (memory = memoryMapper.getMemoryById(id)) != null) {
+            merge += memory.getName();
+            if (getLength(merge) > 20) {
+                addName(memory.getId(), "..", names);
+                return;
+            }
             addName(memory.getId(), memory.getName(), names);
-            addParentNames(memory.getParentId(), names);
+            addParentNames(merge, memory.getParentId(), names);
         }
     }
 
@@ -138,6 +144,17 @@ public class MemoryServiceImpl implements MemoryService {
         map.put("id", id);
         map.put("name", name);
         names.add(map);
+    }
+
+    private static int getLength(String str) {
+        if (str == null || StringUtils.isBlank(str = str.trim())) {
+            return 0;
+        }
+        int length = 0;
+        for (char c : str.toCharArray()) {
+            length += CharacterUtils.isChinese(c) ? 2 : 1;
+        }
+        return length;
     }
 
 }

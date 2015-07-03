@@ -9,6 +9,6 @@
                   timeToIdleSeconds="600" timeToLiveSeconds="1800" memoryStoreEvictionPolicy="LRU"/>
 
     <cache name="org.txazo.cache.SpringEhCache" maxElementsInMemory="100" eternal="false" overflowToDisk="true"
-           diskPersistent="false" timeToIdleSeconds="600" timeToLiveSeconds="1800" memoryStoreEvictionPolicy="LRU"/>
+           diskPersistent="false" timeToIdleSeconds="600" timeToLiveSeconds="600" memoryStoreEvictionPolicy="LRU"/>
 
 </ehcache>
