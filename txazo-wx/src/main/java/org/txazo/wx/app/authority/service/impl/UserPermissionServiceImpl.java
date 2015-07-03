@@ -22,6 +22,7 @@ public class UserPermissionServiceImpl implements UserPermissionService {
 
     static {
         userPermissions.put("txazo1218", AuthorityType.ADMIN);
+        userPermissions.put("ilk413", AuthorityType.MEMORY_READ);
     }
 
     @Override

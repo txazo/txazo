@@ -29,13 +29,14 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/memory")
-@RequestConfig(authority = AuthorityType.ALL)
+@RequestConfig(authority = AuthorityType.MEMORY)
 public class MemoryController {
 
     @Autowired
     private MemoryService memoryService;
 
     @RequestMapping("home.wx")
+    @RequestConfig(authority = AuthorityType.MEMORY_READ)
     public String home(HttpServletRequest request) {
         return "forward:/memory/showTree.wx?type=1&parentId=0";
     }
@@ -53,6 +54,7 @@ public class MemoryController {
         return "forward:/memory/showNode.wx?id=" + id;
     }
 
+    @RequestConfig(authority = AuthorityType.MEMORY_READ)
     @RequestMapping("showTree.wx")
     public String showTree(@RequestParam(value = "type", required = false, defaultValue = "0") Integer type,
                            @RequestParam(value = "parentId", required = true) Integer parentId,
@@ -69,6 +71,7 @@ public class MemoryController {
         return "memory/tree";
     }
 
+    @RequestConfig(authority = AuthorityType.MEMORY_READ)
     @RequestMapping("showNode.wx")
     public String showNode(@RequestParam(value = "id", required = true) Integer id,
                            HttpServletRequest request) {

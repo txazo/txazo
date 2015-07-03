@@ -9,11 +9,12 @@ package org.txazo.wx.app.authority.enums;
  */
 public enum AuthorityType {
 
-    ADMIN(0xffff),
-    EMAIL(0x0001),
-    MEMORY(0x0002),
-    REMIND(0x0004),
-    ALL(0x0000);
+    ADMIN(0xffffffff),
+    EMAIL(0x00000001),
+    MEMORY(0x00000010),
+    MEMORY_READ(0x00000020),
+    REMIND(0x00000100),
+    ALL(0x00000000);
 
     private int id;
 
@@ -23,11 +24,6 @@ public enum AuthorityType {
 
     public int getId() {
         return id;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(ADMIN.getId() & MEMORY.getId());
-        System.out.println(EMAIL.getId() & MEMORY.getId());
     }
 
 }
