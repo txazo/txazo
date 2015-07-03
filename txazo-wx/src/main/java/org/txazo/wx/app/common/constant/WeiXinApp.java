@@ -1,7 +1,7 @@
 package org.txazo.wx.app.common.constant;
 
 /**
- * EmailReminder
+ * WeiXinApp
  *
  * @author txazo
  * @email txazo1218@163.com
