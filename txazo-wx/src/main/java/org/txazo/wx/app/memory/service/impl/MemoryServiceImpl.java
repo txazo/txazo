@@ -115,12 +115,12 @@ public class MemoryServiceImpl implements MemoryService {
         int maxSize = 3;
         List<Map<String, Object>> names = new ArrayList<Map<String, Object>>();
         addParentNames(StringUtils.EMPTY, id, names);
-        if (names.size() > maxSize) {
-            for (int index = names.size() - 1; index >= maxSize; index--) {
-                names.remove(index);
-            }
-            names.get(maxSize - 1).put("name", "..");
-        }
+//        if (names.size() > maxSize) {
+//            for (int index = names.size() - 1; index >= maxSize; index--) {
+//                names.remove(index);
+//            }
+//            names.get(maxSize - 1).put("name", "..");
+//        }
         addName(0, "Home", names);
         Collections.reverse(names);
         return names;
@@ -130,12 +130,12 @@ public class MemoryServiceImpl implements MemoryService {
         Memory memory = null;
         if (id > 0 && (memory = memoryMapper.getMemoryById(id)) != null) {
             merge += memory.getName();
-            if (getLength(merge) > 20) {
+            if (getLength(merge) > 58) {
                 addName(memory.getId(), "..", names);
                 return;
             }
             addName(memory.getId(), memory.getName(), names);
-            addParentNames(merge, memory.getParentId(), names);
+            addParentNames(merge + " / ", memory.getParentId(), names);
         }
     }
 
@@ -152,7 +152,7 @@ public class MemoryServiceImpl implements MemoryService {
         }
         int length = 0;
         for (char c : str.toCharArray()) {
-            length += CharacterUtils.isChinese(c) ? 2 : 1;
+            length += CharacterUtils.isChinese(c) ? 3 : 2;
         }
         return length;
     }

@@ -54,9 +54,10 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
 
         String sessionId = request.getSession().getId();
+        boolean authFlag = false;
         String authCode = CookieUtils.getCookieValue(AUTH_CODE_COOKIE, request);
         int authCount = NumberUtils.toInt(CookieUtils.getCookieValue(AUTH_COUNT_COOKIE, request), 0);
-        if (StringUtils.isBlank(authCode)) {
+        if (StringUtils.isBlank(authCode) || (authFlag = springEhCache.get(sessionId) == null)) {
             if (authCount >= MAX_AUTH_COUNT) {
                 redirectToNoAccess(response);
                 return false;
@@ -70,14 +71,15 @@ public class AuthorityServiceImpl implements AuthorityService {
                 String userId = WeiXinUtils.getUserId(code);
                 if (userPermissionService.checkUserPermission(userId, type)) {
                     springEhCache.put(new Element(sessionId, code));
-                    CookieUtils.setCookie(response, AUTH_CODE_COOKIE, code, COOKIE_MAX_AGE);
                     CookieUtils.removeCookie(request, response, AUTH_COUNT_COOKIE);
+                    CookieUtils.setCookie(response, AUTH_CODE_COOKIE, code, COOKIE_MAX_AGE);
                     return true;
                 }
             }
 
             /** 重定向到微信OAuth */
             try {
+                CookieUtils.removeCookie(request, response, AUTH_CODE_COOKIE);
                 CookieUtils.setCookie(response, AUTH_COUNT_COOKIE, String.valueOf(authCount + 1), COOKIE_MAX_AGE);
                 WeiXinUtils.redirectToAuth(RequestUtils.getRequestURL(request, "code", "state"), shaCode, response);
             } catch (IOException e) {
