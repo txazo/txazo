@@ -8,7 +8,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.txazo.weixin.WeiXinUtils;
-import org.txazo.wx.app.authority.enums.AuthorityType;
+import org.txazo.wx.app.common.enums.PrivilegeType;
 import org.txazo.wx.app.authority.service.AuthorityService;
 import org.txazo.wx.app.authority.service.UserPermissionService;
 import org.txazo.wx.app.common.util.CookieUtils;
@@ -41,7 +41,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     private UserPermissionService userPermissionService;
 
     @Override
-    public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, AuthorityType type) {
+    public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, PrivilegeType type) {
         if (request == null || response == null || type == null) {
             if (response != null) {
                 redirectToNoAccess(response);
@@ -49,7 +49,7 @@ public class AuthorityServiceImpl implements AuthorityService {
             return false;
         }
 
-        if (type == AuthorityType.ALL) {
+        if (type == PrivilegeType.UNLIMIT) {
             return true;
         }
 

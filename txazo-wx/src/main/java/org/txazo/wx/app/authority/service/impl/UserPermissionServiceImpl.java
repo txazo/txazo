@@ -2,7 +2,7 @@ package org.txazo.wx.app.authority.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.txazo.wx.app.authority.enums.AuthorityType;
+import org.txazo.wx.app.common.enums.PrivilegeType;
 import org.txazo.wx.app.authority.service.UserPermissionService;
 
 import java.util.Map;
@@ -18,19 +18,19 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class UserPermissionServiceImpl implements UserPermissionService {
 
-    private static Map<String, AuthorityType> userPermissions = new ConcurrentHashMap<String, AuthorityType>();
+    private static Map<String, PrivilegeType> userPermissions = new ConcurrentHashMap<String, PrivilegeType>();
 
     static {
-        userPermissions.put("txazo1218", AuthorityType.ADMIN);
-        userPermissions.put("ilk413", AuthorityType.MEMORY_READ);
+        userPermissions.put("txazo1218", PrivilegeType.ADMIN);
+        userPermissions.put("ilk413", PrivilegeType.EMAIL);
     }
 
     @Override
-    public boolean checkUserPermission(String user, AuthorityType type) {
+    public boolean checkUserPermission(String user, PrivilegeType type) {
         if (StringUtils.isBlank(user) || type == null) {
             return false;
         }
-        AuthorityType userAuthorityType = userPermissions.get(user);
+        PrivilegeType userAuthorityType = userPermissions.get(user);
         return userAuthorityType != null && (userAuthorityType.getId() & type.getId()) > 0;
     }
 

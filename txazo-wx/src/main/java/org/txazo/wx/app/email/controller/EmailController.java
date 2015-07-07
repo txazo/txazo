@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.txazo.wx.app.authority.annotation.RequestConfig;
-import org.txazo.wx.app.authority.enums.AuthorityType;
+import org.txazo.wx.app.common.enums.PrivilegeType;
 import org.txazo.wx.app.email.bean.Email;
 import org.txazo.wx.app.email.service.EmailService;
 
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/email")
-@RequestConfig(authority = AuthorityType.EMAIL)
+@RequestConfig(authority = PrivilegeType.EMAIL)
 public class EmailController {
 
     @Autowired

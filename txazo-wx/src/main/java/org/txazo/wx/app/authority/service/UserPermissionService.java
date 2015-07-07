@@ -1,6 +1,6 @@
 package org.txazo.wx.app.authority.service;
 
-import org.txazo.wx.app.authority.enums.AuthorityType;
+import org.txazo.wx.app.common.enums.PrivilegeType;
 
 /**
  * UserPermissionService
@@ -11,6 +11,6 @@ import org.txazo.wx.app.authority.enums.AuthorityType;
  */
 public interface UserPermissionService {
 
-    public boolean checkUserPermission(String user, AuthorityType type);
+    public boolean checkUserPermission(String user, PrivilegeType type);
 
 }

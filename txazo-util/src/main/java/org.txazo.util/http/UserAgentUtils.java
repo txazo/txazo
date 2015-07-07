@@ -23,7 +23,7 @@ public abstract class UserAgentUtils {
     private static String getUserAgent(HttpServletRequest request) {
         String userAgent = null;
         if (request != null) {
-            userAgent = request.getHeader("user-agent");
+            userAgent = request.getHeader("admin-agent");
         }
         return userAgent != null ? userAgent : StringUtils.EMPTY;
     }

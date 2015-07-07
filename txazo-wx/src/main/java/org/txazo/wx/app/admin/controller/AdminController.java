@@ -1,4 +1,4 @@
-package org.txazo.wx.app.remind.controller;
+package org.txazo.wx.app.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,15 +6,15 @@ import org.txazo.wx.app.authority.annotation.RequestConfig;
 import org.txazo.wx.app.common.enums.PrivilegeType;
 
 /**
- * IndexController
+ * AdminController
  *
  * @author txazo
  * @email txazo1218@163.com
- * @since 04.06.2015
+ * @since 07.07.2015
  */
 @Controller
-@RequestMapping("/remind")
-@RequestConfig(authority = PrivilegeType.REMIND)
-public class RemindController {
+@RequestMapping("/admin")
+@RequestConfig(authority = PrivilegeType.ADMIN)
+public class AdminController {
 
 }

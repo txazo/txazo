@@ -24,7 +24,7 @@ public class URLConnectionTest {
     public void testURLConnection() throws IOException {
         URL url = new URL("http://127.0.0.1/spring/login.html");
 
-        String params = "user=root&password=root";
+        String params = "admin=root&password=root";
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setDoInput(true);
         connection.setDoOutput(true);

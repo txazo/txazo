@@ -1,4 +1,4 @@
-package org.txazo.wx.app.authority.enums;
+package org.txazo.wx.app.common.enums;
 
 /**
  * HttpType
@@ -9,6 +9,6 @@ package org.txazo.wx.app.authority.enums;
  */
 public enum HttpType {
 
-    GET, POST, ALL
+    GET, POST, UNLIMIT
 
 }

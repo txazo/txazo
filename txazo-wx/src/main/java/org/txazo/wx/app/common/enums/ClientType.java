@@ -1,4 +1,4 @@
-package org.txazo.wx.app.authority.enums;
+package org.txazo.wx.app.common.enums;
 
 /**
  * ClientType
@@ -9,6 +9,6 @@ package org.txazo.wx.app.authority.enums;
  */
 public enum ClientType {
 
-    DESKTOP, MOBILE, WEIXIN, ALL
+    COMPUTER, MOBILE, WEIXIN, UNLIMIT
 
 }

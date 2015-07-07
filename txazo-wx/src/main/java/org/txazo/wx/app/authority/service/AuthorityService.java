@@ -1,6 +1,6 @@
 package org.txazo.wx.app.authority.service;
 
-import org.txazo.wx.app.authority.enums.AuthorityType;
+import org.txazo.wx.app.common.enums.PrivilegeType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +14,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface AuthorityService {
 
-    public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, AuthorityType type);
+    public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, PrivilegeType type);
 
 }

@@ -13,7 +13,7 @@ import org.txazo.weixin.xml.XmlEntity;
 @EntityPath(path = "email.account")
 public class Account implements XmlEntity {
 
-    @EntityPath(path = "email.account.user")
+    @EntityPath(path = "email.account.admin")
     private String user;
     @EntityPath(path = "email.account.passwd")
     private String passwd;
