@@ -1,6 +1,6 @@
 package org.txazo.wx.app.common.controller;
 
-import org.txazo.wx.app.common.bean.User;
+import org.txazo.wx.app.user.bean.User;
 
 /**
  * BaseController

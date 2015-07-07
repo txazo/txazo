@@ -8,6 +8,7 @@
         <typeAlias alias="Email" type="org.txazo.wx.app.email.bean.Email"/>
         <typeAlias alias="EmailContent" type="org.txazo.wx.app.email.bean.EmailContent"/>
         <typeAlias alias="Memory" type="org.txazo.wx.app.memory.bean.Memory"/>
+        <typeAlias alias="User" type="org.txazo.wx.app.user.bean.User"/>
     </typeAliases>
 
     <mappers>
@@ -15,5 +16,6 @@
         <mapper resource="config/mapper/Email.xml"/>
         <mapper resource="config/mapper/EmailContent.xml"/>
         <mapper resource="config/mapper/Memory.xml"/>
+        <mapper resource="config/mapper/User.xml"/>
     </mappers>
 </configuration>
