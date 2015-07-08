@@ -16,14 +16,9 @@
         <module>txazo-freemarker</module>
         <!--<module>txazo-hadoop</module>-->
         <module>txazo-java</module>
-        <module>txazo-java/txazo-java-jvm</module>
-        <module>txazo-java/txazo-java-security</module>
         <module>txazo-log</module>
         <module>txazo-network</module>
         <module>txazo-pom</module>
-        <module>txazo-reflection</module>
-        <module>txazo-reflection/txazo-reflection-remote-api</module>
-        <module>txazo-reflection/txazo-reflection-remote-service</module>
         <module>txazo-test</module>
         <module>txazo-util</module>
         <module>txazo-wx</module>
@@ -51,8 +46,8 @@
         <org.mybatis.mybatis-spring.version>1.2.2</org.mybatis.mybatis-spring.version>
         <org.quartz-scheduler.quartz.version>2.2.1</org.quartz-scheduler.quartz.version>
         <org.txazo.txazo-log.version>1.0</org.txazo.txazo-log.version>
-        <org.txazo.txazo-reflection-remote-api.version>1.0</org.txazo.txazo-reflection-remote-api.version>
-        <org.txazo.txazo-reflection-remote-service.version>1.0</org.txazo.txazo-reflection-remote-service.version>
+        <org.txazo.txazo-java-reflection-remote-api.version>1.0</org.txazo.txazo-java-reflection-remote-api.version>
+        <org.txazo.txazo-java-reflection-remote-service.version>1.0</org.txazo.txazo-java-reflection-remote-service.version>
         <org.txazo.txazo-test.version>1.0</org.txazo.txazo-test.version>
         <org.txazo.txazo-util.version>1.0</org.txazo.txazo-util.version>
 
@@ -71,7 +66,7 @@
                 <artifactId>dubbo</artifactId>
                 <version>2.5.3</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
@@ -277,7 +272,7 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-redis</artifactId>
-                <version>1.5.0.RELEASE</version>
+                <version>1.2.1.RELEASE</version>
             </dependency>
 
             <dependency>
@@ -312,14 +307,14 @@
 
             <dependency>
                 <groupId>org.txazo</groupId>
-                <artifactId>txazo-reflection-remote-api</artifactId>
-                <version>${org.txazo.txazo-reflection-remote-api.version}</version>
+                <artifactId>txazo-java-reflection-remote-api</artifactId>
+                <version>${org.txazo.txazo-java-reflection-remote-api.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.txazo</groupId>
-                <artifactId>txazo-reflection-remote-service</artifactId>
-                <version>${org.txazo.txazo-reflection-remote-service.version}</version>
+                <artifactId>txazo-java-reflection-remote-service</artifactId>
+                <version>${org.txazo.txazo-java-reflection-remote-service.version}</version>
             </dependency>
 
             <dependency>

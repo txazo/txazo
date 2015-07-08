@@ -10,11 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
-    <artifactId>txazo-reflection</artifactId>
+    <artifactId>txazo-java-reflection</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>txazo-reflection</name>
+    <name>txazo-java-reflection</name>
     <url>https://github.com/txazo/txazo</url>
 
     <dependencies>
@@ -30,12 +30,14 @@
 
         <dependency>
             <groupId>org.txazo</groupId>
-            <artifactId>txazo-reflection-remote-api</artifactId>
+            <artifactId>txazo-java-reflection-remote-api</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.txazo</groupId>
-            <artifactId>txazo-reflection-remote-service</artifactId>
+            <artifactId>txazo-java-reflection-remote-service</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>

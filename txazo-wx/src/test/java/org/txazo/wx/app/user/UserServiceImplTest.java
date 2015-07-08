@@ -1,4 +1,4 @@
-package org.txazo.wx.app.common;
+package org.txazo.wx.app.user;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
@@ -39,6 +39,7 @@ public class UserServiceImplTest extends SpringAbstractTest {
     @Test
     public void testUpdateUser() {
         User user = new User();
+        user.setId(1);
         user.setUserName("txazo1218");
         user.setTrueName("涂小洲");
         user.setPrivilege(2);

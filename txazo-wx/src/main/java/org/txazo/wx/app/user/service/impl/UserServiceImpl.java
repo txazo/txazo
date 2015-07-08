@@ -2,14 +2,12 @@ package org.txazo.wx.app.user.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.txazo.wx.app.user.bean.User;
 import org.txazo.wx.app.user.mapper.UserMapper;
 import org.txazo.wx.app.user.service.UserService;
 import org.txazo.wx.cache.CacheService;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -61,12 +59,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(User user) {
         boolean res = false;
-        try {
-            if (checkUser(user)) {
+        if (checkUser(user)) {
+            try {
                 res = userMapper.updateUser(user) > 0;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         if (res) {
             clearUserCache(user.getId());
@@ -80,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private String getUserKey(int id) {
-        return "user_id_" + id;
+        return "user_" + id;
     }
 
     private User getUserFromCache(int id) {
@@ -88,7 +86,9 @@ public class UserServiceImpl implements UserService {
         User user = cacheService.get(key, User.class);
         if (user == null) {
             user = userMapper.getUser(id);
-            cacheService.set(key, user, 600);
+            if (user != null) {
+                cacheService.set(key, user, 600);
+            }
         }
         return user;
     }

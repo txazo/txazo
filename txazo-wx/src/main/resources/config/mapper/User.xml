@@ -22,11 +22,11 @@
         WHERE id = #{id} LIMIT 1
     </update>
 
-    <select id="getUser" parameterType="int" resultType="Memory">
+    <select id="getUser" parameterType="int" resultType="User">
         SELECT * FROM User WHERE id = #{id} and isDeleted = 0 limit 1
     </select>
 
-    <select id="getAllUsers" resultType="Memory">
+    <select id="getAllUsers" resultType="User">
         SELECT * FROM User WHERE isDeleted = 0
     </select>
 

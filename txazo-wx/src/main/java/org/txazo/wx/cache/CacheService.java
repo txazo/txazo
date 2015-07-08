@@ -11,8 +11,8 @@ public class CacheService {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<String, Object> valueOperations;
 
-    public void set(String key, Object value, long time) {
-        valueOperations.set(key, value, time);
+    public void set(String key, Object value, long expireTime) {
+        valueOperations.set(key, value, expireTime);
     }
 
     public <T> T get(String key, Class<T> clazz) {
