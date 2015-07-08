@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.txazo.wx.app.common.enums.PrivilegeType;
-import org.txazo.wx.app.authority.annotation.RequestConfig;
 import org.txazo.wx.app.common.util.ResponseUtils;
 import org.txazo.wx.app.memory.bean.Memory;
 import org.txazo.wx.app.memory.service.MemoryService;
@@ -29,14 +28,12 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/memory")
-@RequestConfig(authority = PrivilegeType.MEMORY)
 public class MemoryController {
 
     @Autowired
     private MemoryService memoryService;
 
     @RequestMapping("home.wx")
-    @RequestConfig(authority = PrivilegeType.MEMORY_READ)
     public String home(HttpServletRequest request) {
         return "forward:/memory/showTree.wx?type=1&parentId=0";
     }
@@ -54,7 +51,6 @@ public class MemoryController {
         return "forward:/memory/showNode.wx?id=" + id;
     }
 
-    @RequestConfig(authority = PrivilegeType.MEMORY_READ)
     @RequestMapping("showTree.wx")
     public String showTree(@RequestParam(value = "type", required = false, defaultValue = "0") Integer type,
                            @RequestParam(value = "parentId", required = true) Integer parentId,
@@ -71,7 +67,6 @@ public class MemoryController {
         return "memory/tree";
     }
 
-    @RequestConfig(authority = PrivilegeType.MEMORY_READ)
     @RequestMapping("showNode.wx")
     public String showNode(@RequestParam(value = "id", required = true) Integer id,
                            HttpServletRequest request) {

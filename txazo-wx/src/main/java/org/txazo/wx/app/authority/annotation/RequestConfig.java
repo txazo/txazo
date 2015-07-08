@@ -20,10 +20,10 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface RequestConfig {
 
-    PrivilegeType authority() default PrivilegeType.ALL;
+    PrivilegeType authority() default PrivilegeType.UNLIMIT;
 
-    ClientType[] client() default ClientType.ALL;
+    ClientType[] client() default ClientType.UNLIMIT;
 
-    HttpType http() default HttpType.ALL;
+    HttpType http() default HttpType.UNLIMIT;
 
 }
