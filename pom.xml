@@ -47,7 +47,8 @@
         <org.quartz-scheduler.quartz.version>2.2.1</org.quartz-scheduler.quartz.version>
         <org.txazo.txazo-log.version>1.0</org.txazo.txazo-log.version>
         <org.txazo.txazo-java-reflection-remote-api.version>1.0</org.txazo.txazo-java-reflection-remote-api.version>
-        <org.txazo.txazo-java-reflection-remote-service.version>1.0</org.txazo.txazo-java-reflection-remote-service.version>
+        <org.txazo.txazo-java-reflection-remote-service.version>1.0
+        </org.txazo.txazo-java-reflection-remote-service.version>
         <org.txazo.txazo-test.version>1.0</org.txazo.txazo-test.version>
         <org.txazo.txazo-util.version>1.0</org.txazo.txazo-util.version>
 
@@ -119,6 +120,12 @@
                 <groupId>net.sf.ehcache</groupId>
                 <artifactId>ehcache</artifactId>
                 <version>2.10.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.spy</groupId>
+                <artifactId>spymemcached</artifactId>
+                <version>2.10.6</version>
             </dependency>
 
             <dependency>

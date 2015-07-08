@@ -9,9 +9,10 @@
 
     <import resource="spring-ehcache.xml"/>
     <import resource="spring-jdbc.xml"/>
+    <import resource="spring-memcached.xml"/>
     <import resource="spring-mybatis.xml"/>
     <import resource="spring-quartz.xml"/>
-    <import resource="spring-redis.xml"/>
+    <!--<import resource="spring-redis.xml"/>-->
 
     <context:annotation-config/>
 

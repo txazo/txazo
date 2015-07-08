@@ -7,6 +7,7 @@ import org.txazo.wx.app.user.bean.User;
 import org.txazo.wx.app.user.mapper.UserMapper;
 import org.txazo.wx.app.user.service.UserService;
 import org.txazo.wx.cache.CacheService;
+import org.txazo.wx.cache.RedisCacheService;
 
 import java.util.List;
 
