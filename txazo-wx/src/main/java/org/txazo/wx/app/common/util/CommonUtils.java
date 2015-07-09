@@ -1,6 +1,10 @@
 package org.txazo.wx.app.common.util;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.txazo.wx.app.user.bean.User;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * CommonUtils
@@ -11,8 +15,13 @@ import org.txazo.wx.app.user.bean.User;
  */
 public abstract class CommonUtils {
 
+    public static HttpServletRequest getHttpServletRequest() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    }
+
     public static User getUser() {
-        return null;
+        HttpServletRequest request = getHttpServletRequest();
+        return (User) request.getAttribute("user");
     }
 
 }

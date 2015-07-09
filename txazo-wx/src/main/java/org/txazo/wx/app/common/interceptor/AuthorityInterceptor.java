@@ -1,4 +1,4 @@
-package org.txazo.wx.app.authority.interceptor;
+package org.txazo.wx.app.common.interceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,7 +34,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
             if (requestConfig == null) {
                 return true;
             }
-            return authorityService.checkAuthority(request, response, requestConfig.authority());
+            return authorityService.checkAuthority(request, response, requestConfig.privilege());
         }
         return true;
     }
