@@ -1,8 +1,4 @@
-package org.txazo.wx.app.authority.annotation;
-
-import org.txazo.wx.app.common.enums.PrivilegeType;
-import org.txazo.wx.app.common.enums.ClientType;
-import org.txazo.wx.app.common.enums.HttpType;
+package org.txazo.wx.app.common.enums;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -20,7 +16,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface RequestConfig {
 
-    PrivilegeType authority() default PrivilegeType.UNLIMIT;
+    PrivilegeType privilege() default PrivilegeType.UNLIMIT;
 
     ClientType[] client() default ClientType.UNLIMIT;
 

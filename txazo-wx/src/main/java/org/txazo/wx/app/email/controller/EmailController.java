@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.txazo.wx.app.authority.annotation.RequestConfig;
+import org.txazo.wx.app.common.enums.RequestConfig;
 import org.txazo.wx.app.common.enums.PrivilegeType;
 import org.txazo.wx.app.email.bean.Email;
 import org.txazo.wx.app.email.service.EmailService;

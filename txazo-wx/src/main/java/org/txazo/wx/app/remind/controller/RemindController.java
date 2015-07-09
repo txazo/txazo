@@ -2,7 +2,7 @@ package org.txazo.wx.app.remind.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.txazo.wx.app.authority.annotation.RequestConfig;
+import org.txazo.wx.app.common.enums.RequestConfig;
 import org.txazo.wx.app.common.enums.PrivilegeType;
 
 /**
