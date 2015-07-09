@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.txazo.wx.app.common.util.ResponseUtils;
+import org.txazo.util.web.servlet.ResponseUtils;
 import org.txazo.wx.app.memory.bean.Memory;
 import org.txazo.wx.app.memory.service.MemoryService;
 

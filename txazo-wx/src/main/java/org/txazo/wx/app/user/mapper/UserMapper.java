@@ -21,6 +21,8 @@ public interface UserMapper {
 
     public User getUser(int id);
 
+    public User getUserByUserName(String userName);
+
     public List<User> getAllUsers();
 
 }

@@ -78,6 +78,11 @@ public class UserServiceImpl implements UserService {
         return getUserFromCache(id);
     }
 
+    @Override
+    public User getUser(String userName) {
+        return userMapper.getUserByUserName(userName);
+    }
+
     private String getUserKey(int id) {
         return "user_" + id;
     }

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/email")
-@RequestConfig(authority = PrivilegeType.EMAIL)
+@RequestConfig(privilege = PrivilegeType.EMAIL)
 public class EmailController {
 
     @Autowired

@@ -14,7 +14,7 @@ import org.txazo.wx.app.common.enums.PrivilegeType;
  */
 @Controller
 @RequestMapping("/admin")
-@RequestConfig(authority = PrivilegeType.ADMIN)
+@RequestConfig(privilege = PrivilegeType.ADMIN)
 public class AdminController {
 
 }

@@ -1,4 +1,4 @@
-package org.txazo.wx.app.common.util;
+package org.txazo.util.web.cookie;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;

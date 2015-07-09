@@ -1,4 +1,4 @@
-package org.txazo.wx.app.common.util;
+package org.txazo.util.web.servlet;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @author txazo
  * @email txazo1218@163.com
- * @since 30.06.2015
+ * @since 09.07.2015
  */
 public abstract class RequestUtils {
 

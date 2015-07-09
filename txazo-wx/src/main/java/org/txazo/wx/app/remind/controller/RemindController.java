@@ -14,7 +14,7 @@ import org.txazo.wx.app.common.enums.PrivilegeType;
  */
 @Controller
 @RequestMapping("/remind")
-@RequestConfig(authority = PrivilegeType.REMIND)
+@RequestConfig(privilege = PrivilegeType.REMIND)
 public class RemindController {
 
 }

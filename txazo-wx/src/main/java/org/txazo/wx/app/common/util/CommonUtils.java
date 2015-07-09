@@ -21,7 +21,7 @@ public abstract class CommonUtils {
 
     public static User getUser() {
         HttpServletRequest request = getHttpServletRequest();
-        return (User) request.getAttribute("user");
+        return request != null ? (User) request.getAttribute("user") : null;
     }
 
 }

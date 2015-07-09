@@ -1,4 +1,4 @@
-package org.txazo.wx.app.authority.service;
+package org.txazo.wx.app.common.service;
 
 import org.txazo.wx.app.common.enums.PrivilegeType;
 

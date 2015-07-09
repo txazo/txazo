@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.txazo.wx.app.common.enums.RequestConfig;
-import org.txazo.wx.app.authority.service.AuthorityService;
+import org.txazo.wx.app.common.service.AuthorityService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

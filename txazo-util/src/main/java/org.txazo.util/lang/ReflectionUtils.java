@@ -1,4 +1,4 @@
-package org.txazo.util;
+package org.txazo.util.lang;
 
 import java.lang.reflect.Field;
 import java.util.Map;

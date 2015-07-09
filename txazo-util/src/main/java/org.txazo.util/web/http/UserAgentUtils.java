@@ -1,4 +1,4 @@
-package org.txazo.util.http;
+package org.txazo.util.web.http;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;

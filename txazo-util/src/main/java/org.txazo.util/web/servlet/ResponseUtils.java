@@ -1,7 +1,8 @@
-package org.txazo.wx.app.common.util;
+package org.txazo.util.web.servlet;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * ResponseUtils
@@ -37,10 +38,20 @@ public abstract class ResponseUtils {
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
+
+        PrintWriter out = null;
         try {
-            response.getWriter().write(text);
+            out = response.getWriter();
+            out.write(text);
         } catch (IOException e) {
             e.printStackTrace();
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
         }
     }
 

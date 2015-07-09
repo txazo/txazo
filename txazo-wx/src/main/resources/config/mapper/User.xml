@@ -26,6 +26,10 @@
         SELECT * FROM User WHERE id = #{id} and isDeleted = 0 limit 1
     </select>
 
+    <select id="getUserByUserName" parameterType="string" resultType="User">
+        SELECT * FROM User WHERE userName = #{userName} and isDeleted = 0 limit 1
+    </select>
+
     <select id="getAllUsers" resultType="User">
         SELECT * FROM User WHERE isDeleted = 0
     </select>
