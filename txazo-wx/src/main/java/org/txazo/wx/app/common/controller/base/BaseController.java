@@ -13,7 +13,7 @@ import org.txazo.wx.app.user.bean.User;
  */
 public abstract class BaseController {
 
-    private User getUser() {
+    protected User getUser() {
         return CommonUtils.getUser();
     }
 

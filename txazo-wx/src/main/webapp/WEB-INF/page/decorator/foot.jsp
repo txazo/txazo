@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <footer class="footer">
     <div class="container">
         <p class="text-muted" align="center">txazo.com © 粤ICP备14070725号</p>

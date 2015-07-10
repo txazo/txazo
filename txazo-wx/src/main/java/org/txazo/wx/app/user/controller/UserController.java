@@ -9,9 +9,11 @@ import org.txazo.util.web.servlet.ResponseUtils;
 import org.txazo.wx.app.common.controller.base.BaseController;
 import org.txazo.wx.app.common.enums.RequestConfig;
 import org.txazo.wx.app.common.enums.PrivilegeType;
+import org.txazo.wx.app.common.util.PrivilegeUtils;
 import org.txazo.wx.app.user.bean.User;
 import org.txazo.wx.app.user.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -29,7 +31,7 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("add")
+    @RequestMapping("/add")
     public String add(User user) {
         if (userService.addUser(user)) {
             return "redirect:/user/list";
@@ -37,10 +39,35 @@ public class UserController extends BaseController {
         return "user/add";
     }
 
-    @RequestMapping("list")
-    public void list(HttpServletResponse response) {
-        System.out.println("user: " + getUserName());
-        ResponseUtils.renderJson(response, "{\"Code\" : 1}");
+    @RequestMapping("/list")
+    public String list(HttpServletRequest request) {
+        request.setAttribute("users", userService.getAllUsers());
+        return "user/list";
+    }
+
+    @RequestMapping("/privilege/show")
+    public String showPrivilege(@RequestParam(value = "userId", required = true) Integer userId,
+                                HttpServletRequest request) {
+        User user = userService.getUser(userId);
+        if (user == null) {
+            return "redirect:/user/list";
+        }
+        request.setAttribute("userId", user.getId());
+        request.setAttribute("privileges", PrivilegeUtils.getPrivilegeDisplays(user.getPrivilege()));
+        return "user/privilege-show";
+    }
+
+    @RequestMapping("/privilege/update")
+    public String updatePrivilege(@RequestParam(value = "userId", required = true) Integer userId,
+                                  @RequestParam(value = "privilege", required = false) Integer[] privilege,
+                                  HttpServletRequest request) {
+        User user = userService.getUser(userId);
+        if (user == null) {
+            return "redirect:/user/list";
+        }
+        user.setPrivilege(PrivilegeUtils.getPrivilege(privilege));
+        userService.updateUser(user);
+        return "redirect:/user/privilege/show?userId=" + userId;
     }
 
     @RequestMapping("checkUserExists")
