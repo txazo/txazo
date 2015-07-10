@@ -26,7 +26,7 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    @RequestMapping("/read/{id}.wx")
+    @RequestMapping("/read/{id}")
     public String read(@PathVariable Integer id, HttpServletRequest request) {
         if (id == null) {
             return null;

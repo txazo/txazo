@@ -7,7 +7,6 @@ import org.txazo.weixin.WeiXinUtils;
 import org.txazo.weixin.develop.message.Message;
 import org.txazo.weixin.develop.message.MessageBuilder;
 import org.txazo.weixin.develop.message.NewsMessage;
-import org.txazo.wx.app.common.constant.WeiXinApp;
 import org.txazo.wx.app.email.bean.Email;
 
 import java.util.Collections;
@@ -51,7 +50,8 @@ public class EmailReminder {
         sb.append("时    间: " + DateFormatUtils.format(email.getSendTime(), "yyyy年MM月dd日 HH:mm (E)", Locale.CHINESE));
         article.setDescription(sb.toString());
         article.setUrl("http://wx.txazo.com/email/read/" + email.getId() + ".wx");
-        return MessageBuilder.buildNewsMessage(WeiXinApp.ACCOUNT, null, null, WeiXinApp.APP_EMAIL_ID, "0", article);
+//        return MessageBuilder.buildNewsMessage(WeiXinApp.ACCOUNT, null, null, WeiXinApp.APP_EMAIL_ID, "0", article);
+        return null;
     }
 
     private class EmailComparator implements Comparator<Email> {

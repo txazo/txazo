@@ -21,4 +21,9 @@
         <ref bean="authorityInterceptor"/>
     </mvc:interceptors>
 
+    <mvc:resources mapping="/bootstrap/**" location="/bootstrap/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+
 </beans>

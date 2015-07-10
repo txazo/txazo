@@ -25,4 +25,6 @@ public interface UserService {
 
     public List<User> getAllUsers();
 
+    public boolean existsUser(String userName);
+
 }

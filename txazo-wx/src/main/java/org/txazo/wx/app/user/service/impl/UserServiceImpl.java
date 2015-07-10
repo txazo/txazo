@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             user = userMapper.getUser(id);
             if (user != null) {
-                cacheService.set(key, user, 600);
+                // cacheService.set(key, user, 600);
             }
         }
         return user;
@@ -106,6 +106,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userMapper.getAllUsers();
+    }
+
+    @Override
+    public boolean existsUser(String userName) {
+        return getUser(userName) != null;
     }
 
 }

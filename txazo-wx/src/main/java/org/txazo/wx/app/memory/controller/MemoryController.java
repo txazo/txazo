@@ -32,31 +32,31 @@ public class MemoryController {
     @Autowired
     private MemoryService memoryService;
 
-    @RequestMapping("home.wx")
+    @RequestMapping("home")
     public String home(HttpServletRequest request) {
         return "forward:/memory/showTree.wx?type=1&parentId=0";
     }
 
-    @RequestMapping("show.wx")
+    @RequestMapping("show")
     public String show(@RequestParam(value = "id", required = true) Integer id,
                        HttpServletRequest request) {
         Memory memory = memoryService.getMemoryById(id);
         if (memory == null) {
-            return "redirect:/memory/home.wx";
+            return "redirect:/memory/home";
         }
         if (memory.isTree()) {
-            return "forward:/memory/showTree.wx?parentId=" + id;
+            return "forward:/memory/showTree?parentId=" + id;
         }
-        return "forward:/memory/showNode.wx?id=" + id;
+        return "forward:/memory/showNode?id=" + id;
     }
 
-    @RequestMapping("showTree.wx")
+    @RequestMapping("showTree")
     public String showTree(@RequestParam(value = "type", required = false, defaultValue = "0") Integer type,
                            @RequestParam(value = "parentId", required = true) Integer parentId,
                            HttpServletRequest request) {
         Memory memory = null;
         if (parentId < 0 || (parentId > 0 && (memory = memoryService.getMemoryById(parentId)) == null)) {
-            return "redirect:/memory/home.wx";
+            return "redirect:/memory/home";
         }
         request.setAttribute("type", type);
         request.setAttribute("parentId", parentId);
@@ -66,12 +66,12 @@ public class MemoryController {
         return "memory/tree";
     }
 
-    @RequestMapping("showNode.wx")
+    @RequestMapping("showNode")
     public String showNode(@RequestParam(value = "id", required = true) Integer id,
                            HttpServletRequest request) {
         Memory memory = memoryService.getMemoryById(id);
         if (memory == null) {
-            return "redirect:/memory/home.wx";
+            return "redirect:/memory/home";
         }
         request.setAttribute("memory", memory);
         request.setAttribute("title", memory.getName());
@@ -79,7 +79,7 @@ public class MemoryController {
         return "memory/node";
     }
 
-    @RequestMapping("add.wx")
+    @RequestMapping("add")
     public String add(@RequestParam(value = "type", defaultValue = "0", required = false) Integer type,
                       @RequestParam(value = "parentId", defaultValue = "0", required = false) Integer parentId,
                       HttpServletRequest request) {
@@ -89,20 +89,20 @@ public class MemoryController {
         return "memory/add";
     }
 
-    @RequestMapping("addMemory.wx")
+    @RequestMapping("addMemory")
     public String addMemory(Memory memory) {
         if (memoryService.addMemory(memory)) {
-            return "redirect:/memory/show.wx?id=" + memory.getParentId();
+            return "redirect:/memory/show?id=" + memory.getParentId();
         }
         return "memory/add";
     }
 
-    @RequestMapping("editNode.wx")
+    @RequestMapping("editNode")
     public String editNode(@RequestParam(value = "id", required = true) Integer id,
                            HttpServletRequest request) {
         Memory memory = memoryService.getMemoryById(id);
         if (memory == null) {
-            return "redirect:/memory/home.wx";
+            return "redirect:/memory/home";
         }
         request.setAttribute("memory", memory);
         request.setAttribute("title", memory.getName());
@@ -110,19 +110,19 @@ public class MemoryController {
         return "memory/node-edit";
     }
 
-    @RequestMapping("updateNode.wx")
+    @RequestMapping("updateNode")
     public String updateNode(@RequestParam(value = "id", required = true) Integer id,
                              @RequestParam(value = "point", required = true) String[] point,
                              HttpServletRequest request) {
         Memory memory = memoryService.getMemoryById(id);
         if (memory == null) {
-            return "redirect:/memory/home.wx";
+            return "redirect:/memory/home";
         }
         memoryService.updateContentById(id, createJson("point", point));
-        return "redirect:/memory/show.wx?id=" + id;
+        return "redirect:/memory/show?id=" + id;
     }
 
-    @RequestMapping("checkMemory.wx")
+    @RequestMapping("checkMemory")
     public void checkMemory(@RequestParam(value = "parentId", required = true) Integer parentId,
                             @RequestParam(value = "type", required = true) Integer type,
                             @RequestParam(value = "name", required = true) String name,

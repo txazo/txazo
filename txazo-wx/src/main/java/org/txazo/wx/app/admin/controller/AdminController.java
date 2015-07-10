@@ -2,6 +2,7 @@ package org.txazo.wx.app.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.txazo.wx.app.common.controller.base.BaseController;
 import org.txazo.wx.app.common.enums.RequestConfig;
 import org.txazo.wx.app.common.enums.PrivilegeType;
 
@@ -15,6 +16,6 @@ import org.txazo.wx.app.common.enums.PrivilegeType;
 @Controller
 @RequestMapping("/admin")
 @RequestConfig(privilege = PrivilegeType.ADMIN)
-public class AdminController {
+public class AdminController extends BaseController {
 
 }

@@ -73,7 +73,7 @@
 
     <servlet-mapping>
         <servlet-name>wx</servlet-name>
-        <url-pattern>*.wx</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <!-- Spring ContextConfigLocation -->

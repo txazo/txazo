@@ -34,7 +34,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
             if (requestConfig == null) {
                 return true;
             }
-            return authorityService.checkAuthority(request, response, requestConfig.privilege());
+//            return authorityService.checkAuthority(request, response, requestConfig.privilege());
         }
         return true;
     }
