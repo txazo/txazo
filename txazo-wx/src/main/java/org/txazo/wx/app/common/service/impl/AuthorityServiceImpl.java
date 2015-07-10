@@ -1,7 +1,5 @@
 package org.txazo.wx.app.common.service.impl;
 
-import net.sf.ehcache.Ehcache;
-import net.sf.ehcache.Element;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.txazo.wx.app.common.service.AuthorityService;
 import org.txazo.wx.app.common.util.PrivilegeUtils;
 import org.txazo.wx.app.user.bean.User;
 import org.txazo.wx.app.user.service.UserService;
+import org.txazo.wx.cache.CacheService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +38,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     private static final String ADMIN_USER_NAME = "txazo1218";
 
     @Resource
-    private Ehcache springEhCache;
+    private CacheService ehCacheCacheService;
 
     @Autowired
     private UserService userService;
@@ -71,7 +70,7 @@ public class AuthorityServiceImpl implements AuthorityService {
         /** OAuth验证次数 */
         int authCount = NumberUtils.toInt(CookieUtils.getCookieValue(COOKIE_AUTH_COUNT, request), 0);
         /** 未通过验证或缓存失效 */
-        if (userId == 0 || (cacheMissed = springEhCache.get(sessionId) == null)) {
+        if (userId == 0 || (cacheMissed = ehCacheCacheService.get(sessionId) == null)) {
             if (authCount >= MAX_AUTH_COUNT) {
                 redirectToNoAccess(response);
                 System.out.println("-----------------: checkAuthority return 3");
@@ -97,7 +96,7 @@ public class AuthorityServiceImpl implements AuthorityService {
                         (user != null && PrivilegeUtils.checkPrivilege(privilege.getId(), user.getPrivilege()))) {
                     /** 通过权限验证 */
                     request.setAttribute("user", user);
-                    springEhCache.put(new Element(sessionId, code));
+                    ehCacheCacheService.set(sessionId, code);
                     CookieUtils.removeCookie(request, response, COOKIE_AUTH_COUNT);
                     CookieUtils.setCookie(response, COOKIE_USER_ID, String.valueOf(user.getId()), COOKIE_MAX_AGE);
                     CookieUtils.setCookie(response, COOKIE_LOGIN_KEY, PrivilegeUtils.generateLoginKey(user.getId(), code), COOKIE_MAX_AGE);
@@ -120,8 +119,7 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
 
         /** Cookie验证 */
-        Element element = springEhCache.get(sessionId);
-        boolean passedAuthority = element != null && PrivilegeUtils.generateLoginKey(userId, element.getObjectValue().toString()).equals(loginKey);
+        boolean passedAuthority = PrivilegeUtils.generateLoginKey(userId, ehCacheCacheService.get(sessionId, String.class)).equals(loginKey);
         if (passedAuthority) {
             request.setAttribute("user", userService.getUser(userId));
             System.out.println("-----------------: checkAuthority return 6");

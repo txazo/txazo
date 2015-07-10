@@ -16,12 +16,14 @@ public class User implements Serializable {
 
     /** id */
     private int id;
-    /** 用户名 */
+    /** 微信号 */
     private String userName;
-    /** 真实姓名 */
+    /** 姓名 */
     private String trueName;
     /** 权限 */
     private int privilege;
+    /** 是否删除 */
+    private int isDeleted;
     /** 创建时间 */
     private Date createTime;
     /** 更新时间 */
@@ -57,6 +59,14 @@ public class User implements Serializable {
 
     public void setPrivilege(int privilege) {
         this.privilege = privilege;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public Date getCreateTime() {

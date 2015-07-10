@@ -7,7 +7,6 @@ import org.txazo.wx.app.user.bean.User;
 import org.txazo.wx.app.user.mapper.UserMapper;
 import org.txazo.wx.app.user.service.UserService;
 import org.txazo.wx.cache.CacheService;
-import org.txazo.wx.cache.RedisCacheService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -94,7 +93,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             user = userMapper.getUser(id);
             if (user != null) {
-                // memcachedCacheService.set(key, user, 600);
+                memcachedCacheService.set(key, user, 600);
             }
         }
         return user;
