@@ -51,7 +51,9 @@
                         <td class="text-center">${u.trueName}</td>
                         <td class="text-center">${u.userName}</td>
                         <td class="text-center">
-                            <a class="btn btn-xs btn-info" href="/user/privilege/show?userId=${u.id}">权限设置</a>
+                            <button type="button" class="btn btn-xs btn-info"
+                                    onclick="window.location.href = '/user/privilege/show?userId=${u.id}'">权限设置
+                            </button>
                         </td>
                     </tr>
                 </c:forEach>
