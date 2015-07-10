@@ -10,27 +10,28 @@ import javax.annotation.Resource;
  *
  * @author txazo
  * @email txazo1218@163.com
- * @since 08.07.2015
+ * @since 10.07.2015
  */
-@Component("cacheService")
-public class MemcachedCacheService implements CacheService {
+@Component("memcachedCacheService")
+public class MemcachedCacheService extends AbstractCacheService {
 
     @Resource
-    protected MemcachedClient spyMemcached;
+    protected MemcachedClient memcachedClient;
 
     @Override
     public void set(String key, Object value, long expireTime) {
-        spyMemcached.set(key, (int) expireTime, value);
+        memcachedClient.set(key, (int) expireTime, value);
     }
 
     @Override
-    public <T> T get(String key, Class<T> clazz) {
-        return (T) spyMemcached.get(key);
+    public Object get(String key) {
+        return memcachedClient.get(key);
     }
+
 
     @Override
     public void delete(String key) {
-        spyMemcached.delete(key);
+        memcachedClient.delete(key);
     }
 
 }

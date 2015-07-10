@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
     <!-- Spy MemcachedClient -->
-    <bean id="spyMemcached" class="net.spy.memcached.spring.MemcachedClientFactoryBean">
+    <bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">
         <property name="servers" value="${memcached.server}"/>
         <property name="protocol" value="BINARY"/>
         <property name="transcoder">

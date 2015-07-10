@@ -9,6 +9,7 @@ import org.txazo.wx.app.user.service.UserService;
 import org.txazo.wx.cache.CacheService;
 import org.txazo.wx.cache.RedisCacheService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private CacheService cacheService;
+    @Resource
+    private CacheService memcachedCacheService;
 
     @Override
     public boolean addUser(User user) {
@@ -89,18 +90,18 @@ public class UserServiceImpl implements UserService {
 
     private User getUserFromCache(int id) {
         String key = getUserKey(id);
-        User user = cacheService.get(key, User.class);
+        User user = memcachedCacheService.get(key, User.class);
         if (user == null) {
             user = userMapper.getUser(id);
             if (user != null) {
-                // cacheService.set(key, user, 600);
+                // memcachedCacheService.set(key, user, 600);
             }
         }
         return user;
     }
 
     private void clearUserCache(int id) {
-        cacheService.delete(getUserKey(id));
+        memcachedCacheService.delete(getUserKey(id));
     }
 
     @Override

@@ -9,9 +9,9 @@
     </bean>
 
     <!-- net.sf.ehcache.Ehcache -->
-    <bean id="springEhCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+    <bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
         <property name="cacheManager" ref="cacheManager"/>
-        <property name="cacheName" value="org.txazo.cache.SpringEhCache"/>
+        <property name="cacheName" value="org.txazo.cache.EhCache"/>
     </bean>
 
 </beans>
