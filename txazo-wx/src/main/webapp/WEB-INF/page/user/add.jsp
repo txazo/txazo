@@ -57,7 +57,7 @@
 
         <div class="form-group">
             <div style="width: 60%; margin: 0 auto;">
-                <button type="submit" class="btn btn-purple" style="width:100%;">Add</button>
+                <button type="submit" class="btn btn-danger" style="width:100%;">Add</button>
             </div>
         </div>
     </form>
