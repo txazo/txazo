@@ -1,4 +1,4 @@
-package org.txazo.wx.app.user;
+package org.txazo.wx.app.user.service;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
@@ -27,7 +27,6 @@ public class UserServiceImplTest extends SpringAbstractTest {
         User user = new User();
         user.setUserName("txazo1218");
         user.setTrueName("涂小洲");
-        user.setPrivilege(1);
         Assert.assertTrue(userService.addUser(user));
     }
 
@@ -40,9 +39,9 @@ public class UserServiceImplTest extends SpringAbstractTest {
     public void testUpdateUser() {
         User user = new User();
         user.setId(1);
-        user.setUserName("txazo1218");
+        user.setUserName("txazo");
         user.setTrueName("涂小洲");
-        user.setPrivilege(2);
+        user.setPrivilege(1);
         Assert.assertTrue(userService.updateUser(user));
     }
 
@@ -52,9 +51,19 @@ public class UserServiceImplTest extends SpringAbstractTest {
     }
 
     @Test
+    public void testGetUserByUserName() {
+        Assert.assertNotNull(userService.getUser("txazo1218"));
+    }
+
+    @Test
     public void testGetAllUsers() {
         List<User> users = userService.getAllUsers();
         Assert.assertTrue(CollectionUtils.isNotEmpty(users));
+    }
+
+    @Test
+    public void testExistsUser() {
+        Assert.assertTrue(userService.existsUser("txazo1218"));
     }
 
 }

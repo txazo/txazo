@@ -7,7 +7,7 @@
 
     <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO User (userName, trueName, privilege, isDeleted, createTime)
-        VALUES (#{userName}, #{trueName}, #{privilege}, 0, now())
+        VALUES (#{userName}, #{trueName}, 0, 0, now())
     </insert>
 
     <update id="deleteUser" parameterType="int">

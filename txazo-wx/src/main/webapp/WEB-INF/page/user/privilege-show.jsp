@@ -11,34 +11,17 @@
     <%@ include file="../decorator/head.jsp" %>
 </head>
 <body>
-
-<!-- navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar" aria-expanded="false">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/user/list">用户管理</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/user/list">用户列表</a></li>
-                <li><a href="/user/add">添加用户</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<%@ include file="../decorator/nav-user.jsp" %>
 
 <div class="container-fluid">
-    <form action="/user/privilege/update" method="post" class="form-horizontal" role="form"
-          id="update-form">
+    <ol class="breadcrumb">
+        <li class="active">权限设置</li>
+    </ol>
+
+    <form action="/user/privilege/update" method="post" class="form-horizontal" role="form" id="update-form">
         <input type="hidden" name="userId" value="${userId}"/>
 
-        <div class="panel panel-info">
+        <div class="panel panel-danger">
             <div class="panel-heading">权限设置</div>
             <table class="table table-bordered table-hover table-responsive table-striped">
                 <thead>
