@@ -41,7 +41,7 @@ public class RemindServiceImpl implements RemindService {
 
     private boolean checkRemind(Remind remind) {
         return remind != null &&
-                StringUtils.isNoneBlank(remind.getAccount()) &&
+                StringUtils.isNoneBlank(remind.getUserName()) &&
                 StringUtils.isNoneBlank(remind.getTitle()) &&
                 CronExpression.isValidExpression(remind.getCronExpression()) &&
                 remind.getTotalTimes() >= 0;
@@ -96,7 +96,7 @@ public class RemindServiceImpl implements RemindService {
             return;
         }
 
-        WeiXinUtils.sendMessage(MessageBuilder.buildTextMessage(remind.getAccount(), REMIND_AGENT_ID, remind.getMessage()));
+        WeiXinUtils.sendMessage(MessageBuilder.buildTextMessage(remind.getUserName(), REMIND_AGENT_ID, remind.getMessage()));
         remind.increaseRemindedTimes();
         increaseRemindedTimes(remind.getId());
     }

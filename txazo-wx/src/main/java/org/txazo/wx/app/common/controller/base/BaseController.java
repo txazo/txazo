@@ -17,6 +17,11 @@ public abstract class BaseController {
         return CommonUtils.getUser();
     }
 
+    protected int getUserId() {
+        User user = getUser();
+        return user != null ? user.getId() : 0;
+    }
+
     protected String getUserName() {
         User user = getUser();
         return user != null ? user.getUserName() : StringUtils.EMPTY;

@@ -5,32 +5,98 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="提醒事项">
-    <meta name="author" content="txazo">
     <title>添加事项</title>
-    <!-- Bootstrap -->
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <%@ include file="../decorator/head.jsp" %>
+    <link href="http://cdn.bootcss.com/bootstrap-datetimepicker/4.14.30/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h4>添加事项</h4>
+<%@ include file="../decorator/nav-remind.jsp" %>
+
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li class="active">添加事项</li>
+    </ol>
+
+    <form action="/user/add" method="post" class="form-horizontal" style="padding: 0px 15px;" role="form" id="add-form">
+        <div class="form-group">
+            <div class="col-xs-3" style="padding-top: 7px;">
+                <label for="beginTime" class="control-label">开始时间</label>
+            </div>
+            <div class="input-group date form_date col-xs-8" id="beginDatePicker" data-date="" data-date-format="yyyy-mm-dd" data-link-field="beginTime" data-link-format="yyyy-mm-dd" style="left: 15px;">
+                <input class="form-control" size="10" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <input type="hidden" id="beginTime" value="" />
         </div>
-        <div class="panel-body">
-            <div class="container">
-                <div class="row">
-                    <input class="form-control" type="text" name="">
-                </div>
+
+        <div class="form-group">
+            <div class="col-xs-3" style="padding-top: 7px;">
+                <label for="endTime" class="control-label">结束时间</label>
+            </div>
+            <div class="input-group date form_date col-xs-8" id="endDatePicker" data-date="" data-date-format="yyyy-mm-dd" data-link-field="endTime" data-link-format="yyyy-mm-dd" style="left: 15px;">
+                <input class="form-control" size="10" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <input type="hidden" id="endTime" value="" />
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-3" style="padding-top: 7px;">
+                <label for="trueName" class="control-label">姓&nbsp;&nbsp;名</label>
+            </div>
+            <div class="col-xs-9">
+                <input type="text" name="trueName" class="form-control" id="trueName" placeholder="输入姓名" required/>
             </div>
         </div>
-    </div>
+
+        <div class="form-group">
+            <div class="col-xs-3" style="padding-top: 7px;">
+                <label for="userName" class="control-label">微信号</label>
+            </div>
+            <div class="col-xs-9">
+                <input type="text" name="userName" class="form-control" id="userName" placeholder="输入微信号" required/>
+            </div>
+        </div>
+
+        <div class="form-group" id="alertDanger" style="display: none;">
+            <div class="alert alert-danger" role="alert" style="padding: 8px; margin-bottom: 0px;"></div>
+        </div>
+
+        <div class="form-group">
+            <div style="width: 60%; margin: 0 auto;">
+                <button type="submit" class="btn btn-danger" style="width:100%;">添加</button>
+            </div>
+        </div>
+    </form>
 </div>
-<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<%@ include file="../decorator/foot.jsp" %>
+<script src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/bootstrap/bootstrap-datetimepicker.locale.js"></script>
+<script src="/js/util/date.js"></script>
+<script>
+    $(function() {
+        $('.form_date').datetimepicker({
+            language:  'locale',
+            weekStart: 1,
+            todayBtn:  true,
+            autoclose: true,
+            todayHighlight: true,
+            startView: 2,
+            minView: 2,
+            forceParse: false
+        }).on('changeDate', function(ev) {
+            var id = $(this).attr('id');
+            if (id == 'beginDatePicker') {
+                $('#endDatePicker').datetimepicker('setStartDate', ev.date == null ? null : ev.date.getDateString());
+            } else if (id == 'endDatePicker') {
+                $('#beginDatePicker').datetimepicker('setEndDate', ev.date == null ? null : ev.date.getDateString());
+            }
+        });
+    });
+</script>
 </body>
 </html>
+

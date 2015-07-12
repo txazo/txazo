@@ -14,27 +14,26 @@ public class Remind implements Serializable {
 
     private static final long serialVersionUID = 9039470282185415874L;
 
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
-    /** ID */
+    /** id */
     private int id;
-    /** 账号 */
-    private String account;
-    /** 标题 */
+    /** 用户名 */
+    private String userName;
+    /** 类型 */
+    private int type;
     private String title;
-    /** 描述 */
-    private String description;
-    /** 时间表达式 */
+    private String content;
+    private int totalTimes;
     private String cronExpression;
+    private int remindedTimes;
+    /** 扩展 */
+    private RemindExt ext;
     /** 开始时间 */
     private Date beginTime;
     /** 结束时间 */
     private Date endTime;
-    /** 已提醒次数 */
-    private int remindedTimes;
-    /** 总次数 */
-    private int totalTimes;
-    /** 是否已删除(0-未删除, 1-删除) */
+    /** 状态, 0－启用, 1－停用 */
+    private int status;
+    /** 是否删除, 0－否, 1－是 */
     private int isDeleted;
     /** 创建时间 */
     private Date createTime;
@@ -44,99 +43,12 @@ public class Remind implements Serializable {
     public Remind() {
     }
 
-    public Remind(String account, String title, String description, String cronExpression) {
-        this.account = account;
-        this.title = title;
-        this.description = description;
-        this.cronExpression = cronExpression;
+    public void increaseRemindedTimes() {
+
     }
 
     public String getMessage() {
-        return title + "：" + LINE_SEPARATOR + description;
-    }
-
-    public void increaseRemindedTimes() {
-        remindedTimes += 1;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public Date getBeginTime() {
-        return beginTime;
-    }
-
-    public void setBeginTime(Date beginTime) {
-        this.beginTime = beginTime;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getCronExpression() {
-        return cronExpression;
-    }
-
-    public void setCronExpression(String cronExpression) {
-        this.cronExpression = cronExpression;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(int isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public int getRemindedTimes() {
-        return remindedTimes;
-    }
-
-    public void setRemindedTimes(int remindedTimes) {
-        this.remindedTimes = remindedTimes;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        return null;
     }
 
     public int getTotalTimes() {
@@ -147,6 +59,110 @@ public class Remind implements Serializable {
         this.totalTimes = totalTimes;
     }
 
+    public int getRemindedTimes() {
+        return remindedTimes;
+    }
+
+    public void setRemindedTimes(int remindedTimes) {
+        this.remindedTimes = remindedTimes;
+    }
+
+    public String getCronExpression() {
+        return cronExpression;
+    }
+
+    public void setCronExpression(String cronExpression) {
+        this.cronExpression = cronExpression;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public RemindExt getExt() {
+        return ext;
+    }
+
+    public void setExt(RemindExt ext) {
+        this.ext = ext;
+    }
+
+    public Date getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(Date beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -154,5 +170,4 @@ public class Remind implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-
 }
