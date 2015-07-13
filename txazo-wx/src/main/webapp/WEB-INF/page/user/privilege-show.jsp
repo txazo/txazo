@@ -38,12 +38,12 @@
                         <tr>
                             <td class="text-center">${p.title}</td>
                             <td class="text-center">
-                                <!--
                                 <input type="checkbox" name="privilege"
                                        value="${p.privilege}" ${p.hasPrivilege ? 'checked' : ''}/>
-                                       -->
+                                <!--
                                 <input type="checkbox" data-size="mini" data-on-color="success"
                                        data-off-color="danger" checked/>
+                                -->
                             </td>
                         </tr>
                     </c:forEach>
@@ -65,13 +65,13 @@
 <script src="http://cdn.bootcss.com/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
 <script>
     $(function () {
-//        $('input[type="checkbox"]').iCheck({
-//            checkboxClass: 'icheckbox_square-red',
-//            radioClass: 'iradio_square-red',
-//            increaseArea: '20%'
-//        });
+        $('input[type="checkbox"]').iCheck({
+            checkboxClass: 'icheckbox_square-red',
+            radioClass: 'iradio_square-red',
+            increaseArea: '20%'
+        });
 
-        $('input[type="checkbox"]').bootstrapSwitch();
+//        $('input[type="checkbox"]').bootstrapSwitch();
     });
 </script>
 </body>
