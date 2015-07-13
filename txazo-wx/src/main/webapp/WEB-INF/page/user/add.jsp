@@ -48,9 +48,7 @@
 </div>
 
 <%@ include file="../decorator/foot.jsp" %>
-<script>
-    seajs.use('user-add');
-</script>
+<script src="/js/app/user/add.js"></script>
 </body>
 </html>
 
