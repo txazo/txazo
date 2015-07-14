@@ -25,4 +25,6 @@ public interface RemindMapper {
 
     public List<Remind> getRemindsByUserName(String userName);
 
+    public List<Remind> getAllValidReminds();
+
 }

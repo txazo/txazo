@@ -15,18 +15,16 @@ public interface RemindService {
 
     public boolean addRemind(Remind remind);
 
+    public boolean deleteRemind(int id);
+
     public boolean updateRemind(Remind remind);
 
-    public boolean deleteRemind(int id);
+    public boolean updateRemindStatus(Remind remind);
 
     public Remind getRemind(int id);
 
-    public List<Remind> getAllReminds(String account);
+    public List<Remind> getRemindsByUserName(String userName);
 
-    public List<Remind> getAllValidReminds(String account);
-
-    public boolean increaseRemindedTimes(int id);
-
-    public void remindMessage(Remind remind) throws Throwable;
+    public List<Remind> getAllValidReminds();
 
 }

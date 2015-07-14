@@ -7,7 +7,7 @@
 
     <insert id="addRemind" parameterType="Remind" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO Remind (userName, type, extJson, status, isDeleted, createTime)
-          VALUES (#{userName}, #{type}, #{extJson}, 0, 0, now())
+        VALUES (#{userName}, #{type}, #{extJson}, 0, 0, now())
     </insert>
 
     <update id="deleteRemind" parameterType="int">
@@ -16,13 +16,13 @@
 
     <update id="updateRemind" parameterType="Remind">
         UPDATE Remind SET
-          type = #{type},
-          extJson = #{extJson}
+        type = #{type},
+        extJson = #{extJson}
         WHERE id = #{id} LIMIT 1
     </update>
 
-    <update id="updateRemindStatus" parameterType="int">
-        UPDATE Remind SET isDeleted = 1 WHERE id = #{id} LIMIT 1
+    <update id="updateRemindStatus" parameterType="Remind">
+        UPDATE Remind SET status = #{status} WHERE id = #{id} LIMIT 1
     </update>
 
     <select id="getRemind" parameterType="int" resultType="Remind">
@@ -31,6 +31,10 @@
 
     <select id="getRemindsByUserName" parameterType="string" resultType="Remind">
         SELECT * FROM Remind WHERE userName = #{userName} AND isDeleted = 0
+    </select>
+
+    <select id="getAllValidReminds" resultType="Remind">
+        SELECT * FROM Remind WHERE status = 0 AND isDeleted = 0
     </select>
 
 </mapper>

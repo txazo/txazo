@@ -1,16 +1,20 @@
 package org.txazo.wx.app.remind.service.impl;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.txazo.weixin.WeiXinUtils;
-import org.txazo.weixin.develop.message.MessageBuilder;
 import org.txazo.wx.app.remind.bean.Remind;
+import org.txazo.wx.app.remind.bean.RemindExt;
+import org.txazo.wx.app.remind.enums.RemindShowType;
+import org.txazo.wx.app.remind.enums.RemindType;
 import org.txazo.wx.app.remind.mapper.RemindMapper;
 import org.txazo.wx.app.remind.service.RemindService;
+import org.txazo.wx.quartz.util.CronUtils;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,37 +28,33 @@ import java.util.List;
 @Service("remindService")
 public class RemindServiceImpl implements RemindService {
 
-    private static final String REMIND_AGENT_ID = "2";
-
     @Autowired
     private RemindMapper remindMapper;
 
     @Override
     public boolean addRemind(Remind remind) {
-        try {
-            return checkRemind(remind) && remindMapper.addRemind(remind) > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        if (checkAddRemind(remind)) {
+            try {
+                return remindMapper.addRemind(remind) > 0;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        return false;
     }
 
-    private boolean checkRemind(Remind remind) {
+    private boolean checkAddRemind(Remind remind) {
         return remind != null &&
                 StringUtils.isNoneBlank(remind.getUserName()) &&
-                StringUtils.isNoneBlank(remind.getTitle()) &&
-                CronExpression.isValidExpression(remind.getCronExpression()) &&
-                remind.getTotalTimes() >= 0;
+                RemindType.existsType(remind.getType()) &&
+                checkRemindExt(remind.getExt());
     }
 
-    @Override
-    public boolean updateRemind(Remind remind) {
-        try {
-            return checkRemind(remind) && remind.getId() > 0 && remindMapper.updateRemind(remind) > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    private boolean checkRemindExt(RemindExt ext) {
+        return ext != null &&
+                CronUtils.isValidCronExpression(ext.getCronExpression()) &&
+                RemindShowType.existsType(ext.getShowType()) &&
+                ArrayUtils.isNotEmpty(ext.getContent());
     }
 
     @Override
@@ -63,42 +63,74 @@ public class RemindServiceImpl implements RemindService {
     }
 
     @Override
+    public boolean updateRemind(Remind remind) {
+        if (checkUpdateRemind(remind)) {
+            try {
+                return remindMapper.updateRemind(remind) > 0;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    private boolean checkUpdateRemind(Remind remind) {
+        return remind != null &&
+                remind.getId() > 0 &&
+                RemindType.existsType(remind.getType()) &&
+                checkRemindExt(remind.getExt());
+    }
+
+    @Override
+    public boolean updateRemindStatus(Remind remind) {
+        return checkUpdateRemindStatus(remind) && remindMapper.updateRemindStatus(remind) > 0;
+    }
+
+    private boolean checkUpdateRemindStatus(Remind remind) {
+        return remind != null &&
+                remind.getId() > 0 &&
+                (remind.getStatus() == 0 || remind.getStatus() == 1);
+    }
+
+    @Override
     public Remind getRemind(int id) {
         return id <= 0 ? null : remindMapper.getRemind(id);
     }
 
     @Override
-    public List<Remind> getAllReminds(String account) {
-        return account == null ? Collections.EMPTY_LIST : remindMapper.getAllReminds(account);
+    public List<Remind> getRemindsByUserName(String userName) {
+        return StringUtils.isBlank(userName) ? Collections.EMPTY_LIST : remindMapper.getRemindsByUserName(userName);
     }
 
     @Override
-    public List<Remind> getAllValidReminds(String account) {
-        Remind remind = null;
-        List<Remind> reminds = getAllReminds(account);
-        for (Iterator<Remind> iterator = reminds.iterator(); iterator.hasNext(); ) {
-            remind = iterator.next();
-            if (!checkRemind(remind) || (remind.getTotalTimes() != 0 && remind.getRemindedTimes() >= remind.getTotalTimes())) {
-                iterator.remove();
+    public List<Remind> getAllValidReminds() {
+        List<Remind> reminds = remindMapper.getAllValidReminds();
+        if (CollectionUtils.isNotEmpty(reminds)) {
+            for (Iterator<Remind> iterator = reminds.iterator(); iterator.hasNext(); ) {
+                filterRemind(iterator);
             }
         }
         return reminds;
     }
 
-    @Override
-    public boolean increaseRemindedTimes(int id) {
-        return id > 0 && remindMapper.increaseRemindedTimes(id) > 0;
+    private void filterRemind(Iterator<Remind> iterator) {
+        if (!isValidRemind(iterator.next())) {
+            iterator.remove();
+        }
     }
 
-    @Override
-    public void remindMessage(Remind remind) throws Throwable {
-        if (remind == null || (remind.getTotalTimes() != 0 && remind.getRemindedTimes() >= remind.getTotalTimes())) {
-            return;
+    private boolean isValidRemind(Remind remind) {
+        RemindExt ext = remind.getExt();
+        if (!checkRemindExt(ext)) {
+            return false;
         }
+        return isBetweenBeginAndEnd(ext.getBeginTime(), ext.getEndTime());
+    }
 
-        WeiXinUtils.sendMessage(MessageBuilder.buildTextMessage(remind.getUserName(), REMIND_AGENT_ID, remind.getMessage()));
-        remind.increaseRemindedTimes();
-        increaseRemindedTimes(remind.getId());
+    private boolean isBetweenBeginAndEnd(Date beginTime, Date endTime) {
+        Date now = null;
+        return (beginTime == null || beginTime.before(now = new Date())) &&
+                (endTime == null || endTime.after(now));
     }
 
 }

@@ -1,13 +1,17 @@
 package org.txazo.wx.app.remind.mapper;
 
+import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.txazo.wx.SpringAbstractTest;
 import org.txazo.wx.app.remind.bean.Remind;
+import org.txazo.wx.app.remind.bean.RemindExt;
+import org.txazo.wx.app.remind.enums.RemindShowType;
+import org.txazo.wx.app.remind.enums.RemindType;
 import org.txazo.wx.app.remind.service.RemindService;
-
-import java.util.List;
 
 /**
  * RemindServiceTest
@@ -23,28 +27,38 @@ public class RemindServiceTest extends SpringAbstractTest {
 
     @Test
     public void testAddRemind() {
-//        Assert.assertTrue(remindService.addRemind(new Remind("txazo1218", "健康提醒", "休息一下吧，顺便喝杯水/::P/::P/::P", "0 0 10,11,13,14,15,16,17,18,19,20 * * ?")));
-//        Assert.assertTrue(remindService.addRemind(new Remind("txazo1218", "睡眠提醒", "睡前吃个水果吧/::g/::g/::g", "0 0 21 * * ?")));
-//        Assert.assertTrue(remindService.addRemind(new Remind("txazo1218", "运动提醒", "睡觉前，适量运动一下吧/:jump/:jump/:jump", "0 30 22 *  * ?")));
-//        Assert.assertTrue(remindService.addRemind(new Remind("txazo1218", "睡眠提醒", "关上电脑，上床睡觉啦/::Z/::Z/::Z", "0 30 23 * * ?")));
-//        Assert.assertTrue(remindService.addRemind(new Remind("txazo1218", "起床提醒", "起床啦，不要睡懒觉啦/:,@f/:,@f/:,@f", "0 0 7 * * ?")));
-    }
-
-    @Test
-    public void testUpdateRemind() {
         Remind remind = new Remind();
-        remind.setId(1);
-        remind.setUserName("txazo");
-        remind.setTitle("标题");
-//        remind.setDescription("描述");
-        remind.setCronExpression("*/5 * * * * ?");
-        remind.setTotalTimes(100);
-        Assert.assertTrue(remindService.updateRemind(remind));
+        remind.setUserName("txazo1218");
+        remind.setType(RemindType.DIET.getId());
+
+        RemindExt ext = new RemindExt();
+        ext.setCronExpression("* */10 * * * ?");
+        ext.setShowType(RemindShowType.RANDOM.getId());
+        ext.setContent(new String[]{"Content A", "Content B"});
+
+        remind.setExt(ext);
+
+        Assert.assertTrue(remindService.addRemind(remind));
     }
 
     @Test
     public void testDeleteRemind() {
-        Assert.assertTrue(remindService.deleteRemind(1));
+        remindService.deleteRemind(1);
+    }
+
+    @Test
+    public void testUpdateRemind() {
+        Remind remind = remindService.getRemind(1);
+        remind.setType(RemindType.SLEEP.getId());
+        Assert.assertTrue(remindService.updateRemind(remind));
+    }
+
+    @Test
+    public void testUpdateRemindStatus() {
+        Remind remind = new Remind();
+        remind.setId(1);
+        remind.setStatus(1);
+        remindService.updateRemindStatus(remind);
     }
 
     @Test
@@ -54,9 +68,15 @@ public class RemindServiceTest extends SpringAbstractTest {
     }
 
     @Test
-    public void testGetAllReminds() {
-        List<Remind> reminds = remindService.getAllReminds("txazo");
-        Assert.assertTrue(reminds.size() > 0);
+    public void testGetRemindsByUserName() {
+        List<Remind> reminds = remindService.getRemindsByUserName("txazo1218");
+        Assert.assertTrue(CollectionUtils.isNotEmpty(reminds));
+    }
+
+    @Test
+    public void testGetAllValidReminds() {
+        List<Remind> reminds = remindService.getAllValidReminds();
+        Assert.assertTrue(CollectionUtils.isNotEmpty(reminds));
     }
 
 }

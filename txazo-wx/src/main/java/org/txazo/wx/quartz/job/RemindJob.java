@@ -19,7 +19,6 @@ public class RemindJob extends LimitJob {
             RemindJobDetail jobDetail = (RemindJobDetail) context.getJobDetail();
             Remind remind = jobDetail.getRemind();
             RemindService remindService = jobDetail.getRemindService();
-            remindService.remindMessage(remind);
         }
     }
 

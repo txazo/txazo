@@ -23,6 +23,15 @@ public enum RemindType {
         this.type = type;
     }
 
+    public static boolean existsType(int id) {
+        for (RemindType type : values()) {
+            if (id == type.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getId() {
         return id;
     }
