@@ -15,14 +15,14 @@ public interface RemindMapper {
 
     public int addRemind(Remind remind);
 
+    public int deleteRemind(int id);
+
     public int updateRemind(Remind remind);
 
-    public int deleteRemind(int id);
+    public int updateRemindStatus(Remind remind);
 
     public Remind getRemind(int id);
 
-    public List<Remind> getAllReminds(String account);
-
-    public int increaseRemindedTimes(int id);
+    public List<Remind> getRemindsByUserName(String userName);
 
 }

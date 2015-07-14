@@ -1,5 +1,8 @@
 package org.txazo.wx.app.remind.bean;
 
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,17 +23,10 @@ public class Remind implements Serializable {
     private String userName;
     /** 类型 */
     private int type;
-    private String title;
-    private String content;
-    private int totalTimes;
-    private String cronExpression;
-    private int remindedTimes;
+    /** 扩展json */
+    private String extJson;
     /** 扩展 */
     private RemindExt ext;
-    /** 开始时间 */
-    private Date beginTime;
-    /** 结束时间 */
-    private Date endTime;
     /** 状态, 0－启用, 1－停用 */
     private int status;
     /** 是否删除, 0－否, 1－是 */
@@ -43,116 +39,28 @@ public class Remind implements Serializable {
     public Remind() {
     }
 
-    public void increaseRemindedTimes() {
-
-    }
-
-    public String getMessage() {
-        return null;
-    }
-
-    public int getTotalTimes() {
-        return totalTimes;
-    }
-
-    public void setTotalTimes(int totalTimes) {
-        this.totalTimes = totalTimes;
-    }
-
-    public int getRemindedTimes() {
-        return remindedTimes;
-    }
-
-    public void setRemindedTimes(int remindedTimes) {
-        this.remindedTimes = remindedTimes;
-    }
-
-    public String getCronExpression() {
-        return cronExpression;
-    }
-
-    public void setCronExpression(String cronExpression) {
-        this.cronExpression = cronExpression;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public RemindExt getExt() {
+        if (ext != null) {
+            return ext;
+        }
+        if (StringUtils.isNoneBlank(extJson)) {
+            try {
+                ext = JSON.parseObject(extJson, RemindExt.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (ext == null) {
+            ext = new RemindExt();
+        }
         return ext;
     }
 
     public void setExt(RemindExt ext) {
+        if (ext != null) {
+            extJson = JSON.toJSONString(ext);
+        }
         this.ext = ext;
-    }
-
-    public Date getBeginTime() {
-        return beginTime;
-    }
-
-    public void setBeginTime(Date beginTime) {
-        this.beginTime = beginTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(int isDeleted) {
-        this.isDeleted = isDeleted;
     }
 
     public Date getCreateTime() {
@@ -163,6 +71,46 @@ public class Remind implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getExtJson() {
+        return extJson;
+    }
+
+    public void setExtJson(String extJson) {
+        this.extJson = extJson;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -170,4 +118,13 @@ public class Remind implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 }

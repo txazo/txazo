@@ -9,9 +9,8 @@ package org.txazo.wx.app.remind.enums;
  */
 public enum RemindShowType {
 
-    SINGLE(1, "单个提醒"),
-    RANDOM(2, "顺序提醒"),
-    SEQUENCE(3, "随机提醒");
+    RANDOM(1, "顺序展示"),
+    SEQUENCE(2, "随机展示");
 
     private int id;
     private String type;
