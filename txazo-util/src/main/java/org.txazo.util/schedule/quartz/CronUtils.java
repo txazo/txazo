@@ -1,7 +1,6 @@
 package org.txazo.util.schedule.quartz;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.quartz.CronExpression;
 
 import java.util.ArrayList;
@@ -24,8 +23,7 @@ public abstract class CronUtils {
 
     public static CronExpression getValidCronExpression(String expression) {
         try {
-            CronExpression cronExpression = new CronExpression(expression);
-            return cronExpression;
+            return new CronExpression(expression);
         } catch (Exception e) {
             return null;
         }

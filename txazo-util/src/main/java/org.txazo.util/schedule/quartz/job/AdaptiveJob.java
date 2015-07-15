@@ -14,21 +14,23 @@ import org.quartz.SchedulerException;
  */
 public abstract class AdaptiveJob<V> implements Job, JobInterceptor, JobRemover {
 
-    private boolean beforeExecute(V v) {
-        return !canRemove(v) && canExecute(v);
+    private boolean beforeExecute(V value) {
+        return !canRemove(value) && canExecute(value);
     }
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        V v = (V) context.getMergedJobDataMap().get("V");
-        if (beforeExecute(v)) {
+        JobDataWrapper<V> jobDataWrapper = (JobDataWrapper) context.getJobDetail();
+        V value = jobDataWrapper.getValue();
+        JobCallback<V> jobCallback = jobDataWrapper.getCallback();
+        if (beforeExecute(value)) {
             try {
-                executeJob(v);
+                jobCallback.callback(value);
             } catch (Throwable t) {
                 t.printStackTrace();
             }
         }
-        if (canRemove(v)) {
+        if (canRemove(value)) {
             try {
                 context.getScheduler().deleteJob(context.getJobDetail().getKey());
             } catch (SchedulerException e) {
@@ -36,7 +38,5 @@ public abstract class AdaptiveJob<V> implements Job, JobInterceptor, JobRemover 
             }
         }
     }
-
-    protected abstract void executeJob(V v) throws Throwable;
 
 }
