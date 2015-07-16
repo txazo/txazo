@@ -1,9 +1,6 @@
 package org.txazo.util.schedule.quartz.job;
 
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.quartz.SchedulerException;
+import org.quartz.*;
 
 /**
  * AdaptiveJob
@@ -12,6 +9,8 @@ import org.quartz.SchedulerException;
  * @email txazo1218@163.com
  * @since 15.07.2015
  */
+@DisallowConcurrentExecution
+@PersistJobDataAfterExecution
 public abstract class AdaptiveJob<V> implements Job, JobInterceptor, JobRemover {
 
     private boolean beforeExecute(V value) {
