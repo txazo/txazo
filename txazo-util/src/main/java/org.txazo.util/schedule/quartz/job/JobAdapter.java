@@ -3,15 +3,13 @@ package org.txazo.util.schedule.quartz.job;
 import org.quartz.*;
 
 /**
- * AdaptiveJob
+ * JobAdapter
  *
  * @author txazo
  * @email txazo1218@163.com
  * @since 15.07.2015
  */
-@DisallowConcurrentExecution
-@PersistJobDataAfterExecution
-public abstract class AdaptiveJob<V> implements Job, JobInterceptor, JobRemover {
+public abstract class JobAdapter<V> implements Job, JobExecutor<V>, JobRemover<V> {
 
     private boolean beforeExecute(V value) {
         return !canRemove(value) && canExecute(value);
@@ -19,9 +17,10 @@ public abstract class AdaptiveJob<V> implements Job, JobInterceptor, JobRemover 
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        JobDataWrapper<V> jobDataWrapper = (JobDataWrapper) context.getJobDetail();
-        V value = jobDataWrapper.getValue();
-        JobCallback<V> jobCallback = jobDataWrapper.getCallback();
+        JobDetailAdapter<V> jobDetailAdapter = (JobDetailAdapter) context.getJobDetail();
+        JobData<V> jobData = jobDetailAdapter.getJobData();
+        JobCallback<V> jobCallback = jobDetailAdapter.getJobCallback();
+        V value = jobData.getValue();
         if (beforeExecute(value)) {
             try {
                 jobCallback.callback(value);
@@ -36,6 +35,8 @@ public abstract class AdaptiveJob<V> implements Job, JobInterceptor, JobRemover 
                 e.printStackTrace();
             }
         }
+
+        System.out.println("execute end");
     }
 
 }

@@ -1,7 +1,10 @@
 package org.txazo.util.schedule.quartz;
 
+import org.quartz.JobDetail;
 import org.quartz.JobKey;
-import org.txazo.util.schedule.quartz.job.JobCallback;
+import org.quartz.Trigger;
+import org.quartz.TriggerKey;
+import org.txazo.util.schedule.quartz.job.JobDetailAdapter;
 
 /**
  * QuartzScheduler
@@ -12,6 +15,12 @@ import org.txazo.util.schedule.quartz.job.JobCallback;
  */
 public interface QuartzScheduler {
 
-    public <V> void addSchedule(JobKey jobKey, V v, JobCallback<V> jobCallback);
+    public void addSchedule(JobDetail jobDetail, Trigger trigger);
+
+    public void unSchedule(JobKey jobKey);
+
+    public void unSchedule(TriggerKey triggerKey);
+
+    public <V> void updateSchedule(JobDetailAdapter<V> jobDetailAdapter);
 
 }

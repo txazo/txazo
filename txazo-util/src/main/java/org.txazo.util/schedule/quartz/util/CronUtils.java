@@ -1,4 +1,4 @@
-package org.txazo.util.schedule.quartz;
+package org.txazo.util.schedule.quartz.util;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.quartz.CronExpression;
