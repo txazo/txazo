@@ -12,7 +12,7 @@ import org.txazo.util.schedule.quartz.job.JobAdapter;
  * @email txazo1218@163.com
  * @since 15.07.2015
  */
-@DisallowConcurrentExecution
+//@DisallowConcurrentExecution
 @PersistJobDataAfterExecution
 public class RemindJob<Remind> extends JobAdapter<Remind> implements Job {
 

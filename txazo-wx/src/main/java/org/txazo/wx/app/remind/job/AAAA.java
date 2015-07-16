@@ -13,25 +13,29 @@ import org.txazo.wx.app.remind.bean.Remind;
 
 public class AAAA {
 
-    public static void main(String[] args) throws Exception {
-        SchedulerFactory schedulerFactory = new org.quartz.impl.StdSchedulerFactory();
-        Scheduler scheduler = schedulerFactory.getScheduler();
-        scheduler.start();
+    public static void main(String[] args) {
+        try {
+            SchedulerFactory schedulerFactory = new org.quartz.impl.StdSchedulerFactory();
+            Scheduler scheduler = schedulerFactory.getScheduler();
+            scheduler.start();
 
-        JobDetail jobDetail = JobBuilder.newJobDetail("1", RemindJob.class, new JobData<Remind>(new Remind()), new JobCallback<Remind>() {
+            JobDetail jobDetail = JobBuilder.newJobDetail("1", RemindJob.class, new JobData<Remind>(new Remind()), new JobCallback<Remind>() {
 
-            @Override
-            public void callback(Remind remind) {
-                System.out.println("JobCallback callback id " + remind.getId());
-            }
+                @Override
+                public void callback(Remind remind) {
+                    System.out.println("JobCallback callback id " + remind.getId());
+                }
 
-        });
+            });
 
-        Trigger trigger = TriggerBuilder.newCronTrigger("*/5 * * * * ?", KeyBuilder.newTriggerKey("1", RemindJob.class));
+            Trigger trigger = TriggerBuilder.newCronTrigger("*/5 * * * * ?", KeyBuilder.newTriggerKey("1", RemindJob.class));
 
-        scheduler.scheduleJob(jobDetail, trigger);
+            scheduler.scheduleJob(jobDetail, trigger);
 
-        Thread.sleep(10000000);
+            Thread.sleep(10000000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
