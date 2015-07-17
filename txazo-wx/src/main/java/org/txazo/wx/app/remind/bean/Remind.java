@@ -39,6 +39,10 @@ public class Remind implements Serializable {
     public Remind() {
     }
 
+    public Remind(int id) {
+        this.id = id;
+    }
+
     public RemindExt getExt() {
         if (ext != null) {
             return ext;

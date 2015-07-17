@@ -13,6 +13,9 @@ public class DefaultQuartzScheduler implements QuartzScheduler {
 
     private Scheduler scheduler;
 
+    public DefaultQuartzScheduler() {
+    }
+
     public DefaultQuartzScheduler(Scheduler scheduler) {
         this.scheduler = scheduler;
     }
@@ -54,6 +57,29 @@ public class DefaultQuartzScheduler implements QuartzScheduler {
     public boolean updateSchedule(JobDetail jobDetail) {
         try {
             scheduler.addJob(jobDetail, true);
+            return true;
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateSchedule(TriggerKey triggerKey, Trigger trigger) {
+        try {
+            scheduler.rescheduleJob(triggerKey, trigger);
+            return true;
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateSchedule(JobDetail jobDetail, TriggerKey triggerKey, Trigger trigger) {
+        try {
+            scheduler.addJob(jobDetail, true);
+            scheduler.rescheduleJob(triggerKey, trigger);
             return true;
         } catch (SchedulerException e) {
             e.printStackTrace();

@@ -22,4 +22,8 @@ public interface QuartzScheduler {
 
     public boolean updateSchedule(JobDetail jobDetail);
 
+    public boolean updateSchedule(TriggerKey triggerKey, Trigger trigger);
+
+    public boolean updateSchedule(JobDetail jobDetail, TriggerKey triggerKey, Trigger trigger);
+
 }

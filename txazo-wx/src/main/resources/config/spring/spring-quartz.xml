@@ -6,33 +6,13 @@
     <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
-                <ref bean="emailTrigger"/>
             </list>
         </property>
         <property name="autoStartup" value="true"/>
     </bean>
 
-    <bean id="emailJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="emailJob"/>
-        <property name="targetMethod" value="execute"/>
-    </bean>
-
-    <bean id="emailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="emailJobDetail"/>
-        <property name="cronExpression" value="${job.email.cron}"/>
-    </bean>
-
-    <bean id="remindInitThread" class="org.txazo.wx.quartz.thread.RemindInitThread">
-        <property name="remindService" ref="remindService"/>
-        <property name="quartzScheduler" ref="quartzScheduler"/>
-    </bean>
-
-    <bean class="org.txazo.wx.quartz.QuartzSchedulerInit">
-        <property name="initThreads">
-            <list>
-                <ref bean="remindInitThread"/>
-            </list>
-        </property>
+    <bean id="quartzScheduler" class="org.txazo.util.schedule.quartz.DefaultQuartzScheduler">
+        <property name="scheduler" ref="scheduler"/>
     </bean>
 
 </beans>

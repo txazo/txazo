@@ -5,13 +5,13 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.txazo.util.schedule.quartz.util.CronUtils;
 import org.txazo.wx.app.remind.bean.Remind;
 import org.txazo.wx.app.remind.bean.RemindExt;
 import org.txazo.wx.app.remind.enums.RemindShowType;
 import org.txazo.wx.app.remind.enums.RemindType;
 import org.txazo.wx.app.remind.mapper.RemindMapper;
 import org.txazo.wx.app.remind.service.RemindService;
-import org.txazo.wx.quartz.util.CronUtils;
 
 import java.util.Collections;
 import java.util.Date;
