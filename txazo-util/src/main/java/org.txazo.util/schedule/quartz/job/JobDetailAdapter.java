@@ -1,6 +1,5 @@
 package org.txazo.util.schedule.quartz.job;
 
-import org.quartz.Job;
 import org.quartz.JobKey;
 import org.quartz.impl.JobDetailImpl;
 
@@ -18,7 +17,7 @@ public class JobDetailAdapter<V> extends JobDetailImpl implements Value<V> {
     private JobData<V> jobData;
     private JobCallback<V> jobCallback;
 
-    public JobDetailAdapter(JobKey jobKey, Class<? extends Job> jobClass, JobData<V> jobData, JobCallback<V> jobCallback) {
+    public JobDetailAdapter(JobKey jobKey, Class<? extends JobAdapter> jobClass, JobData<V> jobData, JobCallback<V> jobCallback) {
         this.jobData = jobData;
         this.jobCallback = jobCallback;
         setKey(jobKey);

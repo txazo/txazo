@@ -9,8 +9,7 @@ import org.quartz.*;
  * @email txazo1218@163.com
  * @since 15.07.2015
  */
-//@DisallowConcurrentExecution
-//@PersistJobDataAfterExecution
+@DisallowConcurrentExecution
 public abstract class JobAdapter<V> implements Job, JobExecutor<V>, JobRemover<V> {
 
     private boolean beforeExecute(V value) {

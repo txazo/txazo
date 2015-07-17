@@ -2,6 +2,7 @@ package org.txazo.util.schedule.quartz.build;
 
 import org.quartz.JobKey;
 import org.quartz.TriggerKey;
+import org.txazo.util.schedule.quartz.job.JobAdapter;
 
 /**
  * KeyBuilder
@@ -12,7 +13,7 @@ import org.quartz.TriggerKey;
  */
 public abstract class KeyBuilder {
 
-    public static JobKey newJobKey(String name, Class<?> clazz) {
+    public static JobKey newJobKey(String name, Class<? extends JobAdapter> clazz) {
         return newJobKey(name, clazz.getSimpleName());
     }
 
@@ -20,7 +21,7 @@ public abstract class KeyBuilder {
         return JobKey.jobKey(name, group);
     }
 
-    public static TriggerKey newTriggerKey(String name, Class<?> clazz) {
+    public static TriggerKey newTriggerKey(String name, Class<? extends JobAdapter> clazz) {
         return newTriggerKey(name, clazz.getSimpleName());
     }
 
