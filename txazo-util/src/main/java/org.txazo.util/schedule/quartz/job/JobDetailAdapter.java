@@ -22,6 +22,7 @@ public class JobDetailAdapter<V> extends JobDetailImpl implements Value<V> {
         this.jobCallback = jobCallback;
         setKey(jobKey);
         setJobClass(jobClass);
+        setDurability(true);
     }
 
     public JobCallback<V> getJobCallback() {

@@ -4,7 +4,6 @@ import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Trigger;
 import org.quartz.TriggerKey;
-import org.txazo.util.schedule.quartz.job.JobDetailAdapter;
 
 /**
  * QuartzScheduler
@@ -15,12 +14,12 @@ import org.txazo.util.schedule.quartz.job.JobDetailAdapter;
  */
 public interface QuartzScheduler {
 
-    public void addSchedule(JobDetail jobDetail, Trigger trigger);
+    public boolean addSchedule(JobDetail jobDetail, Trigger trigger);
 
-    public void unSchedule(JobKey jobKey);
+    public boolean deleteSchedule(JobKey jobKey);
 
-    public void unSchedule(TriggerKey triggerKey);
+    public boolean deleteSchedule(TriggerKey triggerKey);
 
-    public <V> void updateSchedule(JobDetailAdapter<V> jobDetailAdapter);
+    public boolean updateSchedule(JobDetail jobDetail);
 
 }
