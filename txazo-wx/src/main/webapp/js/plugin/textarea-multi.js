@@ -26,14 +26,9 @@
 
             function bindClick(settings) {
                 $(settings.this).delegate('.plus', 'click', function () {
-                    $(buildTextArea(1)).insertAfter($(this).closest('.text-area-multi'))
-                        .animate({
-                            height: 'toggle'
-                        });
+                    $(buildTextArea(1)).insertAfter($(this).closest('.text-area-multi')).toggle('normal');
                 }).delegate('.minus', 'click', function () {
-                    $(this).closest('.text-area-multi').animate({
-                        height: 'toggle'
-                    }, function() {
+                    $(this).closest('.text-area-multi').toggle('normal', function() {
                         $(this).remove();
                     });
                 });
