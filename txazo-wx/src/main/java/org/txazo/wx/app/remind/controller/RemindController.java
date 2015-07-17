@@ -34,7 +34,8 @@ public class RemindController extends BaseController {
     private RemindSchedule remindSchedule;
 
     @RequestMapping("/list")
-    public String list() {
+    public String list(HttpServletRequest request) {
+        request.setAttribute("reminds", remindService.getRemindsByUserName("txazo1218"));
         return "remind/list";
     }
 
@@ -45,7 +46,7 @@ public class RemindController extends BaseController {
             remind.setExt(ext);
             if (remindService.addRemind(remind)) {
                 remindSchedule.addRemindSchedule(remind);
-                return "redirect:/user/list";
+                return "redirect:/remind/list";
             }
         }
 

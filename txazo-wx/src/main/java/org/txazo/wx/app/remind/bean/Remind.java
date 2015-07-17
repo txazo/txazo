@@ -2,6 +2,7 @@ package org.txazo.wx.app.remind.bean;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
+import org.txazo.wx.app.remind.enums.RemindType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -109,6 +110,10 @@ public class Remind implements Serializable {
 
     public int getType() {
         return type;
+    }
+
+    public String getTypeString() {
+        return RemindType.value(type);
     }
 
     public void setType(int type) {

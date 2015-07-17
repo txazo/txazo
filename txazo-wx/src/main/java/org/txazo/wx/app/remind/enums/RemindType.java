@@ -1,5 +1,7 @@
 package org.txazo.wx.app.remind.enums;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * RemindType
  *
@@ -30,6 +32,15 @@ public enum RemindType {
             }
         }
         return false;
+    }
+
+    public static String value(int id) {
+        for (RemindType type : values()) {
+            if (id == type.getId()) {
+                return type.getType();
+            }
+        }
+        return StringUtils.EMPTY;
     }
 
     public int getId() {

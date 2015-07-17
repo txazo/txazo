@@ -9,6 +9,6 @@ package org.txazo.wx.app.remind.constant;
  */
 public abstract class RemindConstant {
 
-    public static final String REMIND_AGENT_ID = "1";
+    public static final String REMIND_AGENT_ID = "2";
 
 }

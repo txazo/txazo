@@ -23,21 +23,18 @@
         <table class="table table-bordered table-hover table-responsive table-striped">
             <thead>
             <tr>
-                <th class="text-center">微信号</th>
-                <th class="text-center">姓&nbsp;&nbsp;名</th>
-                <th class="text-center">管&nbsp;&nbsp;理</th>
+                <th class="text-center">类型</th>
+                <th class="text-center">表达式</th>
+                <th class="text-center">操作</th>
             </tr>
             </thead>
             <tbody>
-            <c:if test="${users != null && fn:length(users) > 0}">
-                <c:forEach items="${users}" var="u">
+            <c:if test="${reminds != null && fn:length(reminds) > 0}">
+                <c:forEach items="${reminds}" var="r">
                     <tr>
-                        <td class="text-center">${u.userName}</td>
-                        <td class="text-center">${u.trueName}</td>
+                        <td class="text-center">${r.typeString}</td>
+                        <td class="text-center">${r.ext.cronExpression}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-xs btn-danger"
-                                    onclick="window.location.href = '/user/privilege/show?userId=${u.id}'">权限设置
-                            </button>
                         </td>
                     </tr>
                 </c:forEach>

@@ -19,7 +19,8 @@
         <li class="active">添加事项</li>
     </ol>
 
-    <form action="/user/add" method="post" class="form-horizontal" style="padding: 0px 15px;" role="form" id="add-form">
+    <form action="/remind/add" method="post" class="form-horizontal" style="padding: 0px 15px;" role="form"
+          id="add-form">
         <div class="form-group">
             <div class="col-xs-3" style="padding-top: 7px;">
                 <label for="type" class="control-label">类&nbsp;&nbsp;型</label>
@@ -88,6 +89,8 @@
             <div class="alert alert-danger" role="alert" style="padding: 8px; margin-bottom: 0px;"></div>
         </div>
 
+        <div id="contents"></div>
+
         <div class="form-group">
             <div style="width: 60%; margin: 0 auto;">
                 <button type="submit" class="btn btn-danger" style="width:100%;">添加</button>
@@ -100,6 +103,7 @@
 <script src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/bootstrap/bootstrap-datetimepicker.locale.js"></script>
 <script src="/js/util/date.js"></script>
+<script src="/js/plugin/textarea-multi.js"></script>
 <script>
     $(function () {
         $('.form_date').datetimepicker({
@@ -118,6 +122,11 @@
             } else if (id == 'endDatePicker') {
                 $('#beginDatePicker').datetimepicker('setEndDate', ev.date == null ? null : ev.date.getDateString());
             }
+        });
+
+        $('#contents').multiTextArea({
+            name: 'content',
+            leftContent: '内容'
         });
     });
 </script>
