@@ -21,19 +21,26 @@
             bindClick(settings);
 
             function init(settings) {
-                $(settings.this).html('').append($(buildTextArea(0)));
+                $(buildTextArea(0)).appendTo($(settings.this)).show();
             }
 
             function bindClick(settings) {
                 $(settings.this).delegate('.plus', 'click', function () {
-                    $(this).closest('.text-area-multi').after($(buildTextArea(1)));
+                    $(buildTextArea(1)).insertAfter($(this).closest('.text-area-multi'))
+                        .animate({
+                            height: 'toggle'
+                        });
                 }).delegate('.minus', 'click', function () {
-                    $(this).closest('.text-area-multi').remove();
+                    $(this).closest('.text-area-multi').animate({
+                        height: 'toggle'
+                    }, function() {
+                        $(this).remove();
+                    });
                 });
             }
 
             function buildTextArea(type) {
-                var html = '<div class="form-group text-area-multi">';
+                var html = '<div class="form-group text-area-multi" style="display: none;">';
                 html += '<div class="col-xs-' + settings.left + '" style="padding-top: ' + settings.leftPaddingTop + ';">';
                 html += settings.leftContent;
                 html += '</div>';
