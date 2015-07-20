@@ -10,23 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
-    <artifactId>txazo-java</artifactId>
+    <artifactId>txazo-java-design-pattern</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <name>txazo-java</name>
+    <name>txazo-java-design-pattern</name>
     <url>https://github.com/txazo/txazo</url>
 
-    <modules>
-        <module>txazo-java-design-pattern</module>
-        <module>txazo-java-jvm</module>
-        <module>txazo-java-reflection</module>
-        <module>txazo-java-reflection/txazo-java-reflection-remote-api</module>
-        <module>txazo-java-reflection/txazo-java-reflection-remote-service</module>
-        <module>txazo-java-security</module>
-    </modules>
-
     <dependencies>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
