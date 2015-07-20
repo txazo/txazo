@@ -26,12 +26,12 @@ echo "$gitstat" | awk 'BEGIN {
     } else if ($1 == "Date:") {
         date = $6"-"month[$3]"-"addZero($4)
     } else {
-	count[date, author] += $4
-	totalCount += $4
+	    count[date, author] += $4
+	    totalCount += $4
     }
 } END {
     for (i in count) {
-	split(i, p, "\034")
+	    split(i, p, "\034")
         print p[1], p[2], "submit", count[i], "lines"
     }
     print "total", "submit", totalCount, "lines"
