@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * PrototypeTest
+ * PrototypeTest － Java的clone()实现深度克隆
  *
  * @author txazo
  * @email txazo1218@163.com
