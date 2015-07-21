@@ -1,7 +1,7 @@
-package org.txazo.java.pattern.structural.adapter.defaulttemplate;
+package org.txazo.java.pattern.structural.adapter.defaultadapter;
 
 /**
- * KeyAdapter
+ * KeyAdapter - 缺省适配器
  *
  * @author txazo
  * @email txazo1218@163.com

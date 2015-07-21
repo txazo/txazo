@@ -16,7 +16,7 @@ public class CGLibProxyTest {
     @Test
     public void test() {
         IService iService = new IServiceImpl();
-        IService proxy = (IService) new CGLibProxy().getProxy(iService);
+        IService proxy = new CGLibProxy().getProxy(iService);
         proxy.service();
     }
 

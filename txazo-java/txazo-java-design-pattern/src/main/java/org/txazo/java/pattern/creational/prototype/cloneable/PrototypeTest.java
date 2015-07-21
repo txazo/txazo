@@ -16,6 +16,7 @@ public class PrototypeTest {
     public void test() throws CloneNotSupportedException {
         Student student = new Student(1, "txazo", new Teacher(1, "txazo"));
         Student clone = student.clone();
+        Assert.assertNotSame(clone, student);
         Assert.assertEquals(clone.getName(), "txazo");
         Assert.assertEquals(clone.getTeacher().getName(), "txazo");
     }

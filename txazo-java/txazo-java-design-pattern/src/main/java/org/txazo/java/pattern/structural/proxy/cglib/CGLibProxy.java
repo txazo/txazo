@@ -15,11 +15,11 @@ import java.lang.reflect.Method;
  */
 public class CGLibProxy implements MethodInterceptor {
 
-    public Object getProxy(Object target) {
+    public <T> T getProxy(T target) {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(target.getClass());
         enhancer.setCallback(this);
-        return enhancer.create();
+        return (T) enhancer.create();
     }
 
     @Override

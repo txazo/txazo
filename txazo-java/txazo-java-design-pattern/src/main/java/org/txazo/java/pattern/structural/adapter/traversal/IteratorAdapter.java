@@ -4,7 +4,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 /**
- * EnumerationAdapter
+ * EnumerationAdapter - Iterator到Enumeration的适配
  *
  * @author txazo
  * @email txazo1218@163.com

@@ -3,7 +3,7 @@ package org.txazo.java.pattern.structural.proxy.staticproxy;
 import org.txazo.java.pattern.structural.proxy.IServiceImpl;
 
 /**
- * IServiceInheritanceProxy
+ * IServiceInheritanceProxy - 继承实现静态代理
  *
  * @author txazo
  * @email txazo1218@163.com

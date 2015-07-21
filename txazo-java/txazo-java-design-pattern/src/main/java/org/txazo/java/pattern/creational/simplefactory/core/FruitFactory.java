@@ -10,7 +10,7 @@ package org.txazo.java.pattern.creational.simplefactory.core;
 public abstract class FruitFactory {
 
     public static Fruit createFruit(String name) {
-        if ("apple".equals(name)) {
+        if ("apple".equalsIgnoreCase(name)) {
             return new Apple();
         }
         return new Orange();

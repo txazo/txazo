@@ -11,13 +11,13 @@ import java.lang.reflect.Proxy;
  * @email txazo1218@163.com
  * @since 21.07.2015
  */
-public class JdkDynamicProxy implements InvocationHandler {
+public class JdkDynamicProxy<T> implements InvocationHandler {
 
-    private Object target;
+    private T target;
 
-    public Object getProxy(Object target) {
+    public T getProxy(T target) {
         this.target = target;
-        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
+        return (T) Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.txazo.util.lang.CloneUtils;
 
 /**
- * PrototypeTest
+ * PrototypeTest - 序列化实现深度克隆
  *
  * @author txazo
  * @email txazo1218@163.com
@@ -17,6 +17,7 @@ public class PrototypeTest {
     public void test() throws CloneNotSupportedException {
         Student student = new Student(1, "txazo", new Teacher(1, "txazo"));
         Student clone = CloneUtils.clone(student);
+        Assert.assertNotSame(clone, student);
         Assert.assertEquals(clone.getName(), "txazo");
         Assert.assertEquals(clone.getTeacher().getName(), "txazo");
     }

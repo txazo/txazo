@@ -13,10 +13,12 @@ public class FactoryMethodTest {
 
     @Test
     public void test() {
-        Car car = new BCCarFactory().createCar();
+        CarFactory factory = new BCCarFactory();
+        Car car = factory.createCar();
         System.out.println(car.getName());
 
-        car = new BMCarFactory().createCar();
+        factory = new BMCarFactory();
+        car = factory.createCar();
         System.out.println(car.getName());
     }
 

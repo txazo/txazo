@@ -4,7 +4,7 @@ import org.txazo.java.pattern.structural.adapter.HibernateTemplate;
 import org.txazo.java.pattern.structural.adapter.JdbcTemplate;
 
 /**
- * HibernateTemplateAdapter
+ * HibernateTemplateAdapter - 组合适配器
  *
  * @author txazo
  * @email txazo1218@163.com

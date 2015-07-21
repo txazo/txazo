@@ -1,4 +1,4 @@
-package org.txazo.java.pattern.structural.adapter.defaulttemplate;
+package org.txazo.java.pattern.structural.adapter.defaultadapter;
 
 /**
  * KeyListener
