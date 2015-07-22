@@ -5,18 +5,18 @@ import org.txazo.java.pattern.structural.proxy.IService;
 import org.txazo.java.pattern.structural.proxy.IServiceImpl;
 
 /**
- * JdkDynamicProxyTest
+ * JdkProxyTest
  *
  * @author txazo
  * @email txazo1218@163.com
  * @since 21.07.2015
  */
-public class JdkDynamicProxyTest {
+public class JdkProxyTest {
 
     @Test
     public void test() {
         IService iService = new IServiceImpl();
-        IService proxy = new JdkDynamicProxy<IService>().getProxy(iService);
+        IService proxy = new JdkProxy<IService>().getProxy(iService);
         proxy.service();
     }
 

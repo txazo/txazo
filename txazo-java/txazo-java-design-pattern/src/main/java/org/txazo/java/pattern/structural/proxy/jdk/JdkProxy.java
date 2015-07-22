@@ -5,13 +5,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * JdkDynamicProxy - JDK动态代理
+ * JdkProxy - JDK动态代理
  *
  * @author txazo
  * @email txazo1218@163.com
  * @since 21.07.2015
  */
-public class JdkDynamicProxy<T> implements InvocationHandler {
+public class JdkProxy<T> implements InvocationHandler {
 
     private T target;
 

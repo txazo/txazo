@@ -14,11 +14,12 @@ import java.io.*;
 public abstract class CloneUtils {
 
     public static <T> T clone(T t) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ByteArrayOutputStream baos = null;
         ByteArrayInputStream bais = null;
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;
         try {
+            baos = new ByteArrayOutputStream();
             oos = new ObjectOutputStream(baos);
             oos.writeObject(t);
             bais = new ByteArrayInputStream(baos.toByteArray());
