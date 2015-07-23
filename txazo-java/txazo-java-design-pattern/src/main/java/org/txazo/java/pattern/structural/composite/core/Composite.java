@@ -1,4 +1,4 @@
-package org.txazo.java.pattern.structural.composite;
+package org.txazo.java.pattern.structural.composite.core;
 
 import java.util.ArrayList;
 import java.util.List;
