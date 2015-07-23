@@ -10,28 +10,32 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
-    <artifactId>txazo-java</artifactId>
+    <artifactId>txazo-java-concurrent</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <name>txazo-java</name>
+    <name>txazo-java-concurrent</name>
     <url>https://github.com/txazo/txazo</url>
-
-    <modules>
-        <module>txazo-java-concurrent</module>
-        <module>txazo-java-design-pattern</module>
-        <module>txazo-java-jvm</module>
-        <module>txazo-java-network</module>
-        <module>txazo-java-reflection</module>
-        <module>txazo-java-reflection/txazo-java-reflection-remote-api</module>
-        <module>txazo-java-reflection/txazo-java-reflection-remote-service</module>
-        <module>txazo-java-security</module>
-    </modules>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 
