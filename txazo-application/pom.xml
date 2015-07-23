@@ -19,6 +19,7 @@
 
     <modules>
         <module>txazo-blog</module>
+        <module>txazo-wx</module>
     </modules>
 
 </project>

@@ -10,11 +10,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.txazo</groupId>
-    <artifactId>txazo-blog</artifactId>
+    <artifactId>txazo-open-source</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
-    <name>txazo-blog</name>
+    <name>txazo-open-source</name>
     <url>https://github.com/txazo/txazo</url>
+
+    <modules>
+        <module>txazo-log</module>
+        <module>txazo-test</module>
+        <module>txazo-util</module>
+        <module>txazo-weixin</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

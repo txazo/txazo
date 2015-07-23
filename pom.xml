@@ -13,16 +13,9 @@
 
     <modules>
         <module>txazo-application</module>
-        <module>txazo-freemarker</module>
-        <!--<module>txazo-hadoop</module>-->
         <module>txazo-java</module>
-        <module>txazo-log</module>
-        <module>txazo-network</module>
+        <module>txazo-open-source</module>
         <module>txazo-pom</module>
-        <module>txazo-test</module>
-        <module>txazo-util</module>
-        <module>txazo-wx</module>
-        <module>txazo-wx/weixin</module>
     </modules>
 
     <properties>

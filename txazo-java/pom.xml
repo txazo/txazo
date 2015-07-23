@@ -24,6 +24,7 @@
         <module>txazo-java-reflection/txazo-java-reflection-remote-api</module>
         <module>txazo-java-reflection/txazo-java-reflection-remote-service</module>
         <module>txazo-java-security</module>
+        <module>txazo-network</module>
     </modules>
 
     <dependencies>
