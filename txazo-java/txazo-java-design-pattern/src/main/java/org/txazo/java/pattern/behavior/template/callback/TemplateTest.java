@@ -18,7 +18,7 @@ public class TemplateTest {
 
             @Override
             public void callback() {
-                System.out.println("callback");
+                System.out.println("TemplateCallback callback");
             }
 
         });

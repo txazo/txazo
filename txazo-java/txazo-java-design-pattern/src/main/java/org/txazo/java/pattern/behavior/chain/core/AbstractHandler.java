@@ -14,4 +14,5 @@ public abstract class AbstractHandler implements Handler {
     public void setNext(Handler next) {
         this.next = next;
     }
+
 }

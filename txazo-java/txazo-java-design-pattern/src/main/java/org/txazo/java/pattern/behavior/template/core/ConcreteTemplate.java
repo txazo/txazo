@@ -11,7 +11,7 @@ public class ConcreteTemplate extends AbstractTemplate {
 
     @Override
     protected void abstractMethod() {
-        System.out.println("abstractMethod");
+        System.out.println("ConcreteTemplate abstractMethod");
     }
 
 }

@@ -15,7 +15,7 @@ public class Template {
     }
 
     private void concreteMethod() {
-        System.out.println("concreteMethod");
+        System.out.println("Template concreteMethod");
     }
 
 }

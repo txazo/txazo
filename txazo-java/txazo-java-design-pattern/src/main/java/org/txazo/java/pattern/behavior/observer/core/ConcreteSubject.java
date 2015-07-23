@@ -13,7 +13,6 @@ import java.util.List;
 public class ConcreteSubject implements Subject {
 
     private String state;
-
     private List<Observer> observers = new ArrayList<Observer>();
 
     @Override

@@ -12,7 +12,7 @@ public class MiddleHandler extends AbstractHandler {
     @Override
     public void handle(int quantity) {
         if (quantity > 100 && quantity < 10000) {
-            System.out.println("middle handler with quantity " + quantity);
+            System.out.println("MiddleHandler with quantity " + quantity);
         } else if (next != null) {
             next.handle(quantity);
         }

@@ -12,12 +12,8 @@ public class Chain {
     private Handler chain;
 
     public void addHandler(AbstractHandler handler) {
-        if (chain == null) {
-            chain = handler;
-        } else {
-            handler.setNext(chain);
-            chain = handler;
-        }
+        handler.setNext(chain);
+        chain = handler;
     }
 
     public void doHandle(int quantity) {

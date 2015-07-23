@@ -18,7 +18,7 @@ public abstract class AbstractTemplate {
 
     /** 公共方法，父类实现 */
     private void concreteMethod() {
-        System.out.println("concreteMethod");
+        System.out.println("AbstractTemplate concreteMethod");
     }
 
     /** 抽象方法，延迟子类实现 */
@@ -26,7 +26,7 @@ public abstract class AbstractTemplate {
 
     /** 钩子方法，提供默认实现 */
     protected void hookMethod() {
-        System.out.println("hookMethod");
+        System.out.println("AbstractTemplate hookMethod");
     }
 
 }
