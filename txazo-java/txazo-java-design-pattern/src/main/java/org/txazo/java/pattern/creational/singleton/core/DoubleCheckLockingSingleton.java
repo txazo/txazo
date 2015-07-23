@@ -1,7 +1,7 @@
 package org.txazo.java.pattern.creational.singleton.core;
 
 /**
- * DoubleCheckLockingSingleton - 双检锁单例
+ * DoubleCheckLockingSingleton - 双检锁单例(不推荐使用)
  *
  * @author txazo
  * @email txazo1218@163.com
