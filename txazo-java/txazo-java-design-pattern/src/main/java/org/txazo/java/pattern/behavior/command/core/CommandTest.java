@@ -19,8 +19,8 @@ public class CommandTest {
         Command channelCommand = new ChannelCommand(tv);
         Control control = new Control(onCommand, offCommand, channelCommand);
         control.turnOn();
-        control.turnOff();
         control.changeChannel();
+        control.turnOff();
     }
 
 }

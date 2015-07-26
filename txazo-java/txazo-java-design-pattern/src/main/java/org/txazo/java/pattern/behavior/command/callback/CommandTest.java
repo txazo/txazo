@@ -27,7 +27,7 @@ public class CommandTest {
 
             @Override
             public void execute() {
-                tv.turnOff();
+                tv.changeChannel();
             }
 
         });
@@ -35,7 +35,7 @@ public class CommandTest {
 
             @Override
             public void execute() {
-                tv.changeChannel();
+                tv.turnOff();
             }
 
         });

@@ -27,8 +27,8 @@ public class SingletonTest {
     }
 
     @Test
-    public void testStaticInnerSingleton() {
-        Assert.assertSame(StaticInnerSingleton.getInstance(), StaticInnerSingleton.getInstance());
+    public void testStaticInnerClassSingleton() {
+        Assert.assertSame(StaticInnerClassSingleton.getInstance(), StaticInnerClassSingleton.getInstance());
     }
 
     @Test
