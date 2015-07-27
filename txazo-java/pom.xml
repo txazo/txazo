@@ -20,6 +20,7 @@
     <modules>
         <module>txazo-java-concurrent</module>
         <module>txazo-java-design-pattern</module>
+        <module>txazo-java-io</module>
         <module>txazo-java-jvm</module>
         <module>txazo-java-network</module>
         <module>txazo-java-reflection</module>
