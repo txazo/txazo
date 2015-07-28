@@ -18,6 +18,7 @@
     <url>https://github.com/txazo/txazo</url>
 
     <modules>
+        <module>txazo-java-collection</module>
         <module>txazo-java-concurrent</module>
         <module>txazo-java-design-pattern</module>
         <module>txazo-java-io</module>
