@@ -18,7 +18,7 @@ public class CloseableTest {
     /**
      * Closeable
      * <pre>
-     * 1) 可以关闭的资源或目标
+     * 1) 可以关闭的资源
      * 2) 调用close()释放资源
      * 3) 常见的实现类有:
      *    InputStream OutputStream
@@ -53,7 +53,7 @@ public class CloseableTest {
         @Override
         public void close() throws IOException {
             data = null;
-            System.out.println("Resource close");
+            System.out.println("Resource closed");
         }
 
     }
