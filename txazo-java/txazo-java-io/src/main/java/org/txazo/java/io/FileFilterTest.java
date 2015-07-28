@@ -17,7 +17,11 @@ import java.io.FileFilter;
 public class FileFilterTest {
 
     /**
-     * FileFilter - File.listFiles(FileFilter filter)过滤文件
+     * FileFilter
+     * <pre>
+     * 1) 文件过滤
+     * 2) File.listFiles(FileFilter filter)
+     * </pre>
      */
 
     @Test

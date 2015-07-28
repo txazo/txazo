@@ -19,6 +19,11 @@ public class FilenameFilterTest {
 
     /**
      * FilenameFilter
+     * <pre>
+     * 1) 文件名过滤
+     * 2) File.list(FilenameFilter filter)
+     * 3) File.listFiles(FilenameFilter filter)
+     * <pre/>
      */
 
     @Test
@@ -39,7 +44,7 @@ public class FilenameFilterTest {
 
         @Override
         public boolean accept(File dir, String name) {
-            return "Downloads".equalsIgnoreCase(name);
+            return dir.getAbsolutePath().equalsIgnoreCase("/Users/txazo") && "Downloads".equalsIgnoreCase(name);
         }
 
     }
