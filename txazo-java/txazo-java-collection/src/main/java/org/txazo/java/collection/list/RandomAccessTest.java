@@ -1,8 +1,8 @@
 package org.txazo.java.collection.list;
 
 import org.junit.Test;
-import org.txazo.util.time.ExecutionUtils;
-import org.txazo.util.time.Executor;
+import org.txazo.util.test.ExecutionUtils;
+import org.txazo.util.test.Executor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,22 +26,22 @@ public class RandomAccessTest {
      *    for (Iterator i = list.iterator(); i.hasNext(); )
      * 3) 原理: Iterator.next()比<List extends RandomAccess>.get()多几步操作
      * 4) RandomAccess的实现类有:
-     *    ArrayList
-     *    Vector
      *    Stack
+     *    Vector
+     *    ArrayList
      *    CopyOnWriteArrayList
      * </pre>
      */
 
     @Test
     public void test() {
-        int times = 10000;
+        int times = 100000;
         final List<Integer> list = new ArrayList<Integer>(1000000);
         for (int i = 0, n = list.size(); i < n; i++) {
             list.add(i);
         }
 
-        ExecutionUtils.executeTime("RandomAccess", times, new Executor() {
+        ExecutionUtils.execute("RandomAccess", times, new Executor() {
 
             @Override
             public void execute() {
@@ -52,7 +52,7 @@ public class RandomAccessTest {
 
         });
 
-        ExecutionUtils.executeTime("Iterator", times, new Executor() {
+        ExecutionUtils.execute("Iterator", times, new Executor() {
 
             @Override
             public void execute() {

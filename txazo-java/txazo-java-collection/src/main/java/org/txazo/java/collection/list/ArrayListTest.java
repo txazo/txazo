@@ -20,7 +20,7 @@ public class ArrayListTest {
      * <p/>
      * 1) 线程不安全
      * 2) 实现: Object[] elementData, int size
-     * 3) 大小可动态增长, 默认大小10, 每次扩容1/2, 可指定初始大小
+     * 3) 大小可动态增长, 默认大小10, 每次扩容1/2, 可指定初始大小, 尽量避免扩容
      */
 
     @Test

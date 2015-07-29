@@ -1,9 +1,12 @@
 package org.txazo.java.collection.list;
 
 import org.junit.Test;
+import org.txazo.util.test.ExecutionUtils;
+import org.txazo.util.test.Executor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,28 +21,66 @@ public class ListTest {
 
     @Test
     public void test() {
-        List<Integer> list = new ArrayList<Integer>();
-
-        /** List遍历方式一 */
-        for (int i = 0, length = list.size(); i < length; i++) {
-            System.out.println(list.get(i));
+        final List<Integer> arrayList = new ArrayList<Integer>(100000);
+        final List<Integer> linkedList = new LinkedList<Integer>();
+        for (int i = 0, n = arrayList.size(); i < n; i++) {
+            arrayList.add(i);
+            linkedList.add(i);
         }
+        testLoop("ArrayList", arrayList);
+        testLoop("LinkedList", linkedList);
+    }
 
-        /** List遍历方式二, 内部实现为Iterator */
-        for (Integer i : list) {
-            System.out.println(i);
-        }
+    public void testLoop(String loopName, final List<Integer> list) {
+        int times = 1000000;
 
-        /** List遍历方式三 */
-        for (Iterator<Integer> iterator = list.iterator(); iterator.hasNext(); ) {
-            System.out.println(iterator.next());
-        }
+        ExecutionUtils.execute(loopName + " Loop1", times, new Executor() {
 
-        /** List遍历方式四 */
-        Iterator<Integer> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
+            @Override
+            public void execute() {
+                /** List遍历方式一 */
+                for (int i = 0, n = list.size(); i < n; i++) {
+                    list.get(i);
+                }
+            }
+
+        });
+
+        ExecutionUtils.execute(loopName + " Loop2", times, new Executor() {
+
+            @Override
+            public void execute() {
+                /** List遍历方式二, 内部实现为Iterator */
+                for (Integer i : list) {
+                }
+            }
+
+        });
+
+        ExecutionUtils.execute(loopName + " Loop3", times, new Executor() {
+
+            @Override
+            public void execute() {
+                /** List遍历方式三 */
+                for (Iterator<Integer> i = list.iterator(); i.hasNext(); ) {
+                    i.next();
+                }
+            }
+
+        });
+
+        ExecutionUtils.execute(loopName + " Loop4", times, new Executor() {
+
+            @Override
+            public void execute() {
+                /** List遍历方式四 */
+                Iterator<Integer> i = list.iterator();
+                while (i.hasNext()) {
+                    i.next();
+                }
+            }
+
+        });
     }
 
 }
