@@ -20,16 +20,24 @@ public class RandomAccessTest {
 
     /**
      * RandomAccess
-     * <p/>
-     * 1) 用来被List实现, 为List提供快速随机访问功能
-     * 2) 使用List.get()遍历性能高于Iterator遍历
+     * <pre>
+     * 1) List的标记接口, 表明List支持快速随机访问
+     * 2) 实现RandomAccess的List遍历时, for (int i = 0, n = list.size(); i < n; i++)性能高于
+     *    for (Iterator i = list.iterator(); i.hasNext(); )
+     * 3) 原理: Iterator.next()比<List extends RandomAccess>.get()多几步操作
+     * 4) RandomAccess的实现类有:
+     *    ArrayList
+     *    Vector
+     *    Stack
+     *    CopyOnWriteArrayList
+     * </pre>
      */
 
     @Test
     public void test() {
         int times = 10000;
         final List<Integer> list = new ArrayList<Integer>(1000000);
-        for (int i = 0, length = list.size(); i < length; i++) {
+        for (int i = 0, n = list.size(); i < n; i++) {
             list.add(i);
         }
 
@@ -37,7 +45,7 @@ public class RandomAccessTest {
 
             @Override
             public void execute() {
-                for (int i = 0, length = list.size(); i < length; i++) {
+                for (int i = 0, n = list.size(); i < n; i++) {
                     list.get(i);
                 }
             }
@@ -48,8 +56,8 @@ public class RandomAccessTest {
 
             @Override
             public void execute() {
-                for (Iterator<Integer> iterator = list.iterator(); iterator.hasNext(); ) {
-                    iterator.next();
+                for (Iterator<Integer> i = list.iterator(); i.hasNext(); ) {
+                    i.next();
                 }
             }
 
