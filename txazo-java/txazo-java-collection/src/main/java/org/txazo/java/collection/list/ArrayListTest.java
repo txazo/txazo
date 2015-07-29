@@ -16,7 +16,7 @@ import java.util.List;
 public class ArrayListTest {
 
     /**
-     * ArrayList
+     * ArrayList - 数组
      * <p/>
      * 1) 线程不安全
      * 2) 实现: Object[] elementData, int size

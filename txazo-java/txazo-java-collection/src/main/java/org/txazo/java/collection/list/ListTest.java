@@ -38,7 +38,7 @@ public class ListTest {
 
             @Override
             public void execute() {
-                /** List遍历方式一 */
+                /** List遍历方式一, ArrayList遍历推荐使用 */
                 for (int i = 0, n = list.size(); i < n; i++) {
                     list.get(i);
                 }
@@ -61,7 +61,7 @@ public class ListTest {
 
             @Override
             public void execute() {
-                /** List遍历方式三 */
+                /** List遍历方式三, LinkedList遍历推荐使用 */
                 for (Iterator<Integer> i = list.iterator(); i.hasNext(); ) {
                     i.next();
                 }
