@@ -24,23 +24,30 @@ public class CollectionsTest {
         Collections.emptySet();
         Collections.emptyMap();
 
+        /** 不可变的只保护一个元素的集合 */
+        Collections.singleton(new Object());
+        Collections.singletonList(new Object());
+        Collections.singletonMap(new Object(), new Object());
+
         /** List排序 */
-        Collections.sort(list);
-        Collections.sort(list, new Comparator() {
+        Collections.sort(new ArrayList<Comparable>());
 
-            @Override
-            public int compare(Object o1, Object o2) {
-                return 0;
-            }
+        /** List乱序 */
+        Collections.shuffle(new ArrayList<Object>());
 
-        });
+        /** List反序 */
+        Collections.reverse(new ArrayList<Object>());
+
+        /** 数组添加到集合 */
+        Collections.addAll(new ArrayList<Object>(), new Object[]{});
     }
 
     /**
      * Collections.synchronizedXXX()
      * <p/>
      * 1) 返回同步的集合包装
-     * 2) 原理: final Object mutex, synchronized对象锁
+     * 2) 装饰器模式
+     * 3) 原理: final Object mutex, synchronized对象锁
      */
     @Test
     public void testSynchronized() {
@@ -52,19 +59,14 @@ public class CollectionsTest {
     /**
      * Collections.unmodifiableXXX()
      * <p/>
-     * 1) 返回不可修改的集合包装
+     * 1) 返回不可修改的集合包装, 只支持读, 修改时抛UnsupportedOperationException
+     * 2) 装饰器模式
      */
     @Test
     public void testUnmodifiable() {
         Collections.unmodifiableList(new ArrayList<Object>());
-    }
-
-    /**
-     * Collections.checkedXXX() - 集合元素强制类型检查
-     */
-    @Test
-    public void testC() {
-        Collections.checkedList(new ArrayList<Integer>(), Integer.class);
+        Collections.unmodifiableSet(new HashSet<Object>());
+        Collections.unmodifiableMap(new HashMap<Object, Object>());
     }
 
 }
