@@ -1,4 +1,4 @@
-package org.txazo.java.lang.advanced;
+package org.txazo.java.lang.enhancement.jdk5;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
