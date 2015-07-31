@@ -1,8 +1,8 @@
 package org.txazo.java.collection.list;
 
 import org.junit.Test;
-import org.txazo.util.test.ExecutionUtils;
-import org.txazo.util.test.Executor;
+import org.txazo.util.time.TimeWatch;
+import org.txazo.util.time.TimeWatchTask;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,7 +41,9 @@ public class RandomAccessTest {
             list.add(i);
         }
 
-        ExecutionUtils.execute("RandomAccess", times, new Executor() {
+        TimeWatch timeWatch = new TimeWatch();
+
+        timeWatch.watch("RandomAccess", times, new TimeWatchTask() {
 
             @Override
             public void execute() {
@@ -52,7 +54,7 @@ public class RandomAccessTest {
 
         });
 
-        ExecutionUtils.execute("Iterator", times, new Executor() {
+        timeWatch.watch("Iterator", times, new TimeWatchTask() {
 
             @Override
             public void execute() {
@@ -62,6 +64,8 @@ public class RandomAccessTest {
             }
 
         });
+
+        timeWatch.showTime();
     }
 
 }

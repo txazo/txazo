@@ -20,15 +20,16 @@
     <modules>
         <module>txazo-java-collection</module>
         <module>txazo-java-concurrent</module>
+        <module>txazo-java-core</module>
         <module>txazo-java-design-pattern</module>
         <module>txazo-java-io</module>
         <module>txazo-java-jvm</module>
-        <module>txazo-java-lang</module>
         <module>txazo-java-network</module>
         <module>txazo-java-reflection</module>
         <module>txazo-java-reflection/txazo-java-reflection-remote-api</module>
         <module>txazo-java-reflection/txazo-java-reflection-remote-service</module>
         <module>txazo-java-security</module>
+        <module>txazo-java-web</module>
     </modules>
 
 </project>

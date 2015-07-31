@@ -1,8 +1,8 @@
 package org.txazo.java.collection.list;
 
 import org.junit.Test;
-import org.txazo.util.test.ExecutionUtils;
-import org.txazo.util.test.Executor;
+import org.txazo.util.time.TimeWatch;
+import org.txazo.util.time.TimeWatchTask;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,7 +34,9 @@ public class ListTest {
     public void testLoop(String loopName, final List<Integer> list) {
         int times = 1000000;
 
-        ExecutionUtils.execute(loopName + " Loop1", times, new Executor() {
+        TimeWatch timeWatch = new TimeWatch();
+
+        timeWatch.watch(loopName + " Loop1", times, new TimeWatchTask() {
 
             @Override
             public void execute() {
@@ -46,7 +48,7 @@ public class ListTest {
 
         });
 
-        ExecutionUtils.execute(loopName + " Loop2", times, new Executor() {
+        timeWatch.watch(loopName + " Loop2", times, new TimeWatchTask() {
 
             @Override
             public void execute() {
@@ -57,7 +59,7 @@ public class ListTest {
 
         });
 
-        ExecutionUtils.execute(loopName + " Loop3", times, new Executor() {
+        timeWatch.watch(loopName + " Loop3", times, new TimeWatchTask() {
 
             @Override
             public void execute() {
@@ -69,7 +71,7 @@ public class ListTest {
 
         });
 
-        ExecutionUtils.execute(loopName + " Loop4", times, new Executor() {
+        timeWatch.watch(loopName + " Loop4", times, new TimeWatchTask() {
 
             @Override
             public void execute() {
@@ -81,6 +83,8 @@ public class ListTest {
             }
 
         });
+
+        timeWatch.showTime();
     }
 
 }
