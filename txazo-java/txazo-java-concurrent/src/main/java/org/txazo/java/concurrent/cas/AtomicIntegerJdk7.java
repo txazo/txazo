@@ -40,8 +40,8 @@ public class AtomicIntegerJdk7 {
     }
 
     public final int incrementAndGet() {
-        return unsafe.getAndAddInt(this, valueOffset, 1) + 1;
+//        return unsafe.getAndAddInt(this, valueOffset, 1) + 1;
+        return 0;
     }
-
 
 }
