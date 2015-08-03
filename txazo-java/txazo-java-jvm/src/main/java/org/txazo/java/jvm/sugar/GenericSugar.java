@@ -15,7 +15,7 @@ import java.util.List;
 public class GenericSugar {
 
     /**
-     * 泛型语法糖
+     * 泛型 - 语法糖
      *
      * 1) Java的泛型只在源代码中存在
      * 2) 编译后的class文件中已擦除泛型, 并插入强制转型的代码

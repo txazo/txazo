@@ -10,7 +10,7 @@ package org.txazo.java.jvm.sugar;
 public class EnumSugar {
 
     /**
-     * 枚举语法糖
+     * 枚举 - 语法糖
      */
 
     enum Sugar {

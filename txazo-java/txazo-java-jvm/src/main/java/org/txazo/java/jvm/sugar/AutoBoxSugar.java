@@ -13,7 +13,7 @@ import org.junit.Test;
 public class AutoBoxSugar {
 
     /**
-     * 自动装箱拆箱语法糖
+     * 自动装箱拆箱 - 语法糖
      *
      * 1) 装箱: 基本数据类型转换为包装类型
      * 2) 拆箱: 包装类型转换为基本数据类型

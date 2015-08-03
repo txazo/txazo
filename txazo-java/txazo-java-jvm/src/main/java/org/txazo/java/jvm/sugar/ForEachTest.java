@@ -16,9 +16,9 @@ import java.util.List;
 public class ForEachTest {
 
     /**
-     * 增强for循环语法糖
+     * 增强for循环 - 语法糖
      *
-     * 1) foreach内部原理: Iterator
+     * 1) foreach原理: Iterator
      */
 
     @Test

@@ -12,11 +12,12 @@ import org.junit.Test;
 public class InnerClassSugar {
 
     /**
-     * 内部类语法糖
+     * 内部类 - 语法糖
      */
 
     @Test
     public InnerClass getLocalInnerClass() {
+        /** 局部内部类 */
         class LocalInnerClass implements InnerClass {
 
         }
@@ -26,6 +27,7 @@ public class InnerClassSugar {
 
     @Test
     public InnerClass getAnonymousInnerClass() {
+        /** 匿名内部类 */
         return new InnerClass() {
 
         };
@@ -35,10 +37,12 @@ public class InnerClassSugar {
 
     }
 
+    /** 成员内部类 */
     class MemberInnerClass {
 
     }
 
+    /** 静态内部类 */
     static class StaticInnerClass {
 
     }
