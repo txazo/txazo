@@ -34,9 +34,8 @@ public class ForEachTest {
     public void testDecompile() {
         int number = 0;
         List list = new ArrayList();
-        Integer i;
-        for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {
-            i = ((Integer) iterator.next()).intValue();
+        for (Iterator i = list.iterator(); i.hasNext(); ) {
+            number = ((Integer) i.next()).intValue();
         }
     }
 
