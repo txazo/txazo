@@ -1,6 +1,0 @@
-加载顺序:
-1) Bootstrap classes
-    sun.boot.class.path
-2) Extension classes
-3) User classes
-    java.class.path
