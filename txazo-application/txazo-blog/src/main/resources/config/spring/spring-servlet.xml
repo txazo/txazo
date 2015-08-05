@@ -9,7 +9,7 @@
 
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="org.txazo.wx"/>
+    <context:component-scan base-package="org.txazo.blog"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/page/"/>

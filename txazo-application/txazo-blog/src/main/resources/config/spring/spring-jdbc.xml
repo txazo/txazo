@@ -3,19 +3,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
+    <!-- C3P0 DataSource -->
     <bean id="parentDataSource" abstract="true" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="${jdbc.driverClass}"/>
-        <property name="user" value="${jdbc.user}"/>
-        <property name="password" value="${jdbc.password}"/>
         <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
         <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
         <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
         <property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
     </bean>
 
-    <bean id="wxDataSource" parent="parentDataSource">
-        <property name="jdbcUrl" value="jdbc:mysql://${jdbc.wx.database}?useUnicode=true&amp;characterEncoding=UTF-8"/>
+    <!-- blogDataSource -->
+    <bean id="blogDataSource" parent="parentDataSource">
+        <property name="user" value="${jdbc.blog.user}"/>
+        <property name="password" value="${jdbc.blog.password}"/>
+        <property name="jdbcUrl" value="jdbc:mysql://${jdbc.blog.database}?useUnicode=true&amp;characterEncoding=UTF-8"/>
     </bean>
 
 </beans>
