@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.3//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias alias="Remind" type="org.txazo.wx.app.remind.bean.Remind"/>
+        <typeAlias alias="Email" type="org.txazo.wx.app.email.bean.Email"/>
+        <typeAlias alias="EmailContent" type="org.txazo.wx.app.email.bean.EmailContent"/>
+        <typeAlias alias="Memory" type="org.txazo.wx.app.memory.bean.Memory"/>
+        <typeAlias alias="User" type="org.txazo.wx.app.user.bean.User"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="config/mapper/Remind.xml"/>
+        <mapper resource="config/mapper/Email.xml"/>
+        <mapper resource="config/mapper/EmailContent.xml"/>
+        <mapper resource="config/mapper/Memory.xml"/>
+        <mapper resource="config/mapper/User.xml"/>
+    </mappers>
+</configuration>
