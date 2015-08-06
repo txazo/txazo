@@ -14,7 +14,7 @@ public class MonitorHandler extends NamespaceHandlerSupport {
     @Override
     public void init() {
         System.out.println("init add monitor");
-        registerBeanDefinitionParser("monitor", new MonitorBeanDefinitionParser());
+        registerBeanDefinitionParser("jdbcs", new MonitorBeanDefinitionParser());
     }
 
 }

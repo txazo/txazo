@@ -2,38 +2,26 @@
 
 <xsd:schema xmlns="http://www.txazo.com/schema/spring/spring-monitor"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:beans="http://www.springframework.org/schema/beans"
             targetNamespace="http://www.txazo.com/schema/spring/spring-monitor"
             elementFormDefault="qualified"
             attributeFormDefault="unqualified">
 
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-    <xsd:import namespace="http://www.springframework.org/schema/beans"/>
 
-    <xsd:element name="request">
+    <xsd:element name="jdbcs">
         <xsd:complexType>
-            <xsd:attribute name="domain" type="string" use="optional"/>
-            <xsd:attribute name="uri" type="string" use="required"/>
-            <xsd:attribute name="requestType" type="requestType" use="optional"/>
-            <xsd:attribute name="requireParams" type="string" use="optional"/>
-            <xsd:attribute name="suffix" type="string" use="optional"/>
+            <xsd:sequence>
+                <xsd:element ref="jdbc" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:string" use="required"/>
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:simpleType name="string">
-        <xsd:restriction base="xsd:string">
-            <xsd:whiteSpace value="replace"/>
-        </xsd:restriction>
-    </xsd:simpleType>
+    <xsd:element name="jdbc">
+        <xsd:complexType>
+            <xsd:attribute name="class" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
 
-    <xsd:simpleType name="requestType">
-        <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="GET"/>
-            <xsd:enumeration value="POST_FORM"/>
-            <xsd:enumeration value="POST_TEXT"/>
-            <xsd:enumeration value="POST_FILE"/>
-            <xsd:enumeration value="POST_STREAM"/>
-        </xsd:restriction>
-    </xsd:simpleType>
 
 </xsd:schema>

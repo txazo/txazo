@@ -21,7 +21,6 @@ public class MonitorBeanDefinitionParser extends AbstractSingleBeanDefinitionPar
     @Override
     protected void doParse(Element element, BeanDefinitionBuilder builder) {
         System.out.println("doParse");
-        super.doParse(element, builder);
     }
 
 }
