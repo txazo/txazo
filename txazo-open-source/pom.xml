@@ -19,6 +19,7 @@
 
     <modules>
         <module>txazo-log</module>
+        <module>txazo-monitor</module>
         <module>txazo-test</module>
         <module>txazo-util</module>
         <module>txazo-weixin</module>
