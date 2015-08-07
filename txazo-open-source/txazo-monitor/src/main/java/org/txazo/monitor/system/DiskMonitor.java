@@ -1,24 +1,25 @@
 package org.txazo.monitor.system;
 
+import org.txazo.monitor.common.util.ByteUtils;
+
 import java.io.File;
 
 /**
- * Created by txazo on 15/8/6.
+ * DiskMonitor
+ *
+ * @author txazo
+ * @email txazo1218@163.com
+ * @since 07.08.2015
  */
 public class DiskMonitor {
 
-    public static void main(String[] args) {
-        // 磁盘
-        long totalSpace = 0L;
-        long usableSpace = 0L;
+    public static long getFreeSpace() {
+        long freeSpace = 0L;
         File[] files = File.listRoots();
         for (File file : files) {
-            totalSpace = file.getTotalSpace() / 1024 / 1024 / 1024;
-            usableSpace = file.getUsableSpace() / 1024 / 1024 / 1024;
+            freeSpace += file.getFreeSpace();
         }
-        System.out.println("总的磁盘空间: " + totalSpace + "G");
-        System.out.println("使用磁盘空间: " + usableSpace + "G");
-        System.out.println("磁盘空间使用率: " + usableSpace * 100 / totalSpace + "G");
+        return ByteUtils.getGByte(freeSpace);
     }
 
 }
