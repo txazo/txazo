@@ -1,5 +1,8 @@
 package org.txazo.monitor.jvm;
 
+import org.txazo.monitor.common.util.ByteUtils;
+import org.txazo.monitor.mx.MXBeanFactory;
+
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
@@ -13,22 +16,35 @@ import java.lang.management.MemoryUsage;
  */
 public class HeapMemoryMonitor {
 
+    /** -Xms */
+    public static long getInit() {
+        return ByteUtils.getMByte(getHeapMemoryUsage().getInit());
+    }
+
+    /** currently used Memory */
+    public static long getUsed() {
+        return ByteUtils.getMByte(getHeapMemoryUsage().getUsed());
+    }
+
+    /** committed >= used */
+    public static long getCommitted() {
+        return ByteUtils.getMByte(getHeapMemoryUsage().getCommitted());
+    }
+
+    /** max >= committed >= used */
+    public static long getMax() {
+        return ByteUtils.getMByte(getHeapMemoryUsage().getMax());
+    }
+
+    private static MemoryUsage getHeapMemoryUsage() {
+        return MXBeanFactory.getMemoryMXBean().getHeapMemoryUsage();
+    }
+
     public static void main(String[] args) throws InterruptedException {
-        MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
-        MemoryUsage heapMemory = memoryMXBean.getHeapMemoryUsage();
-        MemoryUsage nonHeapMemory = memoryMXBean.getNonHeapMemoryUsage();
-
-        System.out.println("Init\t\t" + heapMemory.getInit() / 1024 / 1024 + "M");
-        System.out.println("Max\t\t\t" + heapMemory.getMax() / 1024 / 1024 + "M");
-        System.out.println("Used\t\t" + heapMemory.getUsed() / 1024 / 1024 + "M");
-        System.out.println("Commited\t" + heapMemory.getCommitted() / 1024 / 1024 + "M");
-
-        System.out.println("Init\t\t" + nonHeapMemory.getInit() / 1024 / 1024 + "M");
-        System.out.println("Max\t\t\t" + nonHeapMemory.getMax() / 1024 / 1024 + "M");
-        System.out.println("Used\t\t" + nonHeapMemory.getUsed() / 1024 / 1024 + "M");
-        System.out.println("Commited\t" + nonHeapMemory.getCommitted() / 1024 / 1024 + "M");
-
-        Thread.sleep(1000000);
+        System.out.println(HeapMemoryMonitor.getInit());
+        System.out.println(HeapMemoryMonitor.getUsed());
+        System.out.println(HeapMemoryMonitor.getCommitted());
+        System.out.println(HeapMemoryMonitor.getMax());
     }
 
 }

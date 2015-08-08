@@ -11,14 +11,17 @@ import org.txazo.monitor.mx.MXBeanFactory;
  */
 public class CPUMonitor {
 
+    /** Load Average */
     public static double getLoadAverage() {
         return MXBeanFactory.getOperatingSystemMXBean().getSystemLoadAverage() / availableProcessors();
     }
 
+    /** CPU Usage */
     public static double getUsage() {
         return CPU.getUsage() / availableProcessors();
     }
 
+    /** Available Processors */
     public static int availableProcessors() {
         return Runtime.getRuntime().availableProcessors();
     }

@@ -3,6 +3,7 @@ package org.txazo.monitor.mx;
 import com.sun.management.OperatingSystemMXBean;
 
 import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
 import java.lang.management.ThreadMXBean;
 
 /**
@@ -22,6 +23,10 @@ public abstract class MXBeanFactory {
         return ThreadMXBeanHolder.instance;
     }
 
+    public static MemoryMXBean getMemoryMXBean() {
+        return MemoryMXBeanHolder.instance;
+    }
+
     private static class OperatingSystemMXBeanHolder {
 
         private static OperatingSystemMXBean instance = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
@@ -31,6 +36,12 @@ public abstract class MXBeanFactory {
     private static class ThreadMXBeanHolder {
 
         private static ThreadMXBean instance = ManagementFactory.getThreadMXBean();
+    }
+
+    private static class MemoryMXBeanHolder {
+
+        private static MemoryMXBean instance = ManagementFactory.getMemoryMXBean();
+
     }
 
 }

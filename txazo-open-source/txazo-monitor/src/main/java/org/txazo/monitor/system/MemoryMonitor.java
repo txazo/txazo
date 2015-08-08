@@ -12,10 +12,12 @@ import org.txazo.monitor.mx.MXBeanFactory;
  */
 public abstract class MemoryMonitor {
 
+    /** FreePhysicalMemory */
     public static long getFreePhysicalMemory() {
         return ByteUtils.getMByte(MXBeanFactory.getOperatingSystemMXBean().getFreePhysicalMemorySize());
     }
 
+    /* FreeSwapSpace */
     public static long getFreeSwapSpace() {
         return ByteUtils.getMByte(MXBeanFactory.getOperatingSystemMXBean().getFreeSwapSpaceSize());
     }
