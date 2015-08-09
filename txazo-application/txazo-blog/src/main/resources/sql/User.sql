@@ -10,5 +10,5 @@ create table User (
     updateTime timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP comment 'updateTime',
     primary key (id),
     unique (userName),
-    key (updateTime)
+    key (createTime)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User';
