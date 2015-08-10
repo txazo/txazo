@@ -10,12 +10,20 @@
         VALUES (#{blogId}, #{content}, 1, now())
     </insert>
 
+    <update id="updateContent" parameterType="BlogContent">
+        UPDATE BlogContent SET content = #{content} WHERE id = #{id} LIMIT 1
+    </update>
+
     <select id="getContent" parameterType="int" resultType="BlogContent">
         SELECT * from BlogContent WHERE id = #{id} limit 1
     </select>
 
-    <update id="changeType">
-        UPDATE BlogContent SET type = #{type} WHERE id = #{id} LIMIT 1
+    <select id="getContentByBlogAndStatus" resultType="BlogContent">
+        SELECT * from BlogContent WHERE blogId = #{blogId} and status = #{status} limit 1
+    </select>
+
+    <update id="changeContentStatus">
+        UPDATE BlogContent SET status = #{status} WHERE id = #{id} LIMIT 1
     </update>
 
 </mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.3//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.txazo.blog.module.blog.dao.BlogDao">
+
+    <insert id="addBlog" parameterType="Blog" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Blog (userId, catalogId, title, tags, viewCount, isPublic, idDeleted, createTime)
+        VALUES (#{userId}, #{catalogId}, #{title}, #{tags}, 0, #{isPublic}, 0, now())
+    </insert>
+
+</mapper>

@@ -14,8 +14,12 @@ public interface BlogContentDao {
 
     public int addContent(BlogContent content);
 
+    public int updateContent(BlogContent content);
+
     public BlogContent getContent(int id);
 
-    public int changeType(@Param("id") int id, @Param("type") int type);
+    public BlogContent getContentByBlogAndStatus(@Param("blogId") int blogId, @Param("status") int status);
+
+    public int changeContentStatus(@Param("id") int id, @Param("status") int status);
 
 }

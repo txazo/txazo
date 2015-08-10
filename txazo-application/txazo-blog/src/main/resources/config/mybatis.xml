@@ -4,12 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
+        <typeAlias alias="Blog" type="org.txazo.blog.module.blog.bean.Blog"/>
         <typeAlias alias="BlogTag" type="org.txazo.blog.module.blog.bean.BlogTag"/>
         <typeAlias alias="BlogCatalog" type="org.txazo.blog.module.blog.bean.BlogCatalog"/>
-        <typeAlias alias="BlogCatalog" type="org.txazo.blog.module.blog.bean.BlogContent"/>
+        <typeAlias alias="BlogContent" type="org.txazo.blog.module.blog.bean.BlogContent"/>
     </typeAliases>
 
     <mappers>
+        <mapper resource="config/mapper/Blog.xml"/>
         <mapper resource="config/mapper/BlogTag.xml"/>
         <mapper resource="config/mapper/BlogCatalog.xml"/>
         <mapper resource="config/mapper/BlogContent.xml"/>
