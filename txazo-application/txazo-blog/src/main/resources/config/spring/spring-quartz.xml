@@ -11,8 +11,4 @@
         <property name="autoStartup" value="true"/>
     </bean>
 
-    <bean id="quartzScheduler" class="org.txazo.util.schedule.quartz.DefaultQuartzScheduler">
-        <property name="scheduler" ref="scheduler"/>
-    </bean>
-
 </beans>

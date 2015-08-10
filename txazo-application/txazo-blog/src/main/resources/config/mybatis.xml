@@ -4,18 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias alias="Remind" type="org.txazo.wx.app.remind.bean.Remind"/>
-        <typeAlias alias="Email" type="org.txazo.wx.app.email.bean.Email"/>
-        <typeAlias alias="EmailContent" type="org.txazo.wx.app.email.bean.EmailContent"/>
-        <typeAlias alias="Memory" type="org.txazo.wx.app.memory.bean.Memory"/>
-        <typeAlias alias="User" type="org.txazo.wx.app.user.bean.User"/>
+        <typeAlias alias="BlogTag" type="org.txazo.blog.module.blog.bean.BlogTag"/>
+        <typeAlias alias="BlogCatalog" type="org.txazo.blog.module.blog.bean.BlogCatalog"/>
+        <typeAlias alias="BlogCatalog" type="org.txazo.blog.module.blog.bean.BlogContent"/>
     </typeAliases>
 
     <mappers>
-        <mapper resource="config/mapper/Remind.xml"/>
-        <mapper resource="config/mapper/Email.xml"/>
-        <mapper resource="config/mapper/EmailContent.xml"/>
-        <mapper resource="config/mapper/Memory.xml"/>
-        <mapper resource="config/mapper/User.xml"/>
+        <mapper resource="config/mapper/BlogTag.xml"/>
+        <mapper resource="config/mapper/BlogCatalog.xml"/>
+        <mapper resource="config/mapper/BlogContent.xml"/>
     </mappers>
 </configuration>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.3//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.txazo.blog.module.blog.dao.BlogContentDao">
+
+    <insert id="addContent" parameterType="BlogContent" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO BlogContent (blogId, content, type, createTime)
+        VALUES (#{blogId}, #{content}, 1, now())
+    </insert>
+
+    <select id="getContent" parameterType="int" resultType="BlogContent">
+        SELECT * from BlogContent WHERE id = #{id} limit 1
+    </select>
+
+    <update id="changeType">
+        UPDATE BlogContent SET type = #{type} WHERE id = #{id} LIMIT 1
+    </update>
+
+</mapper>

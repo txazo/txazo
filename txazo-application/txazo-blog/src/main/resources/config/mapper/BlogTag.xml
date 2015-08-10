@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.3//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.txazo.blog.module.blog.dao.BlogTagDao">
+
+    <insert id="addTag" parameterType="BlogTag" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO BlogTag (name, quantity, createTime)
+        VALUES (#{name}, 0, now())
+    </insert>
+
+    <update id="updateTag" parameterType="BlogTag">
+        UPDATE BlogTag SET name = #{name} WHERE id = #{id} LIMIT 1
+    </update>
+
+    <update id="increaseTagQuantity" parameterType="int">
+        UPDATE BlogTag SET quantity = quantity + 1 WHERE id = #{id} LIMIT 1
+    </update>
+
+    <update id="decreaseTagQuantity" parameterType="int">
+        UPDATE BlogTag SET quantity = quantity - 1 WHERE id = #{id} and quantity > 0 LIMIT 1
+    </update>
+
+    <select id="getHotTags" resultType="BlogTag">
+        SELECT * FROM BlogTag order by quantity desc limit 10
+    </select>
+
+</mapper>
