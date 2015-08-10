@@ -1,5 +1,7 @@
 package org.txazo.blog.module.user.service;
 
+import org.txazo.blog.module.user.bean.User;
+
 /**
  * UserService
  *
@@ -8,5 +10,7 @@ package org.txazo.blog.module.user.service;
  * @since 10.08.2015
  */
 public interface UserService {
+
+    public User getUser(int id);
 
 }

@@ -13,6 +13,7 @@ public class User implements Serializable {
 
     private int id;
     private String userName;
+    private int privilege;
 
     public int getId() {
         return id;
@@ -28,6 +29,14 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(int privilege) {
+        this.privilege = privilege;
     }
 
 }
