@@ -2,7 +2,9 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.3//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
+
     <typeAliases>
         <typeAlias alias="Blog" type="org.txazo.blog.module.blog.bean.Blog"/>
         <typeAlias alias="BlogTag" type="org.txazo.blog.module.blog.bean.BlogTag"/>
@@ -16,4 +18,5 @@
         <mapper resource="config/mapper/BlogCatalog.xml"/>
         <mapper resource="config/mapper/BlogContent.xml"/>
     </mappers>
+
 </configuration>
