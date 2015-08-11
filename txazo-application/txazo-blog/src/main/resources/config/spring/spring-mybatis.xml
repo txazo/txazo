@@ -8,6 +8,11 @@
         <property name="configLocation" value="classpath:config/mybatis.xml"/>
     </bean>
 
+    <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="org.txazo.blog.module.user.dao.UserDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
     <bean id="blogDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="org.txazo.blog.module.blog.dao.BlogDao"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>

@@ -1,9 +1,11 @@
 package org.txazo.blog.common.interceptor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.txazo.blog.common.enums.RequestConfig;
+import org.txazo.blog.common.service.AuthorityService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 @Component("authorityInterceptor")
 public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 
+    @Autowired
+    private AuthorityService authorityService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
@@ -29,6 +34,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
             if (requestConfig == null) {
                 return true;
             }
+            return authorityService.checkAuthority(request, response, requestConfig.privilege());
         }
         return true;
     }

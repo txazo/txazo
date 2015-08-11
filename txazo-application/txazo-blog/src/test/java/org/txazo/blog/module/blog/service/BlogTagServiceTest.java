@@ -1,4 +1,4 @@
-package org.txazo.blog.module.blog.dao.service;
+package org.txazo.blog.module.blog.service;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;

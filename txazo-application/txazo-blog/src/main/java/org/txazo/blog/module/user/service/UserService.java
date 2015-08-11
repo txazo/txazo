@@ -11,6 +11,16 @@ import org.txazo.blog.module.user.bean.User;
  */
 public interface UserService {
 
+    public boolean addUser(User user);
+
+    public boolean updateUser(User user);
+
+    public boolean removeUser(int id);
+
     public User getUser(int id);
+
+    public User getUserByUserName(String userName);
+
+    public User getUserByEmail(String email);
 
 }

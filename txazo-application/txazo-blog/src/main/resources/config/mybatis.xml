@@ -6,6 +6,7 @@
 <configuration>
 
     <typeAliases>
+        <typeAlias alias="User" type="org.txazo.blog.module.user.bean.User"/>
         <typeAlias alias="Blog" type="org.txazo.blog.module.blog.bean.Blog"/>
         <typeAlias alias="BlogTag" type="org.txazo.blog.module.blog.bean.BlogTag"/>
         <typeAlias alias="BlogCatalog" type="org.txazo.blog.module.blog.bean.BlogCatalog"/>
@@ -13,6 +14,7 @@
     </typeAliases>
 
     <mappers>
+        <mapper resource="config/mapper/User.xml"/>
         <mapper resource="config/mapper/Blog.xml"/>
         <mapper resource="config/mapper/BlogTag.xml"/>
         <mapper resource="config/mapper/BlogCatalog.xml"/>
