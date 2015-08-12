@@ -14,14 +14,14 @@ public class User implements Serializable {
 
     /** id */
     private int id;
-    /** 用户名 */
-    private String userName;
+    /** 邮箱 */
+    private String email;
     /** 密码 */
     private String passWord;
     /** 加密串 */
     private String encryptKey;
-    /** 邮箱 */
-    private String email;
+    /** 用户名 */
+    private String userName;
     /** 头像 */
     private String avatar;
     /** 权限 */

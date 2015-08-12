@@ -58,10 +58,11 @@ public class UserServiceImpl implements UserService {
 
     private boolean checkUser(User user) {
         return user != null &&
-                StringUtils.isNoneBlank(user.getUserName()) &&
+                StringUtils.isNoneBlank(user.getEmail()) &&
                 StringUtils.isNoneBlank(user.getPassWord()) &&
                 StringUtils.isNoneBlank(user.getEncryptKey()) &&
-                StringUtils.isNoneBlank(user.getEmail());
+                StringUtils.isNoneBlank(user.getUserName()) &&
+                StringUtils.isNoneBlank(user.getAvatar());
     }
 
     private String getUserKey(int id) {
@@ -96,12 +97,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUserName(String userName) {
-        return userDao.getUserByUserName(userName);
+        return StringUtils.isBlank(userName) ? null : userDao.getUserByUserName(userName);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return userDao.getUserByEmail(email);
+        return StringUtils.isBlank(email) ? null : userDao.getUserByEmail(email);
     }
 
 }

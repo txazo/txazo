@@ -19,7 +19,6 @@ public class RedisCacheService extends AbstractCacheService {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<String, Object> valueOperations;
 
-
     @Override
     public void set(String key, Object value, long expireTime) {
         valueOperations.set(key, value, expireTime, TimeUnit.SECONDS);
@@ -33,6 +32,10 @@ public class RedisCacheService extends AbstractCacheService {
     @Override
     public void delete(String key) {
         valueOperations.getOperations().delete(key);
+    }
+
+    public void increase(String key) {
+        valueOperations.increment(key, 1);
     }
 
 }

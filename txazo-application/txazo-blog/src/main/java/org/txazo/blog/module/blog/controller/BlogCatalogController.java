@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.txazo.blog.common.controller.BaseController;
 import org.txazo.blog.common.enums.PrivilegeType;
 import org.txazo.blog.common.enums.RequestConfig;
 import org.txazo.blog.module.blog.service.BlogCatalogService;
@@ -12,7 +13,7 @@ import org.txazo.blog.module.blog.service.BlogCatalogService;
 @Controller
 @RequestMapping("/blog/catalog")
 @RequestConfig(privilege = PrivilegeType.ADMIN)
-public class BlogCatalogController {
+public class BlogCatalogController extends BaseController {
 
     @Autowired
     private BlogCatalogService blogCatalogService;

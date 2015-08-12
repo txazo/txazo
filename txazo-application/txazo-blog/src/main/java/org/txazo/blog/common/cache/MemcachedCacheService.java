@@ -28,7 +28,6 @@ public class MemcachedCacheService extends AbstractCacheService {
         return memcachedClient.get(key);
     }
 
-
     @Override
     public void delete(String key) {
         memcachedClient.delete(key);

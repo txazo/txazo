@@ -1,10 +1,10 @@
 package org.txazo.blog.common.interceptor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.txazo.blog.common.cache.CacheService;
+import org.txazo.blog.common.cache.RedisCacheService;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,21 +21,22 @@ public class DefendAttackInterceptor extends HandlerInterceptorAdapter {
     private static final int MAX_TIMES = 50;
     private static final String DEFEND_ATTACK_IP_KEY = "DEFEND_ATTACK_IP_";
 
-    @Resource
-    private CacheService cacheService;
+    @Autowired
+    private RedisCacheService redisCacheService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = request.getRemoteHost();
         String key = DEFEND_ATTACK_IP_KEY + ip;
-        Integer count = (Integer) cacheService.get(key);
+        Integer count = (Integer) redisCacheService.get(key);
         if (count == null) {
             count = 0;
+            redisCacheService.set(key, 0, 10);
         }
         if (count >= MAX_TIMES) {
             return false;
         }
-        cacheService.set(key, count + 1);
+        redisCacheService.increase(key);
         return true;
     }
 
