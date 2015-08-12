@@ -1,5 +1,9 @@
 package org.txazo.blog.module.login.service;
 
+import org.txazo.blog.module.user.bean.User;
+
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * LoginService
  *
@@ -9,6 +13,10 @@ package org.txazo.blog.module.login.service;
  */
 public interface LoginService {
 
-    public boolean login(String userName, String passWord);
+    public User login(String email, String passWord);
+
+    public void loginCookie(User user, HttpServletResponse response);
+
+    public String getLoginCode(int userId);
 
 }

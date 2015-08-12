@@ -14,6 +14,8 @@ public abstract class LoginUtils {
 
     private static final String SECRET_KEY = "!#%&1218@$^*";
     private static final String RANDOM_CHAR = "0123456789abcdefghij";
+    public static final String COOKIE_USER_ID = "user_id";
+    public static final String COOKIE_LOGIN_KEY = "login_key";
 
     public static String generateLoginKey(int userId, String code) {
         return DigestUtils.md5Hex(code + SECRET_KEY + userId);

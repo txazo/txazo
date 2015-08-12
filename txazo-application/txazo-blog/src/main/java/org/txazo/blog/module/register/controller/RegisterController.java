@@ -24,10 +24,10 @@ public class RegisterController extends BaseController {
     private RegisterService registerService;
 
     @RequestMapping("/register")
-    public String login(@RequestParam(value = "email", required = true) String email,
-                        @RequestParam(value = "passWord", required = true) String passWord,
-                        @RequestParam(value = "userName", required = true) String userName,
-                        Model model) {
+    public String register(@RequestParam(value = "email", required = true) String email,
+                           @RequestParam(value = "passWord", required = true) String passWord,
+                           @RequestParam(value = "userName", required = true) String userName,
+                           Model model) {
         RegisterResult result = registerService.register(email, passWord, userName);
         if (result.succ()) {
             return "redirect:/email/validate";

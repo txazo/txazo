@@ -1,7 +1,6 @@
 package org.txazo.blog.module.home.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.txazo.blog.common.controller.BaseController;
 
@@ -17,7 +16,7 @@ import org.txazo.blog.common.controller.BaseController;
 public class HomeController extends BaseController {
 
     @RequestMapping("/index")
-    public String index(Model model) {
+    public String index() {
         return "home/index";
     }
 

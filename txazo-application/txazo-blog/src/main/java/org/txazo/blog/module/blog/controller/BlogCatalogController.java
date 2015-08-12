@@ -19,7 +19,7 @@ public class BlogCatalogController extends BaseController {
     private BlogCatalogService blogCatalogService;
 
     @RequestMapping("/list")
-    public String list(@RequestParam(value = "", defaultValue = "0", required = false) Integer parentId,
+    public String list(@RequestParam(value = "parentId", defaultValue = "0", required = false) Integer parentId,
                        Model model) {
         model.addAttribute("catalogs", blogCatalogService.listCatalogs(parentId));
         return "blog/catalog/list";

@@ -2,10 +2,10 @@ package org.txazo.blog.module.register.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.txazo.blog.common.util.EmailUtils;
 import org.txazo.blog.common.util.LoginUtils;
 import org.txazo.blog.module.register.service.RegisterService;
 import org.txazo.blog.module.register.bean.RegisterResult;
+import org.txazo.blog.module.register.util.RegisterUtils;
 import org.txazo.blog.module.user.bean.User;
 import org.txazo.blog.module.user.service.UserService;
 
@@ -26,8 +26,16 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public RegisterResult register(String email, String passWord, String userName) {
-        if (EmailUtils.isValidEmail(email)) {
+        if (!RegisterUtils.isValidEmail(email)) {
             return RegisterResult.fail("邮箱格式有误");
+        }
+
+        if (!RegisterUtils.isValidPassWord(passWord)) {
+            return RegisterResult.fail("密码输入有误");
+        }
+
+        if (!RegisterUtils.isValidUserName(userName)) {
+            return RegisterResult.fail("昵称输入有误");
         }
 
         if (userService.getUserByEmail(email) != null) {

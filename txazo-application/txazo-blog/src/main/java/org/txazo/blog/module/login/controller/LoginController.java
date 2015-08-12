@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.txazo.blog.common.controller.BaseController;
 import org.txazo.blog.module.login.service.LoginService;
+import org.txazo.blog.module.user.bean.User;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * LoginController
@@ -23,10 +26,13 @@ public class LoginController extends BaseController {
     private LoginService loginService;
 
     @RequestMapping("/login")
-    public String login(@RequestParam(value = "userName", required = true) String userName,
+    public String login(@RequestParam(value = "email", required = true) String email,
                         @RequestParam(value = "passWord", required = true) String passWord,
-                        Model model) {
-        if (loginService.login(userName, passWord)) {
+                        Model model,
+                        HttpServletResponse response) {
+        User login = loginService.login(email, passWord);
+        if (login != null) {
+            loginService.loginCookie(login, response);
             return "redirect:/home/index";
         }
         return "login/login";

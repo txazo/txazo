@@ -14,7 +14,7 @@
     <import resource="spring-velocity.xml"/>
 
     <mvc:interceptors>
-        <ref bean="defendAttackInterceptor"/>
+        <!--<ref bean="defendAttackInterceptor"/>-->
         <ref bean="authorityInterceptor"/>
     </mvc:interceptors>
 
