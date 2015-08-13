@@ -9,6 +9,8 @@ package org.txazo.blog.common.cache;
  */
 public abstract class AbstractCacheService implements CacheService {
 
+    private static final int defaultExpireTime = 600;
+
     @Override
     public void set(String key, Object value) {
         set(key, value, defaultExpireTime);

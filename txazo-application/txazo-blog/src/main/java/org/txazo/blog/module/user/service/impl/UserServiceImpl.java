@@ -32,8 +32,7 @@ public class UserServiceImpl implements UserService {
     public boolean addUser(User user) {
         if (checkUser(user)) {
             try {
-                userDao.addUser(user);
-                return user.getId() > 0;
+                return userDao.addUser(user) > 0;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -62,7 +61,8 @@ public class UserServiceImpl implements UserService {
                 StringUtils.isNoneBlank(user.getPassWord()) &&
                 StringUtils.isNoneBlank(user.getEncryptKey()) &&
                 StringUtils.isNoneBlank(user.getUserName()) &&
-                StringUtils.isNoneBlank(user.getAvatar());
+                StringUtils.isNoneBlank(user.getAvatar()) &&
+                user.getPrivilege() >= 0;
     }
 
     private String getUserKey(int id) {
@@ -96,13 +96,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUserName(String userName) {
-        return StringUtils.isBlank(userName) ? null : userDao.getUserByUserName(userName);
+    public User getUserByEmail(String email) {
+        return StringUtils.isBlank(email) ? null : userDao.getUserByEmail(email);
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return StringUtils.isBlank(email) ? null : userDao.getUserByEmail(email);
+    public User getUserByUserName(String userName) {
+        return StringUtils.isBlank(userName) ? null : userDao.getUserByUserName(userName);
     }
 
 }

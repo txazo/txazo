@@ -8,7 +8,7 @@ create table User (
     userName varchar(20) not null default '' comment 'userName',
     avatar varchar(50) not null default '' comment 'avatar',
     privilege int(11) unsigned not null default 0 comment 'privilege',
-    isDeleted tinyint(3) unsigned not null default 0 comment 'isDeleted',
+    isDeleted tinyint(4) unsigned not null default 0 comment 'isDeleted',
     createTime datetime not null default '1970-01-01 00:00:00' comment 'createTime',
     updateTime timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP comment 'updateTime',
     primary key (id),

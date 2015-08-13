@@ -11,7 +11,7 @@ public enum PrivilegeType {
 
     ADMIN(0xffff),
     MANAGER(0x0fff),
-    LOGIN(0x0001),
+    LOGIN(0x0003),
     EMAIL(0x0001),
     UNLIMIT(0x0000);
 

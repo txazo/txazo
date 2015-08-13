@@ -34,6 +34,7 @@ public class DefendAttackInterceptor extends HandlerInterceptorAdapter {
             redisCacheService.set(key, 0, 10);
         }
         if (count >= MAX_TIMES) {
+            response.sendRedirect("/error/restrict");
             return false;
         }
         redisCacheService.increase(key);

@@ -6,14 +6,15 @@
 <mapper namespace="org.txazo.blog.module.user.dao.UserDao">
 
     <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO User (userName, passWord, encryptKey, email, avatar, privilege, isDeleted, createTime)
-        VALUES (#{userName}, #{passWord}, #{encryptKey}, #{email}, #{avatar}, #{privilege}, 0, now())
+        INSERT INTO User (email, passWord, encryptKey, userName, avatar, privilege, isDeleted, createTime)
+        VALUES (#{email}, #{passWord}, #{encryptKey}, #{userName}, #{avatar}, #{privilege}, 0, now())
     </insert>
 
     <update id="updateUser" parameterType="User">
         UPDATE User SET
         passWord = #{passWord},
-        email = #{email},
+        encryptKey = #{encryptKey},
+        userName = #{userName},
         avatar = #{avatar},
         privilege = #{privilege}
         WHERE id = #{id} and updateTime = #{updateTime} limit 1
@@ -27,12 +28,12 @@
         SELECT * FROM User WHERE id = #{id} and isDeleted = 0 limit 1
     </select>
 
-    <select id="getUserByUserName" parameterType="string" resultType="User">
-        SELECT * FROM User WHERE userName = #{userName} and isDeleted = 0 limit 1
-    </select>
-
     <select id="getUserByEmail" parameterType="string" resultType="User">
         SELECT * FROM User WHERE email = #{email} and isDeleted = 0 limit 1
+    </select>
+
+    <select id="getUserByUserName" parameterType="string" resultType="User">
+        SELECT * FROM User WHERE userName = #{userName} and isDeleted = 0 limit 1
     </select>
 
 </mapper>

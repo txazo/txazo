@@ -14,7 +14,6 @@ import org.txazo.util.web.cookie.CookieUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * AuthorityServiceImpl
@@ -35,35 +34,34 @@ public class AuthorityServiceImpl implements AuthorityService {
     private LoginService loginService;
 
     @Override
-    public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, PrivilegeType privilege) {
-        if (request == null || response == null || privilege == null) {
-            redirectToNoAccess(response);
-            return false;
-        }
-
+    public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, PrivilegeType privilege) throws Exception {
         /** 无权限限制 */
         if (privilege == PrivilegeType.UNLIMIT) {
             return true;
         }
 
+        /** 未登录 */
         int userId = NumberUtils.toInt(CookieUtils.getCookieValue(LoginUtils.COOKIE_USER_ID, request), 0);
         if (userId < 1) {
-            redirectToNoAccess(response);
+            redirectToLogin(response);
             return false;
         }
 
+        /** 登录实效 */
         String code = loginService.getLoginCode(userId);
         if (code == null) {
-            redirectToNoAccess(response);
+            redirectToLogin(response);
             return false;
         }
 
+        /** 未登录 */
         String loginKey = CookieUtils.getCookieValue(LoginUtils.COOKIE_LOGIN_KEY, request);
         if (!LoginUtils.generateLoginKey(userId, code).equals(loginKey)) {
-            redirectToNoAccess(response);
+            redirectToLogin(response);
             return false;
         }
 
+        /** 登录检查权限 */
         User user = userService.getUser(userId);
         if ((user != null && PrivilegeUtils.checkPrivilege(privilege.getId(), user.getPrivilege()))) {
             request.setAttribute("user", user);
@@ -74,14 +72,12 @@ public class AuthorityServiceImpl implements AuthorityService {
         return false;
     }
 
-    private void redirectToNoAccess(HttpServletResponse response) {
-        if (response != null) {
-            try {
-                response.sendRedirect("/error/noaccess");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    private void redirectToLogin(HttpServletResponse response) throws Exception {
+        response.sendRedirect("/login/login");
+    }
+
+    private void redirectToNoAccess(HttpServletResponse response) throws Exception {
+        response.sendRedirect("/error/noaccess");
     }
 
 }

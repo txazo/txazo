@@ -1,5 +1,6 @@
 package org.txazo.blog.module.blog.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,9 @@ import java.util.Date;
  * @email txazo1218@163.com
  * @since 10.08.2015
  */
-public class Blog {
+public class Blog implements Serializable {
+
+    private static final long serialVersionUID = -4188877745784304785L;
 
     /** id */
     private int id;

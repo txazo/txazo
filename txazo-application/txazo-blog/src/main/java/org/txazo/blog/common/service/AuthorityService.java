@@ -14,6 +14,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface AuthorityService {
 
-    public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, PrivilegeType type);
+    public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, PrivilegeType type) throws Exception;
 
 }

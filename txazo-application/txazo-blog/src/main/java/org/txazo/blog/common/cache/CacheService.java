@@ -9,8 +9,6 @@ package org.txazo.blog.common.cache;
  */
 public interface CacheService {
 
-    public static final int defaultExpireTime = 600;
-
     public void set(String key, Object value);
 
     public void set(String key, Object value, long expireTime);
