@@ -47,7 +47,7 @@ public class AuthorityServiceImpl implements AuthorityService {
             return false;
         }
 
-        /** 登录实效 */
+        /** 登录超时 */
         String code = loginService.getLoginCode(userId);
         if (code == null) {
             redirectToLogin(response);
@@ -61,11 +61,23 @@ public class AuthorityServiceImpl implements AuthorityService {
             return false;
         }
 
-        /** 登录检查权限 */
+        /** 无效用户 */
         User user = userService.getUser(userId);
-        if ((user != null && PrivilegeUtils.checkPrivilege(privilege.getId(), user.getPrivilege()))) {
+        if (user == null) {
+            redirectToLogin(response);
+            return false;
+        }
+
+        /** 授权通过 */
+        if (PrivilegeUtils.checkPrivilege(privilege.getId(), user.getPrivilege())) {
             request.setAttribute("user", user);
             return true;
+        }
+
+        /** 未验证邮箱 */
+        if (user.getPrivilege() == PrivilegeType.EMAIL.getId()) {
+            redirectToEmailValidate(response);
+            return false;
         }
 
         redirectToNoAccess(response);
@@ -74,6 +86,10 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     private void redirectToLogin(HttpServletResponse response) throws Exception {
         response.sendRedirect("/login/login");
+    }
+
+    private void redirectToEmailValidate(HttpServletResponse response) throws Exception {
+        response.sendRedirect("/email/validate");
     }
 
     private void redirectToNoAccess(HttpServletResponse response) throws Exception {

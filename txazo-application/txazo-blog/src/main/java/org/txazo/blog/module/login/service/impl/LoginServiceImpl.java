@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-    private static final String LOGIN_KEY_KEY = "Login_Key_";
+    private static final String LOGIN_CODE_KEY = "Login_Code_";
 
     @Autowired
     private UserService userService;
@@ -34,8 +34,7 @@ public class LoginServiceImpl implements LoginService {
     public User login(String email, String passWord) {
         User user = userService.getUserByEmail(email);
         if (user != null) {
-            if (LoginUtils.generatePassWord(passWord, user.getEncryptKey()).
-                    equals(user.getPassWord())) {
+            if (LoginUtils.login(user, passWord)) {
                 return user;
             }
         }
@@ -51,7 +50,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private String getLoginCodeKey(int userId) {
-        return LOGIN_KEY_KEY + userId;
+        return LOGIN_CODE_KEY + userId;
     }
 
     @Override

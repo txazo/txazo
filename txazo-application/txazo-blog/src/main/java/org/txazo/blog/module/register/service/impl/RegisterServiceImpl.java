@@ -3,6 +3,7 @@ package org.txazo.blog.module.register.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.txazo.blog.common.util.LoginUtils;
+import org.txazo.blog.common.util.PrivilegeUtils;
 import org.txazo.blog.module.register.service.RegisterService;
 import org.txazo.blog.module.register.bean.RegisterResult;
 import org.txazo.blog.module.register.util.RegisterUtils;
@@ -31,11 +32,11 @@ public class RegisterServiceImpl implements RegisterService {
         }
 
         if (!RegisterUtils.isValidPassWord(passWord)) {
-            return RegisterResult.fail("密码输入有误");
+            return RegisterResult.fail("密码格式有误");
         }
 
         if (!RegisterUtils.isValidUserName(userName)) {
-            return RegisterResult.fail("昵称输入有误");
+            return RegisterResult.fail("昵称格式有误");
         }
 
         if (userService.getUserByEmail(email) != null) {
@@ -52,6 +53,7 @@ public class RegisterServiceImpl implements RegisterService {
         user.setPassWord(LoginUtils.generatePassWord(passWord, user.getEncryptKey()));
         user.setUserName(userName);
         user.setAvatar(DEFAULT_AVATAR);
+        user.setPrivilege(PrivilegeUtils.generatePrivilege(email).getId());
 
         if (!userService.addUser(user)) {
             return RegisterResult.fail("注册失败");

@@ -30,7 +30,7 @@ public class RegisterController extends BaseController {
                            Model model) {
         RegisterResult result = registerService.register(email, passWord, userName);
         if (result.succ()) {
-            return "redirect:/email/validate";
+            return "redirect:/email/send?email=" + email;
         }
         model.addAttribute("result", result);
         return "register/register";

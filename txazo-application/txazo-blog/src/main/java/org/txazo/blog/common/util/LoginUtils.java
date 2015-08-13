@@ -2,6 +2,7 @@ package org.txazo.blog.common.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.txazo.blog.module.user.bean.User;
 
 /**
  * LoginUtils
@@ -27,6 +28,10 @@ public abstract class LoginUtils {
 
     public static String generatePassWord(String plainText, String encryptKey) {
         return DigestUtils.md5Hex(DigestUtils.sha1Hex(plainText) + encryptKey).substring(8, 24);
+    }
+
+    public static boolean login(User user, String passWord) {
+        return generatePassWord(passWord, user.getEncryptKey()).equals(user.getPassWord());
     }
 
 }
