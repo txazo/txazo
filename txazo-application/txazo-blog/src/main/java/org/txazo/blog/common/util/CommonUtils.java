@@ -5,6 +5,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.txazo.blog.module.user.bean.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * CommonUtils
@@ -17,6 +18,10 @@ public abstract class CommonUtils {
 
     public static HttpServletRequest getHttpServletRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    }
+
+    public static HttpServletResponse getHttpServletResponse() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     }
 
     public static User getUser() {

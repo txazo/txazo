@@ -32,12 +32,15 @@ public class EmailController extends BaseController {
     private SendEmailService sendEmailService;
 
     @RequestMapping("/send")
-    public String send(@RequestParam(value = "email", required = true) String email) {
-        User user = userService.getUserByEmail(email);
-        if (user != null && user.getPrivilege() == PrivilegeType.EMAIL.getId()) {
-            sendEmailService.sendValidateEmail(email, authCodeService.getEmailValidateCode(email));
+    public String send() {
+        User user = getUser();
+        if (user == null) {
+            return redirectTo(LOGIN_LOGIN);
         }
-        return "email/send";
+        if (user.getPrivilege() == PrivilegeType.EMAIL.getId()) {
+            sendEmailService.sendValidateEmail(user.getEmail(), authCodeService.getEmailValidateCode(user.getEmail()));
+        }
+        return EMAIL_SEND;
     }
 
     @RequestMapping("/validate")

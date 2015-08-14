@@ -76,7 +76,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 
         /** 未验证邮箱 */
         if (user.getPrivilege() == PrivilegeType.EMAIL.getId()) {
-            redirectToEmailValidate(response);
+            redirectToEmailSend(response);
             return false;
         }
 
@@ -88,8 +88,8 @@ public class AuthorityServiceImpl implements AuthorityService {
         response.sendRedirect("/login/login");
     }
 
-    private void redirectToEmailValidate(HttpServletResponse response) throws Exception {
-        response.sendRedirect("/email/validate");
+    private void redirectToEmailSend(HttpServletResponse response) throws Exception {
+        response.sendRedirect("/email/send");
     }
 
     private void redirectToNoAccess(HttpServletResponse response) throws Exception {

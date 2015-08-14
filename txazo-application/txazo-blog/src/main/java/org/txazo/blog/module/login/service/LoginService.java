@@ -15,7 +15,7 @@ public interface LoginService {
 
     public User login(String email, String passWord);
 
-    public void loginCookie(User user, HttpServletResponse response);
+    public void writeLoginCookie(User user, HttpServletResponse response);
 
     public String getLoginCode(int userId);
 

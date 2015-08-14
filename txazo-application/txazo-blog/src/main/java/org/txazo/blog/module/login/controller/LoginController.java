@@ -26,14 +26,13 @@ public class LoginController extends BaseController {
 
     @RequestMapping("/login")
     public String login(@RequestParam(value = "email", required = true) String email,
-                        @RequestParam(value = "passWord", required = true) String passWord,
-                        HttpServletResponse response) {
+                        @RequestParam(value = "passWord", required = true) String passWord) {
         User login = loginService.login(email, passWord);
         if (login != null) {
-            loginService.loginCookie(login, response);
-            return "redirect:/home/index";
+            loginService.writeLoginCookie(login, getResponse());
+            return redirectTo(HOME_INDEX);
         }
-        return "login/login";
+        return LOGIN_LOGIN;
     }
 
 }

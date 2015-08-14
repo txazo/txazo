@@ -6,8 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.txazo.blog.common.controller.BaseController;
+import org.txazo.blog.module.login.service.LoginService;
 import org.txazo.blog.module.register.bean.RegisterResult;
 import org.txazo.blog.module.register.service.RegisterService;
+import org.txazo.blog.module.user.bean.User;
+import org.txazo.blog.module.user.service.UserService;
 
 /**
  * RegisterController
@@ -21,6 +24,12 @@ import org.txazo.blog.module.register.service.RegisterService;
 public class RegisterController extends BaseController {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+    private LoginService loginService;
+
+    @Autowired
     private RegisterService registerService;
 
     @RequestMapping("/register")
@@ -30,10 +39,14 @@ public class RegisterController extends BaseController {
                            Model model) {
         RegisterResult result = registerService.register(email, passWord, userName);
         if (result.succ()) {
-            return "redirect:/email/send?email=" + email;
+            User user = userService.getUserByEmail(email);
+            if (user != null) {
+                loginService.writeLoginCookie(user, getResponse());
+                return redirectTo(HOME_INDEX);
+            }
         }
         model.addAttribute("result", result);
-        return "register/register";
+        return REGISTER_REGISTER;
     }
 
 }

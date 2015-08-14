@@ -3,6 +3,8 @@ package org.txazo.blog.module.home.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.txazo.blog.common.controller.BaseController;
+import org.txazo.blog.common.enums.PrivilegeType;
+import org.txazo.blog.common.enums.RequestConfig;
 
 /**
  * HomeController
@@ -13,11 +15,12 @@ import org.txazo.blog.common.controller.BaseController;
  */
 @Controller
 @RequestMapping("/home")
+@RequestConfig(privilege = PrivilegeType.LOGIN)
 public class HomeController extends BaseController {
 
     @RequestMapping("/index")
     public String index() {
-        return "home/index";
+        return HOME_INDEX;
     }
 
 }

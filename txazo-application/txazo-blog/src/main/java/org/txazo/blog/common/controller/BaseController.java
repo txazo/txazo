@@ -1,9 +1,5 @@
 package org.txazo.blog.common.controller;
 
-import org.apache.commons.lang3.StringUtils;
-import org.txazo.blog.common.util.CommonUtils;
-import org.txazo.blog.module.user.bean.User;
-
 /**
  * BaseController
  *
@@ -11,20 +7,17 @@ import org.txazo.blog.module.user.bean.User;
  * @email txazo1218@163.com
  * @since 07.07.2015
  */
-public abstract class BaseController {
+public abstract class BaseController extends UserSetter implements URIPathHolder {
 
-    protected User getUser() {
-        return CommonUtils.getUser();
-    }
+    /**
+     * 1) Request, Response注入
+     * 2) JSON返回, 固定格式
+     * 3) User获取
+     * 4) Redirect
+     */
 
-    protected int getUserId() {
-        User user = getUser();
-        return user != null ? user.getId() : 0;
-    }
-
-    protected String getUserName() {
-        User user = getUser();
-        return user != null ? user.getUserName() : StringUtils.EMPTY;
+    protected String redirectTo(String uri) {
+        return "redirect:/" + uri;
     }
 
 }
