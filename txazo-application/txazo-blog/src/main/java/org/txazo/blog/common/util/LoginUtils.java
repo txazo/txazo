@@ -1,7 +1,6 @@
 package org.txazo.blog.common.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.txazo.blog.module.user.bean.User;
 
 /**
@@ -13,25 +12,41 @@ import org.txazo.blog.module.user.bean.User;
  */
 public abstract class LoginUtils {
 
-    private static final String SECRET_KEY = "!#%&1218@$^*";
-    private static final String RANDOM_CHAR = "0123456789abcdefghij";
     public static final String COOKIE_USER_ID = "user_id";
     public static final String COOKIE_LOGIN_KEY = "login_key";
 
     public static String generateLoginKey(int userId, String code) {
-        return DigestUtils.md5Hex(code + SECRET_KEY + userId);
-    }
-
-    public static String generateEncryptKey() {
-        return RandomStringUtils.random(8, RANDOM_CHAR);
+        return DigestUtils.md5Hex(code + "" + userId);
     }
 
     public static String generatePassWord(String plainText, String encryptKey) {
-        return DigestUtils.md5Hex(DigestUtils.sha1Hex(plainText) + encryptKey).substring(8, 24);
+        return md5AndSha1Hex(merge(plainText, encryptKey)).substring(8, 24);
     }
 
     public static boolean login(User user, String passWord) {
         return generatePassWord(passWord, user.getEncryptKey()).equals(user.getPassWord());
+    }
+
+    private static String md5AndSha1Hex(String text) {
+        return DigestUtils.md5Hex(DigestUtils.sha1Hex(text));
+    }
+
+    private static String merge(String s1, String s2) {
+        if (s1 == null || s2 == null) {
+            return s1 + s2;
+        }
+        StringBuilder result = new StringBuilder();
+        int length = Math.min(s1.length(), s2.length());
+        for (int i = 0; i < length; i++) {
+            result.append(s1.charAt(i)).append(s2.charAt(i));
+        }
+        for (int i = length; i < s1.length(); i++) {
+            result.append(s1.charAt(i));
+        }
+        for (int i = length; i < s2.length(); i++) {
+            result.append(s2.charAt(i));
+        }
+        return result.toString();
     }
 
 }

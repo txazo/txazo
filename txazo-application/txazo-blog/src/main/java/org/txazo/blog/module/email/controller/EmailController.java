@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.txazo.blog.common.controller.BaseController;
 import org.txazo.blog.common.enums.PrivilegeType;
 import org.txazo.blog.common.enums.RequestConfig;
-import org.txazo.blog.module.auth.service.AuthCodeService;
+import org.txazo.blog.module.code.service.CodeService;
 import org.txazo.blog.module.email.service.SendEmailService;
 import org.txazo.blog.module.user.bean.User;
 import org.txazo.blog.module.user.service.UserService;
@@ -27,7 +27,7 @@ public class EmailController extends BaseController {
     private UserService userService;
 
     @Autowired
-    private AuthCodeService authCodeService;
+    private CodeService authCodeService;
 
     @Autowired
     private SendEmailService sendEmailService;

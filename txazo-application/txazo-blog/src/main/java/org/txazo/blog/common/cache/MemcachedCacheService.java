@@ -19,18 +19,18 @@ public class MemcachedCacheService extends AbstractCacheService {
     protected MemcachedClient memcachedClient;
 
     @Override
-    public void set(String key, Object value, long expireTime) {
-        memcachedClient.set(key, (int) expireTime, value);
+    public void set(CacheKey key, Object value, long expireTime) {
+        memcachedClient.set(key.getKey(), (int) expireTime, value);
     }
 
     @Override
-    public Object get(String key) {
-        return memcachedClient.get(key);
+    public Object get(CacheKey key) {
+        return memcachedClient.get(key.getKey());
     }
 
     @Override
-    public void delete(String key) {
-        memcachedClient.delete(key);
+    public void delete(CacheKey key) {
+        memcachedClient.delete(key.getKey());
     }
 
 }

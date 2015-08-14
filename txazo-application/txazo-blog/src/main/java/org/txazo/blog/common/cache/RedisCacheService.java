@@ -20,22 +20,22 @@ public class RedisCacheService extends AbstractCacheService {
     private ValueOperations<String, Object> valueOperations;
 
     @Override
-    public void set(String key, Object value, long expireTime) {
-        valueOperations.set(key, value, expireTime, TimeUnit.SECONDS);
+    public void set(CacheKey key, Object value, long expireTime) {
+        valueOperations.set(key.getKey(), value, expireTime, TimeUnit.SECONDS);
     }
 
     @Override
-    public Object get(String key) {
-        return valueOperations.get(key);
+    public Object get(CacheKey key) {
+        return valueOperations.get(key.getKey());
     }
 
     @Override
-    public void delete(String key) {
-        valueOperations.getOperations().delete(key);
+    public void delete(CacheKey key) {
+        valueOperations.getOperations().delete(key.getKey());
     }
 
-    public void increase(String key) {
-        valueOperations.increment(key, 1);
+    public void increase(CacheKey key) {
+        valueOperations.increment(key.getKey(), 1);
     }
 
 }

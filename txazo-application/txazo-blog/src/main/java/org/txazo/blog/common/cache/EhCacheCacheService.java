@@ -20,19 +20,19 @@ public class EhCacheCacheService extends AbstractCacheService {
     private Ehcache ehCache;
 
     @Override
-    public void set(String key, Object value, long expireTime) {
-        ehCache.put(new Element(key, value, false, 0, (int) expireTime));
+    public void set(CacheKey key, Object value, long expireTime) {
+        ehCache.put(new Element(key.getKey(), value, false, 0, (int) expireTime));
     }
 
     @Override
-    public Object get(String key) {
-        Element element = ehCache.get(key);
+    public Object get(CacheKey key) {
+        Element element = ehCache.get(key.getKey());
         return element != null ? element.getObjectValue() : null;
     }
 
     @Override
-    public void delete(String key) {
-        ehCache.remove(key);
+    public void delete(CacheKey key) {
+        ehCache.remove(key.getKey());
     }
 
 }

@@ -9,14 +9,14 @@ package org.txazo.blog.common.cache;
  */
 public interface CacheService {
 
-    public void set(String key, Object value);
+    public void set(CacheKey key, Object value);
 
-    public void set(String key, Object value, long expireTime);
+    public void set(CacheKey key, Object value, long expireTime);
 
-    public Object get(String key);
+    public Object get(CacheKey key);
 
-    public <T> T get(String key, Class<T> clazz);
+    public <T> T get(CacheKey key, Class<T> clazz);
 
-    public void delete(String key);
+    public void delete(CacheKey key);
 
 }

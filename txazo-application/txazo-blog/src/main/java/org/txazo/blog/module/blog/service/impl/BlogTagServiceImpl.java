@@ -3,7 +3,9 @@ package org.txazo.blog.module.blog.service.impl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.txazo.blog.common.cache.CacheKey;
 import org.txazo.blog.common.cache.CacheService;
+import org.txazo.blog.common.constant.Key;
 import org.txazo.blog.module.blog.bean.BlogTag;
 import org.txazo.blog.module.blog.dao.BlogTagDao;
 import org.txazo.blog.module.blog.service.BlogTagService;
@@ -21,8 +23,6 @@ import java.util.List;
  */
 @Service
 public class BlogTagServiceImpl implements BlogTagService {
-
-    private static final String BLOG_TAG_HOTS_KEY = "BLOG_TAG_HOTS";
 
     @Autowired
     private BlogTagDao blogTagDao;
@@ -71,13 +71,14 @@ public class BlogTagServiceImpl implements BlogTagService {
 
     @Override
     public List<BlogTag> getHotTags() {
-        List<BlogTag> hots = (List<BlogTag>) cacheService.get(BLOG_TAG_HOTS_KEY);
+        CacheKey key = new CacheKey(Key.BLOG_TAG_HOTS);
+        List<BlogTag> hots = (List<BlogTag>) cacheService.get(key);
         if (hots == null) {
             hots = blogTagDao.getHotTags();
             if (hots == null) {
                 hots = new ArrayList<BlogTag>();
             }
-            cacheService.set(BLOG_TAG_HOTS_KEY, hots);
+            cacheService.set(key, hots);
         }
         return hots;
     }

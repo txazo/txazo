@@ -3,7 +3,9 @@ package org.txazo.blog.common.interceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.txazo.blog.common.cache.CacheKey;
 import org.txazo.blog.common.cache.RedisCacheService;
+import org.txazo.blog.common.constant.Key;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +29,7 @@ public class DefendAttackInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = request.getRemoteHost();
-        String key = DEFEND_ATTACK_IP_KEY + ip;
+        CacheKey key = new CacheKey(Key.DEFEND_ATTACK_IP, ip);
         Integer count = (Integer) redisCacheService.get(key);
         if (count == null) {
             count = 0;

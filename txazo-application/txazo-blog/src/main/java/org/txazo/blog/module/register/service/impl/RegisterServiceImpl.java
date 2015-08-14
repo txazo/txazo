@@ -2,6 +2,7 @@ package org.txazo.blog.module.register.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.txazo.blog.common.util.CodeUtils;
 import org.txazo.blog.common.util.LoginUtils;
 import org.txazo.blog.common.util.PrivilegeUtils;
 import org.txazo.blog.module.register.service.RegisterService;
@@ -49,7 +50,7 @@ public class RegisterServiceImpl implements RegisterService {
 
         User user = new User();
         user.setEmail(email);
-        user.setEncryptKey(LoginUtils.generateEncryptKey());
+        user.setEncryptKey(CodeUtils.generateCode(8));
         user.setPassWord(LoginUtils.generatePassWord(passWord, user.getEncryptKey()));
         user.setUserName(userName);
         user.setAvatar(DEFAULT_AVATAR);

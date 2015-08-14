@@ -2,7 +2,10 @@ package org.txazo.blog.module.login.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.txazo.blog.common.cache.CacheKey;
 import org.txazo.blog.common.cache.CacheService;
+import org.txazo.blog.common.constant.Key;
+import org.txazo.blog.common.util.CodeUtils;
 import org.txazo.blog.common.util.LoginUtils;
 import org.txazo.blog.module.login.service.LoginService;
 import org.txazo.blog.module.user.bean.User;
@@ -46,14 +49,14 @@ public class LoginServiceImpl implements LoginService {
         if (user == null || response == null) {
             return;
         }
-        String code = LoginUtils.generateEncryptKey();
+        String code = CodeUtils.generateCode(8);
         cacheService.set(getLoginCodeKey(user.getId()), code, 1800);
         CookieUtils.setCookie(response, LoginUtils.COOKIE_USER_ID, String.valueOf(user.getId()), 1800);
         CookieUtils.setCookie(response, LoginUtils.COOKIE_LOGIN_KEY, LoginUtils.generateLoginKey(user.getId(), code), 1800);
     }
 
-    private String getLoginCodeKey(int userId) {
-        return LOGIN_CODE_KEY + userId;
+    private CacheKey getLoginCodeKey(int userId) {
+        return new CacheKey(Key.LOGIN_CODE, userId);
     }
 
     @Override

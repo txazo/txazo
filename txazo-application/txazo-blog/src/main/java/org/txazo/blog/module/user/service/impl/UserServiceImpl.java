@@ -3,7 +3,9 @@ package org.txazo.blog.module.user.service.impl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.txazo.blog.common.cache.CacheKey;
 import org.txazo.blog.common.cache.CacheService;
+import org.txazo.blog.common.constant.Key;
 import org.txazo.blog.module.user.bean.User;
 import org.txazo.blog.module.user.dao.UserDao;
 import org.txazo.blog.module.user.service.UserService;
@@ -65,8 +67,8 @@ public class UserServiceImpl implements UserService {
                 user.getPrivilege() >= 0;
     }
 
-    private String getUserKey(int id) {
-        return USER_ID_KEY + id;
+    private CacheKey getUserKey(int id) {
+        return new CacheKey(Key.USER_ID, id);
     }
 
     private void clearUserCache(int id) {
@@ -84,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(int id) {
-        String key = getUserKey(id);
+        CacheKey key = getUserKey(id);
         User user = cacheService.get(key, User.class);
         if (user == null) {
             user = userDao.getUser(id);

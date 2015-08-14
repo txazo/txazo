@@ -1,21 +1,23 @@
-package org.txazo.blog.module.auth.service.impl;
+package org.txazo.blog.module.code.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.txazo.blog.common.cache.CacheKey;
 import org.txazo.blog.common.cache.CacheService;
-import org.txazo.blog.module.auth.service.AuthCodeService;
-import org.txazo.blog.module.auth.util.AuthCodeUtils;
+import org.txazo.blog.common.constant.Key;
+import org.txazo.blog.common.util.CodeUtils;
+import org.txazo.blog.module.code.service.CodeService;
 
 import javax.annotation.Resource;
 
 /**
- * AuthCodeServiceImpl
+ * CodeServiceImpl
  *
  * @author txazo
  * @email txazo1218@163.com
  * @since 13.08.2015
  */
 @Service
-public class AuthCodeServiceImpl implements AuthCodeService {
+public class CodeServiceImpl implements CodeService {
 
     private static final int EMAIL_VALIDATE_CODE_TIME = 24 * 60 * 60;
     private static final String EMAIL_VALIDATE_CODE_KEY = "Email_Validate_Code_";
@@ -23,13 +25,13 @@ public class AuthCodeServiceImpl implements AuthCodeService {
     @Resource
     private CacheService cacheService;
 
-    private String getEmailValidateCodeKey(String email) {
-        return EMAIL_VALIDATE_CODE_KEY + email;
+    private CacheKey getEmailValidateCodeKey(String email) {
+        return new CacheKey(Key.EMAIL_VALIDATE_CODE, email);
     }
 
     @Override
     public String getEmailValidateCode(String email) {
-        String code = AuthCodeUtils.generateCode();
+        String code = CodeUtils.generateCode(16);
         cacheService.set(getEmailValidateCodeKey(email), code, EMAIL_VALIDATE_CODE_TIME);
         return code;
     }
