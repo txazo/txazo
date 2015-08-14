@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.txazo.blog.common.controller.BaseController;
 import org.txazo.blog.common.enums.PrivilegeType;
+import org.txazo.blog.common.enums.RequestConfig;
 import org.txazo.blog.module.auth.service.AuthCodeService;
 import org.txazo.blog.module.email.service.SendEmailService;
 import org.txazo.blog.module.user.bean.User;
@@ -32,6 +33,7 @@ public class EmailController extends BaseController {
     private SendEmailService sendEmailService;
 
     @RequestMapping("/send")
+    @RequestConfig(privilege = PrivilegeType.EMAIL)
     public String send() {
         User user = getUser();
         if (user == null) {

@@ -18,7 +18,7 @@ public class SendEmailServiceTest extends SpringAbstractTest {
 
     @Test
     public void testSendValidateEmail() {
-        sendEmailService.sendValidateEmail("784990655@qq.com", "123456");
+        sendEmailService.sendValidateEmail("784990655@qq.com", "absd772f");
     }
 
 }

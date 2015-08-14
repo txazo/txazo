@@ -43,6 +43,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void writeLoginCookie(User user, HttpServletResponse response) {
+        if (user == null || response == null) {
+            return;
+        }
         String code = LoginUtils.generateEncryptKey();
         cacheService.set(getLoginCodeKey(user.getId()), code, 1800);
         CookieUtils.setCookie(response, LoginUtils.COOKIE_USER_ID, String.valueOf(user.getId()), 1800);
