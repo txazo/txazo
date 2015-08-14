@@ -8,7 +8,7 @@ import org.apache.commons.lang3.ArrayUtils;
  *
  * @author txazo
  * @email txazo1218@163.com
- * @since 10.07.2015
+ * @since 14.08.2015
  */
 public class CacheKey {
 

@@ -17,6 +17,4 @@ public interface LoginService {
 
     public void writeLoginCookie(User user, HttpServletResponse response);
 
-    public String getLoginCode(int userId);
-
 }

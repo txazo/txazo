@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 public class DefendAttackInterceptor extends HandlerInterceptorAdapter {
 
     private static final int MAX_TIMES = 50;
-    private static final String DEFEND_ATTACK_IP_KEY = "DEFEND_ATTACK_IP_";
 
     @Autowired
     private RedisCacheService redisCacheService;

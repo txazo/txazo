@@ -31,7 +31,7 @@ public abstract class JSONResponseHandler extends ResponseHandler {
             this.status = status;
         }
 
-        public boolean isStatus() {
+        public boolean getStatus() {
             return status;
         }
 
@@ -76,7 +76,7 @@ public abstract class JSONResponseHandler extends ResponseHandler {
     protected void responseJSON(ResponseStatus status, String message, Object data) {
         Map<String, Object> jsonMap = new HashMap<String, Object>();
         if (status != null) {
-            jsonMap.put("status", status.isStatus());
+            jsonMap.put("status", status.getStatus());
         }
         if (StringUtils.isNotBlank(message)) {
             jsonMap.put("message", message);

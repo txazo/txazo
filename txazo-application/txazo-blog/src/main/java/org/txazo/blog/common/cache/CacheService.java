@@ -5,7 +5,7 @@ package org.txazo.blog.common.cache;
  *
  * @author txazo
  * @email txazo1218@163.com
- * @since 07.07.2015
+ * @since 14.08.2015
  */
 public interface CacheService {
 

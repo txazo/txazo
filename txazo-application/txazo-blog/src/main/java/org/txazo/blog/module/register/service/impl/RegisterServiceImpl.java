@@ -60,7 +60,7 @@ public class RegisterServiceImpl implements RegisterService {
             return RegisterResult.fail("注册失败");
         }
 
-        return RegisterResult.SUCC_RESULT;
+        return RegisterResult.RESULT_SUCC;
     }
 
 }

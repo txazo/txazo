@@ -16,11 +16,11 @@ public abstract class LoginUtils {
     public static final String COOKIE_LOGIN_KEY = "login_key";
 
     public static String generateLoginKey(int userId, String code) {
-        return DigestUtils.md5Hex(code + "" + userId);
+        return md5AndSha1Hex(merge(String.valueOf(userId), code));
     }
 
-    public static String generatePassWord(String plainText, String encryptKey) {
-        return md5AndSha1Hex(merge(plainText, encryptKey)).substring(8, 24);
+    public static String generatePassWord(String passWord, String encryptKey) {
+        return md5AndSha1Hex(merge(passWord, encryptKey)).substring(8, 24);
     }
 
     public static boolean login(User user, String passWord) {

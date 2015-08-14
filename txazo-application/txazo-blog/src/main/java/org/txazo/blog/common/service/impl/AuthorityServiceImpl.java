@@ -7,7 +7,8 @@ import org.txazo.blog.common.enums.PrivilegeType;
 import org.txazo.blog.common.service.AuthorityService;
 import org.txazo.blog.common.util.LoginUtils;
 import org.txazo.blog.common.util.PrivilegeUtils;
-import org.txazo.blog.module.login.service.LoginService;
+import org.txazo.blog.module.code.enums.CodeType;
+import org.txazo.blog.module.code.service.CodeService;
 import org.txazo.blog.module.user.bean.User;
 import org.txazo.blog.module.user.service.UserService;
 import org.txazo.util.web.cookie.CookieUtils;
@@ -31,7 +32,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     private UserService userService;
 
     @Autowired
-    private LoginService loginService;
+    private CodeService codeService;
 
     @Override
     public boolean checkAuthority(HttpServletRequest request, HttpServletResponse response, PrivilegeType privilege) throws Exception {
@@ -48,7 +49,7 @@ public class AuthorityServiceImpl implements AuthorityService {
         }
 
         /** 登录超时 */
-        String code = loginService.getLoginCode(userId);
+        String code = codeService.getCode(userId, CodeType.LOGIN);
         if (code == null) {
             redirectToLogin(response);
             return false;

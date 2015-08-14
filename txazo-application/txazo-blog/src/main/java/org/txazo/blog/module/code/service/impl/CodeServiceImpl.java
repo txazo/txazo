@@ -24,6 +24,11 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     public String getCode(int userId, CodeType type) {
+        return cacheService.get(new CacheKey(type.getKey(), userId), String.class);
+    }
+
+    @Override
+    public String generateCode(int userId, CodeType type) {
         String code = CodeUtils.generateCode(16);
         cacheService.set(new CacheKey(type.getKey(), userId), code, type.getExpireTime());
         return code;
@@ -31,7 +36,7 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     public boolean validateCode(int userId, CodeType type, String code) {
-        String cacheCode = cacheService.get(new CacheKey(type.getKey(), userId), String.class);
+        String cacheCode = getCode(userId, type);
         return cacheCode != null && cacheCode.equals(code);
     }
 

@@ -22,8 +22,6 @@ import javax.annotation.Resource;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static final String USER_ID_KEY = "User_Id_";
-
     @Autowired
     private UserDao userDao;
 

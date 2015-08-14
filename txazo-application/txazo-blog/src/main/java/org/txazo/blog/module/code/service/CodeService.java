@@ -13,6 +13,8 @@ public interface CodeService {
 
     public String getCode(int userId, CodeType type);
 
+    public String generateCode(int userId, CodeType type);
+
     public boolean validateCode(int userId, CodeType type, String code);
 
 }

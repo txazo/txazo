@@ -8,8 +8,6 @@ import org.txazo.blog.common.controller.BaseController;
 import org.txazo.blog.module.login.service.LoginService;
 import org.txazo.blog.module.user.bean.User;
 
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * LoginController
  *

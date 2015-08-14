@@ -16,7 +16,7 @@ public class RegisterResult implements Serializable {
     private static final int FAIL = 0;
     private static final int SUCC = 1;
 
-    public static final RegisterResult SUCC_RESULT = new RegisterResult(SUCC);
+    public static final RegisterResult RESULT_SUCC = new RegisterResult(SUCC);
 
     private int status;
     private String message;
