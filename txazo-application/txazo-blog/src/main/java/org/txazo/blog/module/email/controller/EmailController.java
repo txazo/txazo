@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.txazo.blog.common.controller.BaseController;
 import org.txazo.blog.common.enums.PrivilegeType;
 import org.txazo.blog.common.enums.RequestConfig;
+import org.txazo.blog.module.code.enums.CodeType;
 import org.txazo.blog.module.code.service.CodeService;
 import org.txazo.blog.module.email.service.SendEmailService;
 import org.txazo.blog.module.user.bean.User;
@@ -40,16 +41,16 @@ public class EmailController extends BaseController {
             return redirectTo(LOGIN_LOGIN);
         }
         if (user.getPrivilege() == PrivilegeType.EMAIL.getId()) {
-            sendEmailService.sendValidateEmail(user.getEmail(), authCodeService.getEmailValidateCode(user.getEmail()));
+            sendEmailService.sendValidateEmail(user.getEmail(), authCodeService.getCode(user.getId(), CodeType.EMAIL_VALIDATE));
         }
         return EMAIL_SEND;
     }
 
     @RequestMapping("/validate")
-    public String validate(@RequestParam(value = "email", required = true) String email,
+    public String validate(@RequestParam(value = "userId", required = true) Integer userId,
                            @RequestParam(value = "code", required = true) String code) {
-        if (authCodeService.checkEmailValidateCode(email, code)) {
-            User user = userService.getUserByEmail(email);
+        if (authCodeService.validateCode(userId, CodeType.EMAIL_VALIDATE, code)) {
+            User user = userService.getUser(userId);
             if (user != null && user.getPrivilege() == PrivilegeType.EMAIL.getId()) {
                 user.setPrivilege(PrivilegeType.LOGIN.getId());
                 if (userService.updateUser(user)) {

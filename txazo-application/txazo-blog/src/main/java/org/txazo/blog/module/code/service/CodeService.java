@@ -1,5 +1,7 @@
 package org.txazo.blog.module.code.service;
 
+import org.txazo.blog.module.code.enums.CodeType;
+
 /**
  * CodeService
  *
@@ -9,8 +11,8 @@ package org.txazo.blog.module.code.service;
  */
 public interface CodeService {
 
-    public String getEmailValidateCode(String email);
+    public String getCode(int userId, CodeType type);
 
-    public boolean checkEmailValidateCode(String email, String code);
+    public boolean validateCode(int userId, CodeType type, String code);
 
 }
