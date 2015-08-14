@@ -55,7 +55,7 @@ public class ReflectionPackage extends SuiteTest {
     public void test3() throws IOException {
         /** Manifest */
         String classPath = this.getClass().getResource("/").getPath();
-        String jarFile = classPath + "../txazo-reflection-1.0.jar";
+        String jarFile = classPath + "../txazo-java-reflection-1.0.jar";
         JarInputStream jis = new JarInputStream(new FileInputStream(jarFile), false);
         Manifest manifest = jis.getManifest();
         Attributes attr = manifest.getMainAttributes();
