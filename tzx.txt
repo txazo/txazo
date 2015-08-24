@@ -1,0 +1,14 @@
+1. ArrayList: Object[] elementData, 首地址, 偏移地址
+2. HashMap: Entry<K,V> []table,
+3. Segment(ReentrantLock) - HashEntry<K,V>[] table - put/get
+4. Memcached: K/V, 内存, LRU, Slab Allocation, 一致性Hash
+5. Struts2: Filter ActionContext Dispatcher ActionMapper(ActionMapping) ActionProxy Interceptors Action Result Template
+6. Spring: IOC AOP 整合Struts2
+7. MyBatis
+8. 高并发: 负载均衡, 缓存, 程序优化(代码 算法), 多线程(线程池), 数据库(索引 满查询 主从读写分离 分库分表)
+9. 线程安全: 不可变对象, 局部变量, CAS, volatile, synchronized, ReentrantLock
+10. 分布式: 服务器, SOA, 缓存, 数据库
+11. JVM: GC 内存结构 ClassLoader
+12. sleep() wait()
+13. 项目
+14. 反射, 动态代理
