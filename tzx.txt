@@ -3,12 +3,17 @@
 3. Segment(ReentrantLock) - HashEntry<K,V>[] table - put/get
 4. Memcached: K/V, 内存, LRU, Slab Allocation, 一致性Hash
 5. Struts2: Filter ActionContext Dispatcher ActionMapper(ActionMapping) ActionProxy Interceptors Action Result Template
-6. Spring: IOC AOP 整合Struts2
+6. Spring: IOC AOP 整合Struts2 注入
 7. MyBatis
-8. 高并发: 负载均衡, 缓存, 程序优化(代码 算法), 多线程(线程池), 数据库(索引 满查询 主从读写分离 分库分表)
-9. 线程安全: 不可变对象, 局部变量, CAS, volatile, synchronized, ReentrantLock
-10. 分布式: 服务器, SOA, 缓存, 数据库
-11. JVM: GC 内存结构 ClassLoader
-12. sleep() wait()
-13. 项目
-14. 反射, 动态代理
+8. 高并发: 负载均衡, 缓存, 程序优化(代码 算法), 异步, 多线程(线程池), 数据库(索引 查询优化-explain 慢查询 主从读写分离 分库分表)
+9. 线程安全: final, 不可变对象, 局部变量, ThreadLocal, volatile, synchronized, ReentrantLock, 原子操作类, 非阻塞同步(CAS)
+10. 多线程: 线程池
+11. 线程状态: wait(释放锁) sleep(不释放)
+12. 分布式: 服务器, SOA, 缓存, 数据库
+13. JVM: 内存模型 GC(Minor GC/Full GC) GC算法 ClassLoader(JVM Tomcat)
+14. 项目: App元素配置系统(列表 模块 红点) (版本号 城市 时间) beta/线上 测试/审核/发布/回滚
+15. 反射, 动态代理
+16. DNS TCP HTTP/HTTPS
+17. 设计模式
+18. JVM监控: jps jstat jmap jhat jstack jconsole jvisualvm jprofile
+19. JVM调优: 内存(大小 比例) GC(频率 时间 收集器) 堆转储快照 内存溢出(堆内 堆外)
