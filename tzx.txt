@@ -1,12 +1,12 @@
-1. ArrayList: Object[] elementData, 首地址, 偏移地址
-2. HashMap: Entry<K,V> []table,
-3. Segment(ReentrantLock) - HashEntry<K,V>[] table - put/get
-4. Memcached: K/V, 内存, LRU, Slab Allocation, 一致性Hash
-5. Struts2: Filter ActionContext Dispatcher ActionMapper(ActionMapping) ActionProxy Interceptors Action Result Template
-6. Spring: IOC AOP 整合Struts2 注入
-7. MyBatis
-8. 高并发: 负载均衡, 缓存, 程序优化(代码 算法), 异步, 多线程(线程池), 数据库(索引 查询优化-explain 慢查询 主从读写分离 分库分表)
-9. 线程安全: final, 不可变对象, 局部变量, ThreadLocal, volatile, synchronized, ReentrantLock, 原子操作类, 非阻塞同步(CAS)
+1.  ArrayList: Object[] elementData, 首地址, 偏移地址
+2.  HashMap: Entry<K,V>[] table, (hash - index - key(==/equals))
+3.  ConcurrentHashMap: Segment(ReentrantLock) - HashEntry<K,V>[] table - put/get
+4.  Memcached: K/V, 内存, LRU, Slab Allocation(1M), 一致性Hash(虚拟节点)
+5.  Struts2: Filter ActionContext Dispatcher ActionMapper(ActionMapping) ActionProxy Interceptors Action Result Template
+6.  Spring: IOC AOP 整合Struts2 注入(Autowire-类型 Resource－名称－类型)
+7.  MyBatis: mybatis.xml(Mapper - MappedStatement), SqlSession(SQL ID, Params), MappedStatement, 执行, 结果
+8.  高并发: 负载均衡, 缓存, 程序优化(代码 算法), 异步, 多线程(线程池), 数据库(索引 查询优化-explain 慢查询 主从读写分离 分库分表)
+9.  线程安全: final, 不可变对象, 局部变量, ThreadLocal, volatile, synchronized, ReentrantLock, 原子操作类, 非阻塞同步(CAS)
 10. 多线程: 线程池
 11. 线程状态: wait(释放锁) sleep(不释放)
 12. 分布式: 服务器, SOA, 缓存, 数据库
