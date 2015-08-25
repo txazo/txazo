@@ -17,3 +17,6 @@
 17. 设计模式
 18. JVM监控: jps jstat jmap jhat jstack jconsole jvisualvm jprofile
 19. JVM调优: 内存(大小 比例) GC(频率 时间 收集器) 堆转储快照 内存溢出(堆内 堆外)
+20. GET/POST
+21. Tomcat:
+22. Client - Server - DB:
