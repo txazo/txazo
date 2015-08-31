@@ -25,6 +25,7 @@
         <module>txazo-java-io</module>
         <module>txazo-java-jvm</module>
         <module>txazo-java-network</module>
+        <module>txazo-java-optimize</module>
         <module>txazo-java-reflection</module>
         <module>txazo-java-reflection/txazo-java-reflection-remote-api</module>
         <module>txazo-java-reflection/txazo-java-reflection-remote-service</module>

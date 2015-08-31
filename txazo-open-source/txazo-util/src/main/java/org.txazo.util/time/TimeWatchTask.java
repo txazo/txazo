@@ -9,6 +9,6 @@ package org.txazo.util.time;
  */
 public interface TimeWatchTask {
 
-    public void execute();
+    public void execute() throws Throwable;
 
 }

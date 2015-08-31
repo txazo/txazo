@@ -34,7 +34,7 @@ public class RandomAccessTest {
      */
 
     @Test
-    public void test() {
+    public void test() throws Throwable {
         int times = 100000;
         final List<Integer> list = new ArrayList<Integer>(1000000);
         for (int i = 0, n = list.size(); i < n; i++) {

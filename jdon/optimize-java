@@ -1,0 +1,14 @@
+1. JIT/内联
+   1) final
+   2) 热点小方法
+   3) 虚方法只有一个子类
+   4) -XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining
+
+2. GC垃圾回收
+
+3. False Sharing伪共享
+   1) 填充缓存行
+
+4. Unsafe
+
+5. Queue队列

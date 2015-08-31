@@ -17,11 +17,11 @@ public class TimeWatch {
         stopWatch = new StopWatch();
     }
 
-    public void watch(String taskName, TimeWatchTask task) {
+    public void watch(String taskName, TimeWatchTask task) throws Throwable {
         watch(taskName, 1, task);
     }
 
-    public void watch(String taskName, int times, TimeWatchTask task) {
+    public void watch(String taskName, int times, TimeWatchTask task) throws Throwable {
         if (times <= 0) {
             throw new IllegalArgumentException("times must > 0");
         }
