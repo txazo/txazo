@@ -1,0 +1,57 @@
+Web Architecture
+1.  DNS
+2.  IP TCP(三次握手/四次挥手) HTTP(GET/POST)/HTTPS
+3.  CDN
+4.  Server: Nginx(HTTP) Resin(HTTP) Tomcat(HTTP) Netty(TCP/事件)
+5.  Servlet: Servlet Filter Listener
+6.  Controller: Struts2 SpringMVC
+7.  View: HTML JSP FreeMarker Velocity
+8.  Service: SpringIOC SOA RPC REST
+9.  Cache: Memcached Redis
+10. Middleware: JMS Search
+9.  DAO: MyBatis Hibernate
+10. Database Connection: DBCP C3P0 Proxool
+11. Database: MySQL
+
+Java Architecture
+1.  CPU/Memory
+2.  JVM: ClassLoader GC JMM
+3.  JDK Tool: java javac jar
+4.  JDK Package:
+5.  Java Base: OO IO/NIO Collection Network Thread
+6.  Java Advanced: Annotation Reflection Generic Dynamic Proxy Enumeration java.util.concurrent
+7.  Java Design Pattern: 23 Kind
+
+Distributed System
+1.  CAP
+1.  CDN
+2.  Server
+3.  SOA
+4.  Middleware: Cache JMS Search
+5.  Database
+
+High Concurrency
+1. 负载均衡/分布式
+2. 异步编程: 队列 线程池
+3. 资源池化: 对象池、线程池、连接池
+4. 数据库: 主从 分库分表 慢查询 索引
+5. 数据源: 内存 > 缓存 > 磁盘 > 网络 > 数据库
+
+Thread Safety
+1. final
+2. 不可变对象
+3. 局部变量
+4. ThreadLocal
+5. volatile
+6. synchronized
+7. ReentrantLock
+8. java.util.concurrent.atomic
+9. CAS
+
+SourceCode
+1. ArrayList HashMap ConcurrentHashMap
+2. Struts2
+3. SpringIOC SpringAOP
+
+Model
+1. 事件驱动
