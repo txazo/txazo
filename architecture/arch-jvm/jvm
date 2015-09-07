@@ -1,3 +1,8 @@
 1. GC
 2. 内存模型
 3. 类加载机制
+
+JVM命令
+1. -XX:+DisableExplicitGC
+2. -XX:+HeapDumpOnOutOfMemoryError
+   －XX:HeapDumpPath

@@ -2,3 +2,9 @@
 2. 集合
 3. 多线程
 4. 网络编程
+
+多线程
+1. synchronized: synchronized同步方法, synchronized同步代码块
+2. ThreadLocal
+3. volatile
+4. 原子类
