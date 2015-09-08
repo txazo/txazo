@@ -20,6 +20,7 @@ public class HashMapTest {
      * 5) 容量: 容量为2的n次幂, 默认容量16, 容量超过capacity * loadFactor时扩容一倍, 可设置初始容量, 避免频繁扩容
      * 6) rehash: 扩容时, 重建Entry数组
      * 7) fail-fast机制
+     * 8) key不要为可变对象
      */
 
 }

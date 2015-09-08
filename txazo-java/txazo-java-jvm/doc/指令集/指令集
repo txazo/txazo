@@ -4,3 +4,6 @@ iconst
 
 iload
 istore
+
+[Throw Exception]
+athrow

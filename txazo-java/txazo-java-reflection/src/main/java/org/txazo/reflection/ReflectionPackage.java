@@ -71,4 +71,11 @@ public class ReflectionPackage extends SuiteTest {
         manifest.write(new FileOutputStream(this.getClass().getResource("/manifest.mf").getPath()));
     }
 
+    /**
+     * MANIFEST.MF
+     *
+     * 1) Main-Class: org.txazo.reflection.Main
+     * 2) Class-Path: lib/commons-lang3-3.4.jar
+     */
+
 }

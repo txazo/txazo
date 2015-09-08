@@ -18,9 +18,10 @@ public class IteratorTest {
 
     /**
      * Iterator
-     *
+     * <p/>
      * 1) 迭代器
      * 2) 迭代器模式
+     * 3) remove()是安全的
      */
 
     @Test

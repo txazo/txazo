@@ -46,3 +46,19 @@
 -XX:NewSize=64M -XX:MaxNewSize=128M
 -XX:NewRatio=3
 -XX:SurvivorRatio=8
+
+[Disable System.gc()]
+-XX:+DisableExplicitGC
+
+[Enable Detail Output]
+-verbose:[class|gc|jni]
+
+[Log GC Info To File]
+-Xloggc:<file>
+
+[Open Remote JMX]
+-Dcom.sun.management.jmxremote
+-Dcom.sun.management.jmxremote.port=4000
+-Dcom.sun.management.jmxremote.authenticate="false"
+-Dcom.sun.management.jmxremote.ssl="false"
+-Djava.rmi.server.hostname=127.0.0.1
