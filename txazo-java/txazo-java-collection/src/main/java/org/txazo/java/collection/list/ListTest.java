@@ -20,7 +20,7 @@ import java.util.List;
 public class ListTest {
 
     @Test
-    public void test() {
+    public void test() throws Throwable {
         final List<Integer> arrayList = new ArrayList<Integer>(100000);
         final List<Integer> linkedList = new LinkedList<Integer>();
         for (int i = 0, n = arrayList.size(); i < n; i++) {
@@ -31,7 +31,7 @@ public class ListTest {
         testLoop("LinkedList", linkedList);
     }
 
-    public void testLoop(String loopName, final List<Integer> list) {
+    public void testLoop(String loopName, final List<Integer> list) throws Throwable {
         int times = 1000000;
 
         TimeWatch timeWatch = new TimeWatch();
