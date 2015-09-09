@@ -21,6 +21,7 @@ public class ArrayListTest {
      * 1) 线程不安全
      * 2) 实现: Object[] elementData, int size
      * 3) 大小可动态增长, 默认大小10, 每次扩容1/2, 可指定初始大小, 尽量避免扩容
+     * 4) 基于数组实现: 在内存中为一块连续的内存空间
      */
 
     @Test

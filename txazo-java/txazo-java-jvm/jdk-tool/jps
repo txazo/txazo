@@ -1,1 +1,4 @@
 jps
+
+jps -v
+jps -l
