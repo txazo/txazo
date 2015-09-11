@@ -20,9 +20,8 @@ public class SerializableTest implements Serializable {
     /**
      * Serializable - 序列化
      * <pre>
-     * 应用:
      * 1) 持久化存储(内存 文件 数据库)
-     * 2) 网络传输(RPC Memcached Redis)
+     * 2) 网络传输(RPC Redis Memcached)
      * 3) 深度克隆
      * </pre>
      */
@@ -67,6 +66,9 @@ public class SerializableTest implements Serializable {
         private String name;
         /** transient, 不参入系列化和反序列化 */
         private transient Date createTime;
+
+        public Entity() {
+        }
 
         public Entity(int id, String name, Date createTime) {
             this.id = id;
