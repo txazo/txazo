@@ -37,8 +37,14 @@ public class CloseableTest {
                 try {
                     resource.close();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
+        }
+
+        try (Resource r = new Resource()) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
