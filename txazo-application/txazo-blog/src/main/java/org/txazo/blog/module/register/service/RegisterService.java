@@ -11,6 +11,6 @@ import org.txazo.blog.module.register.bean.RegisterResult;
  */
 public interface RegisterService {
 
-    public RegisterResult register(String email, String passWord, String userName);
+    public RegisterResult register(String email, String userName, String passWord);
 
 }

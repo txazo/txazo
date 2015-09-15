@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.txazo.blog.common.controller.BaseController;
 import org.txazo.blog.module.login.service.LoginService;
@@ -31,13 +32,13 @@ public class RegisterController extends BaseController {
     @Autowired
     private RegisterService registerService;
 
-    // http://127.0.0.1:8080/register/register?email=784990655@qq.com&passWord=123456&userName=txazoqq
-    @RequestMapping("/register")
+    // http://127.0.0.1:8080/register/register?email=784990655@qq.com&userName=txazoqq&passWord=123456
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(@RequestParam(value = "email", required = true) String email,
-                           @RequestParam(value = "passWord", required = true) String passWord,
                            @RequestParam(value = "userName", required = true) String userName,
+                           @RequestParam(value = "passWord", required = true) String passWord,
                            Model model) {
-        RegisterResult result = registerService.register(email, passWord, userName);
+        RegisterResult result = registerService.register(email, userName, passWord);
         if (result.succ()) {
             loginService.writeLoginCookie(userService.getUserByEmail(email), getResponse());
             return redirectTo(HOME_INDEX);

@@ -27,17 +27,17 @@ public class RegisterServiceImpl implements RegisterService {
     private UserService userService;
 
     @Override
-    public RegisterResult register(String email, String passWord, String userName) {
+    public RegisterResult register(String email, String userName, String passWord) {
         if (!RegisterUtils.isValidEmail(email)) {
             return RegisterResult.fail("邮箱格式有误");
         }
 
-        if (!RegisterUtils.isValidPassWord(passWord)) {
-            return RegisterResult.fail("密码格式有误");
-        }
-
         if (!RegisterUtils.isValidUserName(userName)) {
             return RegisterResult.fail("昵称格式有误");
+        }
+
+        if (!RegisterUtils.isValidPassWord(passWord)) {
+            return RegisterResult.fail("密码格式有误");
         }
 
         if (userService.getUserByEmail(email) != null) {

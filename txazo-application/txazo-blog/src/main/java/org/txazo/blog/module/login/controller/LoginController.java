@@ -22,6 +22,7 @@ public class LoginController extends BaseController {
     @Autowired
     private LoginService loginService;
 
+    // http://127.0.0.1:8080/login/login?email=txazo1218@163.com&passWord=123456
     @RequestMapping("/login")
     public String login(@RequestParam(value = "email", required = true) String email,
                         @RequestParam(value = "passWord", required = true) String passWord) {

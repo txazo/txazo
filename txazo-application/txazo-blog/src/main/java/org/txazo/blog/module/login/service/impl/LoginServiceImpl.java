@@ -25,6 +25,7 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserService userService;
 
+    @Autowired
     private CodeService codeService;
 
     @Override
@@ -43,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
         if (user == null || response == null) {
             return;
         }
-        String code = codeService.getCode(user.getId(), CodeType.LOGIN);
+        String code = codeService.generateCode(user.getId(), CodeType.LOGIN);
         CookieUtils.setCookie(response, LoginUtils.COOKIE_USER_ID, String.valueOf(user.getId()), 1800);
         CookieUtils.setCookie(response, LoginUtils.COOKIE_LOGIN_KEY, LoginUtils.generateLoginKey(user.getId(), code), 1800);
     }

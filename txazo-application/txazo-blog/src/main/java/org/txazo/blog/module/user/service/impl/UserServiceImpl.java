@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean removeUser(int id) {
-        if (userDao.removeUser(id) > 0) {
+        if (id > 0 && userDao.removeUser(id) > 0) {
             clearUserCache(id);
             return true;
         }
@@ -84,6 +84,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(int id) {
+        if (id <= 0) {
+            return null;
+        }
         CacheKey key = getUserKey(id);
         User user = cacheService.get(key, User.class);
         if (user == null) {

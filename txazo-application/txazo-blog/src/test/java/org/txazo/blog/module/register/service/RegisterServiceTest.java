@@ -20,7 +20,7 @@ public class RegisterServiceTest extends SpringAbstractTest {
 
     @Test
     public void testRegiser() {
-        String email = "784990655@qq.com";
+        String email = "txazo1218@163.com";
         String passWord = "123456";
         String userName = "txazo";
         RegisterResult result = registerService.register(email, passWord, userName);

@@ -29,7 +29,7 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     public String generateCode(int userId, CodeType type) {
-        String code = CodeUtils.generateCode(16);
+        String code = CodeUtils.generateCode(type.getLength());
         cacheService.set(new CacheKey(type.getKey(), userId), code, type.getExpireTime());
         return code;
     }

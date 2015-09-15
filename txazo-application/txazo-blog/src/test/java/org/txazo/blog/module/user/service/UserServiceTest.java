@@ -35,7 +35,6 @@ public class UserServiceTest extends SpringAbstractTest {
     public void testUpdateUser() {
         User user = userService.getUser(1);
         user.setPassWord("121212");
-        user.setEmail("760908001@qq.com");
         user.setAvatar("my1.jpg");
         user.setPrivilege(PrivilegeType.LOGIN.getId());
         Assert.assertTrue(userService.updateUser(user));
@@ -58,7 +57,7 @@ public class UserServiceTest extends SpringAbstractTest {
 
     @Test
     public void testGetUserByEmail() {
-        Assert.assertNotNull(userService.getUserByEmail("760908001@qq.com"));
+        Assert.assertNotNull(userService.getUserByEmail("784990655@qq.com"));
     }
 
 }

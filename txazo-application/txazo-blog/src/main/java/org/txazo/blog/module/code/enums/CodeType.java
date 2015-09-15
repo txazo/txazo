@@ -11,23 +11,29 @@ import org.txazo.blog.common.constant.Key;
  */
 public enum CodeType {
 
-    LOGIN(Key.LOGIN_CODE, 30 * 60),
-    EMAIL_VALIDATE(Key.EMAIL_VALIDATE_CODE, 24 * 60 * 60);
+    LOGIN(Key.LOGIN_CODE, 16, 30 * 60),
+    EMAIL_VALIDATE(Key.EMAIL_VALIDATE_CODE, 16, 24 * 60 * 60);
 
     private String key;
+    private int length;
     private int expireTime;
 
-    CodeType(String key, int expireTime) {
+    CodeType(String key, int length, int expireTime) {
         this.key = key;
+        this.length = length;
         this.expireTime = expireTime;
-    }
-
-    public int getExpireTime() {
-        return expireTime;
     }
 
     public String getKey() {
         return key;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getExpireTime() {
+        return expireTime;
     }
 
 }
