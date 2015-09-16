@@ -18,6 +18,7 @@
     <url>https://github.com/txazo/txazo</url>
 
     <modules>
+        <module>txazo-framework</module>
         <module>txazo-log</module>
         <module>txazo-monitor</module>
         <module>txazo-test</module>
