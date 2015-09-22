@@ -1,4 +1,4 @@
-package org.txazo.java.concurrent;
+package org.txazo.java.concurrency;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package org.txazo.java.concurrent.lock;
+package org.txazo.java.concurrency.lock;
 
 /**
  * VolatileTest

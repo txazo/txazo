@@ -1,4 +1,4 @@
-package org.txazo.java.concurrent.akka;
+package org.txazo.java.concurrency.akka;
 
 import akka.actor.UntypedActor;
 

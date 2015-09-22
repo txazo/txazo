@@ -19,7 +19,7 @@
 
     <modules>
         <module>txazo-java-collection</module>
-        <module>txazo-java-concurrent</module>
+        <module>txazo-java-concurrency</module>
         <module>txazo-java-core</module>
         <module>txazo-java-design-pattern</module>
         <module>txazo-java-io</module>

@@ -1,4 +1,4 @@
-package org.txazo.java.concurrent.aqs;
+package org.txazo.java.concurrency.aqs;
 
 /**
  * AQSTest
