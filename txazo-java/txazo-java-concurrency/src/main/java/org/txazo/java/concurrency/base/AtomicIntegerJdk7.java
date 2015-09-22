@@ -1,4 +1,4 @@
-package org.txazo.java.concurrency.cas;
+package org.txazo.java.concurrency.base;
 
 import sun.misc.Unsafe;
 

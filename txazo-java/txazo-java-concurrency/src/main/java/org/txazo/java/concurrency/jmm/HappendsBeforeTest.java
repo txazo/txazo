@@ -1,13 +1,9 @@
-package org.txazo.java.concurrency.lock;
+package org.txazo.java.concurrency.jmm;
 
 /**
- * HappensBeforeTest
- *
- * @author txazo
- * @email txazo1218@163.com
- * @since 25.07.2015
+ * Created by txazo on 15/9/22.
  */
-public class HappensBeforeTest {
+public class HappendsBeforeTest {
 
     /**
      * happens-before

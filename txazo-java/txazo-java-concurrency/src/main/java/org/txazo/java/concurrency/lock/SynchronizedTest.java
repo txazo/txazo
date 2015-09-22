@@ -3,19 +3,19 @@ package org.txazo.java.concurrency.lock;
 /**
  * SynchronizedTest
  *
- * @author txazo
- * @email txazo1218@163.com
- * @since 24.07.2015
+ * @author xiaozhou.tu
+ * @date 2015-09-22
  */
 public class SynchronizedTest {
 
     /**
      * synchronized
-     * <p/>
+     * <p>
      * 锁
      * 1) 偏向锁
      * 2) 轻量级锁
      * 3) 重量级锁
+     * </p>
      */
 
     private static Object lock = new Object();

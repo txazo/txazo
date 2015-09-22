@@ -1,13 +1,12 @@
-package org.txazo.java.concurrency.cas;
+package org.txazo.java.concurrency.base;
 
 import org.junit.Test;
 
 /**
  * CASTest
  *
- * @author txazo
- * @email txazo1218@163.com
- * @since 25.07.2015
+ * @author xiaozhou.tu
+ * @date 2015-09-22
  */
 public class CASTest {
 
