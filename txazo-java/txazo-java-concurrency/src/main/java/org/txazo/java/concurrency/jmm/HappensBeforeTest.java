@@ -1,9 +1,12 @@
 package org.txazo.java.concurrency.jmm;
 
 /**
- * Created by txazo on 15/9/22.
+ * HappensBeforeTest
+ *
+ * @author xiaozhou.tu
+ * @date 2015-09-23
  */
-public class HappendsBeforeTest {
+public class HappensBeforeTest {
 
     /**
      * happens-before
@@ -16,6 +19,13 @@ public class HappendsBeforeTest {
      * 6) 一个线程A调用另一个另一个线程B的interrupt（）都happens-before于线程A发现B被A中断（B抛出异常或者A检测到B的isInterrupted（）或者interrupted()）
      * 7) 一个对象构造函数的结束happens-before与该对象的finalizer的开始
      * 8) 如果A动作happens-before于B动作，而B动作happens-before与C动作，那么A动作happens-before于C动作。
+     */
+
+    /**
+     * 解锁               加锁
+     * volatile写        volatile读
+     * Thread.start()    Thread中的操作
+     * Thread中的操作       Thread.join()
      */
 
 }

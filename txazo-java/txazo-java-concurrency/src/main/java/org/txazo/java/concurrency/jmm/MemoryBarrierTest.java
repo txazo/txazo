@@ -1,16 +1,20 @@
 package org.txazo.java.concurrency.jmm;
 
 /**
- * MemoryBarrierTest
+ * InstructionRearrangementTest
  *
- * @author txazo
- * @email txazo1218@163.com
- * @since 24.07.2015
+ * @author xiaozhou.tu
+ * @date 2015-09-23
  */
 public class MemoryBarrierTest {
 
     /**
      * 内存屏障
+     *
+     * 1) LoadLoad
+     * 2) LoadStore
+     * 3) StoreLoad(*)
+     * 4) StoreStore
      */
 
 }
