@@ -19,12 +19,12 @@ public abstract class AbstractResource implements Resource {
     public boolean exists() {
         try {
             return this.getFile().exists();
-        } catch (IOException var4) {
+        } catch (IOException e) {
             try {
-                InputStream isEx = this.getInputStream();
-                isEx.close();
+                InputStream is = this.getInputStream();
+                is.close();
                 return true;
-            } catch (Throwable var3) {
+            } catch (Throwable t) {
                 return false;
             }
         }
@@ -47,8 +47,8 @@ public abstract class AbstractResource implements Resource {
 
         try {
             return ResourceUtils.toURI(url);
-        } catch (URISyntaxException var3) {
-            throw new NestedIOException("Invalid URI [" + url + "]", var3);
+        } catch (URISyntaxException e) {
+            throw new NestedIOException("Invalid URI [" + url + "]", e);
         }
     }
 
@@ -64,18 +64,14 @@ public abstract class AbstractResource implements Resource {
 
             int read;
             for (byte[] buf = new byte[255]; (read = is.read(buf)) != -1; size += (long) read) {
-                ;
             }
 
-            long var6 = size;
-            return var6;
+            return size;
         } finally {
             try {
                 is.close();
-            } catch (IOException var14) {
-                ;
+            } catch (IOException e) {
             }
-
         }
     }
 
