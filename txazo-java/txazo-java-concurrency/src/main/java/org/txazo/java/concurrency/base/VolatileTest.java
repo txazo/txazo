@@ -1,5 +1,9 @@
 package org.txazo.java.concurrency.base;
 
+import org.junit.Test;
+
+import java.io.Serializable;
+
 /**
  * VolatileTest
  *
@@ -10,12 +14,40 @@ public class VolatileTest {
 
     /**
      * volatile
-     *
+     * <p/>
      * 1. 保证可见性
      * 2. 不保证原子性
-     * 3. 锁释放与volatile写有相同的内存语义
-     * 4. 锁获取与volatile读有相同的内存语义
-     * 5. CAS同时具有volatile读和volatile写的内存语义
      */
+
+    @Test
+    public void testVolatile() {
+        /**
+         * 汇编代码
+         *
+         * lock ...
+         * 1) 缓存一致性协议
+         * 2) 缓存行数据写回主存
+         * 3) 其它处理器的缓存行无效
+         */
+        node = new Node();
+    }
+
+    private static volatile Node node;
+
+    private static class Node<V> implements Serializable {
+
+        private V value;
+
+    }
+
+    /**
+     * volatile追加字节
+     */
+    private static class PaddedNode<V> extends Node<V> {
+
+        private Object o0, o1, o2, o3, o4, o5, o6, o7, o8, o9, oa, ob, oc, od, oe;
+
+    }
+
 
 }
