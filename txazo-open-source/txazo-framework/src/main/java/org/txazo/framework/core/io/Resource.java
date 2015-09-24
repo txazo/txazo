@@ -5,28 +5,22 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 
+/**
+ * 资源
+ * <p/>
+ * 1) .xml
+ * 2) .class
+ */
 public interface Resource extends InputStreamSource {
 
     boolean exists();
 
-    boolean isReadable();
-
-    boolean isOpen();
+    String getFileName();
 
     URL getURL() throws IOException;
 
     URI getURI() throws IOException;
 
     File getFile() throws IOException;
-
-    long contentLength() throws IOException;
-
-    long lastModified() throws IOException;
-
-    Resource createRelative(String relativePath) throws IOException;
-
-    String getFilename();
-
-    String getDescription();
 
 }

@@ -1,14 +1,9 @@
 package org.txazo.framework.core.io;
 
-import org.txazo.framework.core.NestedIOException;
-import org.txazo.framework.util.ResourceUtils;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 public abstract class AbstractResource implements Resource {
@@ -16,6 +11,7 @@ public abstract class AbstractResource implements Resource {
     public AbstractResource() {
     }
 
+    @Override
     public boolean exists() {
         try {
             return this.getFile().exists();
@@ -30,82 +26,24 @@ public abstract class AbstractResource implements Resource {
         }
     }
 
-    public boolean isReadable() {
-        return true;
-    }
-
-    public boolean isOpen() {
-        return false;
-    }
-
-    public URL getURL() throws IOException {
-        throw new FileNotFoundException(this.getDescription() + " cannot be resolved to URL");
-    }
-
-    public URI getURI() throws IOException {
-        URL url = this.getURL();
-
-        try {
-            return ResourceUtils.toURI(url);
-        } catch (URISyntaxException e) {
-            throw new NestedIOException("Invalid URI [" + url + "]", e);
-        }
-    }
-
-    public File getFile() throws IOException {
-        throw new FileNotFoundException(this.getDescription() + " cannot be resolved to absolute file path");
-    }
-
-    public long contentLength() throws IOException {
-        InputStream is = this.getInputStream();
-
-        try {
-            long size = 0L;
-
-            int read;
-            for (byte[] buf = new byte[255]; (read = is.read(buf)) != -1; size += (long) read) {
-            }
-
-            return size;
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-            }
-        }
-    }
-
-    public long lastModified() throws IOException {
-        long lastModified = this.getFileForLastModifiedCheck().lastModified();
-        if (lastModified == 0L) {
-            throw new FileNotFoundException(this.getDescription() + " cannot be resolved in the file system for resolving its last-modified timestamp");
-        } else {
-            return lastModified;
-        }
-    }
-
-    protected File getFileForLastModifiedCheck() throws IOException {
-        return this.getFile();
-    }
-
-    public Resource createRelative(String relativePath) throws IOException {
-        throw new FileNotFoundException("Cannot create a relative resource for " + this.getDescription());
-    }
-
-    public String getFilename() {
+    @Override
+    public String getFileName() {
         return null;
     }
 
-    public String toString() {
-        return this.getDescription();
+    @Override
+    public URL getURL() throws IOException {
+        return null;
     }
 
-    public boolean equals(Object obj) {
-        return obj == this || obj instanceof Resource && ((Resource) obj).getDescription().equals(this.getDescription());
+    @Override
+    public URI getURI() throws IOException {
+        return null;
     }
 
-    public int hashCode() {
-        return this.getDescription().hashCode();
+    @Override
+    public File getFile() throws IOException {
+        return null;
     }
 
 }
