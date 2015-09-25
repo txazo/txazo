@@ -1,7 +1,6 @@
 package org.txazo.framework.core.io;
 
 import org.txazo.framework.util.Assert;
-import org.txazo.framework.util.ClassUtils;
 import org.txazo.framework.util.StringUtils;
 
 import java.net.MalformedURLException;
@@ -15,23 +14,7 @@ import java.net.URL;
  */
 public class DefaultResourceLoader implements ResourceLoader {
 
-    private ClassLoader classLoader;
-
     public DefaultResourceLoader() {
-        this.classLoader = ClassUtils.getDefaultClassLoader();
-    }
-
-    public DefaultResourceLoader(ClassLoader classLoader) {
-        this.classLoader = classLoader;
-    }
-
-    public void setClassLoader(ClassLoader classLoader) {
-        this.classLoader = classLoader;
-    }
-
-    @Override
-    public ClassLoader getClassLoader() {
-        return this.classLoader != null ? this.classLoader : ClassUtils.getDefaultClassLoader();
     }
 
     @Override
@@ -40,7 +23,7 @@ public class DefaultResourceLoader implements ResourceLoader {
         if (location.startsWith("/")) {
             return getResourceByPath(location);
         } else if (location.startsWith(CLASSPATH_URL_PREFIX)) {
-            return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
+            return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()));
         } else {
             try {
                 URL url = new URL(location);
@@ -52,13 +35,13 @@ public class DefaultResourceLoader implements ResourceLoader {
     }
 
     protected Resource getResourceByPath(String path) {
-        return new ClassPathContextResource(path, getClassLoader());
+        return new ClassPathContextResource(path);
     }
 
     protected static class ClassPathContextResource extends ClassPathResource implements ContextResource {
 
-        public ClassPathContextResource(String path, ClassLoader classLoader) {
-            super(path, classLoader);
+        public ClassPathContextResource(String path) {
+            super(path);
         }
 
         public String getPathWithinContext() {
@@ -67,7 +50,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 
         public Resource createRelative(String relativePath) {
             String newPath = StringUtils.applyRelativePath(getPath(), relativePath);
-            return new ClassPathContextResource(newPath, getClassLoader());
+            return new ClassPathContextResource(newPath);
         }
 
     }

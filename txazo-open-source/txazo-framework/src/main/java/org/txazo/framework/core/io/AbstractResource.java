@@ -15,7 +15,7 @@ public abstract class AbstractResource implements Resource {
 
     @Override
     public Resource createRelative(String relativePath) throws IOException {
-        throw new IOException("Cannot create a relative resource for " + getDescription());
+        throw new IOException("Cannot create a relative resource");
     }
 
 }

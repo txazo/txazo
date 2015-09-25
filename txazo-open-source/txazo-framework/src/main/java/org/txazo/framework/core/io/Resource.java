@@ -10,8 +10,6 @@ import java.io.IOException;
  */
 public interface Resource extends InputStreamSource {
 
-    String getDescription();
-
     Resource createRelative(String relativePath) throws IOException;
 
 }

@@ -69,6 +69,7 @@ public abstract class StringUtils {
         if (path == null) {
             return null;
         } else {
+            // \替换为/
             String pathToUse = replace(path, "\\", "/");
             int prefixIndex = pathToUse.indexOf(":");
             String prefix = "";

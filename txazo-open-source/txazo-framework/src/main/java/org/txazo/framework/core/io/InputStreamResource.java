@@ -1,7 +1,6 @@
 package org.txazo.framework.core.io;
 
 import org.txazo.framework.util.Assert;
-import org.txazo.framework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,22 +14,11 @@ import java.io.InputStream;
 public class InputStreamResource extends AbstractResource {
 
     private volatile boolean read = false;
-    private final String description;
     private final InputStream inputStream;
 
     public InputStreamResource(InputStream inputStream) {
-        this(inputStream, "InputStreamResource");
-    }
-
-    public InputStreamResource(InputStream inputStream, String description) {
         Assert.notNull(inputStream, "InputStream must not be null");
         this.inputStream = inputStream;
-        this.description = description != null ? description : StringUtils.EMPTY;
-    }
-
-    @Override
-    public String getDescription() {
-        return this.description;
     }
 
     @Override

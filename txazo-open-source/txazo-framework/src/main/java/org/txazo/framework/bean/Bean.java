@@ -1,8 +1,15 @@
 package org.txazo.framework.bean;
 
-/**
- * Created by txazo on 15/9/24.
- */
 public class Bean {
+
+    private boolean isAbstract;
+
+    private String parentName;
+
+    private String beanClassName;
+
+    private Class<?> beanClass;
+
+    private BeanType beanType;
 
 }
