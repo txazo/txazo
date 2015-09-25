@@ -1,26 +1,17 @@
 package org.txazo.framework.core.io;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 
 /**
- * 资源
- * <p/>
- * 1) .xml
- * 2) .class
+ * Resource
+ *
+ * @author xiaozhou.tu
+ * @since 2015-09-25
  */
 public interface Resource extends InputStreamSource {
 
-    boolean exists();
+    String getDescription();
 
-    String getFileName();
-
-    URL getURL() throws IOException;
-
-    URI getURI() throws IOException;
-
-    File getFile() throws IOException;
+    Resource createRelative(String relativePath) throws IOException;
 
 }

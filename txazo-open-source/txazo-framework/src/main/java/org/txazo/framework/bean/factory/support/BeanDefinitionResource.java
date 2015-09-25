@@ -21,4 +21,9 @@ public class BeanDefinitionResource extends AbstractResource {
         return null;
     }
 
+    @Override
+    public String getDescription() {
+        return null;
+    }
+
 }

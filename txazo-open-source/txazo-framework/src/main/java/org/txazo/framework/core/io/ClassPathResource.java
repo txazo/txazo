@@ -7,9 +7,8 @@ import org.txazo.framework.util.StringUtils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
-public class ClassPathResource extends AbstractFileResolvingResource {
+public class ClassPathResource {
 
     private final String path;
     private ClassLoader classLoader;
@@ -25,9 +24,8 @@ public class ClassPathResource extends AbstractFileResolvingResource {
         if (pathToUse.startsWith("/")) {
             pathToUse = pathToUse.substring(1);
         }
-
         this.path = pathToUse;
-        this.classLoader = classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader();
+        this.classLoader = (classLoader != null ? classLoader : ClassUtils.getDefaultClassLoader());
     }
 
     public ClassPathResource(String path, Class<?> clazz) {
@@ -42,22 +40,7 @@ public class ClassPathResource extends AbstractFileResolvingResource {
         this.clazz = clazz;
     }
 
-    public final String getPath() {
-        return this.path;
-    }
-
-    public final ClassLoader getClassLoader() {
-        return this.clazz != null ? this.clazz.getClassLoader() : this.classLoader;
-    }
-
-    public boolean exists() {
-        return this.resolveURL() != null;
-    }
-
-    protected URL resolveURL() {
-        return this.clazz != null ? this.clazz.getResource(this.path) : (this.classLoader != null ? this.classLoader.getResource(this.path) : ClassLoader.getSystemResource(this.path));
-    }
-
+    @Override
     public InputStream getInputStream() throws IOException {
         InputStream is;
         if (this.clazz != null) {
@@ -67,21 +50,21 @@ public class ClassPathResource extends AbstractFileResolvingResource {
         } else {
             is = ClassLoader.getSystemResourceAsStream(this.path);
         }
-
         if (is == null) {
-            throw new FileNotFoundException(" cannot be opened because it does not exist");
-        } else {
-            return is;
+            throw new FileNotFoundException(getDescription() + " cannot be opened because it does not exist");
         }
+        return is;
     }
 
-    public URL getURL() throws IOException {
-        URL url = this.resolveURL();
-        if (url == null) {
-            throw new FileNotFoundException(" cannot be resolved to URL because it does not exist");
-        } else {
-            return url;
-        }
+    @Override
+    public Resource createRelative(String relativePath) {
+        String newPath = StringUtils.applyRelativePath(this.path, relativePath);
+        return new ClassPathResource(newPath, this.classLoader, this.clazz);
+    }
+
+    @Override
+    public String getDescription() {
+        return this.path;
     }
 
 }

@@ -7,6 +7,9 @@ import java.util.LinkedList;
 
 public abstract class StringUtils {
 
+    public static final String EMPTY = "";
+    private static final String FOLDER_SEPARATOR = "/";
+
     public static boolean hasLength(CharSequence str) {
         return str != null && str.length() > 0;
     }
@@ -34,6 +37,9 @@ public abstract class StringUtils {
         }
     }
 
+    /**
+     * applyRelativePath
+     */
     public static String applyRelativePath(String path, String relativePath) {
         int separatorIndex = path.lastIndexOf("/");
         if (separatorIndex != -1) {
@@ -46,6 +52,17 @@ public abstract class StringUtils {
         } else {
             return relativePath;
         }
+    }
+
+    /**
+     * getFilename
+     */
+    public static String getFilename(String path) {
+        if (path == null) {
+            return null;
+        }
+        int separatorIndex = path.lastIndexOf(FOLDER_SEPARATOR);
+        return (separatorIndex != -1 ? path.substring(separatorIndex + 1) : path);
     }
 
     public static String cleanPath(String path) {
