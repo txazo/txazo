@@ -1,9 +1,9 @@
 package org.txazo.framework.bean.factory;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.txazo.framework.bean.Bean;
 import org.txazo.framework.bean.BeanException;
 import org.txazo.framework.util.Assert;
+import org.txazo.framework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
