@@ -9,7 +9,7 @@ import java.util.List;
  * @author xiaozhou.tu
  * @since 2015-09-26
  */
-public class Bean {
+public class Bean extends Value {
 
     // Bean Name
     private String beanName;
