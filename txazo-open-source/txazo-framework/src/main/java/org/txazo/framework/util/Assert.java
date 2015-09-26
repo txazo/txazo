@@ -8,8 +8,10 @@ public abstract class Assert {
         }
     }
 
-    public static void notNull(Object object) {
-        notNull(object, "[Assertion failed] - this argument is required; it must not be null");
+    public static void notEmpty(final CharSequence cs, String message) {
+        if (cs == null || cs.length() == 0) {
+            throw new IllegalArgumentException(message);
+        }
     }
 
 }

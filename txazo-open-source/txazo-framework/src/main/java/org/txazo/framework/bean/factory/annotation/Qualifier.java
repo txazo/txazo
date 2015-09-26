@@ -2,7 +2,7 @@ package org.txazo.framework.bean.factory.annotation;
 
 import java.lang.annotation.*;
 
-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
