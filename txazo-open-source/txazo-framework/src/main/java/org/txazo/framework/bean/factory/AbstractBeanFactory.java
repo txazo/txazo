@@ -71,20 +71,23 @@ public abstract class AbstractBeanFactory implements BeanFactory {
     @Override
     public final String[] getName(Class<?> requiredType) throws BeanException {
         String[] beanNames = beanNamesByType.get(requiredType);
-        if (beanNames == null) {
-            beanNamesByTypeLock.lock();
-            try {
-                List<String> beanNameList = new ArrayList<String>();
-                for (Bean bean : beanMap.values()) {
-                    if (requiredType.isAssignableFrom(bean.getBeanClass())) {
-                        beanNameList.add(bean.getBeanName());
-                    }
+        return beanNames != null ? beanNames : getNameFromBean(requiredType);
+    }
+
+    private String[] getNameFromBean(Class<?> requiredType) {
+        String[] beanNames = null;
+        beanNamesByTypeLock.lock();
+        try {
+            List<String> beanNameList = new ArrayList<String>();
+            for (Bean bean : beanMap.values()) {
+                if (requiredType.isAssignableFrom(bean.getBeanClass())) {
+                    beanNameList.add(bean.getBeanName());
                 }
-                beanNames = beanNameList.toArray(new String[0]);
-                beanNamesByType.put(requiredType, beanNames);
-            } finally {
-                beanNamesByTypeLock.unlock();
             }
+            beanNames = beanNameList.toArray(new String[0]);
+            beanNamesByType.put(requiredType, beanNames);
+        } finally {
+            beanNamesByTypeLock.unlock();
         }
         return beanNames;
     }
