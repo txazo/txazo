@@ -63,20 +63,6 @@
             <version>1.2.7</version>
         </dependency>
 
-        <!-- Commons Lang -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
-        </dependency>
-
-        <!-- Commons Collection -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.0</version>
-        </dependency>
-
         <!-- DBCP -->
         <dependency>
             <groupId>org.apache.commons</groupId>

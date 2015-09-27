@@ -9,10 +9,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class DefaultBeanFactory extends AbstractBeanFactory implements BeanRegister {
 
-    private ReentrantLock lock = new ReentrantLock();
+    private final ReentrantLock lock = new ReentrantLock();
 
     @Override
-    public void registerBean(Bean bean) {
+    public void registerBean(Bean bean) throws BeanException {
         BeanUtils.checkBean(bean);
 
         lock.lock();

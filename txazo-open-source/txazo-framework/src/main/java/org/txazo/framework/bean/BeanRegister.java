@@ -2,6 +2,6 @@ package org.txazo.framework.bean;
 
 public interface BeanRegister {
 
-    void registerBean(Bean bean);
+    void registerBean(Bean bean) throws BeanException;
 
 }

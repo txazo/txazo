@@ -12,6 +12,10 @@ public interface BeanFactory {
 
     boolean containsBean(String name);
 
+    boolean containsBean(Class<?> requiredType);
+
     Class<?> getType(String name) throws BeanException;
+
+    String[] getName(Class<?> requiredType) throws BeanException;
 
 }
