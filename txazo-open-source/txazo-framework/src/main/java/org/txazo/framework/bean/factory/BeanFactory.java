@@ -4,7 +4,7 @@ import org.txazo.framework.bean.BeanException;
 
 public interface BeanFactory {
 
-    Object getBean(String name) throws BeanException;
+    Object getBean(String name);
 
     <T> T getBean(String name, Class<T> requiredType) throws BeanException;
 
@@ -14,8 +14,7 @@ public interface BeanFactory {
 
     boolean containsBean(Class<?> requiredType);
 
-    Class<?> getType(String name) throws BeanException;
+    Class<?> getType(String name);
 
-    String[] getName(Class<?> requiredType) throws BeanException;
-
+    String[] getName(Class<?> requiredType);
 }

@@ -19,7 +19,7 @@ public abstract class AbstractBeanFactory implements BeanFactory {
     protected final Map<Class<?>, String[]> beanNamesByType = new ConcurrentHashMap<Class<?>, String[]>(64);
 
     @Override
-    public final Object getBean(String name) throws BeanException {
+    public final Object getBean(String name) {
         Bean bean = getBeanByName(name);
         return bean != null ? bean.getValue() : null;
     }
@@ -63,13 +63,13 @@ public abstract class AbstractBeanFactory implements BeanFactory {
     }
 
     @Override
-    public final Class<?> getType(String name) throws BeanException {
+    public final Class<?> getType(String name) {
         Bean bean = getBeanByName(name);
         return bean != null ? bean.getBeanClass() : null;
     }
 
     @Override
-    public final String[] getName(Class<?> requiredType) throws BeanException {
+    public final String[] getName(Class<?> requiredType) {
         String[] beanNames = beanNamesByType.get(requiredType);
         return beanNames != null ? beanNames : getNameFromBean(requiredType);
     }
