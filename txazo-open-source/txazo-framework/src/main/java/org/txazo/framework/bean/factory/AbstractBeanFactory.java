@@ -1,5 +1,6 @@
 package org.txazo.framework.bean.factory;
 
+import org.txazo.framework.bean.AbstractBeanInjector;
 import org.txazo.framework.bean.Bean;
 import org.txazo.framework.bean.BeanException;
 import org.txazo.framework.util.ArrayUtils;
@@ -17,7 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author xiaozhou.tu
  * @since 2015-09-27
  */
-public abstract class AbstractBeanFactory implements BeanFactory {
+public abstract class AbstractBeanFactory extends AbstractBeanInjector implements BeanFactory {
 
     private final ReentrantLock beanNamesByTypeLock = new ReentrantLock();
 
