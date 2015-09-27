@@ -11,6 +11,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * AbstractBeanFactory
+ *
+ * @author xiaozhou.tu
+ * @since 2015-09-27
+ */
 public abstract class AbstractBeanFactory implements BeanFactory {
 
     private final ReentrantLock beanNamesByTypeLock = new ReentrantLock();

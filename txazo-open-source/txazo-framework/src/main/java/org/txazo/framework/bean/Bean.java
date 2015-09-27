@@ -20,8 +20,8 @@ public class Bean extends Value {
     // Bean Source
     private BeanSource beanSource;
 
-    // Bean PropertySetter List
-    private List<PropertySetter> propertySetters = new ArrayList<PropertySetter>();
+    // Bean PropertyValue List
+    private List<PropertyValue> propertySetters = new ArrayList<PropertyValue>();
 
     public Bean() {
     }
@@ -50,12 +50,17 @@ public class Bean extends Value {
         this.beanSource = beanSource;
     }
 
-    public List<PropertySetter> getPropertySetters() {
+    public List<PropertyValue> getPropertySetters() {
         return propertySetters;
     }
 
-    public void setPropertySetters(List<PropertySetter> propertySetters) {
+    public void setPropertySetters(List<PropertyValue> propertySetters) {
         this.propertySetters = propertySetters;
+    }
+
+    @Override
+    public String toString() {
+        return beanName + ", " + beanClass + ", " + beanSource;
     }
 
 }

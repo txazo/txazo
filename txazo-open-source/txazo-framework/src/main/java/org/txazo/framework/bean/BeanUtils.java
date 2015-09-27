@@ -2,6 +2,12 @@ package org.txazo.framework.bean;
 
 import org.txazo.framework.util.Assert;
 
+/**
+ * BeanUtils
+ *
+ * @author xiaozhou.tu
+ * @since 2015-09-27
+ */
 public abstract class BeanUtils {
 
     public static void checkBean(Bean bean) {

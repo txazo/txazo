@@ -1,6 +1,6 @@
 package org.txazo.framework.bean;
 
-public enum SetterValueType {
+public enum PropertyValueType {
 
     XML_STRING,
 

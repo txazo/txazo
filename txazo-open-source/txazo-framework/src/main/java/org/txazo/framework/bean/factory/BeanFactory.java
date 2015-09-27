@@ -2,6 +2,12 @@ package org.txazo.framework.bean.factory;
 
 import org.txazo.framework.bean.BeanException;
 
+/**
+ * BeanFactory
+ *
+ * @author xiaozhou.tu
+ * @since 2015-09-27
+ */
 public interface BeanFactory {
 
     Object getBean(String name);
