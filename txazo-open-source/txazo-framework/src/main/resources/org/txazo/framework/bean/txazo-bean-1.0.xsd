@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.framework.org/schema/bean"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.framework.org/schema/bean"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+    <!-- beans -->
+    <xsd:element name="beans">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                    <xsd:element ref="import"/>
+                    <xsd:element ref="bean"/>
+                </xsd:choice>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- import -->
+    <xsd:element name="import">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:restriction base="xsd:anyType">
+                    <xsd:attribute name="resource" type="xsd:string" use="required"/>
+                </xsd:restriction>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!-- bean -->
+    <xsd:element name="bean">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="identifiedType">
+                    <xsd:group ref="beanElements"/>
+                    <xsd:attributeGroup ref="beanAttributes"/>
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="identifiedType" abstract="true">
+        <xsd:attribute name="id" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:group name="beanElements">
+        <xsd:sequence>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="property"/>
+            </xsd:choice>
+        </xsd:sequence>
+    </xsd:group>
+
+    <!-- bean -> property -->
+    <xsd:element name="property" type="propertyType"/>
+
+    <xsd:complexType name="propertyType">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="ref" type="xsd:string"/>
+        <xsd:attribute name="value" type="xsd:string"/>
+    </xsd:complexType>
+
+    <xsd:attributeGroup name="beanAttributes">
+        <xsd:attribute name="class" type="xsd:string"/>
+        <xsd:attribute name="lazy-init" default="default" type="defaultable-boolean"/>
+        <xsd:attribute name="init-method" type="xsd:string"/>
+    </xsd:attributeGroup>
+
+    <xsd:simpleType name="defaultable-boolean">
+        <xsd:restriction base="xsd:NMTOKEN">
+            <xsd:enumeration value="default"/>
+            <xsd:enumeration value="true"/>
+            <xsd:enumeration value="false"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

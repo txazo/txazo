@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.framework.org/schema/bean"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.framework.org/schema/bean http://www.framework.org/schema/bean/txazo-bean-1.0.xsd">
+
+    <import resource=""/>
+    <import resource=""/>
+
+    <bean class=""/>
+
+    <bean id="" class="">
+        <property name="" value=""/>
+        <property name="" ref=""/>
+        <property name="" value=""/>
+        <property name="" value=""/>
+        <property name="" ref=""/>
+    </bean>
+
+    <bean id="" class="" lazy-init="true" init-method="">
+        <property name="" ref=""/>
+        <property name="" value=""/>
+    </bean>
+
+</beans>
