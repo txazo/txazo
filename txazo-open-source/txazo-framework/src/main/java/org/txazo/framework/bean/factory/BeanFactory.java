@@ -20,7 +20,10 @@ public interface BeanFactory {
 
     boolean containsBean(Class<?> requiredType);
 
+    boolean isTypeMatch(String name, Class<?> targetType) throws BeanException;
+
     Class<?> getType(String name);
 
-    String[] getName(Class<?> requiredType);
+    String[] getAliases(Class<?> requiredType);
+
 }

@@ -4,6 +4,6 @@ import org.txazo.framework.bean.factory.BeanFactory;
 
 public interface BeanInjector extends BeanFactory {
 
-    void injectBean(Bean bean, PropertyValue propertyValue);
+    void injectBean(Bean bean) throws BeanException;
 
 }

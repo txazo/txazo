@@ -2,14 +2,12 @@ package org.txazo.framework.bean;
 
 public enum PropertyValueType {
 
-    XML_STRING,
+    VALUE,
 
-    XML_REF,
+    NAME,
 
-    ANNO_TYPE,
+    TYPE,
 
-    ANNO_TYPE_AND_NAME,
-
-    ANNO_NAME
+    NAME_AND_TYPE
 
 }

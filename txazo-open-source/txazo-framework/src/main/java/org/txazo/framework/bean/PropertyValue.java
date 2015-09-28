@@ -1,5 +1,7 @@
 package org.txazo.framework.bean;
 
+import org.txazo.framework.util.Assert;
+
 /**
  * PropertyValue
  *
@@ -33,6 +35,13 @@ public class PropertyValue {
         this.propertyValue = propertyValue;
         this.propertyClass = propertyClass;
         this.setterValueType = setterValueType;
+    }
+
+    public void validate() {
+        Assert.notEmpty(propertyName, "PropertyName must not be empty");
+        Assert.notEmpty(propertyValue, "PropertyValue must not be empty");
+        Assert.notNull(propertyClass, "PropertyClass must not be null");
+        Assert.notNull(setterValueType, "SetterValueType must not be null");
     }
 
     public String getPropertyName() {

@@ -1,39 +1,55 @@
 package org.txazo.framework.bean;
 
-import org.txazo.framework.util.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.txazo.framework.util.CollectionUtils;
 import org.txazo.framework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 
 public abstract class AbstractBeanInjector implements BeanInjector {
 
+    private static final Logger logger = LoggerFactory.getLogger(AbstractBeanInjector.class);
+
     @Override
-    public void injectBean(Bean bean, PropertyValue propertyValue) {
-        Assert.notNull(bean, "Bean must not be null");
-        Assert.notNull(propertyValue, "PropertyValue must not be null");
+    public void injectBean(Bean bean) throws BeanException {
+        BeanUtils.checkBean(bean);
 
-        Object b = bean.getValue();
-        Object value = getPropertyValueObject(propertyValue);
-        if (value == null) {
-
+        if (bean.getValue() == null) {
+            throw new BeanException(bean + "");
         }
 
-        Field field = ReflectionUtils.findField(b.getClass(), propertyValue.getPropertyName());
-        ReflectionUtils.setField(field, b, value);
+        if (CollectionUtils.isNotEmpty(bean.getPropertyValues())) {
+            for (PropertyValue propertyValue : bean.getPropertyValues()) {
+                doInject(bean, propertyValue);
+            }
+        }
+    }
+
+    private void doInject(Bean bean, PropertyValue propertyValue) {
+        Object beanPropertyValue = getPropertyValueObject(propertyValue);
+        if (beanPropertyValue == null) {
+            throw new BeanException(bean + " ");
+        }
+
+        Field field = ReflectionUtils.findField(bean.getBeanClass(), propertyValue.getPropertyName());
+        if (field == null) {
+            throw new BeanException(bean + " has no field named '" + propertyValue.getPropertyName() + "'");
+        }
+
+        ReflectionUtils.setField(field, bean.getValue(), beanPropertyValue);
     }
 
     private Object getPropertyValueObject(PropertyValue propertyValue) {
         switch (propertyValue.getSetterValueType()) {
-            case XML_STRING:
+            case VALUE:
                 return propertyValue.getPropertyValue();
-            case XML_REF:
+            case NAME:
                 return getBean(propertyValue.getPropertyValue());
-            case ANNO_TYPE:
+            case TYPE:
                 return getBean(propertyValue.getPropertyClass());
-            case ANNO_TYPE_AND_NAME:
+            case NAME_AND_TYPE:
                 return getBean(propertyValue.getPropertyValue(), propertyValue.getPropertyClass());
-            case ANNO_NAME:
-                return getBean(propertyValue.getPropertyValue());
             default:
                 break;
         }

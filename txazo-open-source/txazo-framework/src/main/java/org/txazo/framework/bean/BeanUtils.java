@@ -1,6 +1,9 @@
 package org.txazo.framework.bean;
 
 import org.txazo.framework.util.Assert;
+import org.txazo.framework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * BeanUtils
@@ -15,6 +18,13 @@ public abstract class BeanUtils {
         Assert.notEmpty(bean.getBeanName(), "Bean name must not be empty");
         Assert.notNull(bean.getBeanClass(), "Bean class must not be null");
         Assert.notNull(bean.getBeanSource(), "Bean source must not be null");
+
+        List<PropertyValue> propertyValues = bean.getPropertyValues();
+        if (CollectionUtils.isNotEmpty(propertyValues)) {
+            for (PropertyValue propertyValue : propertyValues) {
+                propertyValue.validate();
+            }
+        }
     }
 
 }

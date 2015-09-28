@@ -22,7 +22,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanInjector implement
 
     private final ReentrantLock beanNamesByTypeLock = new ReentrantLock();
 
-    protected final Map<String, Bean> beanMap = new ConcurrentHashMap<String, Bean>(64);
+    protected final Map<String, Bean> beans = new ConcurrentHashMap<String, Bean>(64);
     protected final Map<Class<?>, String[]> beanNamesByType = new ConcurrentHashMap<Class<?>, String[]>(64);
 
     @Override
@@ -32,23 +32,23 @@ public abstract class AbstractBeanFactory extends AbstractBeanInjector implement
     }
 
     private Bean getBeanByName(String name) {
-        return beanMap.get(name);
+        return beans.get(name);
     }
 
     @Override
     public final <T> T getBean(String name, Class<T> requiredType) throws BeanException {
-        Object bean = getBean(name);
-        if (bean != null && requiredType != null && !requiredType.isAssignableFrom(bean.getClass())) {
-            throw new BeanException("Bean with name '" + name + "' is type of " + bean.getClass().getName() + " but not " + requiredType.getName());
+        Object beanValue = getBean(name);
+        if (beanValue != null && requiredType != null && !requiredType.isAssignableFrom(beanValue.getClass())) {
+            throw new BeanException("Bean with name '" + name + "' is type of " + beanValue.getClass().getName() + " but not " + requiredType.getName());
         }
-        return (T) bean;
+        return (T) beanValue;
     }
 
     @Override
     public final <T> T getBean(Class<T> requiredType) throws BeanException {
         Assert.notNull(requiredType, "RequiredType must not be null");
 
-        String[] beanNames = getName(requiredType);
+        String[] beanNames = getAliases(requiredType);
         if (ArrayUtils.isNotEmpty(beanNames)) {
             if (beanNames.length == 1) {
                 return (T) getBean(beanNames[0]);
@@ -61,12 +61,25 @@ public abstract class AbstractBeanFactory extends AbstractBeanInjector implement
 
     @Override
     public final boolean containsBean(String name) {
-        return beanMap.containsKey(name);
+        return beans.containsKey(name);
     }
 
     @Override
     public final boolean containsBean(Class<?> requiredType) {
-        return ArrayUtils.isNotEmpty(getName(requiredType));
+        return ArrayUtils.isNotEmpty(getAliases(requiredType));
+    }
+
+    @Override
+    public final boolean isTypeMatch(String name, Class<?> targetType) throws BeanException {
+        Assert.notEmpty(name, "Name must not be empty");
+        Assert.notNull(targetType, "TargetType must not be null");
+
+        Class<?> type = getType(name);
+        if (type == null) {
+            throw new BeanException("Bean name with '" + name + "' not exists");
+        }
+
+        return targetType.isAssignableFrom(type);
     }
 
     @Override
@@ -76,17 +89,17 @@ public abstract class AbstractBeanFactory extends AbstractBeanInjector implement
     }
 
     @Override
-    public final String[] getName(Class<?> requiredType) {
+    public final String[] getAliases(Class<?> requiredType) {
         String[] beanNames = beanNamesByType.get(requiredType);
-        return beanNames != null ? beanNames : getNameFromBean(requiredType);
+        return beanNames != null ? beanNames : getAliasesFromBean(requiredType);
     }
 
-    private String[] getNameFromBean(Class<?> requiredType) {
+    private String[] getAliasesFromBean(Class<?> requiredType) {
         String[] beanNames = null;
         beanNamesByTypeLock.lock();
         try {
             List<String> beanNameList = new ArrayList<String>();
-            for (Bean bean : beanMap.values()) {
+            for (Bean bean : beans.values()) {
                 if (requiredType.isAssignableFrom(bean.getBeanClass())) {
                     beanNameList.add(bean.getBeanName());
                 }

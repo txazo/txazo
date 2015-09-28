@@ -31,7 +31,7 @@ public class DefaultBeanFactory extends AbstractBeanFactory implements BeanRegis
                 throw new BeanException("Bean with name '" + bean.getBeanName() + "' already exists");
             }
 
-            beanMap.put(bean.getBeanName(), bean);
+            beans.put(bean.getBeanName(), bean);
 
             logger.debug("Register Bean: " + bean);
         } finally {

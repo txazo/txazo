@@ -7,6 +7,4 @@ import java.lang.annotation.*;
 @Documented
 public @interface Autowired {
 
-    boolean required() default true;
-
 }
