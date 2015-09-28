@@ -1,4 +1,4 @@
-package org.txazo.framework.bean;
+package org.txazo.framework.bean.factory.config;
 
 /**
  * Value

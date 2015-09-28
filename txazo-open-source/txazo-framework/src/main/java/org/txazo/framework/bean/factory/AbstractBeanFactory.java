@@ -1,7 +1,7 @@
 package org.txazo.framework.bean.factory;
 
 import org.txazo.framework.bean.AbstractBeanInjector;
-import org.txazo.framework.bean.Bean;
+import org.txazo.framework.bean.factory.config.Bean;
 import org.txazo.framework.bean.BeanException;
 import org.txazo.framework.util.ArrayUtils;
 import org.txazo.framework.util.Assert;
@@ -20,10 +20,11 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public abstract class AbstractBeanFactory extends AbstractBeanInjector implements BeanFactory {
 
-    private final ReentrantLock beanNamesByTypeLock = new ReentrantLock();
-
     protected final Map<String, Bean> beans = new ConcurrentHashMap<String, Bean>(64);
+
     protected final Map<Class<?>, String[]> beanNamesByType = new ConcurrentHashMap<Class<?>, String[]>(64);
+
+    private final ReentrantLock beanNamesByTypeLock = new ReentrantLock();
 
     @Override
     public final Object getBean(String name) {
@@ -48,7 +49,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanInjector implement
     public final <T> T getBean(Class<T> requiredType) throws BeanException {
         Assert.notNull(requiredType, "RequiredType must not be null");
 
-        String[] beanNames = getAliases(requiredType);
+        String[] beanNames = getNames(requiredType);
         if (ArrayUtils.isNotEmpty(beanNames)) {
             if (beanNames.length == 1) {
                 return (T) getBean(beanNames[0]);
@@ -66,7 +67,7 @@ public abstract class AbstractBeanFactory extends AbstractBeanInjector implement
 
     @Override
     public final boolean containsBean(Class<?> requiredType) {
-        return ArrayUtils.isNotEmpty(getAliases(requiredType));
+        return ArrayUtils.isNotEmpty(getNames(requiredType));
     }
 
     @Override
@@ -89,12 +90,12 @@ public abstract class AbstractBeanFactory extends AbstractBeanInjector implement
     }
 
     @Override
-    public final String[] getAliases(Class<?> requiredType) {
+    public final String[] getNames(Class<?> requiredType) {
         String[] beanNames = beanNamesByType.get(requiredType);
-        return beanNames != null ? beanNames : getAliasesFromBean(requiredType);
+        return beanNames != null ? beanNames : getNamesFromBean(requiredType);
     }
 
-    private String[] getAliasesFromBean(Class<?> requiredType) {
+    private String[] getNamesFromBean(Class<?> requiredType) {
         String[] beanNames = null;
         beanNamesByTypeLock.lock();
         try {

@@ -24,6 +24,6 @@ public interface BeanFactory {
 
     Class<?> getType(String name);
 
-    String[] getAliases(Class<?> requiredType);
+    String[] getNames(Class<?> requiredType);
 
 }

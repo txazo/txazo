@@ -2,6 +2,9 @@ package org.txazo.framework.bean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.txazo.framework.bean.factory.config.Bean;
+import org.txazo.framework.bean.factory.config.PropertyValue;
+import org.txazo.framework.bean.factory.support.BeanInjector;
 import org.txazo.framework.util.CollectionUtils;
 import org.txazo.framework.util.ReflectionUtils;
 

@@ -1,7 +1,7 @@
 package org.txazo.framework.bean.factory.support;
 
-import org.txazo.framework.bean.Bean;
-import org.txazo.framework.bean.BeanSource;
+import org.txazo.framework.bean.factory.config.Bean;
+import org.txazo.framework.bean.factory.config.BeanSource;
 import org.txazo.framework.util.ClassUtils;
 
 public class BeanBuilder {

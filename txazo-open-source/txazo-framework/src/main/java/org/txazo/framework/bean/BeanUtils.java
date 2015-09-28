@@ -1,5 +1,7 @@
 package org.txazo.framework.bean;
 
+import org.txazo.framework.bean.factory.config.Bean;
+import org.txazo.framework.bean.factory.config.PropertyValue;
 import org.txazo.framework.util.Assert;
 import org.txazo.framework.util.CollectionUtils;
 

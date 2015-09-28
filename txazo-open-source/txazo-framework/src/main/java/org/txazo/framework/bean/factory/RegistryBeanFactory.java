@@ -2,22 +2,22 @@ package org.txazo.framework.bean.factory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.txazo.framework.bean.Bean;
+import org.txazo.framework.bean.factory.config.Bean;
 import org.txazo.framework.bean.BeanException;
-import org.txazo.framework.bean.BeanRegister;
+import org.txazo.framework.bean.factory.support.BeanRegistry;
 import org.txazo.framework.bean.BeanUtils;
 
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * DefaultBeanFactory
+ * RegistryBeanFactory
  *
  * @author xiaozhou.tu
  * @since 2015-09-27
  */
-public class DefaultBeanFactory extends AbstractBeanFactory implements BeanRegister {
+public class RegistryBeanFactory extends AbstractBeanFactory implements BeanRegistry {
 
-    private static final Logger logger = LoggerFactory.getLogger(DefaultBeanFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegistryBeanFactory.class);
 
     private final ReentrantLock lock = new ReentrantLock();
 
