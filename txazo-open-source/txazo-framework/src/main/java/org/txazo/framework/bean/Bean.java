@@ -60,7 +60,7 @@ public class Bean extends Value {
 
     @Override
     public String toString() {
-        return beanName + ", " + beanClass + ", " + beanSource;
+        return "[" + beanName + ", " + beanClass.getName() + ", " + beanSource + "]";
     }
 
 }
