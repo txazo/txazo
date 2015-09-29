@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class WeiXinExecutor {
 
-    public static WeiXinExecutor instance;
+    public static volatile WeiXinExecutor instance;
 
     private WeiXin weiXin = WeiXin.getInstance();
     private HttpRequestHandler requestHandler = new DefaultHttpRequestHandler();

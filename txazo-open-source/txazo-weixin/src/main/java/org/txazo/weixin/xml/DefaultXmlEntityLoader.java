@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class DefaultXmlEntityLoader<T extends XmlEntity> implements XmlEntityLoader<T> {
 
-    private static DefaultXmlEntityLoader instance;
+    private static volatile DefaultXmlEntityLoader instance;
 
     private ResourceLoader resourceLoader = new DefaultResourceLoader();
     private XmlEntityRegistry xmlEntityRegistry = new DefaultXmlEntityRegistry();

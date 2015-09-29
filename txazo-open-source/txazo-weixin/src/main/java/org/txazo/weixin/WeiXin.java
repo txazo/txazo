@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class WeiXin {
 
-    private static WeiXin instance;
+    private static volatile WeiXin instance;
 
     private Crop crop;
     private Set<Verify> verifys = new HashSet<Verify>();
