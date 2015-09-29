@@ -1,15 +1,31 @@
 package org.txazo.framework.web.context.request;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 public interface RequestAttributes {
 
-    Object getAttribute(String name, int scope);
+    Object getAttribute(String name, RequestScope scope);
 
-    void setAttribute(String name, Object value, int scope);
+    void setAttribute(String name, Object value, RequestScope scope);
 
-    void removeAttribute(String name, int scope);
+    void removeAttribute(String name, RequestScope scope);
 
-    String[] getAttributeNames(int scope);
+    String[] getAttributeNames(RequestScope scope);
 
-    String getSessionId();
+    HttpServletRequest getRequest();
+
+    HttpSession getSession();
+
+    ServletContext getServletContext();
+
+    enum RequestScope {
+
+        REQUEST,
+
+        SESSION
+
+    }
 
 }

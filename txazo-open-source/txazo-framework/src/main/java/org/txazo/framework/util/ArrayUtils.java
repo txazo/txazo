@@ -1,6 +1,11 @@
 package org.txazo.framework.util;
 
-public abstract class ArrayUtils {
+import java.util.Collections;
+import java.util.Enumeration;
+
+public class ArrayUtils {
+
+    public static final String[] EMPTY_STRING = new String[0];
 
     public static <T> boolean isEmpty(final T[] array) {
         return array == null || array.length == 0;
@@ -8,6 +13,13 @@ public abstract class ArrayUtils {
 
     public static <T> boolean isNotEmpty(final T[] array) {
         return !isEmpty(array);
+    }
+
+    public static String[] toArray(Enumeration<String> enumeration) {
+        if (enumeration == null) {
+            return EMPTY_STRING;
+        }
+        return Collections.list(enumeration).toArray(EMPTY_STRING);
     }
 
 }

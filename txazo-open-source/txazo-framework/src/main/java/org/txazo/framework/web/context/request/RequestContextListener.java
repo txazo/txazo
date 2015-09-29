@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class RequestContextListener implements ServletRequestListener {
 
-    private static final String REQUEST_ATTRIBUTES_ATTRIBUTE = RequestContextListener.class.getName() + ".REQUEST_ATTRIBUTES";
+    public static final String REQUEST_ATTRIBUTES_ATTRIBUTE = RequestContextListener.class.getName() + ".REQUEST_ATTRIBUTES";
 
     @Override
     public void requestInitialized(ServletRequestEvent event) {
