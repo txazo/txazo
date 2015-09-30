@@ -1,0 +1,10 @@
+source: _source
+destination: _destination
+safe: true
+exclude: [a.txt, b.txt]
+include: [a.txt, b.txt]
+timezone: 
+encoding: UTF-8
+
+port: 80
+detach: true
