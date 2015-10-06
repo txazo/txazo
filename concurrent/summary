@@ -1,0 +1,9 @@
+线程通信 线程同步
+
+CPU缓存
+
+维度
+1) 类(接口 类 抽象类 实例内部类 静态内部类 匿名内部类)
+2) 变量(static final volatile)
+3) 方法(synchroinzed)
+4) 代码块(synchroinzed Lock)
