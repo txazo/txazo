@@ -1,0 +1,7 @@
+********** 性能测试 **********
+1. 施压工具
+Apache JMeter
+2. 测试指标
+1) 响应时间、TPS、错误率(JMeter)
+2) CPU、Load、IO、系统内存(Linux)
+3) JVM(JConsole)
