@@ -5,18 +5,15 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * ThreadPriorityTest
+ * 线程优先级
+ * <p/>
+ * 1) 优先级从1到10
  *
  * @author xiaozhou.tu
  * @date 2015-10-09
+ * @see java.lang.Thread#priority
  */
 public class ThreadPriorityTest {
-
-    /**
-     * 线程优先级
-     *
-     * 1) 优先级从1到10
-     */
 
     @Test
     public void test() throws InterruptedException {
@@ -52,6 +49,7 @@ public class ThreadPriorityTest {
             try {
                 countDown.await();
                 while (running) {
+                    Thread.yield();
                     count++;
                 }
                 System.out.println("thread " + i + " count " + count);
@@ -62,21 +60,19 @@ public class ThreadPriorityTest {
 
     }
 
-//    源码: java.lang.Thread
-//
 //    public class Thread implements Runnable {
 //
-//        // 线程优先级
+//        /* 线程优先级 **/
 //        private int priority;
 //
 //        public Thread() {
 //            Thread parent = currentThread();
-//            // 继承父线程优先级
+//            /* 继承父线程优先级 **/
 //            this.priority = parent.getPriority();
 //            ThreadGroup g;
 //            if ((g = getThreadGroup()) != null) {
 //                if (newPriority > g.getMaxPriority()) {
-//                    // 不超过线程组最大优先级
+//                    /* 不超过线程组最大优先级 **/
 //                    newPriority = g.getMaxPriority();
 //                }
 //                setPriority0(priority = newPriority);

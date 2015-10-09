@@ -3,10 +3,14 @@ package org.txazo.java.concurrency.thread;
 import org.junit.Test;
 
 /**
- * ThreadTest
+ * 线程
+ * <p/>
+ * 1) 一个线程只能运行在一个CPU上
+ * 2) 初始化线程时最好设置下threadName, 便于使用jstack分析时进行问题排查
  *
  * @author xiaozhou.tu
  * @date 2015-10-09
+ * @see java.lang.Thread
  */
 public class ThreadTest {
 
@@ -15,7 +19,7 @@ public class ThreadTest {
         Thread t1 = new MyThread();
         Thread t2 = new Thread(new MyRunnable());
 
-        // 线程启动
+        /* 线程启动 **/
         t1.start();
         t2.start();
 
@@ -47,8 +51,6 @@ public class ThreadTest {
 
     }
 
-//    源码: java.lang.Thread
-//
 //    public class Thread implements Runnable {
 //
 //        private Runnable target;
