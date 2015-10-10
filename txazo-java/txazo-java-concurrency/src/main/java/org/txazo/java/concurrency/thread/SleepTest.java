@@ -3,10 +3,14 @@ package org.txazo.java.concurrency.thread;
 import org.junit.Test;
 
 /**
- * SleepTest
+ * sleep
+ *
+ * 1) 当前线程休眠一段时间
  *
  * @author xiaozhou.tu
  * @date 2015-10-09
+ * @see java.lang.Thread#sleep(long)
+ * @see java.lang.Thread#sleep(long, int)
  */
 public class SleepTest {
 

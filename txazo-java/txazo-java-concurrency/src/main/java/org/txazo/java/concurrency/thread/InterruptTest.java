@@ -82,12 +82,32 @@ public class InterruptTest {
         @Override
         public void run() {
             try {
-                while (avaliable && !Thread.currentThread().isInterrupted()) {
-                    Thread.sleep(1);
+                while (true) {
+                    if (!avaliable || Thread.currentThread().isInterrupted()) {
+                        /** 检测到中断, 向外抛出InterruptedException */
+                        throw new InterruptedException();
+                    }
+                    task();
                 }
             } catch (InterruptedException e) {
                 /** 重新设置中断标识 */
                 Thread.currentThread().interrupt();
+            }
+        }
+
+        public void task() throws InterruptedException {
+            try {
+                while (true) {
+                    if (!avaliable || Thread.currentThread().isInterrupted()) {
+                        /** 检测到中断, 向外抛出InterruptedException */
+                        throw new InterruptedException();
+                    }
+                    Thread.sleep(100);
+                }
+            } catch (InterruptedException e) {
+                /** 重新设置中断标识 */
+                Thread.currentThread().interrupt();
+                throw e;
             }
         }
 

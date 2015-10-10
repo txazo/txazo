@@ -16,12 +16,12 @@ import java.util.Stack;
  * @author xiaozhou.tu
  * @date 2015-10-10
  * @see java.lang.Object#wait()
+ * @see java.lang.Object#wait(long)
+ * @see java.lang.Object#wait(long, int)
  * @see java.lang.Object#notify()
  * @see java.lang.Object#notifyAll()
  */
 public class WaitNotifyTest {
-
-    private static volatile boolean running = true;
 
     @Test
     public void test() throws InterruptedException {
@@ -33,31 +33,47 @@ public class WaitNotifyTest {
         Thread.sleep(300000);
     }
 
+    /**
+     * 生产者/消费者模式
+     */
     private static class Product {
 
         private static final int MAX = 5;
+
         private Stack<String> container = new Stack<String>();
 
+        /**
+         * 生产
+         */
         public synchronized void put(String p) {
-            if (container.size() >= MAX) {
+            while (container.size() >= MAX) {
                 try {
+                    /** wait时释放锁 */
                     wait();
+                    /** 被notify/notifyAll唤醒后, 重新竞争锁 */
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
             container.push(p);
+            /** notify/notifyAll时不释放锁 */
             notify();
         }
 
+        /**
+         * 消费
+         */
         public synchronized String get() {
-            if (container.isEmpty()) {
+            while (container.isEmpty()) {
                 try {
+                    /** wait时释放锁 */
                     wait();
+                    /** 被notify/notifyAll唤醒后, 重新竞争锁 */
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            /** notify/notifyAll时不释放锁 */
             notify();
             return container.pop();
         }
@@ -74,7 +90,7 @@ public class WaitNotifyTest {
 
         @Override
         public void run() {
-            while (running) {
+            while (true) {
                 String p = String.valueOf(RandomUtils.nextInt(1, 100));
                 System.out.println("put " + p);
                 product.put(p);
@@ -98,7 +114,7 @@ public class WaitNotifyTest {
 
         @Override
         public void run() {
-            while (running) {
+            while (true) {
                 System.out.println("get " + product.get());
                 try {
                     Thread.sleep(1000);

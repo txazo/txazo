@@ -3,18 +3,15 @@ package org.txazo.java.concurrency.thread;
 import org.junit.Test;
 
 /**
- * YieldTest
+ * yield
+ *
+ * 1) 让当前线程回到可运行状态
  *
  * @author xiaozhou.tu
  * @date 2015-10-09
+ * @see java.lang.Thread#yield()
  */
 public class YieldTest {
-
-    /**
-     * Thread.yield()
-     *
-     * 1) 让当前线程回到可运行状态
-     */
 
     @Test
     public void test() throws InterruptedException {

@@ -3,10 +3,16 @@ package org.txazo.java.concurrency.thread;
 import org.junit.Test;
 
 /**
- * JoinTest
+ * join
+ *
+ * 1) 等待目标线程执行完毕
+ * 2) join依赖wait来实现
  *
  * @author xiaozhou.tu
  * @date 2015-10-09
+ * @see java.lang.Thread#join()
+ * @see java.lang.Thread#join(long)
+ * @see java.lang.Thread#join(long, int)
  */
 public class JoinTest {
 
@@ -42,5 +48,34 @@ public class JoinTest {
         }
 
     }
+
+//    public class Thread implements Runnable {
+//
+//        public final void join() throws InterruptedException {
+//            join(0);
+//        }
+//
+//        /** synchronized同步方法 */
+//        public final synchronized void join(long millis) throws InterruptedException {
+//            long base = System.currentTimeMillis();
+//            long now = 0;
+//
+//            if (millis == 0) {
+//                while (isAlive()) {
+//                    wait(0);
+//                }
+//            } else {
+//                while (isAlive()) {
+//                    long delay = millis - now;
+//                    if (delay <= 0) {
+//                        break;
+//                    }
+//                    wait(delay);
+//                    now = System.currentTimeMillis() - base;
+//                }
+//            }
+//        }
+//
+//    }
 
 }
