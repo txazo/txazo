@@ -25,5 +25,4 @@ public class TimeUnitTest {
         Assert.assertEquals(TimeUnit.MICROSECONDS.toNanos(1), TimeUnit.NANOSECONDS.toNanos(1) * 1000);
     }
 
-
 }
