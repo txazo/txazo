@@ -18,7 +18,7 @@ import java.util.concurrent.locks.Lock;
  *      2) tryRelease(int): 独占式释放同步状态
  *      3) tryAcquireShared(int): 共享式获取同步状态
  *      4) tryReleaseShared(int): 共享式释放同步状态
- *      5) isHeldExclusively: 是否被当前线程独占
+ *      5) isHeldExclusively(): 是否被当前线程独占
  * </pre>
  *
  * @author xiaozhou.tu
