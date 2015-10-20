@@ -117,4 +117,41 @@ public class InterruptTest {
 
     }
 
+//    public static class Thread {
+//
+//        /** 中断标识 */
+//        private volatile boolean interrupted = false;
+//
+//        public static Thread currentThread() {
+//            return null;
+//        }
+//
+//        public void interrupt() {
+//            interrupted = true;
+//        }
+//
+//        public static boolean interrupted() {
+//            return currentThread().isInterrupted(true);
+//        }
+//
+//        public boolean isInterrupted() {
+//            return isInterrupted(false);
+//        }
+//
+//        private boolean isInterrupted(boolean clearInterrupted) {
+//            boolean i = interrupted;
+//            if (interrupted && clearInterrupted) {
+//                interrupted = false;
+//            }
+//            return i;
+//        }
+//
+//        public static void sleep(long millis) throws InterruptedException {
+//            /** 中断 */
+//            currentThread().interrupted = false;
+//            throw new InterruptedException();
+//        }
+//
+//    }
+
 }
