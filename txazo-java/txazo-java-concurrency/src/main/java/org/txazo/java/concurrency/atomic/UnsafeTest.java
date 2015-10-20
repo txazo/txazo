@@ -9,15 +9,19 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Unsafe
- *
- * 1) 定位对象的内存位置
- * 2) 修改对象中变量的值
- * 3) CAS
+ * <p/>
+ * 1) 定位对象的内存偏移位置
+ * 2) 获取和修改对象中变量的值
+ * 3) CAS操作
  * 4) 挂起与恢复线程
  *
  * @author xiaozhou.tu
  * @date 2015-10-20
  * @see sun.misc.Unsafe
+ * @see Unsafe#objectFieldOffset(Field),Unsafe#staticFieldOffset(Field),Unsafe#arrayBaseOffset(Class)
+ * @see Unsafe#getInt(long),Unsafe#getAndSetInt(Object, long, int)
+ * @see Unsafe#compareAndSwapInt(Object, long, int, int)
+ * @see Unsafe#park(boolean, long),Unsafe#unpark(Object)
  */
 public class UnsafeTest {
 
@@ -70,11 +74,11 @@ public class UnsafeTest {
         }
 
         public int add(int count) {
-            int oldCount;
+            int prev, next;
             do {
-                oldCount = get();
-            } while (!UnsafeHolder.unsafe.compareAndSwapInt(this, valueOffset, oldCount, oldCount + count));
-            return get();
+                next = (prev = get()) + count;
+            } while (!UnsafeHolder.unsafe.compareAndSwapInt(this, valueOffset, prev, next));
+            return next;
         }
 
     }
