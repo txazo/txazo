@@ -50,7 +50,7 @@
         <plugin.maven-jar-plugin.version>2.6</plugin.maven-jar-plugin.version>
 
         <author>txazo</author>
-        <jdk.compile.version>1.7</jdk.compile.version>
+        <jdk.compile.version>1.8</jdk.compile.version>
     </properties>
 
     <dependencyManagement>
