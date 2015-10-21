@@ -8,12 +8,14 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 /**
  * 原子操作类－AtomicIntegerFieldUpdater
  *
+ * 1) 原子操作对象的int类型字段
+ *
  * @author xiaozhou.tu
  * @date 2015-10-20
  * @see AtomicIntegerFieldUpdater
  * @see AtomicIntegerFieldUpdater#newUpdater(Class, String)
  * @see AtomicIntegerFieldUpdater.AtomicIntegerFieldUpdaterImpl
- * @see AtomicIntegerFieldUpdater.AtomicIntegerFieldUpdaterImpl#offset
+ * @see AtomicIntegerFieldUpdater.AtomicIntegerFieldUpdaterImpl#offset(类的字段偏移)
  * @see AtomicIntegerFieldUpdater.AtomicIntegerFieldUpdaterImpl#tclass
  */
 public class AtomicIntegerFieldUpdaterTest {

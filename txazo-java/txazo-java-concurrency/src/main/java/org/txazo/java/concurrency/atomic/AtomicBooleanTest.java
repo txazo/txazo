@@ -8,8 +8,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * 原子操作类－AtomicBoolean
  * <p/>
- * 1) long valueOffset(value的内存偏移)
- * 2) volatile int value(1为true, 0为false)
+ * 1) 原子操作boolean
+ * 2) long valueOffset(类的字段偏移)
+ * 3) volatile int value(1为true, 0为false)
  *
  * @author xiaozhou.tu
  * @date 2015-10-20

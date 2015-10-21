@@ -8,13 +8,15 @@ import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 /**
  * 原子操作类－AtomicLongFieldUpdater
  *
+ * 1) 原子操作对象的long类型字段
+ *
  * @author xiaozhou.tu
  * @date 2015-10-20
  * @see AtomicLongFieldUpdater
  * @see AtomicLongFieldUpdater#newUpdater(Class, String)
  * @see AtomicLongFieldUpdater.CASUpdater
  * @see AtomicLongFieldUpdater.LockedUpdater
- * @see AtomicLongFieldUpdater.LockedUpdater#offset
+ * @see AtomicLongFieldUpdater.LockedUpdater#offset(类的字段偏移)
  * @see AtomicLongFieldUpdater.LockedUpdater#tclass
  */
 public class AtomicLongFieldUpdaterTest {

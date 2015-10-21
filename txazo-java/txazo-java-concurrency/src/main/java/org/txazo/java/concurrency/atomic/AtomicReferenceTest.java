@@ -8,8 +8,9 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * 原子操作类－AtomicReference
  * <p/>
- * 1) long valueOffset(value的内存偏移)
- * 2) volatile V value
+ * 1) 原子操作对象
+ * 2) long valueOffset(类的字段偏移)
+ * 3) volatile V value
  *
  * @author xiaozhou.tu
  * @date 2015-10-20

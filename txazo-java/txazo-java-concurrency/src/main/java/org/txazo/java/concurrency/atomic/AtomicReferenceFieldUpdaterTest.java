@@ -8,12 +8,14 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 /**
  * 原子操作类－AtomicReferenceFieldUpdater
  *
+ * 1) 原子操作对象的引用类型字段
+ *
  * @author xiaozhou.tu
  * @date 2015-10-20
  * @see AtomicReferenceFieldUpdater
  * @see AtomicReferenceFieldUpdater#newUpdater(Class, Class, String)
  * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl
- * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl#offset
+ * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl#offset(类的字段偏移)
  * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl#tclass
  * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl#vclass
  */
