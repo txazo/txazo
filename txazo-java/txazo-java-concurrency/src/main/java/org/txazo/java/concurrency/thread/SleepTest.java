@@ -3,9 +3,10 @@ package org.txazo.java.concurrency.thread;
 import org.junit.Test;
 
 /**
- * sleep
+ * 线程休眠
  *
  * 1) 当前线程休眠一段时间
+ * 2) 不会释放对象锁
  *
  * @author xiaozhou.tu
  * @date 2015-10-09

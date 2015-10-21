@@ -8,9 +8,10 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
 /**
  * 原子操作类－AtomicReferenceArray
  * <p/>
- * 1) final int base
- * 2) final int shift
- * 3) final Object[] array
+ * 1) 原子操作引用类型数组
+ * 2) int base(首地址偏移)
+ * 3) int shift(位偏移)
+ * 4) final Object[] array
  *
  * @author xiaozhou.tu
  * @date 2015-10-21

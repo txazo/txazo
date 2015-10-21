@@ -8,8 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 原子操作类－AtomicInteger
  * <p/>
- * 1) long valueOffset(value的内存偏移)
- * 2) volatile int value
+ * 1) 原子操作int
+ * 2) long valueOffset(类的字段偏移)
+ * 3) volatile int value
  *
  * @author xiaozhou.tu
  * @date 2015-10-20

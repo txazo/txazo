@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 简单的线程池
+ */
 public class DefaultThreadPool<Job extends Runnable> implements ThreadPool<Job> {
 
     private final int size;

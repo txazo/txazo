@@ -11,7 +11,7 @@ import java.util.Stack;
  * 1) Object.wait(): 线程在目标对象上进入等待状态
  * 2) Object.notify(): 唤醒目标对象上的一个等待线程
  * 3) Object.notifyAll(): 唤醒目标对象上的所有等待线程
- * 4) 使用wait()、notify()、notifyAll()时要先对目标对象加锁
+ * 4) 执行wait()、notify()、notifyAll()时, 必须保证已经获取到对象的锁, 否则抛IllegalMonitorStateException
  *
  * @author xiaozhou.tu
  * @date 2015-10-10
