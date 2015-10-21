@@ -23,11 +23,28 @@ public class AtomicIntegerArrayTest {
 
     @Test
     public void test() {
-        AtomicIntegerArray array = new AtomicIntegerArray(1);
+        int[] value = new int[1];
+        AtomicIntegerArray array = new AtomicIntegerArray(value);
         array.set(0, 1);
         Assert.assertEquals(1, array.get(0));
         Assert.assertTrue(array.compareAndSet(0, 1, 10));
         Assert.assertEquals(10, array.get(0));
+        /** value不变 */
+        Assert.assertEquals(0, value[0]);
     }
+
+//    public class AtomicIntegerArray {
+//
+//        private final int[] array;
+//
+//        public AtomicIntegerArray(int length) {
+//            array = new int[length];
+//        }
+//
+//        public AtomicIntegerArray(int[] array) {
+//            this.array = array.clone();
+//        }
+//
+//    }
 
 }
