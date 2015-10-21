@@ -17,7 +17,7 @@ import java.util.concurrent.CountDownLatch;
  *
  * @author xiaozhou.tu
  * @date 2015-10-20
- * @see sun.misc.Unsafe
+ * @see Unsafe
  * @see Unsafe#objectFieldOffset(Field),Unsafe#staticFieldOffset(Field),Unsafe#arrayBaseOffset(Class)
  * @see Unsafe#getInt(long),Unsafe#getAndSetInt(Object, long, int)
  * @see Unsafe#compareAndSwapInt(Object, long, int, int)
