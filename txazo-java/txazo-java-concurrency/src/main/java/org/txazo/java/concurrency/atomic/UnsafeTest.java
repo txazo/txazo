@@ -10,8 +10,8 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Unsafe
  * <p/>
- * 1) 定位对象的内存偏移位置
- * 2) 获取和修改对象中变量的值
+ * 1) 定位内存偏移
+ * 2) 获取和修改对象中字段的值或数组元素的值
  * 3) CAS操作
  * 4) 挂起与恢复线程
  *
