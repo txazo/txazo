@@ -5,19 +5,15 @@ import org.junit.Test;
 import java.io.Serializable;
 
 /**
- * VolatileTest
+ * volatile
+ *
+ * 1. 保证可见性
+ * 2. 不保证原子性
  *
  * @author xiaozhou.tu
  * @date 2015-09-22
  */
 public class VolatileTest {
-
-    /**
-     * volatile
-     * <p/>
-     * 1. 保证可见性
-     * 2. 不保证原子性
-     */
 
     @Test
     public void testVolatile() {
@@ -48,6 +44,5 @@ public class VolatileTest {
         private Object o0, o1, o2, o3, o4, o5, o6, o7, o8, o9, oa, ob, oc, od, oe;
 
     }
-
 
 }

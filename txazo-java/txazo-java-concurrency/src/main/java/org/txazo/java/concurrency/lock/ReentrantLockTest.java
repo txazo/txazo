@@ -14,6 +14,11 @@ import java.util.concurrent.locks.ReentrantLock;
  * 3) tryLock(): 尝试非阻塞的获取锁, 立刻返回, 获取到锁返回true, 否则返回false
  * 4) tryLock(long, TimeUnit): 超时获取锁, 可响应中断
  * 5) lockInterruptibly(): 获取锁, 可响应中断
+ * 6) newCondition(): 返回Condition
+ *
+ * 锁分类
+ * 1) 公平锁: ReentrantLock.FairSync
+ * 2) 非公平锁: ReentrantLock.NonfairSync
  *
  * @author xiaozhou.tu
  * @date 2015-10-10
@@ -23,6 +28,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @see java.util.concurrent.locks.ReentrantLock#tryLock()
  * @see java.util.concurrent.locks.ReentrantLock#tryLock(long, TimeUnit)
  * @see java.util.concurrent.locks.ReentrantLock#lockInterruptibly()
+ * @see java.util.concurrent.locks.ReentrantLock#newCondition()
  */
 public class ReentrantLockTest {
 

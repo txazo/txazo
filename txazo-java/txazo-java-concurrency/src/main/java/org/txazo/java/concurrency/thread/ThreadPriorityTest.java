@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * 线程优先级
  * <p/>
- * 1) 优先级从1到10
+ * 1) 优先级从1到10(最高优先级)
  *
  * @author xiaozhou.tu
  * @date 2015-10-09

@@ -1,20 +1,16 @@
 package org.txazo.java.concurrency.lock;
 
 /**
- * SynchronizedTest
+ * synchronized
+ *
+ * 1) 偏向锁
+ * 2) 轻量级锁
+ * 3) 重量级锁
  *
  * @author xiaozhou.tu
  * @date 2015-09-22
  */
 public class SynchronizedTest {
-
-    /**
-     * synchronized
-     * <p/>
-     * 1) 偏向锁
-     * 2) 轻量级锁
-     * 3) 重量级锁
-     */
 
     /**
      * 方法同步(隐式)

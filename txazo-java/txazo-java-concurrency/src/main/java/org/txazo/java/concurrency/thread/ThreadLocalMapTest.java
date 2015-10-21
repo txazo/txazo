@@ -1,5 +1,6 @@
 package org.txazo.java.concurrency.thread;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -21,6 +22,7 @@ public class ThreadLocalMapTest {
     @Test
     public void test() {
         count.set(1);
+        Assert.assertEquals(1, (int) count.get());
     }
 
 }

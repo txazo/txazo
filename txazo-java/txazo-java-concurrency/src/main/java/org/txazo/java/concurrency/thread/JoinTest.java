@@ -7,6 +7,8 @@ import org.junit.Test;
  *
  * 1) 等待目标线程执行完毕
  * 2) join依赖wait来实现
+ * 3) synchronized void join(long millis)
+ * 4) 目标线程执行完毕, 会调用notifyAll()唤醒在join上等待的线程
  *
  * @author xiaozhou.tu
  * @date 2015-10-09
@@ -56,9 +58,14 @@ public class JoinTest {
 //        }
 //
 //        /** synchronized同步方法 */
-//        public final synchronized void join(long millis) throws InterruptedException {
+//        public final synchronized void join(long millis)
+//                throws InterruptedException {
 //            long base = System.currentTimeMillis();
 //            long now = 0;
+//
+//            if (millis < 0) {
+//                throw new IllegalArgumentException("timeout value is negative");
+//            }
 //
 //            if (millis == 0) {
 //                while (isAlive()) {

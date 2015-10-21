@@ -12,7 +12,7 @@ import java.util.concurrent.locks.Lock;
  *      1) getState(): 获取当前同步状态
  *      2) setState(int): 设置同步状态
  *      3) compareAndSetState(int, int): CAS设置同步状态
- * 2) 内置FIFO队列
+ * 2) FIFO队列
  * 3) 可重写的方法
  *      1) tryAcquire(int): 独占式获取同步状态
  *      2) tryRelease(int): 独占式释放同步状态
@@ -23,14 +23,15 @@ import java.util.concurrent.locks.Lock;
  *
  * @author xiaozhou.tu
  * @date 2015-10-10
- * @see java.util.concurrent.locks.AbstractQueuedSynchronizer
- * @see java.util.concurrent.locks.AbstractQueuedSynchronizer#getState()
- * @see java.util.concurrent.locks.AbstractQueuedSynchronizer#setState(int)
- * @see java.util.concurrent.locks.AbstractQueuedSynchronizer#tryAcquire(int)
- * @see java.util.concurrent.locks.AbstractQueuedSynchronizer#tryRelease(int)
- * @see java.util.concurrent.locks.AbstractQueuedSynchronizer#tryAcquireShared(int)
- * @see java.util.concurrent.locks.AbstractQueuedSynchronizer#tryReleaseShared(int)
- * @see java.util.concurrent.locks.AbstractQueuedSynchronizer#isHeldExclusively()
+ * @see AbstractQueuedSynchronizer
+ * @see AbstractQueuedSynchronizer#getState()
+ * @see AbstractQueuedSynchronizer#setState(int)
+ * @see AbstractQueuedSynchronizer#compareAndSetState(int, int)
+ * @see AbstractQueuedSynchronizer#tryAcquire(int)
+ * @see AbstractQueuedSynchronizer#tryRelease(int)
+ * @see AbstractQueuedSynchronizer#tryAcquireShared(int)
+ * @see AbstractQueuedSynchronizer#tryReleaseShared(int)
+ * @see AbstractQueuedSynchronizer#isHeldExclusively()
  */
 public class AQSTest {
 
@@ -40,6 +41,8 @@ public class AQSTest {
     private static class Mutex implements Lock {
 
         private static class Sync extends AbstractQueuedSynchronizer {
+
+            private static final long serialVersionUID = -7166677921945681960L;
 
             @Override
             protected boolean tryAcquire(int arg) {

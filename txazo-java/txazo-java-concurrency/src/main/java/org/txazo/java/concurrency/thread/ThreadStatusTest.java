@@ -20,7 +20,7 @@ package org.txazo.java.concurrency.thread;
  * 6) TERMINATED: 终止状态
  * </pre>
  * <pre>
- * 可通过jstack工具查看运行时的线程状态
+ * 1) 可通过jstack工具查看运行时的线程状态
  * </pre>
  *
  * @author xiaozhou.tu
