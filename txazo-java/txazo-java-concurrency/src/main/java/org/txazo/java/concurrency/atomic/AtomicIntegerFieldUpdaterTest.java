@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
 /**
  * 原子操作类－AtomicIntegerFieldUpdater
- *
+ * <p/>
  * 1) 原子操作对象的int类型字段
  *
  * @author xiaozhou.tu
@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
  * @see AtomicIntegerFieldUpdater
  * @see AtomicIntegerFieldUpdater#newUpdater(Class, String)
  * @see AtomicIntegerFieldUpdater.AtomicIntegerFieldUpdaterImpl
- * @see AtomicIntegerFieldUpdater.AtomicIntegerFieldUpdaterImpl#offset(类的字段偏移)
+ * @see AtomicIntegerFieldUpdater.AtomicIntegerFieldUpdaterImpl#offset (类的字段偏移)
  * @see AtomicIntegerFieldUpdater.AtomicIntegerFieldUpdaterImpl#tclass
  */
 public class AtomicIntegerFieldUpdaterTest {
@@ -33,6 +33,7 @@ public class AtomicIntegerFieldUpdaterTest {
 
     private static class Entity {
 
+        /** 字段必须为public volatile类型 */
         public volatile int value;
 
         public Entity(int value) {

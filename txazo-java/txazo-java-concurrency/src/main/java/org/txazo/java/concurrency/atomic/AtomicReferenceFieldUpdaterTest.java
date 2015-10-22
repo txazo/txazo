@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 /**
  * 原子操作类－AtomicReferenceFieldUpdater
- *
+ * <p/>
  * 1) 原子操作对象的引用类型字段
  *
  * @author xiaozhou.tu
@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
  * @see AtomicReferenceFieldUpdater
  * @see AtomicReferenceFieldUpdater#newUpdater(Class, Class, String)
  * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl
- * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl#offset(类的字段偏移)
+ * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl#offset (类的字段偏移)
  * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl#tclass
  * @see AtomicReferenceFieldUpdater.AtomicReferenceFieldUpdaterImpl#vclass
  */
@@ -33,6 +33,7 @@ public class AtomicReferenceFieldUpdaterTest {
 
     private static class Entity {
 
+        /** 字段必须为public volatile类型 */
         public volatile String value;
 
         public Entity(String value) {
