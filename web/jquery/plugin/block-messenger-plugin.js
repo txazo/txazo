@@ -1,3 +1,4 @@
+/* Require jquery.js jquery.blockUI.js bootstrap.js bootstrap.css */
 (function ($) {
     var Block = {
         defaults: {
