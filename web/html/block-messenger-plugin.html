@@ -15,7 +15,19 @@
 <body>
 
 <div class="container-fluid">
-    test
+    <div style="width:500px; margin:100px auto; text-align:center;">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>Block Messenger Plugin</h4>
+            </div>
+            <ul class="list-group">
+                <a class="list-group-item list-group-item-info tip">Tip</a>
+                <a class="list-group-item list-group-item-warning alert">Alert</a>
+                <a class="list-group-item list-group-item-success confirm">Confirm</a>
+                <a class="list-group-item list-group-item-danger input">Input</a>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -23,9 +35,17 @@
 <script src="http://cdn.bootcss.com/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js"></script>
 <script src="../jquery/plugin/block-messenger-plugin.js"></script>
 <script>
-    $(function () {
-        $.blockTip({
-            text: '测试case保存成功'
+    $(function() {
+        $('.list-group').delegate('.tip', 'click', function() {
+            $.blockTip({
+                text :''
+            });
+        }).delegate('.alert', 'click', function() {
+            alert(1);
+        }).delegate('.confirm', 'click', function() {
+            alert(1);
+        }).delegate('.input', 'click', function() {
+            alert(1);
         });
     });
 </script>
