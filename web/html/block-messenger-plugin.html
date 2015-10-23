@@ -21,10 +21,11 @@
                 <h4>Block Messenger Plugin</h4>
             </div>
             <ul class="list-group">
-                <a class="list-group-item list-group-item-info tip">Tip</a>
-                <a class="list-group-item list-group-item-warning alert">Alert</a>
-                <a class="list-group-item list-group-item-success confirm">Confirm</a>
-                <a class="list-group-item list-group-item-danger input">Input</a>
+                <a class="list-group-item list-group-item-info tip1">Tip1</a>
+                <a class="list-group-item list-group-item-warning tip2">Tip2</a>
+                <a class="list-group-item list-group-item-success alert">Alert</a>
+                <a class="list-group-item list-group-item-danger confirm">Confirm</a>
+                <a class="list-group-item list-group-item-info prompt">prompt</a>
             </ul>
         </div>
     </div>
@@ -35,17 +36,43 @@
 <script src="http://cdn.bootcss.com/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js"></script>
 <script src="../jquery/plugin/block-messenger-plugin.js"></script>
 <script>
-    $(function() {
-        $('.list-group').delegate('.tip', 'click', function() {
+    $(function () {
+        $('.list-group').delegate('.tip1', 'click', function () {
             $.blockTip({
-                text :''
+                text: '执行成功'
             });
-        }).delegate('.alert', 'click', function() {
-            alert(1);
-        }).delegate('.confirm', 'click', function() {
-            alert(1);
-        }).delegate('.input', 'click', function() {
-            alert(1);
+        }).delegate('.tip2', 'click', function () {
+            $.blockTip({
+                text: '执行成功',
+                timeout: 1000
+            });
+        }).delegate('.alert', 'click', function () {
+            $.blockAlert({
+                text: '接口不存在',
+                ok: '确定',
+                Ok: function () {
+                }
+            });
+        }).delegate('.confirm', 'click', function () {
+            $.blockConfirm({
+                text: '接口不存在',
+                ok: '确定',
+                cancel: '取消',
+                Ok: function () {
+                },
+                Cancel: function () {
+                }
+            });
+        }).delegate('.prompt', 'click', function () {
+            $.blockPrompt({
+                text: '请输入参数',
+                ok: '确定',
+                cancel: '取消',
+                Ok: function (value) {
+                },
+                Cancel: function () {
+                }
+            });
         });
     });
 </script>

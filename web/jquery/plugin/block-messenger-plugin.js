@@ -1,209 +1,184 @@
 (function ($) {
-    function openBlock(options, timeout, timeoutCallback) {
-        $.blockUI(options);
-        timeout && setTimeout(function () {
-            timeoutCallback && timeoutCallback();
-        }, timeout);
-    }
-
-    function closeBlock(callback) {
-        $.unblockUI();
-        callback();
-    }
-
-    var DialogType = {
-        Tip: 1,
-        Alert: 2,
-        Confirm: 3,
-        Input: 4
+    var Block = {
+        defaults: {
+            css: {
+                width: '400px',
+                border: '2px solid #CCC'
+            },
+            overlayCSS: {
+                opacity: '.5'
+            }
+        },
+        openBlock: function (options, timeout, timeoutCallback) {
+            $.blockUI($.extend({}, this.defaults, options));
+            timeout && timeoutCallback && setTimeout(function () {
+                timeoutCallback();
+            }, timeout);
+        },
+        closeBlock: function (callback) {
+            $.unblockUI();
+            callback && callback();
+        }
     };
 
     var Dialog = {
-        dialog_title: '<div class="dialog_title">',
-        dialog_text: '<div class="dialog_text" style="margin:10px; text-align:center;">',
-        dialog_button: '<div class="dialog_button">',
-        dialog_div_suffix: '</div>',
-        dialog_button_ok: '<button type="button" class="btn btn-success ok">',
-        dialog_button_cancel: '<button type="button" class="btn btn-danger cancel">',
-        dialog_button_hidden: '<button type="button" class="hidden">',
-        dialog_button_suffix: '</button>'
-    };
-
-    function buildDialog(type, options) {
-        if (type == DialogType.Tip) {
-            return Dialog.dialog_text + options.text + Dialog.dialog_div_suffix;
+        Type: {
+            Tip: 1,
+            Alert: 2,
+            Confirm: 3,
+            Prompt: 4
+        },
+        Content: {
+            dialog_text: '<div class="dialog_text" style="margin: 20px 0 0 0; text-align: center; font-size: 16px; font-weight: 500;">',
+            dialog_input: '<div class="dialog_input" style="margin: 20px 0 0 0; text-align: center; padding-left: 20px; padding-right: 20px;"><input type="text" class="form-control" /></div>',
+            dialog_button: '<div class="dialog_button" style="margin: 20px 0; text-align: center;">',
+            dialog_div_suffix: '</div>',
+            dialog_button_ok: '<button type="button" class="btn btn-success btn-ok" style="padding-left:30px; padding-right:30px;">',
+            dialog_button_cancel: '<button type="button" class="btn btn-danger btn-cancel" style="margin-left:50px; padding-left:30px; padding-right:30px;">',
+            dialog_button_hidden: '<button type="button" class="btn-hidden"></button>',
+            dialog_button_suffix: '</button>'
+        },
+        buildDialog: function (type, options) {
+            if (type == Dialog.Type.Tip) {
+                return this.buildText(options).replace('margin: 20px 0 0 0', 'margin: 15px 0');
+            } else if (type == Dialog.Type.Alert) {
+                return this.buildText(options) + this.buildButton(options, {hidden: true, ok: true});
+            } else if (type == Dialog.Type.Confirm) {
+                return this.buildText(options) + this.buildButton(options, {hidden: true, ok: true, cancel: true});
+            } else if (type == Dialog.Type.Prompt) {
+                return this.buildText(options) + this.buildInput() + this.buildButton(options, {hidden: true, ok: true, cancel: true});
+            }
+        },
+        buildText: function (options) {
+            return this.Content.dialog_text + options.text + this.Content.dialog_div_suffix;
+        },
+        buildInput: function () {
+            return this.Content.dialog_input;
+        },
+        buildButton: function (options, buttons) {
+            var content = this.Content.dialog_button;
+            if (buttons.hidden) {
+                content += this.buildButtonHidden(options);
+            }
+            if (buttons.ok) {
+                content += this.buildButtonOk(options);
+            }
+            if (buttons.cancel) {
+                content += this.buildButtonCancel(options);
+            }
+            return content + this.Content.dialog_div_suffix;
+        },
+        buildButtonOk: function (options) {
+            return this.Content.dialog_button_ok + options.ok + this.Content.dialog_button_suffix;
+        },
+        buildButtonCancel: function (options) {
+            return this.Content.dialog_button_cancel + options.cancel + this.Content.dialog_button_suffix;
+        },
+        buildButtonHidden: function (options) {
+            return this.Content.dialog_button_hidden;
         }
-    }
+    };
 
     $.extend({
         blockTip: function (options) {
             var defaults = {
-                text: 'Tip',
-                timeout: 100000,
-                css: {
-                    width: '20%',
-                    left: '40%',
-                    color: 'green',
-                    border: 'none',
-                    // border: '3px solid #a00',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    backgroundColor: '#999'
-                },
-                overlayCSS: {
-                    opacity: '.6'
-                }
+                text: '提示'
             };
             $.extend(defaults, options);
-            openBlock({
-                message: buildDialog(DialogType.Tip, options),
-                css: defaults.css,
-                overlayCSS: defaults.overlayCSS
-            }, defaults.timeout, closeBlock);
+            Block.openBlock({
+                message: Dialog.buildDialog(Dialog.Type.Tip, defaults),
+                onOverlayClick: function () {
+                    Block.closeBlock();
+                }
+            }, defaults.timeout, Block.closeBlock);
         },
 
         blockAlert: function (options) {
-            var $dialog;
             var defaults = {
-                title: '提示',
-                text: '',
-                ok: '确定',
+                text: '提示',
+                ok: 'Ok',
                 Ok: function () {
                 }
             };
-
             $.extend(defaults, options);
-
-            init();
-            openDialog();
-
-            function init() {
-                defaults.dialog = '<div class="modal-body" style="text-align: center; margin-top: 10px;">' +
-                '<div>' + defaults.text + '</div></div>' +
-                '<div class="modal-footer" style="text-align: center; padding-top: 0px; border-top: 0px;">' +
-                '<button type="button" class="btn-hidden" style="width:1px;"></button>' +
-                '<button type="button" class="btn btn-success ok" style="padding-left: 10px; padding-right: 10px;">' + defaults.ok + '</button>' +
-                '</div>';
-            }
-
-            function openDialog() {
-                $dialog = $(defaults.dialog).delegate('.ok', 'click', Ok);
-                $.blockUI({
-                    message: $dialog,
-                    css: {
-                        width: '20%',
-                        left: '40%'
-                    }
+            var $dialog = $(Dialog.buildDialog(Dialog.Type.Alert, defaults))
+                .delegate('.btn-ok', 'click', function () {
+                    Block.closeBlock(function () {
+                        defaults.Ok();
+                    });
                 });
-                setTimeout(function () {
-                    $dialog.find('.btn-hidden').remove();
-                }, 10);
-            }
-
-            function Ok() {
-                defaults.Ok();
-                $.unblockUI();
-            }
+            Block.openBlock({
+                message: $dialog
+            });
+            setTimeout(function () {
+                $dialog.find('.btn-hidden').remove();
+            }, 10);
         },
 
         blockConfirm: function (options) {
             var defaults = {
-                title: '提示',
-                text: '',
-                ok: 'ok',
-                cancel: 'cancel',
+                text: '提示',
+                ok: 'Ok',
+                cancel: 'Cancel',
                 Ok: function () {
                 },
                 Cancel: function () {
                 }
             };
-
             $.extend(defaults, options);
-
-            init();
-            openDialog();
-
-            function init() {
-                defaults.dialog = '<div class="modal-header">' +
-                    // '<button type="button" class="close">×</button>' +
-                '<h4 class="modal-title">' + defaults.title + '</h4></div>' +
-                '<div class="modal-body" style="text-align: center">' +
-                '<div>' + defaults.text + '</div></div>' +
-                '<div class="modal-footer" style="text-align: center">' +
-                '<button type="button" class="btn btn-success ok">' + defaults.ok + '</button>' +
-                '<button type="button" class="btn btn-danger cancel" style="margin-left: 50px;">' + defaults.cancel + '</button>' +
-                '</div>';
-            }
-
-            function openDialog() {
-                $.blockUI({
-                    message: $(defaults.dialog).delegate('.ok', 'click', Ok)
-                        // .delegate('.close', 'click', Cancel)
-                        .delegate('.cancel', 'click', Cancel)
+            var $dialog = $(Dialog.buildDialog(Dialog.Type.Confirm, defaults))
+                .delegate('.btn-ok', 'click', function () {
+                    Block.closeBlock(function () {
+                        defaults.Ok();
+                    });
+                })
+                .delegate('.btn-cancel', 'click', function () {
+                    Block.closeBlock(function () {
+                        defaults.Cancel();
+                    });
                 });
-            }
-
-            function Ok() {
-                defaults.Ok();
-                $.unblockUI();
-            }
-
-            function Cancel() {
-                defaults.Cancel();
-                $.unblockUI();
-            }
+            Block.openBlock({
+                message: $dialog
+            });
+            setTimeout(function () {
+                $dialog.find('.btn-hidden').remove();
+            }, 10);
         },
 
-        blockInput: function (options) {
-            var $dialog;
+        blockPrompt: function (options) {
             var defaults = {
-                text: '请输入',
+                text: '提示',
                 ok: 'Ok',
                 cancel: 'Cancel',
                 Ok: function () {
+                },
+                Cancel: function () {
                 }
             };
-
             $.extend(defaults, options);
-
-            init();
-            openDialog();
-
-            function init() {
-                defaults.dialog =
-                    '<div class="modal-body" style="text-align: center">' +
-                    '<div>' + defaults.text + '</div></div>' +
-                    '<div class="modal-body form-group" style="text-align: center">' +
-                    '<input type="text" class="form-control input" /></div>' +
-                    '<div class="modal-footer" style="text-align: center; padding-top: 0px; border-top: 0px;">' +
-                    '<button type="button" class="btn btn-success ok">' + defaults.ok + '</button>' +
-                    '<button type="button" class="btn btn-danger cancel" style="margin-left: 50px;">' + defaults.cancel + '</button>' +
-                    '</div>';
-            }
-
-            function openDialog() {
-                $dialog = $(defaults.dialog).delegate('.ok', 'click', Ok)
-                    .delegate('.cancel', 'click', Cancel);
-                $.blockUI({
-                    message: $dialog
+            var $dialog = $(Dialog.buildDialog(Dialog.Type.Prompt, defaults))
+                .delegate('.btn-ok', 'click', function () {
+                    var $input = $dialog.find('input');
+                    var value = $input.val();
+                    if (value == null || value.trim() == '') {
+                        $input.focus().closest('.dialog_input').addClass('has-error');
+                        return;
+                    }
+                    Block.closeBlock(function () {
+                        defaults.Ok(value);
+                    });
+                })
+                .delegate('.btn-cancel', 'click', function () {
+                    Block.closeBlock(function () {
+                        defaults.Cancel();
+                    });
                 });
-            }
-
-            function Ok() {
-                var $input = $dialog.find('.input');
-                var text = $input.val();
-                if (text == null || text.trim() == '') {
-                    $input.focus().closest('.form-group').addClass('has-error');
-                    return;
-                }
-                $.unblockUI();
-                defaults.Ok(text);
-            }
-
-            function Cancel() {
-                $.unblockUI();
-            }
+            Block.openBlock({
+                message: $dialog
+            });
+            setTimeout(function () {
+                $dialog.find('.btn-hidden').remove();
+            }, 10);
         }
     });
-})
-(jQuery);
+})(jQuery);
