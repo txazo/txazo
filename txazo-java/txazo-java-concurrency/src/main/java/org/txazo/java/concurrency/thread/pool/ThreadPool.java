@@ -1,9 +1,16 @@
 package org.txazo.java.concurrency.thread.pool;
 
-public interface ThreadPool<Job extends Runnable> {
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
-    public void execute(Job job);
+public interface ThreadPool {
 
-    public void shutdown();
+    void execute(Runnable task);
+
+    <T> Future<T> submit(Callable<T> task);
+
+    void shutdown();
+
+    void shutdownNow();
 
 }
