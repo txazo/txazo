@@ -1,79 +1,70 @@
 package org.txazo.java.concurrency.thread.pool;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * 简单的线程池
  */
-public class DefaultThreadPool<Job extends Runnable> implements ThreadPool<Job> {
+public class DefaultThreadPool implements ThreadPool {
 
-    private final int size;
-    private final LinkedList<Job> jobs = new LinkedList<Job>();
-    private final List<Worker> workers = Collections.synchronizedList(new ArrayList<Worker>());
+    private volatile int corePoolSize;
+    private volatile int maximumPoolSize;
+    private volatile long keepAliveTime;
+    private final BlockingQueue<Runnable> workQueue;
 
-    public DefaultThreadPool(int size) {
-        this.size = size;
-        initWorker();
+    public DefaultThreadPool(int corePoolSize, int maximumPoolSize, int keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue) {
+        this.corePoolSize = corePoolSize;
+        this.maximumPoolSize = maximumPoolSize;
+        this.keepAliveTime = unit.toNanos(keepAliveTime);
+        this.workQueue = workQueue;
     }
 
-    private void initWorker() {
-        /** 初始化工作线程 */
-        for (int i = 0; i < size; i++) {
-            Worker worker = new Worker();
-            workers.add(worker);
-            new Thread(worker).start();
-        }
+
+    @Override
+    public void execute(Runnable task) {
+
     }
 
     @Override
-    public void execute(Job job) {
-        synchronized (jobs) {
-            jobs.addLast(job);
-            jobs.notify();
-        }
+    public <T> Future<T> submit(Callable<T> task) {
+        return null;
     }
 
     @Override
     public void shutdown() {
-        for (Worker worker : workers) {
-            worker.shutdown();
-        }
+
     }
 
-    private class Worker implements Runnable {
+    @Override
+    public void shutdownNow() {
 
-        private volatile boolean running = true;
+    }
+
+    private static class CallableAdapter<V> implements Runnable, Callable<V> {
+
+        private Callable<V> callable;
+
+        public CallableAdapter(Callable<V> callable) {
+            this.callable = callable;
+        }
+
+        @Override
+        public V call() throws Exception {
+            return callable.call();
+        }
 
         @Override
         public void run() {
-            while (running) {
-                Job job = null;
-                synchronized (jobs) {
-                    while (jobs.isEmpty()) {
-                        try {
-                            jobs.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    job = jobs.removeFirst();
-                }
-                if (job != null) {
-                    try {
-                        job.run();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
+            try {
+                call();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
-        public void shutdown() {
-            running = false;
-        }
+    }
+
+    private static class Worker {
 
     }
 
