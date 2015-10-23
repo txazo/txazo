@@ -46,7 +46,11 @@
             } else if (type == Dialog.Type.Confirm) {
                 return this.buildText(options) + this.buildButton(options, {hidden: true, ok: true, cancel: true});
             } else if (type == Dialog.Type.Prompt) {
-                return this.buildText(options) + this.buildInput() + this.buildButton(options, {hidden: true, ok: true, cancel: true});
+                return this.buildText(options) + this.buildInput() + this.buildButton(options, {
+                        hidden: true,
+                        ok: true,
+                        cancel: true
+                    });
             }
         },
         buildText: function (options) {
@@ -179,6 +183,46 @@
             setTimeout(function () {
                 $dialog.find('.btn-hidden').remove();
             }, 10);
+        },
+
+        blockAjax: function (options) {
+            var defaults = {
+                text: '正在处理中'
+            };
+            Block.openBlock({
+                message: defaults.text
+            });
+            var cloneOptions = $.extend({}, options);
+            if (options.success) {
+                options.success = function () {
+                    Block.closeBlock();
+                    cloneOptions.success();
+                }
+            }
+            if (options.error) {
+                options.error = function () {
+                    Block.closeBlock();
+                    cloneOptions.error();
+                }
+            }
+            $.ajax(options);
+        },
+
+        blockFormSubmit: function (options) {
+            var defaults = {
+                text: '表单提交中'
+            };
+            $.extend(defaults, options);
+            $('#' + defaults.form).submit(function (e) {
+                e.preventDefault();
+                if (!defaults.beforeSubmit()) {
+                    return;
+                }
+                $(this).submit();
+                Block.openBlock({
+                    message: defaults.text
+                });
+            });
         }
     });
 })(jQuery);
