@@ -23,6 +23,11 @@
     };
 
     var Dialog = {
+        defaults: {
+            text_margin: '30px 0 0 0',
+            input_margin: '30px 0 0 0',
+            button_margin: '30px 0'
+        },
         Type: {
             Tip: 1,
             Alert: 2,
@@ -30,24 +35,25 @@
             Prompt: 4
         },
         Content: {
-            dialog_text: '<div class="dialog_text" style="margin: 20px 0 0 0; text-align: center; font-size: 16px; font-weight: 500;">',
-            dialog_input: '<div class="dialog_input" style="margin: 20px 0 0 0; text-align: center; padding-left: 20px; padding-right: 20px;"><input type="text" class="form-control" /></div>',
-            dialog_button: '<div class="dialog_button" style="margin: 20px 0; text-align: center;">',
+            dialog_text: '<div class="dialog_text" style="${text_margin}; text-align: center; font-size: 16px; font-weight: 500;">',
+            dialog_input: '<div class="dialog_input" style="${input_margin}; text-align: center; padding-left: 20px; padding-right: 20px;"><input type="text" class="form-control" /></div>',
+            dialog_button: '<div class="dialog_button" style="${button_margin}; text-align: center;">',
             dialog_div_suffix: '</div>',
-            dialog_button_ok: '<button type="button" class="btn btn-success btn-ok" style="padding-left:30px; padding-right:30px;">',
-            dialog_button_cancel: '<button type="button" class="btn btn-danger btn-cancel" style="margin-left:50px; padding-left:30px; padding-right:30px;">',
+            dialog_button_ok: '<button type="button" class="btn btn-color btn-ok" style="padding-left:30px; padding-right:30px;">',
+            dialog_button_cancel: '<button type="button" class="btn btn-color btn-cancel" style="margin-left:50px; padding-left:30px; padding-right:30px;">',
             dialog_button_hidden: '<button type="button" class="btn-hidden"></button>',
             dialog_button_suffix: '</button>'
         },
         buildDialog: function (type, options) {
+            options = $.extend({}, this.defaults, options);
             if (type == Dialog.Type.Tip) {
-                return this.buildText(options).replace('margin: 20px 0 0 0', 'margin: 15px 0');
+                return this.buildText(options);
             } else if (type == Dialog.Type.Alert) {
                 return this.buildText(options) + this.buildButton(options, {hidden: true, ok: true});
             } else if (type == Dialog.Type.Confirm) {
                 return this.buildText(options) + this.buildButton(options, {hidden: true, ok: true, cancel: true});
             } else if (type == Dialog.Type.Prompt) {
-                return this.buildText(options) + this.buildInput() + this.buildButton(options, {
+                return this.buildText(options) + this.buildInput(options) + this.buildButton(options, {
                         hidden: true,
                         ok: true,
                         cancel: true
@@ -55,13 +61,13 @@
             }
         },
         buildText: function (options) {
-            return this.Content.dialog_text + options.text + this.Content.dialog_div_suffix;
+            return this.Content.dialog_text.replace('${text_margin}', 'margin: ' + options.text_margin) + options.text + this.Content.dialog_div_suffix;
         },
-        buildInput: function () {
-            return this.Content.dialog_input;
+        buildInput: function (options) {
+            return this.Content.dialog_input.replace('${input_margin}', 'margin: ' + options.input_margin);
         },
         buildButton: function (options, buttons) {
-            var content = this.Content.dialog_button;
+            var content = this.Content.dialog_button.replace('${button_margin}', 'margin: ' + options.button_margin);
             if (buttons.hidden) {
                 content += this.buildButtonHidden(options);
             }
@@ -74,10 +80,10 @@
             return content + this.Content.dialog_div_suffix;
         },
         buildButtonOk: function (options) {
-            return this.Content.dialog_button_ok + options.ok + this.Content.dialog_button_suffix;
+            return this.Content.dialog_button_ok.replace('btn-color', 'btn-' + options.okColor) + options.ok + this.Content.dialog_button_suffix;
         },
         buildButtonCancel: function (options) {
-            return this.Content.dialog_button_cancel + options.cancel + this.Content.dialog_button_suffix;
+            return this.Content.dialog_button_cancel.replace('btn-color', 'btn-' + options.cancelColor) + options.cancel + this.Content.dialog_button_suffix;
         },
         buildButtonHidden: function (options) {
             return this.Content.dialog_button_hidden;
@@ -87,7 +93,8 @@
     $.extend({
         blockTip: function (options) {
             var defaults = {
-                text: '提示'
+                text: '提示',
+                text_margin: '20px 0'
             };
             $.extend(defaults, options);
             Block.openBlock({
@@ -101,7 +108,9 @@
         blockAlert: function (options) {
             var defaults = {
                 text: '提示',
+                text_margin: '20px 0',
                 ok: 'Ok',
+                okColor: 'warning',
                 Ok: function () {
                 }
             };
@@ -124,7 +133,9 @@
             var defaults = {
                 text: '提示',
                 ok: 'Ok',
+                okColor: 'success',
                 cancel: 'Cancel',
+                cancelColor: 'danger',
                 Ok: function () {
                 },
                 Cancel: function () {
@@ -154,7 +165,9 @@
             var defaults = {
                 text: '提示',
                 ok: 'Ok',
+                okColor: 'success',
                 cancel: 'Cancel',
+                cancelColor: 'danger',
                 Ok: function () {
                 },
                 Cancel: function () {
@@ -166,7 +179,7 @@
                     var $input = $dialog.find('input');
                     var value = $input.val();
                     if (value == null || value.trim() == '') {
-                        $input.focus().closest('.dialog_input').addClass('has-error');
+                        $input.val('').focus().closest('.dialog_input').addClass('has-error');
                         return;
                     }
                     Block.closeBlock(function () {
@@ -177,6 +190,8 @@
                     Block.closeBlock(function () {
                         defaults.Cancel();
                     });
+                }).delegate('input', 'input propertychange', function () {
+                    $(this).closest('.dialog_input').removeClass('has-error');
                 });
             Block.openBlock({
                 message: $dialog
