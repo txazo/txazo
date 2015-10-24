@@ -39,8 +39,8 @@
             dialog_input: '<div class="dialog_input" style="${input_margin}; text-align: center; padding-left: 20px; padding-right: 20px;"><input type="text" class="form-control" /></div>',
             dialog_button: '<div class="dialog_button" style="${button_margin}; text-align: center;">',
             dialog_div_suffix: '</div>',
-            dialog_button_ok: '<button type="button" class="btn btn-color btn-ok" style="padding-left:30px; padding-right:30px;">',
-            dialog_button_cancel: '<button type="button" class="btn btn-color btn-cancel" style="margin-left:50px; padding-left:30px; padding-right:30px;">',
+            dialog_button_ok: '<button type="button" class="btn ${btn-color} btn-ok" style="padding-left:30px; padding-right:30px;">',
+            dialog_button_cancel: '<button type="button" class="btn ${btn-color} btn-cancel" style="margin-left:50px; padding-left:30px; padding-right:30px;">',
             dialog_button_hidden: '<button type="button" class="btn-hidden"></button>',
             dialog_button_suffix: '</button>'
         },
@@ -80,10 +80,10 @@
             return content + this.Content.dialog_div_suffix;
         },
         buildButtonOk: function (options) {
-            return this.Content.dialog_button_ok.replace('btn-color', 'btn-' + options.okColor) + options.ok + this.Content.dialog_button_suffix;
+            return this.Content.dialog_button_ok.replace('${btn-color}', 'btn-' + options.okColor) + options.ok + this.Content.dialog_button_suffix;
         },
         buildButtonCancel: function (options) {
-            return this.Content.dialog_button_cancel.replace('btn-color', 'btn-' + options.cancelColor) + options.cancel + this.Content.dialog_button_suffix;
+            return this.Content.dialog_button_cancel.replace('${btn-color}', 'btn-' + options.cancelColor) + options.cancel + this.Content.dialog_button_suffix;
         },
         buildButtonHidden: function (options) {
             return this.Content.dialog_button_hidden;
