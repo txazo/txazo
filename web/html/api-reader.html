@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ApiReader</title>
+    <link href="http://cdn.bootcss.com/semantic-ui/2.1.4/semantic.min.css" rel="stylesheet">
+    <style>
+        .ui.menu a {
+            width: 25%;
+        }
+
+        .ui.menu a span {
+            width: 100%;
+            text-align: center;
+        }
+
+        .middle {
+            margin: 0 auto !important;
+            padding-left: 30px !important;
+            padding-right: 20px !important;
+            letter-spacing: 10px !important;
+        }
+
+        .ui.dropdown {
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ui menu pointing">
+    <a class="item teal" data-tab="tab-1"><span>接口测试</span></a>
+    <a class="item teal" data-tab="tab-2"><span>自定义接口测试</span></a>
+    <a class="item teal" data-tab="tab-3"><span>测试Case</span></a>
+    <a class="item teal" data-tab="tab-4"><span>接口对比</span></a>
+</div>
+
+<div class="ui container" style="width: 98%;">
+    <div class="ui tab" data-tab="tab-1">
+        <div class="ui two column divided grid">
+            <div class="stretched row">
+                <div class="column five wide">
+                    <div class="ui segment">
+
+                        <form class="ui form">
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label>接口名称</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <select name="apiName" class="ui search dropdown">
+                                        <option value="">输入接口名称</option>
+                                        <option value="asd">asd</option>
+                                        <option value="af">af</option>
+                                        <option value="dgdfd">dgdfd</option>
+                                        <option value="afsd">afsd</option>
+                                        <option value="wrwr">wrwr</option>
+                                        <option value="aadsf">aadsf</option>
+                                        <option value="acfsfs">acfsfs</option>
+                                        <option value="asfsfs">asfsfs</option>
+                                        <option value="bc">bc</option>
+                                        <option value="fsfsfs">fsfsfs</option>
+                                        <option value="ssd">ssd</option>
+                                        <option value="da">da</option>
+                                    </select>
+                                </div>
+                                <div class="field one wide">
+                                </div>
+                            </div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label for="version">版本选择</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <select name="version" id="version" class="ui dropdown">
+                                        <option value="1">Male</option>
+                                        <option value="0">Female</option>
+                                        <option value="1">Male</option>
+                                        <option value="0">Female</option>
+                                        <option value="1">Male</option>
+                                        <option value="0">Female</option>
+                                    </select>
+                                </div>
+                                <div class="field one wide">
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+
+                            <div class="inline fields two">
+                                <div class="field four wide">
+                                    <label>请求方式</label>
+                                </div>
+                                <div class="field four wide">
+                                    <div class="ui radio checkbox">
+                                        <input name="method" type="radio" checked="checked">
+                                        <label>GET</label>
+                                    </div>
+                                </div>
+                                <div class="field four wide">
+                                    <div class="ui radio checkbox">
+                                        <input name="method" type="radio">
+                                        <label>POST</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inline fields two">
+                                <div class="field four wide">
+                                    <label>客户端</label>
+                                </div>
+                                <div class="field four wide">
+                                    <div class="ui radio checkbox">
+                                        <input name="client" type="radio" checked="checked">
+                                        <label>IOS</label>
+                                    </div>
+                                </div>
+                                <div class="field four wide">
+                                    <div class="ui radio checkbox">
+                                        <input name="client" type="radio">
+                                        <label>Android</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label>测试环境</label>
+                                </div>
+                                <div class="field four wide">
+                                    <div class="ui radio checkbox">
+                                        <input name="environment" type="radio" checked="checked">
+                                        <label>本地</label>
+                                    </div>
+                                </div>
+                                <div class="field four wide">
+                                    <div class="ui radio checkbox">
+                                        <input name="environment" type="radio">
+                                        <label>Beta</label>
+                                    </div>
+                                </div>
+                                <div class="field four wide">
+                                    <div class="ui radio checkbox">
+                                        <input name="environment" type="radio">
+                                        <label>线上</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label for="dpid">dpid</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <input name="dpid" id="dpid" type="text">
+                                </div>
+                                <div class="field one wide">
+                                </div>
+                            </div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label for="token">token</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <input name="token" id="token" type="text">
+                                </div>
+                                <div class="field one wide">
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label>id</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <input name="token" type="text">
+                                </div>
+                                <div class="field one wide">
+                                    <i class="small red asterisk icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label>id</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <input name="token" type="text">
+                                </div>
+                                <div class="field one wide">
+                                    <i class="small red asterisk icon"></i>
+                                </div>
+                            </div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label>shopid</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <input name="shopid" type="text">
+                                </div>
+                                <div class="field one wide">
+                                </div>
+                            </div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label>shopid</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <input name="shopid" type="text">
+                                </div>
+                                <div class="field one wide">
+                                </div>
+                            </div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label>productid</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <input name="shopid" type="text">
+                                </div>
+                                <div class="field one wide">
+                                    <i class="small teal remove icon link"></i>
+                                </div>
+                            </div>
+
+                            <div class="inline fields three">
+                                <div class="field four wide">
+                                    <label>right</label>
+                                </div>
+                                <div class="field eleven wide">
+                                    <input name="shopid" type="text">
+                                </div>
+                                <div class="field one wide">
+                                    <i class="small teal remove icon link"></i>
+                                </div>
+                            </div>
+
+                            <div class="inline fields four">
+                                <div class="field seven wide">
+                                    <input name="token" type="text" placeholder="key">
+                                </div>
+                                <div class="field one wide">
+                                    <span style="text-align: center;">=</span>
+                                </div>
+                                <div class="field seven wide">
+                                    <input name="token" type="text" placeholder="value">
+                                </div>
+                                <div class="field one wide">
+                                    <i class="teal plus icon link"></i>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+
+                            <div class="inline fields two">
+                                <div class="field eight wide">
+                                    <button class="ui teal button middle">
+                                        执行
+                                    </button>
+                                </div>
+                                <div class="field eight wide">
+                                    <button class="ui teal button middle">
+                                        保存
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="column eleven wide" style="box-shadow: 0px 0px 0px 0px;">
+                    <div class="ui segment" style="flex-grow: 0;">
+                        <form class="ui form">
+                            <div class="field">
+                                <label>URL</label>
+                                <textarea rows="4" disabled></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ui segment">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui tab" data-tab="tab-2">
+        测试Case
+    </div>
+
+    <div class="ui tab" data-tab="tab-3">
+        自定义接口测试
+    </div>
+
+    <div class="ui tab" data-tab="tab-4">
+        接口对比
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/semantic-ui/2.1.4/semantic.min.js"></script>
+<script>
+    $(function () {
+        $('.ui.menu .item').tab();
+
+        $('select.dropdown').dropdown({
+            onChange: function (value, text, $selectedItem) {
+            }
+        });
+
+        $('.ui.radio.checkbox').checkbox();
+
+        showTab('tab-1');
+
+        function showTab(tab) {
+            $('.ui.menu .item[data-tab="' + tab + '"]').addClass('active');
+            $('div[data-tab="' + tab + '"]').addClass('active');
+        }
+    });
+</script>
+</body>
+</html>
+
