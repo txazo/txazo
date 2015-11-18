@@ -57,14 +57,6 @@
 
     };
 
-    JSONDiff.buildNode = function (key, value, parentNode) {
-        var node = $(this.nodeTemplate);
-        node.find('.key').html(key);
-        node.find('.value').html(value);
-        parentNode.append(node);
-        return node;
-    };
-
     JSONDiff.convertToJson = function (value) {
         if (!this.isJson(value)) {
             try {
@@ -75,7 +67,18 @@
         return value;
     };
 
-    JSONDiff.buildTree = function (left, right, leftNode, rightNode) {
+    JSONDiff.buildNode = function (key, value, parentNode) {
+        var node = $(this.nodeTemplate);
+        node.find('.key').html(key);
+        node.find('.value').html(value);
+        parentNode.append(node);
+        return node;
+    };
+
+    JSONDiff.buildTree = function (leftKey, leftValue, leftParentNode, rightKey, rightValue, rightParentNode) {
+        var leftNode = thsi.buildNode(leftKey, this.buildValue(leftValue), leftParentNode);
+        var rightNode = thsi.buildNode(rightKey, this.buildValue(rightValue), rightParentNode);
+
         if (this.isArray(left)) {
             if (this.isArray(right)) {
 
@@ -98,7 +101,7 @@
     };
 
     JSONDiff.diff = function (options) {
-        this.buildTree(this.options.left, this.options.right, this.options.leftTarget, this.options.rightTarget);
+        this.buildTree('', this.options.left, this.options.leftTarget, '', this.options.right, this.options.rightTarget);
     };
 
     $.extend({
