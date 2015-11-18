@@ -65,6 +65,16 @@
         return node;
     };
 
+    JSONDiff.convertToJson = function (value) {
+        if (!this.isJson(value)) {
+            try {
+                value = eval('(' + value + ')');
+            } catch (e) {
+            }
+        }
+        return value;
+    };
+
     JSONDiff.buildTree = function (left, right, leftNode, rightNode) {
         if (this.isArray(left)) {
             if (this.isArray(right)) {
