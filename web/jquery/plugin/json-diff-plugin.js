@@ -102,6 +102,8 @@
     };
 
     JSONDiff.buildTree = function (leftKey, leftValue, leftParentNode, rightKey, rightValue, rightParentNode) {
+        var isSame = false;
+
         leftValue = this.convertToJson(leftValue);
         rightValue = this.convertToJson(rightValue);
 
@@ -110,10 +112,10 @@
 
         if (this.isArray(leftValue)) {
             if (this.isArray(rightValue)) {
-                var result = leftValue.length == rightValue.length;
+                isSame = leftValue.length == rightValue.length;
                 var minLength = leftValue.length < rightValue.length ? leftValue.length : rightValue.length;
                 for (var i = 0; i < minLength.length; i++) {
-                    result = result & this.buildTree(i, leftValue[i], leftNode, i, rightValue[i], rightNode);
+                    isSame = isSame & this.buildTree(i, leftValue[i], leftNode, i, rightValue[i], rightNode);
                 }
                 for (var i = minLength; i < leftValue.length; i++) {
                     this.buildNode(i, leftValue[i], leftNode);
@@ -121,22 +123,21 @@
                 for (var i = minLength; i < rightValue.length; i++) {
                     this.buildNode(i, rightValue[i], rightNode);
                 }
-                return result;
             } else {
                 this.buildJsonNode(leftValue, leftNode);
                 if (this.isObject(rightValue)) {
                     this.buildJsonNode(rightValue, rightNode);
                 }
-                return false;
+                isSame = false;
             }
         } else if (this.isObject(leftValue)) {
             if (this.isObject(rightValue)) {
-                var result = this.getPropertyCount(leftValue) == this.getPropertyCount(rightValue);
+                isSame = this.getPropertyCount(leftValue) == this.getPropertyCount(rightValue);
                 var samePropertys = this.getSamePropertys(leftValue, rightValue);
-                result = result & this.getPropertyCount(leftValue) = samePropertys.length;
+                isSame = isSame & this.getPropertyCount(leftValue) = samePropertys.length;
                 $.each(leftValue, function(k, v) {
                     if ($.inArray(k, samePropertys)) {
-                        result = result & this.buildTree(k, v, leftNode, k, rightValue[v], rightNode);
+                        isSame = isSame & this.buildTree(k, v, leftNode, k, rightValue[v], rightNode);
                     }
                 });
                 $.each(leftValue, function(k, v) {
@@ -154,15 +155,19 @@
                 if (this.isArray(rightValue)) {
                     this.buildJsonNode(rightValue, rightNode);
                 }
-                return false;
+                isSame = false;
             }
         } else {
             if (!this.isJson(rightValue)) {
-                return this.compareValue(leftValue, rightValue);
+                isSame = this.compareValue(leftValue, rightValue);
             } else {
                 this.buildJsonNode(rightValue, rightNode);
-                return false;
+                isSame = false;
             }
+        }
+
+        if (!isSame) {
+            rightNode.addClass('diff');
         }
     };
 
