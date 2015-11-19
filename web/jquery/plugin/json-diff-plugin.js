@@ -6,6 +6,7 @@
             leftTarget: {},
             rightTarget: {}
         },
+        defaultKey: '',
         nodeTemplate: '<div class="node"><div class="key"></div><div class="value"></div><div class="child"></div></div>'
     };
 
@@ -37,38 +38,20 @@
         return this.isArray(value) || this.isObject(value);
     };
 
-    JSONDiff.buildValue = function (value) {
-        if (this.isArray(value)) {
-            return '[' + value.length + ']';
-        } else if (this.isObject(value)) {
-            return '{' + this.getPropertyCount(value) + '}';
-        } else {
-            return value;
-        }
-    };
-
-    JSONDiff.getPropertyCount = function(value) {
+    JSONDiff.getPropertyCount = function (value) {
         return this.isObject(value) ? Object.getOwnPropertyNames(value).length : 0;
     };
 
-    JSONDiff.getSamePropertys = function(left, right) {
+    JSONDiff.getSamePropertys = function (left, right) {
         var propertys = [];
         if (this.isObject(left) && this.isObject(right)) {
-            $.each(leftValue, function(k, v) {
-                if (rightValue.hasOwnProperty(k)) {
+            $.each(left, function (k, v) {
+                if (right.hasOwnProperty(k)) {
                     propertys.push(k);
                 }
-            }
+            });
         }
         return propertys;
-    };
-
-    JSONDiff.compare = function (left, right, leftParent, rightParent) {
-
-    };
-
-    JSONDiff.compareArray = function (left, right, leftParent, rightParent) {
-        this.buildTree(left);
     };
 
     JSONDiff.convertToJson = function (value) {
@@ -81,87 +64,108 @@
         return value;
     };
 
+    JSONDiff.buildNodeValue = function (value) {
+        if (this.isArray(value)) {
+            return '[' + value.length + ']';
+        } else if (this.isObject(value)) {
+            return '{' + this.getPropertyCount(value) + '}';
+        } else {
+            return value;
+        }
+    };
+
     JSONDiff.buildNode = function (key, value, parentNode) {
         var node = $(this.nodeTemplate);
         node.find('.key').html(key);
-        node.find('.value').html(this.buildValue(leftValue));
+        node.find('.value').html(this.buildNodeValue(value));
         parentNode.append(node);
         return node;
     };
 
-    JSONDiff.buildJsonNode = function (value, parentNode) {
-        if (this.isArray(value)) {
+    JSONDiff.buildNodeWithChild = function (key, value, parentNode) {
+        var node = this.buildNode(key, value, parentNode);
+        this.buildChildNode(value, node);
+    };
+
+    JSONDiff.buildChildNode = function (value, parentNode) {
+        var that = this;
+        if (that.isArray(value)) {
             for (var i = 0; i < value.length; i++) {
-                this.buildTree(i, value[i], node);
+                that.buildNodeWithChild(i, value[i], parentNode);
             }
-        } else if (this.isObject(value)) {
-            $.each(value, function(k, v) {
-                this.buildTree(k, v, node);
+        } else if (that.isObject(value)) {
+            $.each(value, function (k, v) {
+                that.buildNodeWithChild(k, v, parentNode);
             });
         }
     };
 
-    JSONDiff.buildTree = function (leftKey, leftValue, leftParentNode, rightKey, rightValue, rightParentNode) {
+    JSONDiff.compareValue = function (left, right) {
+        return left == right;
+    };
+
+    JSONDiff.compare = function (key, left, leftParentNode, right, rightParentNode) {
+        var that = this;
         var isSame = false;
 
-        leftValue = this.convertToJson(leftValue);
-        rightValue = this.convertToJson(rightValue);
+        left = that.convertToJson(left);
+        right = that.convertToJson(right);
 
-        var leftNode = this.buildNode(leftKey, this.buildValue(leftValue), leftParentNode);
-        var rightNode = this.buildNode(rightKey, this.buildValue(rightValue), rightParentNode);
+        var leftNode = that.buildNode(key, left, leftParentNode);
+        var rightNode = that.buildNode(key, right, rightParentNode);
 
-        if (this.isArray(leftValue)) {
-            if (this.isArray(rightValue)) {
-                isSame = leftValue.length == rightValue.length;
-                var minLength = leftValue.length < rightValue.length ? leftValue.length : rightValue.length;
+        if (that.isArray(left)) {
+            if (that.isArray(right)) {
+                isSame = (left.length == right.length);
+                var minLength = (left.length < right.length) ? left.length : right.length;
                 for (var i = 0; i < minLength.length; i++) {
-                    isSame = isSame & this.buildTree(i, leftValue[i], leftNode, i, rightValue[i], rightNode);
+                    isSame = isSame && that.compare(i, left[i], leftNode, right[i], rightNode);
                 }
-                for (var i = minLength; i < leftValue.length; i++) {
-                    this.buildNode(i, leftValue[i], leftNode);
+                for (var j = minLength; j < left.length; j++) {
+                    that.buildNodeWithChild(j, left[j], leftNode);
                 }
-                for (var i = minLength; i < rightValue.length; i++) {
-                    this.buildNode(i, rightValue[i], rightNode);
+                for (var k = minLength; k < right.length; k++) {
+                    that.buildNodeWithChild(k, right[k], rightNode);
                 }
             } else {
-                this.buildJsonNode(leftValue, leftNode);
-                if (this.isObject(rightValue)) {
-                    this.buildJsonNode(rightValue, rightNode);
+                that.buildChildNode(left, leftNode);
+                if (that.isObject(right)) {
+                    that.buildChildNode(right, rightNode);
                 }
                 isSame = false;
             }
-        } else if (this.isObject(leftValue)) {
-            if (this.isObject(rightValue)) {
-                isSame = this.getPropertyCount(leftValue) == this.getPropertyCount(rightValue);
-                var samePropertys = this.getSamePropertys(leftValue, rightValue);
-                isSame = isSame & this.getPropertyCount(leftValue) = samePropertys.length;
-                $.each(leftValue, function(k, v) {
+        } else if (that.isObject(left)) {
+            if (that.isObject(right)) {
+                isSame = (that.getPropertyCount(left) == that.getPropertyCount(right));
+                var samePropertys = that.getSamePropertys(left, right);
+                isSame = isSame && (that.getPropertyCount(left) == samePropertys.length);
+                $.each(left, function (k, v) {
                     if ($.inArray(k, samePropertys)) {
-                        isSame = isSame & this.buildTree(k, v, leftNode, k, rightValue[v], rightNode);
+                        isSame = isSame && that.compare(k, v, leftNode, right[k], rightNode);
                     }
                 });
-                $.each(leftValue, function(k, v) {
+                $.each(left, function (k, v) {
                     if (!$.inArray(k, samePropertys)) {
-                        this.buildJsonNode(k, v, leftNode);
+                        that.buildNodeWithChild(k, v, leftNode);
                     }
                 });
-                $.each(rightValue, function(k, v) {
+                $.each(right, function (k, v) {
                     if (!$.inArray(k, samePropertys)) {
-                        this.buildJsonNode(k, v, rightNode);
+                        that.buildNodeWithChild(k, v, rightNode);
                     }
                 });
             } else {
-                this.buildJsonNode(leftValue, leftNode);
-                if (this.isArray(rightValue)) {
-                    this.buildJsonNode(rightValue, rightNode);
+                that.buildChildNode(left, leftNode);
+                if (that.isArray(right)) {
+                    that.buildChildNode(right, rightNode);
                 }
                 isSame = false;
             }
         } else {
-            if (!this.isJson(rightValue)) {
-                isSame = this.compareValue(leftValue, rightValue);
+            if (!that.isJson(right)) {
+                isSame = that.compareValue(left, right);
             } else {
-                this.buildJsonNode(rightValue, rightNode);
+                that.buildChildNode(right, rightNode);
                 isSame = false;
             }
         }
@@ -171,12 +175,8 @@
         }
     };
 
-    JSONDiff.compareValue = function(left, right) {
-        return left == right;
-    };
-
     JSONDiff.diff = function (options) {
-        this.buildTree('', this.options.left, this.options.leftTarget, '', this.options.right, this.options.rightTarget);
+        this.compare(this.defaultKey, this.options.left, this.options.leftTarget, this.options.right, this.options.rightTarget);
     };
 
     $.extend({
