@@ -54,6 +54,10 @@
         return propertys;
     };
 
+    JSONDiff.isInArray = function (value, array) {
+        return $.inArray(value, array) >= 0;
+    };
+
     JSONDiff.convertToJson = function (value) {
         if (!this.isJson(value)) {
             try {
@@ -79,7 +83,7 @@
         node.find('.key').html(key);
         node.find('.value').html(this.buildNodeValue(value));
         parentNode.append(node);
-        return node;
+        return node.find('.child');
     };
 
     JSONDiff.buildNodeWithChild = function (key, value, parentNode) {
@@ -119,7 +123,7 @@
                 isSame = (left.length == right.length);
                 var minLength = (left.length < right.length) ? left.length : right.length;
                 for (var i = 0; i < minLength.length; i++) {
-                    isSame = isSame && that.compare(i, left[i], leftNode, right[i], rightNode);
+                    isSame = that.compare(i, left[i], leftNode, right[i], rightNode) && isSame;
                 }
                 for (var j = minLength; j < left.length; j++) {
                     that.buildNodeWithChild(j, left[j], leftNode);
@@ -140,17 +144,17 @@
                 var samePropertys = that.getSamePropertys(left, right);
                 isSame = isSame && (that.getPropertyCount(left) == samePropertys.length);
                 $.each(left, function (k, v) {
-                    if ($.inArray(k, samePropertys)) {
-                        isSame = isSame && that.compare(k, v, leftNode, right[k], rightNode);
+                    if (that.isInArray(k, samePropertys)) {
+                        isSame = that.compare(k, v, leftNode, right[k], rightNode) && isSame;
                     }
                 });
                 $.each(left, function (k, v) {
-                    if (!$.inArray(k, samePropertys)) {
+                    if (!that.isInArray(k, samePropertys)) {
                         that.buildNodeWithChild(k, v, leftNode);
                     }
                 });
                 $.each(right, function (k, v) {
-                    if (!$.inArray(k, samePropertys)) {
+                    if (!that.isInArray(k, samePropertys)) {
                         that.buildNodeWithChild(k, v, rightNode);
                     }
                 });
@@ -173,9 +177,12 @@
         if (!isSame) {
             rightNode.addClass('diff');
         }
+
+        return isSame;
     };
 
     JSONDiff.diff = function (options) {
+        this.options = $.extend({}, this.options, options);
         this.compare(this.defaultKey, this.options.left, this.options.leftTarget, this.options.right, this.options.rightTarget);
     };
 

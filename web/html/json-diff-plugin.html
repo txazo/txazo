@@ -8,13 +8,21 @@
 </head>
 <body>
 
-<h1>Json Diff</h1>
+<div>
+    <div id="left"></div>
+    <div id="right"></div>
+</div>
 
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <script src="../jquery/plugin/json-diff-plugin.js"></script>
 <script>
     $(function () {
-        $.jsonDiff({});
+        $.jsonDiff({
+            left: {"as": "as"},
+            right: {"as": "as", "rsd": ["as", "asa", "as"], "adad": {"asa": "assa", "as": "dad"}},
+            leftTarget: $('#left'),
+            rightTarget: $('#right')
+        });
     });
 </script>
 </body>
