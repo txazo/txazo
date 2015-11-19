@@ -13,14 +13,31 @@
             margin: 50px auto;
         }
 
-        .left {
+        .left, .right {
             white-space: nowrap;
             overflow-y: scroll;
+            margin: 0;
+            padding: 0 0 10px 0;
         }
 
-        .right {
-            white-space: nowrap;
-            overflow-y: scroll;
+        .parent {
+            float: left;
+            padding: 8px 15px;
+            font-size: 14px;
+            line-height: 1.4285em;
+        }
+
+        .parent:hover {
+            background: yellow;
+        }
+
+        .key {
+            float: left;
+            width: 200px;
+        }
+
+        .value {
+            margin-left: 300px;
         }
 
         .diff {
@@ -34,13 +51,13 @@
     <div class="ui two column divided grid">
         <div class="stretched row">
             <div class="column eight wide">
-                <div class="ui segment">
-                    <div class="left"></div>
+                <div class="ui segment" style="padding: 0;">
+                    <div class="left" id="left"></div>
                 </div>
             </div>
             <div class="column eight wide">
-                <div class="ui segment">
-                    <div class="right"></div>
+                <div class="ui segment" style="padding: 0;">
+                    <div class="right" id="right"></div>
                 </div>
             </div>
         </div>
@@ -55,7 +72,16 @@
     $(function () {
         $.jsonDiff({
             left: {
-                "0x7a43": "285124",
+                "0x7a43": {
+                    "Name": "txazo",
+                    "Age": 18,
+                    "List": {
+                        "Name": "root",
+                        "Array": [
+                            "Admin", "Manager"
+                        ]
+                    }
+                },
                 "Avatar": "http://i2.dpfile.com/u/20110802/1_23857_b.jpg",
                 "BadgeCount": "6",
                 "BindingAccounts": "null",
@@ -81,12 +107,6 @@
                 "MovieTicketCount": "0",
                 "NeedSetAvatar": "false",
                 "NeedSetName": "false",
-                "NewToken": "",
-                "NickName": "asdfdsfs",
-                "PaymentResult": "0",
-                "PhoneNo": "",
-                "PhotoCount": "0",
-                "ReviewCount": "0",
                 "Score": "170",
                 "SnsImportedFlags": "0",
                 "SnsNickName": "",
@@ -113,10 +133,6 @@
                 "Avatar": "http://i2.dpfile.com/u/20110802/1_23857_b.jpg",
                 "BadgeCount": "6",
                 "BindingAccounts": "null",
-                "CheckInCount": "52",
-                "CityID": "1",
-                "CouponCount": "3434",
-                "DCashCount": "213442",
                 "Email": "",
                 "FansCount": "1",
                 "FavoCount": "5",
@@ -162,8 +178,8 @@
                 },
                 "UserPower": "60"
             },
-            leftTarget: $('.left'),
-            rightTarget: $('.right')
+            leftTarget: $('#left'),
+            rightTarget: $('#right')
         });
     });
 </script>

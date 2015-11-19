@@ -7,7 +7,7 @@
             rightTarget: {}
         },
         defaultKey: '',
-        nodeTemplate: '<div class="node"><p class="parent"><div class="key"></div><div class="value"></div></p><div class="child"></div></div>'
+        nodeTemplate: '<div class="node"><div class="parent"><div class="key"></div><div class="value"></div></div><div class="child" style="display: none;"></div></div>'
     };
 
     JSONDiff.isTypeOf = function (value, type) {
@@ -70,36 +70,45 @@
 
     JSONDiff.buildNodeValue = function (value) {
         if (this.isArray(value)) {
-            return '[' + value.length + ']';
+            return '[ ' + value.length + ' ]';
         } else if (this.isObject(value)) {
-            return '{' + this.getPropertyCount(value) + '}';
+            return '{ ' + this.getPropertyCount(value) + ' }';
         } else {
             return value;
         }
     };
 
-    JSONDiff.buildNode = function (key, value, parentNode) {
+    JSONDiff.buildNode = function (level, key, value, parentNode) {
         var node = $(this.nodeTemplate);
-        node.find('.key').html(key);
+        node.find('.key').html(key).css('margin-left', 40 * (level - 1) + 'px');
         node.find('.value').html(this.buildNodeValue(value));
         parentNode.append(node);
         return node.find('.child');
     };
 
-    JSONDiff.buildNodeWithChild = function (key, value, parentNode) {
-        var node = this.buildNode(key, value, parentNode);
-        this.buildChildNode(value, node);
+    JSONDiff.buildEmptyNode = function (level, parentNode) {
+        var node = $(this.nodeTemplate);
+        node.find('.key').css('margin-left', 40 * (level - 1) + 'px');
+        node.find('.parent').css('padding', '18px 15px');
+        parentNode.append(node);
+        return node.find('.child');
     };
 
-    JSONDiff.buildChildNode = function (value, parentNode) {
+    JSONDiff.buildNodeWithChild = function (level, key, value, parentNode, otherParentNode) {
+        var node = this.buildNode(level, key, value, parentNode);
+        var otherNode = this.buildEmptyNode(level, otherParentNode);
+        this.buildChildNode(level + 1, value, node, otherNode);
+    };
+
+    JSONDiff.buildChildNode = function (level, value, parentNode, otherParentNode) {
         var that = this;
         if (that.isArray(value)) {
             for (var i = 0; i < value.length; i++) {
-                that.buildNodeWithChild(i, value[i], parentNode);
+                that.buildNodeWithChild(level, i, value[i], parentNode, otherParentNode);
             }
         } else if (that.isObject(value)) {
             $.each(value, function (k, v) {
-                that.buildNodeWithChild(k, v, parentNode);
+                that.buildNodeWithChild(level, k, v, parentNode, otherParentNode);
             });
         }
     };
@@ -108,33 +117,33 @@
         return left == right;
     };
 
-    JSONDiff.compare = function (key, left, leftParentNode, right, rightParentNode) {
+    JSONDiff.compare = function (level, key, left, leftParentNode, right, rightParentNode) {
         var that = this;
         var isSame = true;
 
         left = that.convertToJson(left);
         right = that.convertToJson(right);
 
-        var leftNode = that.buildNode(key, left, leftParentNode);
-        var rightNode = that.buildNode(key, right, rightParentNode);
+        var leftNode = that.buildNode(level, key, left, leftParentNode);
+        var rightNode = that.buildNode(level, key, right, rightParentNode);
 
         if (that.isArray(left)) {
             if (that.isArray(right)) {
                 isSame = (left.length == right.length);
                 var minLength = (left.length < right.length) ? left.length : right.length;
                 for (var i = 0; i < minLength.length; i++) {
-                    isSame = that.compare(i, left[i], leftNode, right[i], rightNode) && isSame;
+                    isSame = that.compare(level + 1, i, left[i], leftNode, right[i], rightNode) && isSame;
                 }
                 for (var j = minLength; j < left.length; j++) {
-                    that.buildNodeWithChild(j, left[j], leftNode);
+                    that.buildNodeWithChild(level + 1, j, left[j], leftNode, rightNode);
                 }
                 for (var k = minLength; k < right.length; k++) {
-                    that.buildNodeWithChild(k, right[k], rightNode);
+                    that.buildNodeWithChild(level + 1, k, right[k], rightNode, leftNode);
                 }
             } else {
-                that.buildChildNode(left, leftNode);
+                that.buildChildNode(level + 1, left, leftNode, rightNode);
                 if (that.isObject(right)) {
-                    that.buildChildNode(right, rightNode);
+                    that.buildChildNode(level + 1, right, rightNode, leftNode);
                 }
                 isSame = false;
             }
@@ -145,23 +154,23 @@
                 isSame = isSame && (that.getPropertyCount(left) == samePropertys.length);
                 $.each(left, function (k, v) {
                     if (that.isInArray(k, samePropertys)) {
-                        isSame = that.compare(k, v, leftNode, right[k], rightNode) && isSame;
+                        isSame = that.compare(level + 1, k, v, leftNode, right[k], rightNode) && isSame;
                     }
                 });
                 $.each(left, function (k, v) {
                     if (!that.isInArray(k, samePropertys)) {
-                        that.buildNodeWithChild(k, v, leftNode);
+                        that.buildNodeWithChild(level + 1, k, v, leftNode, rightNode);
                     }
                 });
                 $.each(right, function (k, v) {
                     if (!that.isInArray(k, samePropertys)) {
-                        that.buildNodeWithChild(k, v, rightNode);
+                        that.buildNodeWithChild(level + 1, k, v, rightNode, leftNode);
                     }
                 });
             } else {
-                that.buildChildNode(left, leftNode);
+                that.buildChildNode(level + 1, left, leftNode, rightNode);
                 if (that.isArray(right)) {
-                    that.buildChildNode(right, rightNode);
+                    that.buildChildNode(level + 1, right, rightNode, leftNode);
                 }
                 isSame = false;
             }
@@ -181,9 +190,27 @@
         return isSame;
     };
 
+    JSONDiff.adaptiveWidth = function () {
+        this.options.leftTarget.find('.parent').css('width', this.options.leftTarget[0].scrollWidth);
+        this.options.rightTarget.find('.parent').css('width', this.options.rightTarget[0].scrollWidth);
+    };
+
+    JSONDiff.initEvent = function (leftTarget, rightTarget) {
+        var that = this;
+        leftTarget.scroll(function () {
+            rightTarget.scrollLeft(leftTarget.scrollLeft());
+        }).on('click', '.parent', function () {
+            $(this).next().toggle();
+            that.adaptiveWidth();
+        });
+    };
+
     JSONDiff.diff = function (options) {
         this.options = $.extend({}, this.options, options);
-        this.compare(this.defaultKey, this.options.left, this.options.leftTarget, this.options.right, this.options.rightTarget);
+        this.compare(0, this.defaultKey, this.options.left, this.options.leftTarget, this.options.right, this.options.rightTarget);
+        this.adaptiveWidth();
+        this.initEvent(this.options.leftTarget, this.options.rightTarget);
+        this.initEvent(this.options.rightTarget, this.options.leftTarget);
     };
 
     $.extend({
