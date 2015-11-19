@@ -80,7 +80,7 @@
 
     JSONDiff.buildNode = function (level, key, value, parentNode) {
         var node = $(this.nodeTemplate);
-        node.find('.key').html(key).css('margin-left', 40 * (level - 1) + 'px');
+        node.find('.key').html(key).css('margin-left', 50 * (level - 1) + 'px');
         node.find('.value').html(this.buildNodeValue(value));
         parentNode.append(node);
         return node.find('.child');
@@ -88,7 +88,7 @@
 
     JSONDiff.buildEmptyNode = function (level, parentNode) {
         var node = $(this.nodeTemplate);
-        node.find('.key').css('margin-left', 40 * (level - 1) + 'px');
+        node.find('.key').css('margin-left', 50 * (level - 1) + 'px');
         node.find('.parent').css('padding', '18px 15px');
         parentNode.append(node);
         return node.find('.child');
