@@ -39,6 +39,7 @@
 
         .parent:hover {
             background: #DDDDDD;
+            cursor: pointer;
         }
 
         .key {
@@ -49,7 +50,14 @@
         .value {
         }
 
+        .add {
+        }
+
+        .remove {
+        }
+
         .diff {
+            red;
         }
     </style>
 </head>
@@ -80,10 +88,10 @@
         $.jsonDiff({
             left: {
                 "0x7a43": {
-                    "Name": "txazo",
+                    "Name": "232",
                     "Age": 18,
                     "List": {
-                        "Name": "root",
+                        "Name": "1",
                         "Array": [
                             "Admin", "http://i2.dpfile.com/u/20110802/1_23857_b.jpg"
                         ]
@@ -136,7 +144,16 @@
                 "UserPower": "60"
             },
             right: {
-                "0x7a43": "3434",
+                "0x7a43": {
+                    "Name": "3434",
+                    "Age": 18,
+                    "List": {
+                        "Name": "1",
+                        "Array": [
+                            "Admin", "http://i2.dpfile.com/u/20110802/1_23857_b.jpg"
+                        ]
+                    }
+                },
                 "Avatar": "http://i2.dpfile.com/u/20110802/1_23857_b.jpg",
                 "BadgeCount": "6",
                 "BindingAccounts": "null",
