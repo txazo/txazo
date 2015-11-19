@@ -7,7 +7,7 @@
             rightTarget: {}
         },
         defaultKey: '',
-        nodeTemplate: '<div class="node"><div class="key"></div><div class="value"></div><div class="child"></div></div>'
+        nodeTemplate: '<div class="node"><p class="parent"><div class="key"></div><div class="value"></div></p><div class="child"></div></div>'
     };
 
     JSONDiff.isTypeOf = function (value, type) {
@@ -110,7 +110,7 @@
 
     JSONDiff.compare = function (key, left, leftParentNode, right, rightParentNode) {
         var that = this;
-        var isSame = false;
+        var isSame = true;
 
         left = that.convertToJson(left);
         right = that.convertToJson(right);
@@ -174,8 +174,8 @@
             }
         }
 
-        if (!isSame) {
-            rightNode.addClass('diff');
+        if (!isSame && that.isJson(right)) {
+            rightNode.find('.parent').addClass('diff');
         }
 
         return isSame;

@@ -4,27 +4,168 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://cdn.bootcss.com/semantic-ui/2.1.4/semantic.min.css" rel="stylesheet">
     <title>Json Diff</title>
+    <style>
+        .main {
+            float: left;
+            width: 1000px;
+            margin: 50px auto;
+        }
+
+        .left {
+            white-space: nowrap;
+            overflow-y: scroll;
+        }
+
+        .right {
+            white-space: nowrap;
+            overflow-y: scroll;
+        }
+
+        .diff {
+            background: red;
+        }
+    </style>
 </head>
 <body>
 
-<div>
-    <div id="left"></div>
-    <div id="right"></div>
+<div class="ui container" style="width: 1100px; margin: 50px auto;" id="api-diff">
+    <div class="ui two column divided grid">
+        <div class="stretched row">
+            <div class="column eight wide">
+                <div class="ui segment">
+                    <div class="left"></div>
+                </div>
+            </div>
+            <div class="column eight wide">
+                <div class="ui segment">
+                    <div class="right"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/semantic-ui/2.1.4/semantic.min.js"></script>
 <script src="../jquery/plugin/json-diff-plugin.js"></script>
 <script>
     $(function () {
         $.jsonDiff({
-            left: {"as": "as"},
-            right: {"as": "as", "rsd": ["as", "asa", "as"], "adad": {"asa": "assa", "as": "dad"}},
-            leftTarget: $('#left'),
-            rightTarget: $('#right')
+            left: {
+                "0x7a43": "285124",
+                "Avatar": "http://i2.dpfile.com/u/20110802/1_23857_b.jpg",
+                "BadgeCount": "6",
+                "BindingAccounts": "null",
+                "CheckInCount": "52",
+                "CityID": "1",
+                "CouponCount": "1049",
+                "DCashCount": "213442",
+                "Email": "",
+                "FansCount": "1",
+                "FavoCount": "5",
+                "FeedFlag": "0",
+                "Gender": "2",
+                "GrouponFavoCount": "0",
+                "GrouponIsLocked": "false",
+                "GrouponPhone": "",
+                "HoneyCount": "0",
+                "IsFans": "false",
+                "IsHoney": "false",
+                "IsInvited": "false",
+                "Level": "11",
+                "LotteryDealCount": "0",
+                "MayorCount": "0",
+                "MovieTicketCount": "0",
+                "NeedSetAvatar": "false",
+                "NeedSetName": "false",
+                "NewToken": "",
+                "NickName": "asdfdsfs",
+                "PaymentResult": "0",
+                "PhoneNo": "",
+                "PhotoCount": "0",
+                "ReviewCount": "0",
+                "Score": "170",
+                "SnsImportedFlags": "0",
+                "SnsNickName": "",
+                "Time": "2015/11/19 13:31:57",
+                "Token": "",
+                "TuanBalance": "",
+                "UserGrade": {
+                    "Desc": "Lv7",
+                    "Image": "http://www.dpfile.com/gp/cms/1446531768066.png",
+                    "Level": "7",
+                    "Url": "dianping://web?url=http%3A%2F%2Fm.dianping.com%2Fmember%2F1"
+                },
+                "UserID": "1",
+                "UserLevel": {
+                    "Pic": "",
+                    "Pow": "-999",
+                    "Title": "成为VIP 享特权",
+                    "Url": "dianping://complexweb?url=http%3A%2F%2Fm.51ping.com%2Fmobile%2Fvipindex%3Ftoken%3D*%26cityid%3D*"
+                },
+                "UserPower": "60"
+            },
+            right: {
+                "0x7a43": "3434",
+                "Avatar": "http://i2.dpfile.com/u/20110802/1_23857_b.jpg",
+                "BadgeCount": "6",
+                "BindingAccounts": "null",
+                "CheckInCount": "52",
+                "CityID": "1",
+                "CouponCount": "3434",
+                "DCashCount": "213442",
+                "Email": "",
+                "FansCount": "1",
+                "FavoCount": "5",
+                "FeedFlag": "0",
+                "Gender": "2",
+                "GrouponFavoCount": "0",
+                "GrouponIsLocked": "false",
+                "GrouponPhone": "",
+                "HoneyCount": "0",
+                "IsFans": "false",
+                "IsHoney": "false",
+                "IsInvited": "false",
+                "Level": "11",
+                "LotteryDealCount": "0",
+                "MayorCount": "0",
+                "MovieTicketCount": "0",
+                "NeedSetAvatar": "false",
+                "NeedSetName": "false",
+                "NewToken": "",
+                "NickName": "asdfdsfs",
+                "PaymentResult": "0",
+                "PhoneNo": "",
+                "PhotoCount": "0",
+                "ReviewCount": "0",
+                "Score": "170",
+                "SnsImportedFlags": "0",
+                "SnsNickName": "",
+                "Time": "2015/11/19 13:31:57",
+                "Token": "",
+                "TuanBalance": "",
+                "UserGrade": {
+                    "Desc": "Lv7",
+                    "Image": "http://www.dpfile.com/gp/cms/1446531768066.png",
+                    "Level": "7",
+                    "Url": "dianping://web?url=http%3A%2F%2Fm.dianping.com%2Fmember%2F1"
+                },
+                "UserID": "1",
+                "UserLevel": {
+                    "Pic": "232",
+                    "Pow": "-999",
+                    "Title": "成为VIP 享特权",
+                    "Url": "dianping://complexweb?url=http%3A%2F%2Fm.51ping.com%2Fmobile%2Fvipindex%3Ftoken%3D*%26cityid%3D*"
+                },
+                "UserPower": "60"
+            },
+            leftTarget: $('.left'),
+            rightTarget: $('.right')
         });
     });
 </script>
 </body>
 </html>
-
