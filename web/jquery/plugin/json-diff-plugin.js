@@ -78,8 +78,17 @@
         } else if (this.isObject(value)) {
             return '{ ' + this.getPropertyCount(value) + ' }';
         } else {
-            return value;
+            if (value == null) {
+                return 'null';
+            } else if (value == '') {
+                return '""';
+            } else if (this.isNumber(value) || this.isBoolean(value)) {
+                return value;
+            } else if (this.isString(value)) {
+                return '"' + value + '"';
+            }
         }
+        return value;
     };
 
     JSONDiff.buildNodeId = function(level, index, parentNode) {
