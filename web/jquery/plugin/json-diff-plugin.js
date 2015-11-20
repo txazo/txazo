@@ -222,8 +222,9 @@
             }
         }
 
-        if (!isSame && that.isJson(right)) {
-            //rightNode.find('.parent').addClass('diff');
+        if (!isSame) {
+            leftNode.prev().addClass('diff');
+            rightNode.prev().addClass('diff');
         }
 
         return isSame;
@@ -234,24 +235,64 @@
         this.options.rightTarget.find('.parent').css('width', this.options.rightTarget[0].scrollWidth);
     };
 
+    JSONDiff.nodeHover = function (node) {
+        if (node.hasClass('left')) {
+            node.addClass('left-hover');
+        } else if (node.hasClass('right')) {
+            node.addClass('right-hover');
+        } else if (node.hasClass('diff')) {
+            node.addClass('diff-hover');
+        } else {
+            node.addClass('hover');
+        }
+    };
+
+    JSONDiff.nodeHoverOut = function (node) {
+        if (node.hasClass('left-hover')) {
+            node.removeClass('left-hover');
+        } else if (node.hasClass('right-hover')) {
+            node.removeClass('right-hover');
+        } else if (node.hasClass('diff-hover')) {
+            node.removeClass('diff-hover');
+        } else {
+            node.removeClass('hover');
+        }
+    };
+
     JSONDiff.initEvent = function (leftTarget, rightTarget) {
         var that = this;
         leftTarget.scroll(function () {
             rightTarget.scrollLeft(leftTarget.scrollLeft());
         }).on('click', '.parent', function () {
-            if ($(this).next().children().length < 10) {
+            var childs = $(this).next().children().length;
+            if (childs > 10) {
+                rightTarget.find('.child[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
+                that.adaptiveWidth();
+            } else if (childs > 0) {
                 rightTarget.find('.child[nid="' + $(this).next().slideToggle().attr('nid') + '"]').slideToggle(function () {
                     that.adaptiveWidth();
                 });
-            } else {
-                rightTarget.find('.child[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
-                that.adaptiveWidth();
             }
         }).on('mouseover', '.parent', function () {
-            rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev().addClass('hover');
+            if ($(this).next().children().length > 0) {
+                $(this).css('cursor', 'pointer');
+            }
+            that.nodeHover($(this));
+            that.nodeHover(rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev());
         }).on('mouseout', '.parent', function () {
-            rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev().removeClass('hover');
+            that.nodeHoverOut($(this));
+            that.nodeHoverOut(rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev());
         });
+    };
+
+    JSONDiff.fold = function () {
+        this.options.leftTarget.find('.child').hide();
+        this.options.rightTarget.find('.child').hide();
+    };
+
+    JSONDiff.foldOut = function () {
+        this.options.leftTarget.find('.child').show();
+        this.options.rightTarget.find('.child').show();
     };
 
     JSONDiff.diff = function (options) {
