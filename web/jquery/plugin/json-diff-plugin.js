@@ -126,7 +126,7 @@
     JSONDiff.buildEmptyNode = function (level, index, parentNode) {
         var node = $(this.nodeTemplate);
         node.find('.key').css('margin-left', 80 * (level - 1) + 'px');
-        node.find('.parent').addClass('empty').css('padding', '18px 15px');
+        node.find('.parent').addClass('empty').css('padding', '20.5px 15px');
         parentNode.append(node);
         return node.find('.child').attr('nid', this.buildNodeId(level, parentNode.children().length, parentNode));
     };
