@@ -174,20 +174,20 @@
                 isSame = (that.getPropertyCount(left) == that.getPropertyCount(right));
                 var samePropertys = that.getSamePropertys(left, right);
                 isSame = isSame && (that.getPropertyCount(left) == samePropertys.length);
-                var i = 0;
+                var m = 0;
                 $.each(left, function (k, v) {
                     if (that.isInArray(k, samePropertys)) {
-                        isSame = that.compare(level + 1, i++, k, v, leftNode, right[k], rightNode) && isSame;
+                        isSame = that.compare(level + 1, m++, k, v, leftNode, right[k], rightNode) && isSame;
                     }
                 });
                 $.each(left, function (k, v) {
                     if (!that.isInArray(k, samePropertys)) {
-                        that.buildNodeWithChild(level + 1, i++, k, v, leftNode, rightNode);
+                        that.buildNodeWithChild(level + 1, m++, k, v, leftNode, rightNode);
                     }
                 });
                 $.each(right, function (k, v) {
                     if (!that.isInArray(k, samePropertys)) {
-                        that.buildNodeWithChild(level + 1, i++, k, v, rightNode, leftNode);
+                        that.buildNodeWithChild(level + 1, m++, k, v, rightNode, leftNode);
                     }
                 });
             } else {
