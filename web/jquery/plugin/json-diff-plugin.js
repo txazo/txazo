@@ -1,4 +1,17 @@
 (function ($) {
+    var DiffType = {
+        SAME: {},
+        DIFF: {
+            key: 'diff'
+        },
+        LEFT: {
+            key: 'left'
+        },
+        RIGHT: {
+            key: 'right'
+        }
+    };
+
     var JSONDiff = {
         options: {
             left: {},
@@ -96,12 +109,15 @@
         return (pnid ? pnid + '-' : '') + level + '-' + index;
     };
 
-    JSONDiff.buildNode = function (level, index, key, value, parentNode) {
+    JSONDiff.buildNode = function (level, index, key, value, parentNode, diffType) {
         var node = $(this.nodeTemplate);
         node.find('.key').html(key).css('margin-left', 80 * (level - 1) + 'px');
         node.find('.value').html(this.buildNodeValue(value));
         if (this.isJson(value)) {
             node.find('.value').css('color', '#A333C8').css('font-weight', 'bold');
+        }
+        if (diffType && diffType != DiffType.SAME) {
+            node.find('.parent').addClass(diffType.key);
         }
         parentNode.append(node);
         return node.find('.child').attr('nid', this.buildNodeId(level, index, parentNode));
@@ -115,22 +131,22 @@
         return node.find('.child').attr('nid', this.buildNodeId(level, index, parentNode));
     };
 
-    JSONDiff.buildNodeWithChild = function (level, index, key, value, parentNode, otherParentNode) {
-        var node = this.buildNode(level, index, key, value, parentNode);
+    JSONDiff.buildNodeWithChild = function (level, index, key, value, parentNode, otherParentNode, diffType) {
+        var node = this.buildNode(level, index, key, value, parentNode, diffType);
         var otherNode = this.buildEmptyNode(level, index, otherParentNode);
-        this.buildChildNode(level + 1, value, node, otherNode);
+        this.buildChildNode(level + 1, value, node, otherNode, diffType);
     };
 
-    JSONDiff.buildChildNode = function (level, value, parentNode, otherParentNode) {
+    JSONDiff.buildChildNode = function (level, value, parentNode, otherParentNode, diffType) {
         var that = this;
         if (that.isArray(value)) {
             for (var i = 0; i < value.length; i++) {
-                that.buildNodeWithChild(level, i, i, value[i], parentNode, otherParentNode);
+                that.buildNodeWithChild(level, i, i, value[i], parentNode, otherParentNode, diffType);
             }
         } else if (that.isObject(value)) {
             var j = 0;
             $.each(value, function (k, v) {
-                that.buildNodeWithChild(level, j++, k, v, parentNode, otherParentNode);
+                that.buildNodeWithChild(level, j++, k, v, parentNode, otherParentNode, diffType);
             });
         }
     };
@@ -157,10 +173,10 @@
                     isSame = that.compare(level + 1, i, i, left[i], leftNode, right[i], rightNode) && isSame;
                 }
                 for (var j = minLength; j < left.length; j++) {
-                    that.buildNodeWithChild(level + 1, j, j, left[j], leftNode, rightNode);
+                    that.buildNodeWithChild(level + 1, j, j, left[j], leftNode, rightNode, DiffType.LEFT);
                 }
                 for (var k = minLength; k < right.length; k++) {
-                    that.buildNodeWithChild(level + 1, left.length + k, k, right[k], rightNode, leftNode);
+                    that.buildNodeWithChild(level + 1, left.length + k, k, right[k], rightNode, leftNode, DiffType.RIGHT);
                 }
             } else {
                 that.buildChildNode(level + 1, left, leftNode, rightNode);
@@ -182,12 +198,12 @@
                 });
                 $.each(left, function (k, v) {
                     if (!that.isInArray(k, samePropertys)) {
-                        that.buildNodeWithChild(level + 1, m++, k, v, leftNode, rightNode);
+                        that.buildNodeWithChild(level + 1, m++, k, v, leftNode, rightNode, DiffType.LEFT);
                     }
                 });
                 $.each(right, function (k, v) {
                     if (!that.isInArray(k, samePropertys)) {
-                        that.buildNodeWithChild(level + 1, m++, k, v, rightNode, leftNode);
+                        that.buildNodeWithChild(level + 1, m++, k, v, rightNode, leftNode, DiffType.RIGHT);
                     }
                 });
             } else {
@@ -207,7 +223,7 @@
         }
 
         if (!isSame && that.isJson(right)) {
-            rightNode.find('.parent').addClass('diff');
+            //rightNode.find('.parent').addClass('diff');
         }
 
         return isSame;
