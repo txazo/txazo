@@ -223,12 +223,18 @@
         leftTarget.scroll(function () {
             rightTarget.scrollLeft(leftTarget.scrollLeft());
         }).on('click', '.parent', function () {
-            rightTarget.find('.child[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
-            that.adaptiveWidth();
+            if ($(this).next().children().length < 10) {
+                rightTarget.find('.child[nid="' + $(this).next().slideToggle().attr('nid') + '"]').slideToggle(function () {
+                    that.adaptiveWidth();
+                });
+            } else {
+                rightTarget.find('.child[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
+                that.adaptiveWidth();
+            }
         }).on('mouseover', '.parent', function () {
-            rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev().css('background-color', '#DDDDDD');
-        }).on('mouseleave', '.parent', function () {
-            rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev().css('background-color', '#EEEEEE');
+            rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev().addClass('hover');
+        }).on('mouseout', '.parent', function () {
+            rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev().removeClass('hover');
         });
     };
 
