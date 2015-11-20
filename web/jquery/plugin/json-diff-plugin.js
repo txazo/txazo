@@ -100,6 +100,9 @@
         var node = $(this.nodeTemplate);
         node.find('.key').html(key).css('margin-left', 80 * (level - 1) + 'px');
         node.find('.value').html(this.buildNodeValue(value));
+        if (this.isJson(value)) {
+            node.find('.value').css('color', '#A333C8').css('font-weight', 'bold');
+        }
         parentNode.append(node);
         return node.find('.child').attr('nid', this.buildNodeId(level, index, parentNode));
     };
