@@ -120,7 +120,7 @@
             node.find('.parent').addClass(diffType.key);
         }
         parentNode.append(node);
-        return node.find('.child').attr('nid', this.buildNodeId(level, index, parentNode));
+        return node.find('.child').attr('nid', this.buildNodeId(level, parentNode.children().length, parentNode));
     };
 
     JSONDiff.buildEmptyNode = function (level, index, parentNode) {
@@ -128,7 +128,7 @@
         node.find('.key').css('margin-left', 80 * (level - 1) + 'px');
         node.find('.parent').addClass('empty').css('padding', '18px 15px');
         parentNode.append(node);
-        return node.find('.child').attr('nid', this.buildNodeId(level, index, parentNode));
+        return node.find('.child').attr('nid', this.buildNodeId(level, parentNode.children().length, parentNode));
     };
 
     JSONDiff.buildNodeWithChild = function (level, index, key, value, parentNode, otherParentNode, diffType) {
@@ -179,9 +179,9 @@
                     that.buildNodeWithChild(level + 1, left.length + k, k, right[k], rightNode, leftNode, DiffType.RIGHT);
                 }
             } else {
-                that.buildChildNode(level + 1, left, leftNode, rightNode);
+                that.buildChildNode(level + 1, left, leftNode, rightNode, DiffType.LEFT);
                 if (that.isObject(right)) {
-                    that.buildChildNode(level + 1, right, rightNode, leftNode);
+                    that.buildChildNode(level + 1, right, rightNode, leftNode, DiffType.RIGHT);
                 }
                 isSame = false;
             }
@@ -207,9 +207,9 @@
                     }
                 });
             } else {
-                that.buildChildNode(level + 1, left, leftNode, rightNode);
+                that.buildChildNode(level + 1, left, leftNode, rightNode, DiffType.LEFT);
                 if (that.isArray(right)) {
-                    that.buildChildNode(level + 1, right, rightNode, leftNode);
+                    that.buildChildNode(level + 1, right, rightNode, leftNode, DiffType.RIGHT);
                 }
                 isSame = false;
             }
@@ -217,7 +217,7 @@
             if (!that.isJson(right)) {
                 isSame = that.compareValue(left, right);
             } else {
-                that.buildChildNode(right, rightNode);
+                that.buildChildNode(level + 1, right, rightNode, leftNode, DiffType.RIGHT);
                 isSame = false;
             }
         }
@@ -259,19 +259,25 @@
         }
     };
 
+    JSONDiff.hasChildNode = function (node) {
+        return node.find('.node').length > node.find('.empty').length;
+    };
+
     JSONDiff.initEvent = function (leftTarget, rightTarget) {
         var that = this;
         leftTarget.scroll(function () {
             rightTarget.scrollLeft(leftTarget.scrollLeft());
         }).on('click', '.parent', function () {
-            var childs = $(this).next().children().length;
-            if (childs > 10) {
-                rightTarget.find('.child[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
-                that.adaptiveWidth();
-            } else if (childs > 0) {
-                rightTarget.find('.child[nid="' + $(this).next().slideToggle().attr('nid') + '"]').slideToggle(function () {
+            if (that.hasChildNode($(this).next())) {
+                var childs = $(this).next().children().length;
+                if (childs > 10) {
+                    rightTarget.find('.child[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
                     that.adaptiveWidth();
-                });
+                } else if (childs > 0) {
+                    rightTarget.find('.child[nid="' + $(this).next().slideToggle().attr('nid') + '"]').slideToggle(function () {
+                        that.adaptiveWidth();
+                    });
+                }
             }
         }).on('mouseover', '.parent', function () {
             if ($(this).next().children().length > 0) {
