@@ -91,9 +91,9 @@
         return value;
     };
 
-    JSONDiff.buildNodeId = function(level, index, parentNode) {
+    JSONDiff.buildNodeId = function (level, index, parentNode) {
         var pnid = parentNode.attr('nid');
-        return (pnid ? pnid + '-' : '') +  level + '-' + index;
+        return (pnid ? pnid + '-' : '') + level + '-' + index;
     };
 
     JSONDiff.buildNode = function (level, index, key, value, parentNode) {
@@ -225,9 +225,9 @@
         }).on('click', '.parent', function () {
             rightTarget.find('.child[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
             that.adaptiveWidth();
-        }).on('mouseover', '.parent', function() {
+        }).on('mouseover', '.parent', function () {
             rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev().css('background-color', '#DDDDDD');
-        }).on('mouseleave', '.parent', function() {
+        }).on('mouseleave', '.parent', function () {
             rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev().css('background-color', '#EEEEEE');
         });
     };
