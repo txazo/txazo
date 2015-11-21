@@ -1,0 +1,78 @@
+.jtitle {
+    margin: 0;
+    padding: 15px 20px;
+    border: 1px solid #CCCCCC;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-width: 0;
+    background: #E9E9E9;
+}
+
+.jleft, .jright {
+    white-space: nowrap;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #CCCCCC;
+    border-top-width: 0;
+    background: #F9F9F9;
+    font-family: Menlo, 'Courier New', Consolas, Monaco, 'Andale Mono', monospace;
+}
+
+.jleft {
+    border-bottom-left-radius: 4px;
+}
+
+.jright {
+    border-left-width: 0;
+    border-bottom-right-radius: 4px;
+}
+
+.jparent {
+    float: left;
+    padding: 10px 15px;
+    font-size: 14px;
+    line-height: 1.5em;
+    border-radius: 0;
+    border: 0 solid #CCCCCC;
+    border-top-width: 1px;
+}
+
+.jparent .jkey {
+    float: left;
+    width: 240px;
+    color: #FF695E;
+}
+
+.jparent .jvalue {
+    color: #2ECC40;
+}
+
+.jparent.jleft {
+    background-color: #DFF0D8;
+}
+
+.jparent.jright {
+    background-color: #DFF0D8;
+}
+
+.jparent.jdiff {
+    background-color: #F2DEDE;
+}
+
+.jparent.jleft-hover {
+    background-color: #B1D0A6;
+}
+
+.jparent.jright-hover {
+    background-color: #B1D0A6;
+}
+
+.jparent.jdiff-hover {
+    background-color: #CFACAE;
+}
+
+.jparent.jhover {
+    background-color: #EEEEEE;
+    border-color: #CCCCCC;
+}
