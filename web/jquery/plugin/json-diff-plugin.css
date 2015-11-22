@@ -1,4 +1,4 @@
-.title {
+.jtitle {
     margin: 0;
     padding: 15px 20px;
     border: 1px solid #CCCCCC;
@@ -8,7 +8,7 @@
     background: #E9E9E9;
 }
 
-.left, .right {
+.jleft, .jright {
     white-space: nowrap;
     overflow-y: scroll;
     margin: 0;
@@ -19,16 +19,16 @@
     font-family: Menlo, 'Courier New', Consolas, Monaco, 'Andale Mono', monospace;
 }
 
-.left {
+.jleft {
     border-bottom-left-radius: 4px;
 }
 
-.right {
+.jright {
     border-left-width: 0;
     border-bottom-right-radius: 4px;
 }
 
-.parent {
+.jparent {
     float: left;
     padding: 10px 15px;
     font-size: 14px;
@@ -38,41 +38,41 @@
     border-top-width: 1px;
 }
 
-.parent .key {
+.jparent .jkey {
     float: left;
     width: 240px;
     color: #FF695E;
 }
 
-.parent .value {
+.jparent .jvalue {
     color: #2ECC40;
 }
 
-.parent.left {
+.jparent.jleft {
     background-color: #DFF0D8;
 }
 
-.parent.right {
+.jparent.jright {
     background-color: #DFF0D8;
 }
 
-.parent.diff {
+.jparent.jdiff {
     background-color: #F2DEDE;
 }
 
-.parent.left-hover {
+.jparent.jleft-hover {
     background-color: #B1D0A6;
 }
 
-.parent.right-hover {
+.jparent.jright-hover {
     background-color: #B1D0A6;
 }
 
-.parent.diff-hover {
+.jparent.jdiff-hover {
     background-color: #CFACAE;
 }
 
-.parent.hover {
+.jparent.jhover {
     background-color: #EEEEEE;
     border-color: #CCCCCC;
 }

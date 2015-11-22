@@ -2,13 +2,13 @@
     var DiffType = {
         SAME: {},
         DIFF: {
-            key: 'diff'
+            key: 'jdiff'
         },
         LEFT: {
-            key: 'left'
+            key: 'jleft'
         },
         RIGHT: {
-            key: 'right'
+            key: 'jright'
         }
     };
 
@@ -17,10 +17,12 @@
             left: {},
             right: {},
             leftTarget: {},
-            rightTarget: {}
+            rightTarget: {},
+            defaultLevel: 0
         },
+        initTarget: false,
         defaultKey: '',
-        nodeTemplate: '<div class="node"><div class="parent"><div class="key"></div><div class="value"></div></div><div class="child" style="display: none;"></div></div>'
+        nodeTemplate: '<div class="jnode"><div class="jparent"><div class="jkey"></div><div class="jvalue"></div></div><div class="jchild" style="display: none;"></div></div>'
     };
 
     JSONDiff.isTypeOf = function (value, type) {
@@ -111,24 +113,30 @@
 
     JSONDiff.buildNode = function (level, index, key, value, parentNode, diffType) {
         var node = $(this.nodeTemplate);
-        node.find('.key').html(key).css('margin-left', 80 * (level - 1) + 'px');
-        node.find('.value').html(this.buildNodeValue(value));
+        node.find('.jkey').html(key).css('margin-left', 80 * (level - 1) + 'px');
+        node.find('.jvalue').html(this.buildNodeValue(value));
         if (this.isJson(value)) {
-            node.find('.value').css('color', '#A333C8').css('font-weight', 'bold');
+            node.find('.jvalue').css('color', '#A333C8').css('font-weight', 'bold');
         }
         if (diffType && diffType != DiffType.SAME) {
-            node.find('.parent').addClass(diffType.key);
+            node.find('.jparent').addClass(diffType.key);
+        }
+        if (level <= this.options.defaultLevel) {
+            node.find('.jchild').show();
         }
         parentNode.append(node);
-        return node.find('.child').attr('nid', this.buildNodeId(level, parentNode.children().length, parentNode));
+        return node.find('.jchild').attr('nid', this.buildNodeId(level, parentNode.children().length, parentNode));
     };
 
     JSONDiff.buildEmptyNode = function (level, index, parentNode) {
         var node = $(this.nodeTemplate);
-        node.find('.key').css('margin-left', 80 * (level - 1) + 'px');
-        node.find('.parent').addClass('empty').css('padding', '20.5px 15px');
+        node.find('.jkey').css('margin-left', 80 * (level - 1) + 'px');
+        node.find('.jparent').addClass('empty').css('padding', '20.5px 15px');
+        if (level <= this.options.defaultLevel) {
+            node.find('.jchild').show();
+        }
         parentNode.append(node);
-        return node.find('.child').attr('nid', this.buildNodeId(level, parentNode.children().length, parentNode));
+        return node.find('.jchild').attr('nid', this.buildNodeId(level, parentNode.children().length, parentNode));
     };
 
     JSONDiff.buildNodeWithChild = function (level, index, key, value, parentNode, otherParentNode, diffType) {
@@ -223,95 +231,108 @@
         }
 
         if (!isSame) {
-            leftNode.prev().addClass('diff');
-            rightNode.prev().addClass('diff');
+            leftNode.prev().addClass('jdiff');
+            rightNode.prev().addClass('jdiff');
         }
 
         return isSame;
     };
 
     JSONDiff.adaptiveWidth = function () {
-        this.options.leftTarget.find('.parent').css('width', this.options.leftTarget[0].scrollWidth);
-        this.options.rightTarget.find('.parent').css('width', this.options.rightTarget[0].scrollWidth);
+        this.options.leftTarget.find('.jparent').css('width', this.options.leftTarget[0].scrollWidth);
+        this.options.rightTarget.find('.jparent').css('width', this.options.rightTarget[0].scrollWidth);
     };
 
     JSONDiff.nodeHover = function (node) {
-        if (node.hasClass('left')) {
-            node.addClass('left-hover');
-        } else if (node.hasClass('right')) {
-            node.addClass('right-hover');
-        } else if (node.hasClass('diff')) {
-            node.addClass('diff-hover');
+        if (node.hasClass('jleft')) {
+            node.addClass('jleft-hover');
+        } else if (node.hasClass('jright')) {
+            node.addClass('jright-hover');
+        } else if (node.hasClass('jdiff')) {
+            node.addClass('jdiff-hover');
         } else {
-            node.addClass('hover');
+            node.addClass('jhover');
         }
     };
 
     JSONDiff.nodeHoverOut = function (node) {
-        if (node.hasClass('left-hover')) {
-            node.removeClass('left-hover');
-        } else if (node.hasClass('right-hover')) {
-            node.removeClass('right-hover');
-        } else if (node.hasClass('diff-hover')) {
-            node.removeClass('diff-hover');
+        if (node.hasClass('jleft-hover')) {
+            node.removeClass('jleft-hover');
+        } else if (node.hasClass('jright-hover')) {
+            node.removeClass('jright-hover');
+        } else if (node.hasClass('jdiff-hover')) {
+            node.removeClass('jdiff-hover');
         } else {
-            node.removeClass('hover');
+            node.removeClass('jhover');
         }
     };
 
     JSONDiff.hasChildNode = function (node) {
-        return node.find('.node').length > node.find('.empty').length;
+        return node.find('.jnode').length > node.find('.empty').length;
     };
 
     JSONDiff.initEvent = function (leftTarget, rightTarget) {
         var that = this;
         leftTarget.scroll(function () {
             rightTarget.scrollLeft(leftTarget.scrollLeft());
-        }).on('click', '.parent', function () {
+        }).on('click', '.jparent', function () {
             if (that.hasChildNode($(this).next())) {
                 var childs = $(this).next().children().length;
                 if (childs > 10) {
-                    rightTarget.find('.child[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
+                    rightTarget.find('.jchild[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
                     that.adaptiveWidth();
                 } else if (childs > 0) {
-                    rightTarget.find('.child[nid="' + $(this).next().slideToggle().attr('nid') + '"]').slideToggle(function () {
-                        that.adaptiveWidth();
-                    });
+                    rightTarget.find('.jchild[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
+                    that.adaptiveWidth();
                 }
             }
-        }).on('mouseover', '.parent', function () {
+        }).on('mouseover', '.jparent', function () {
             if ($(this).next().children().length > 0) {
                 $(this).css('cursor', 'pointer');
             }
             that.nodeHover($(this));
-            that.nodeHover(rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev());
-        }).on('mouseout', '.parent', function () {
+            that.nodeHover(rightTarget.find('.jchild[nid="' + $(this).next().attr('nid') + '"]').prev());
+        }).on('mouseout', '.jparent', function () {
             that.nodeHoverOut($(this));
-            that.nodeHoverOut(rightTarget.find('.child[nid="' + $(this).next().attr('nid') + '"]').prev());
+            that.nodeHoverOut(rightTarget.find('.jchild[nid="' + $(this).next().attr('nid') + '"]').prev());
         });
     };
 
     JSONDiff.fold = function () {
-        this.options.leftTarget.find('.child').hide();
-        this.options.rightTarget.find('.child').hide();
+        this.options.leftTarget.find('.jchild').hide();
+        this.options.rightTarget.find('.jchild').hide();
     };
 
     JSONDiff.foldOut = function () {
-        this.options.leftTarget.find('.child').show();
-        this.options.rightTarget.find('.child').show();
+        this.options.leftTarget.find('.jchild').show();
+        this.options.rightTarget.find('.jchild').show();
+    };
+
+    JSONDiff.init = function (options) {
+        if (this.initTarget) {
+            options.leftTarget = this.options.leftTarget;
+            options.rightTarget = this.options.rightTarget;
+            this.options = $.extend({}, this.options, options);
+        } else {
+            this.initTarget = true;
+            this.options = $.extend({}, this.options, options);
+            this.initEvent(this.options.leftTarget, this.options.rightTarget);
+            this.initEvent(this.options.rightTarget, this.options.leftTarget);
+        }
+        this.options.leftTarget.html('');
+        this.options.rightTarget.html('');
     };
 
     JSONDiff.diff = function (options) {
-        this.options = $.extend({}, this.options, options);
-        this.compare(0, 0, this.defaultKey, this.options.left, this.options.leftTarget, this.options.right, this.options.rightTarget);
+        this.init(options);
+        this.compare(0, 0, this.defaultKey, options.left, this.options.leftTarget, options.right, this.options.rightTarget);
         this.adaptiveWidth();
-        this.initEvent(this.options.leftTarget, this.options.rightTarget);
-        this.initEvent(this.options.rightTarget, this.options.leftTarget);
     };
 
     $.extend({
-        jsonDiff: function (options) {
+        jsonDiff: function (options, callback) {
             JSONDiff.diff(options);
+            callback && callback();
         }
     });
 })(jQuery);
