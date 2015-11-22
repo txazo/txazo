@@ -1,15 +1,9 @@
 (function ($) {
     var DiffType = {
         SAME: {},
-        DIFF: {
-            key: 'jdiff'
-        },
-        LEFT: {
-            key: 'jleft'
-        },
-        RIGHT: {
-            key: 'jright'
-        }
+        DIFF: {key: 'jdiff'},
+        LEFT: {key: 'jleft'},
+        RIGHT: {key: 'jright'}
     };
 
     var JSONDiff = {
@@ -18,7 +12,8 @@
             right: {},
             leftTarget: {},
             rightTarget: {},
-            defaultLevel: 0
+            defaultLevel: 0,
+            keyMarginLeft: 80,
         },
         initTarget: false,
         defaultKey: '',
@@ -49,19 +44,19 @@
         return this.isTypeOf(value, '[object Boolean]');
     };
 
-    JSONDiff.isJson = function (value) {
-        return this.isArray(value) || this.isObject(value);
-    };
-
     JSONDiff.isUndefined = function (value) {
         return typeof(value) == undefined;
     };
 
-    JSONDiff.getPropertyCount = function (value) {
+    JSONDiff.isJson = function (value) {
+        return this.isArray(value) || this.isObject(value);
+    };
+
+    JSONDiff.getObjectPropertyCount = function (value) {
         return this.isObject(value) ? Object.getOwnPropertyNames(value).length : 0;
     };
 
-    JSONDiff.getSamePropertys = function (left, right) {
+    JSONDiff.getSameObjectPropertys = function (left, right) {
         var propertys = [];
         if (this.isObject(left) && this.isObject(right)) {
             $.each(left, function (k, v) {
@@ -91,17 +86,15 @@
         if (this.isArray(value)) {
             return '[ ' + value.length + ' ]';
         } else if (this.isObject(value)) {
-            return '{ ' + this.getPropertyCount(value) + ' }';
-        } else {
-            if (value == null) {
-                return 'null';
-            } else if (value == '') {
-                return '""';
-            } else if (this.isNumber(value) || this.isBoolean(value)) {
-                return value;
-            } else if (this.isString(value)) {
-                return '"' + value + '"';
-            }
+            return '{ ' + this.getObjectPropertyCount(value) + ' }';
+        } else if (value == null) {
+            return 'null';
+        } else if (value == '') {
+            return '""';
+        } else if (this.isString(value)) {
+            return '"' + value + '"';
+        } else if (this.isNumber(value) || this.isBoolean(value)) {
+            return value;
         }
         return value;
     };
@@ -113,7 +106,7 @@
 
     JSONDiff.buildNode = function (level, index, key, value, parentNode, diffType) {
         var node = $(this.nodeTemplate);
-        node.find('.jkey').html(key).css('margin-left', 80 * (level - 1) + 'px');
+        node.find('.jkey').html(key).css('margin-left', this.options.keyMarginLeft * (level - 1) + 'px');
         node.find('.jvalue').html(this.buildNodeValue(value));
         if (this.isJson(value)) {
             node.find('.jvalue').css('color', '#A333C8').css('font-weight', 'bold');
@@ -130,7 +123,7 @@
 
     JSONDiff.buildEmptyNode = function (level, index, parentNode) {
         var node = $(this.nodeTemplate);
-        node.find('.jkey').css('margin-left', 80 * (level - 1) + 'px');
+        node.find('.jkey').css('margin-left', this.options.keyMarginLeft * (level - 1) + 'px');
         node.find('.jparent').addClass('empty').css('padding', '20.5px 15px');
         if (level <= this.options.defaultLevel) {
             node.find('.jchild').show();
@@ -195,9 +188,9 @@
             }
         } else if (that.isObject(left)) {
             if (that.isObject(right)) {
-                isSame = (that.getPropertyCount(left) == that.getPropertyCount(right));
-                var samePropertys = that.getSamePropertys(left, right);
-                isSame = isSame && (that.getPropertyCount(left) == samePropertys.length);
+                isSame = (that.getObjectPropertyCount(left) == that.getObjectPropertyCount(right));
+                var samePropertys = that.getSameObjectPropertys(left, right);
+                isSame = isSame && (that.getObjectPropertyCount(left) == samePropertys.length);
                 var m = 0;
                 $.each(left, function (k, v) {
                     if (that.isInArray(k, samePropertys)) {
@@ -277,14 +270,8 @@
             rightTarget.scrollLeft(leftTarget.scrollLeft());
         }).on('click', '.jparent', function () {
             if (that.hasChildNode($(this).next())) {
-                var childs = $(this).next().children().length;
-                if (childs > 10) {
-                    rightTarget.find('.jchild[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
-                    that.adaptiveWidth();
-                } else if (childs > 0) {
-                    rightTarget.find('.jchild[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
-                    that.adaptiveWidth();
-                }
+                rightTarget.find('.jchild[nid="' + $(this).next().toggle().attr('nid') + '"]').toggle();
+                that.adaptiveWidth();
             }
         }).on('mouseover', '.jparent', function () {
             if ($(this).next().children().length > 0) {
