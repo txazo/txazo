@@ -13,7 +13,7 @@
             leftTarget: {},
             rightTarget: {},
             defaultLevel: 0,
-            keyMarginLeft: 80,
+            keyMarginLeft: 80
         },
         initTarget: false,
         defaultKey: '',
@@ -288,23 +288,31 @@
     JSONDiff.fold = function () {
         this.options.leftTarget.find('.jchild').hide();
         this.options.rightTarget.find('.jchild').hide();
+        this.adaptiveWidth();
     };
 
     JSONDiff.foldOut = function () {
         this.options.leftTarget.find('.jchild').show();
         this.options.rightTarget.find('.jchild').show();
+        this.adaptiveWidth();
     };
 
     JSONDiff.init = function (options) {
-        if (this.initTarget) {
-            options.leftTarget = this.options.leftTarget;
-            options.rightTarget = this.options.rightTarget;
-            this.options = $.extend({}, this.options, options);
+        var that = this;
+        if (that.initTarget) {
+            options.leftTarget = that.options.leftTarget;
+            options.rightTarget = that.options.rightTarget;
+            that.options = $.extend({}, that.options, options);
         } else {
-            this.initTarget = true;
-            this.options = $.extend({}, this.options, options);
-            this.initEvent(this.options.leftTarget, this.options.rightTarget);
-            this.initEvent(this.options.rightTarget, this.options.leftTarget);
+            that.initTarget = true;
+            that.options = $.extend({}, that.options, options);
+            that.initEvent(that.options.leftTarget, that.options.rightTarget);
+            that.initEvent(that.options.rightTarget, that.options.leftTarget);
+            $('.jcontrol').on('click', '.jfold', function () {
+                that.fold();
+            }).on('click', '.junfold', function () {
+                that.foldOut();
+            });
         }
         this.options.leftTarget.html('');
         this.options.rightTarget.html('');

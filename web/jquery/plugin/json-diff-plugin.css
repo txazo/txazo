@@ -1,4 +1,4 @@
-.jtitle {
+.jhead {
     margin: 0;
     padding: 15px 20px;
     border: 1px solid #CCCCCC;
@@ -6,6 +6,53 @@
     border-top-right-radius: 4px;
     border-bottom-width: 0;
     background: #E9E9E9;
+}
+
+.jhead .jtitle {
+    float: left;
+}
+
+.jhead .jcontrol {
+    float: right;
+    margin-right: 20px;
+}
+
+.jhead .jcontrol a {
+    margin-right: 15px;
+}
+
+.jhead .jcontrol a:hover {
+    text-decoration: underline;
+    color: #FF695E;
+}
+
+.jhead .jexplain {
+    float: right;
+    margin-right: 20px;
+}
+
+.jhead .jexplain span {
+    float: right;
+    margin-right: 10px;
+}
+
+.jhead .jexplain .jdiff, .jhead .jexplain .jrund, .jhead .jexplain .jsame {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.jhead .jexplain .jdiff {
+    background: #B1D0A6;
+}
+
+.jhead .jexplain .jrund {
+    background: #CFACAE;
+}
+
+.jhead .jexplain .jsame {
+    background: #F9F9F9;
 }
 
 .jleft, .jright {
