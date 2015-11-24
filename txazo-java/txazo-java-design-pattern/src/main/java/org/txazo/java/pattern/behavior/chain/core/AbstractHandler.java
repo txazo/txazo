@@ -1,7 +1,7 @@
 package org.txazo.java.pattern.behavior.chain.core;
 
 /**
- * AbstractHandler
+ * 职责链模式－链表实现
  *
  * @author txazo
  * @email txazo1218@163.com

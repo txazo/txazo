@@ -22,3 +22,11 @@ TLAB(Thread Local Allocation Buffer)
 [gc算法]
 年轻代
 年老代
+
+[JVM内存模型]
+1. 程序计数器
+2. Java虚拟机栈
+3. 本地方法栈
+4. Java堆
+5. 方法区
+6. 运行时常量池
