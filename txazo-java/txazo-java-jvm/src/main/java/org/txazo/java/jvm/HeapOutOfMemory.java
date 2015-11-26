@@ -13,11 +13,11 @@ import java.util.List;
 public class HeapOutOfMemory {
 
     /**
-     * VM Args: -server -Xmx20M -Xms20M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintCommandLineFlags
+     * VM Args: -server -verbose:gc -Xms20M -Xmx20M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintCommandLineFlags
      */
     public static void main(String[] args) {
         List<byte[]> bytes = new ArrayList<byte[]>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 100; i++) {
             bytes.add(new byte[1024 * 1024]);
         }
     }
