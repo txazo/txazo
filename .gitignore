@@ -6,7 +6,7 @@
 *.iml
 
 # Java
-*.classes
+*.class
 
 # Maven
 target/
