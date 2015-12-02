@@ -28,6 +28,10 @@
 -Xmx256M -Xms256M
 -XX:InitialHeapSize=256M -XX:MaxHeapSize=256M
 
+[VM Metaspace Size] (JDK8)
+-XX:MetaspaceSize
+-XX:MaxMetaspaceSize=32M
+
 [HeapDump On OutOfMemory]
 -XX:+HeapDumpOnOutOfMemoryError
 -XX:HeapDumpPath=<path>

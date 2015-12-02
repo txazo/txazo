@@ -102,4 +102,31 @@ public class UnsafeTest {
 
     }
 
+    @Test
+    public void testAllocateInstance() throws Exception {
+        Instance i1 = new Instance();
+        Assert.assertEquals(1, i1.getA());
+
+        Instance i2 = Instance.class.newInstance();
+        Assert.assertEquals(1, i2.getA());
+
+        // 给对象实例分配内存, 但跳过对象初始化阶段(跳过构造器)
+        Instance i3 = (Instance) UnsafeHolder.unsafe.allocateInstance(Instance.class);
+        Assert.assertEquals(0, i3.getA());
+    }
+
+    private static class Instance {
+
+        private int a;
+
+        public Instance() {
+            a = 1;
+        }
+
+        public int getA() {
+            return a;
+        }
+
+    }
+
 }
