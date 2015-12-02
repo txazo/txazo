@@ -9,6 +9,9 @@ package org.txazo.java.jvm;
  */
 public class JVMArgs {
 
+    /**
+     * VM Args: -server -XX:+PrintFlagsInitial -XX:+PrintFlagsFinal
+     */
     public static void main(String[] args) {
         System.out.println("jvm args");
     }

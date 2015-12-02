@@ -1,19 +1,16 @@
-package org.txazo.java.jvm;
+package org.txazo.java.jvm.outofmemory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * HeapOutOfMemory
- *
- * @author txazo
- * @email txazo1218@163.com
- * @since 25.06.2015
- */
-public class HeapOutOfMemory {
+public class HeapOutOfMemoryError {
 
     /**
+     * 堆内存溢出
+     *
      * VM Args: -server -verbose:gc -Xms20M -Xmx20M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintCommandLineFlags
+     *
+     * java.lang.OutOfMemoryError: Java heap space
      */
     public static void main(String[] args) {
         List<byte[]> bytes = new ArrayList<byte[]>();

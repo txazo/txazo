@@ -28,9 +28,24 @@
 -Xmx256M -Xms256M
 -XX:InitialHeapSize=256M -XX:MaxHeapSize=256M
 
+[Set Young Generation Size]
+-Xmn128M
+-XX:NewRatio=3 (Old Gen / Young Gen = 3)
+-XX:SurvivorRatio=8 (Eden / From Survivor = 8)
+
+[Set Thread Stack Size]
+-Xss256K
+
+[Set Perm Size] (<= JDK7)
+-XX:PermSize=128M
+-XX:MaxPermSize=256M
+
 [VM Metaspace Size] (JDK8)
 -XX:MetaspaceSize
 -XX:MaxMetaspaceSize=32M
+
+[GC]
+-XX:MaxTenuringThreshold=20
 
 [HeapDump On OutOfMemory]
 -XX:+HeapDumpOnOutOfMemoryError
@@ -39,17 +54,9 @@
 [When OutOfMemory Execute]
 -XX:OnOutOfMemoryError="sh ~/notify.sh"
 
-[Set Perm Size]
--XX:PermSize=128M -XX:MaxPermSize=256M
-
 [Set Code Cache Size]
 -XX:InitialCodeCacheSize=128M -XX:ReservedCodeCacheSize=256M
 -XX:+UseCodeCacheFlushing
-
-[Set Young Generation Size]
--XX:NewSize=64M -XX:MaxNewSize=128M
--XX:NewRatio=3
--XX:SurvivorRatio=8
 
 [Disable System.gc()]
 -XX:+DisableExplicitGC
@@ -70,3 +77,5 @@
 [Set Inline Threshold]
 -XX:MaxInlineSize=100
 ‑XX:FreqInlineSize=100000
+
+[GC]
