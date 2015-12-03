@@ -21,6 +21,7 @@ http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136373.html
     接口类型
     数组类型
 
+
 ----------**********< 运行时数据区 >**********----------
 1. 程序计数器(线程)
 2. Java虚拟机栈(线程) - 栈帧(局部变量、)
@@ -43,6 +44,7 @@ http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136373.html
     StackOverflowError
     OutOfMemoryError
 
+
 ----------**********< 栈帧(方法) >**********----------
 动态链接、方法返回值、异常调度
 1. 局部变量(表): 大小在编译时写入到方法代码中
@@ -62,16 +64,17 @@ http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136373.html
 4. 方法调用正常返回
 5. 方法调用异常返回
 
-----------**********< 对象表示 >**********----------
-----------**********< 浮点运算 >**********----------
 
 ----------**********< 特殊方法 >**********----------
 1. <init>
 2. <clinit>
 
+
 ----------**********< 异常 >**********----------
 
+
 ----------**********< 指令集 >**********----------
+
 
 ----------**********< 类库 >**********----------
 1. 反射: java.lang.reflect、Class
@@ -81,8 +84,14 @@ http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136373.html
 5. 多线程: Thread
 6. 弱引用: java.lang.ref
 
-----------**********< Java虚拟机反编译 >**********----------
 
+----------**********< Java虚拟机编译 >**********----------
+1. javap
+   javap -v
+2. 虚拟机指令: <index> <opcode> [ <operand1> [ <operand2>... ]] [<comment>]
+   说明: 指令索引 虚拟机指令 操作数 注释
+   #n 常量池索引n
+   eg: 8   bipush 100     // Push int constant 100
 
 ----------**********< 加载、链接、初始化 >**********----------
 
