@@ -1,5 +1,7 @@
 package org.txazo.classfile.analysis.core;
 
+import org.txazo.classfile.analysis.util.ByteUtils;
+
 import java.nio.ByteBuffer;
 
 public class ClassReader {
@@ -13,16 +15,30 @@ public class ClassReader {
         byteBuffer = ByteBuffer.wrap(bytes);
     }
 
-    public byte read() {
+    public byte readByte() {
         return byteBuffer.get();
+    }
+
+    public byte[] readByte(int n) {
+        byte[] bytes = new byte[n];
+        byteBuffer.get(bytes);
+        return bytes;
+    }
+
+    public String readHex() {
+        return ByteUtils.byteToHex(readByte());
+    }
+
+    public String readHex(int n) {
+        return ByteUtils.byteToHex(readByte(n));
+    }
+
+    public int readInt() {
+        return byteBuffer.getInt();
     }
 
     public short readShort() {
         return byteBuffer.getShort();
-    }
-
-    public long readInt() {
-        return byteBuffer.getInt();
     }
 
 }

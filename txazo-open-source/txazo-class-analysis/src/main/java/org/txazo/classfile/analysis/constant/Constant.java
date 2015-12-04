@@ -2,7 +2,7 @@ package org.txazo.classfile.analysis.constant;
 
 public final class Constant {
 
-    public static final int magic = 0xCAFEBABE;
+    public static final String MAGIC = "0xCAFEBABE";
 
     public enum Access_Flags {
 
