@@ -1,6 +1,6 @@
 package org.txazo.classfile.analysis;
 
-import org.txazo.classfile.analysis.buffer.ByteBufferWrapper;
+import org.txazo.classfile.analysis.core.ClassReader;
 import org.txazo.classfile.analysis.core.MagicResolver;
 import org.txazo.classfile.analysis.core.ResolverHandler;
 
@@ -13,7 +13,7 @@ public class ClassAnalysis {
     // ...
 
     public void analysis(byte[] bytes) {
-        ByteBufferWrapper bufferWrapper = new ByteBufferWrapper(bytes);
+        ClassReader bufferWrapper = new ClassReader(bytes);
 
         ResolverHandler handler = new ResolverHandler();
         handler.addResolver(new MagicResolver());

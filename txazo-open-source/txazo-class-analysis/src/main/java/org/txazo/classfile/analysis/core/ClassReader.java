@@ -1,12 +1,12 @@
-package org.txazo.classfile.analysis.buffer;
+package org.txazo.classfile.analysis.core;
 
 import java.nio.ByteBuffer;
 
-public class ByteBufferWrapper {
+public class ClassReader {
 
     private ByteBuffer byteBuffer;
 
-    public ByteBufferWrapper(byte[] bytes) {
+    public ClassReader(byte[] bytes) {
         if (bytes == null) {
             throw new IllegalArgumentException("bytes can not be null");
         }

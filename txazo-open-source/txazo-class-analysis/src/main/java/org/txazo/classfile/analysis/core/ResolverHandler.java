@@ -1,18 +1,24 @@
 package org.txazo.classfile.analysis.core;
 
-import org.txazo.classfile.analysis.buffer.ByteBufferWrapper;
+import org.txazo.classfile.analysis.bean.ClassStruct;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResolverHandler {
 
-    private Resolver next;
+    private List<Resolver> resolves = new ArrayList<Resolver>();
 
-    public void addResolver(AbstractResolver resolver) {
-        resolver.setNext(next);
-        next = resolver;
+    public void addResolver(Resolver resolver) {
+        resolves.add(resolver);
     }
 
-    public void doResolve(ByteBufferWrapper bufferWrapper) {
-        next.resolve(bufferWrapper);
+    public List<ClassStruct> handleResolver(ClassReader reader) {
+        List<ClassStruct> classStructs = new ArrayList<ClassStruct>();
+        for (Resolver resolver : resolves) {
+            classStructs.add(resolver.resolve(reader));
+        }
+        return classStructs;
     }
 
 }

@@ -1,14 +1,18 @@
 package org.txazo.classfile.analysis.core;
 
-import org.txazo.classfile.analysis.buffer.ByteBufferWrapper;
+import org.txazo.classfile.analysis.bean.ClassStruct;
 
-import java.util.Map;
-
-public class MagicResolver extends AbstractResolver {
+public class MagicResolver implements Resolver {
 
     @Override
-    public Map<String, Object> resolve(ByteBufferWrapper bufferWrapper, Map<String, Object> treeMap) {
-        return null;
+    public ClassStruct resolve(ClassReader reader) {
+        return new Magic();
+    }
+
+    private static class Magic extends ClassStruct {
+
+        private static final String magic = "0xCAFEBABE";
+
     }
 
 }
