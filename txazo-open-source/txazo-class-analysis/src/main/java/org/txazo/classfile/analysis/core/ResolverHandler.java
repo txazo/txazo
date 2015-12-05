@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ResolverHandler {
 
+    private ClassContext classContext = new DefaultClassContext();
     private List<Resolver> resolves = new ArrayList<Resolver>();
 
     public void addResolver(Resolver resolver) {
@@ -16,7 +17,7 @@ public class ResolverHandler {
     public List<ClassStruct> handleResolver(ClassReader classReader) {
         List<ClassStruct> classStructs = new ArrayList<ClassStruct>();
         for (Resolver resolver : resolves) {
-            classStructs.add(resolver.resolve(classReader));
+            classStructs.add(resolver.resolve(classReader, classContext));
         }
         return classStructs;
     }

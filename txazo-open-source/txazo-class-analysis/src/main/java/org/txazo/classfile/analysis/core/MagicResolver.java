@@ -6,21 +6,17 @@ import org.txazo.classfile.analysis.constant.Constant;
 public class MagicResolver implements Resolver {
 
     @Override
-    public ClassStruct resolve(ClassReader reader) {
-        String magic = reader.readHex(4);
+    public ClassStruct resolve(ClassReader classReader, ClassContext classContext) {
+        String magic = classReader.readHex(4);
         if (!Constant.MAGIC.equalsIgnoreCase(magic)) {
-            throw new RuntimeException("The file is not class format");
+            throw new RuntimeException("This file is not class format");
         }
-        return new Magic(magic);
+        return new Magic();
     }
 
     private static class Magic extends ClassStruct {
 
-        private String magic;
-
-        public Magic(String magic) {
-            this.magic = magic;
-        }
+        private String magic = Constant.MAGIC;
 
         public String getMagic() {
             return magic;

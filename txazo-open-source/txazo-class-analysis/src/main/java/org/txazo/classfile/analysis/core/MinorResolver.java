@@ -5,8 +5,8 @@ import org.txazo.classfile.analysis.bean.ClassStruct;
 public class MinorResolver implements Resolver {
 
     @Override
-    public ClassStruct resolve(ClassReader reader) {
-        return new Version(reader.readShort());
+    public ClassStruct resolve(ClassReader classReader, ClassContext classContext) {
+        return new Version(classReader.readShort());
     }
 
     private static class Version extends ClassStruct {

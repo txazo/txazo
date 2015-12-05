@@ -4,6 +4,6 @@ import org.txazo.classfile.analysis.bean.ClassStruct;
 
 public interface Resolver {
 
-    public ClassStruct resolve(ClassReader reader);
+    public ClassStruct resolve(ClassReader classReader, ClassContext classContext);
 
 }
