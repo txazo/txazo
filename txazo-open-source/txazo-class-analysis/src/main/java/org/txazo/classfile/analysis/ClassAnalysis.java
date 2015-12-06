@@ -18,14 +18,15 @@ public class ClassAnalysis {
     // ...
 
     public void analysis(byte[] bytes) {
-        ClassReader classReader = new ClassReader(bytes);
+        ClassReader reader = new ClassReader(bytes);
 
         ResolverHandler handler = new ResolverHandler();
         handler.addResolver(new MagicResolver());
         handler.addResolver(new MinorResolver());
         handler.addResolver(new MajorResolver());
         handler.addResolver(new ConstantPoolCountResolver());
-        List<ClassStruct> classTree = handler.handleResolver(classReader);
+        handler.addResolver(new ConstantPoolResolver());
+        List<ClassStruct> classTree = handler.handleResolver(reader);
         System.out.println(JSON.toJSONString(classTree));
     }
 

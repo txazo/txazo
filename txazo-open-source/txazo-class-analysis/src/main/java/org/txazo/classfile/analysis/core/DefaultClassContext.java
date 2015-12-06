@@ -2,15 +2,15 @@ package org.txazo.classfile.analysis.core;
 
 public class DefaultClassContext implements ClassContext {
 
-    private int constantPoolCount;
+    private short constantPoolCount;
 
     @Override
-    public int getConstantPoolCount() {
+    public short getConstantPoolCount() {
         return this.constantPoolCount;
     }
 
     @Override
-    public void setConstantPoolCount(int constantPoolCount) {
+    public void setConstantPoolCount(short constantPoolCount) {
         this.constantPoolCount = constantPoolCount;
     }
 

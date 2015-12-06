@@ -6,22 +6,22 @@ import java.nio.ByteBuffer;
 
 public class ClassReader {
 
-    private ByteBuffer byteBuffer;
+    private ByteBuffer buffer;
 
     public ClassReader(byte[] bytes) {
         if (bytes == null) {
             throw new IllegalArgumentException("bytes can not be null");
         }
-        byteBuffer = ByteBuffer.wrap(bytes);
+        buffer = ByteBuffer.wrap(bytes);
     }
 
     public byte readByte() {
-        return byteBuffer.get();
+        return buffer.get();
     }
 
     public byte[] readByte(int n) {
         byte[] bytes = new byte[n];
-        byteBuffer.get(bytes);
+        buffer.get(bytes);
         return bytes;
     }
 
@@ -33,12 +33,24 @@ public class ClassReader {
         return ByteUtils.byteToHex(readByte(n));
     }
 
-    public int readInt() {
-        return byteBuffer.getInt();
+    public short readShort() {
+        return buffer.getShort();
     }
 
-    public short readShort() {
-        return byteBuffer.getShort();
+    public int readInt() {
+        return buffer.getInt();
+    }
+
+    public long readLong() {
+        return buffer.getLong();
+    }
+
+    public float readFloat() {
+        return buffer.getFloat();
+    }
+
+    public double readDouble() {
+        return buffer.getDouble();
     }
 
 }

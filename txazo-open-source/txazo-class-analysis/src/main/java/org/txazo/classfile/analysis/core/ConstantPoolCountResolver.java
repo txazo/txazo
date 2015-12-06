@@ -5,9 +5,9 @@ import org.txazo.classfile.analysis.bean.ClassStruct;
 public class ConstantPoolCountResolver implements Resolver {
 
     @Override
-    public ClassStruct resolve(ClassReader classReader, ClassContext classContext) {
-        short constantPoolCount = classReader.readShort();
-        classContext.setConstantPoolCount(constantPoolCount);
+    public ClassStruct resolve(ClassReader reader, ClassContext context) {
+        short constantPoolCount = reader.readShort();
+        context.setConstantPoolCount(constantPoolCount);
         return new ConstantPoolCount(constantPoolCount);
     }
 

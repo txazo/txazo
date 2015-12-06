@@ -4,7 +4,7 @@ public final class Constant {
 
     public static final String MAGIC = "0xCAFEBABE";
 
-    public enum Access_Flags {
+    public enum AccessFlags {
 
         ACC_PUBLIC(0x0001),
         ACC_FINAL(0x0010),
@@ -17,29 +17,10 @@ public final class Constant {
 
         private int hex;
 
-        Access_Flags(int hex) {
+        AccessFlags(int hex) {
             this.hex = hex;
         }
 
-    }
-
-    public static void main(String[] args) {
-        System.out.println((long) 0xCAFEBABE);
-        System.out.println(Long.parseLong("CAFEBABE", 16));
-
-        System.out.println(Long.parseLong("FF", 16));
-        System.out.println(Long.parseLong("FFFF", 16));
-        System.out.println(Long.parseLong("FFFFFFFF", 16));
-
-        System.out.println((long) 0xFF);
-        System.out.println((long) 0xFFFF);
-
-        System.out.println((long) 0xFFFFFFFE);
-        System.out.println((long) 0xEFFFFFFF);
-
-        System.out.println(Integer.parseInt("FF", 16));
-        System.out.println(Integer.parseInt("FFFF", 16));
-        System.out.println(Long.parseLong("FFFFFFFF", 16));
     }
 
 }
