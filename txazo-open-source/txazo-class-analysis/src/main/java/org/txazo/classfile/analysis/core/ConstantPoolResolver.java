@@ -46,6 +46,7 @@ public class ConstantPoolResolver implements Resolver {
             }
             constantPools.add(info);
         }
+        context.setConstantPool(constantPools);
         return new ConstantPool(constantPools);
     }
 

@@ -5,19 +5,12 @@ import org.txazo.classfile.analysis.bean.ClassStruct;
 import org.txazo.classfile.analysis.core.*;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 public class ClassAnalysis {
 
-    // 顺序流
-
-    // 先解析魔数
-    // 然后解析版本号
-    // ...
-
-    public void analysis(byte[] bytes) {
+    public void analysis(byte[] bytes) throws Exception {
         ClassReader reader = new ClassReader(bytes);
 
         ResolverHandler handler = new ResolverHandler();
@@ -26,11 +19,17 @@ public class ClassAnalysis {
         handler.addResolver(new MajorResolver());
         handler.addResolver(new ConstantPoolCountResolver());
         handler.addResolver(new ConstantPoolResolver());
+        handler.addResolver(new AccessFlagsResolver());
+        handler.addResolver(new ThisClassResolver());
+        handler.addResolver(new SuperClassResolver());
+        handler.addResolver(new InterfacesCountResolver());
+        handler.addResolver(new InterfacesResolver());
+        handler.addResolver(new FieldsCountResolver());
         List<ClassStruct> classTree = handler.handleResolver(reader);
         System.out.println(JSON.toJSONString(classTree));
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         ClassAnalysis analysis = new ClassAnalysis();
         InputStream input = ClassAnalysis.class.getResourceAsStream("/Test.class");
         byte[] temp = new byte[1028];

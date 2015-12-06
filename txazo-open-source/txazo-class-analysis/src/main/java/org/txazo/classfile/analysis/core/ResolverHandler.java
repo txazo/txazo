@@ -14,7 +14,7 @@ public class ResolverHandler {
         resolves.add(resolver);
     }
 
-    public List<ClassStruct> handleResolver(ClassReader classReader) {
+    public List<ClassStruct> handleResolver(ClassReader classReader) throws Exception {
         List<ClassStruct> classStructs = new ArrayList<ClassStruct>();
         for (Resolver resolver : resolves) {
             classStructs.add(resolver.resolve(classReader, context));
