@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<class>
+
+    <itemtype type="u1.hex"/>
+    <itemtype type="u2.short"/>
+    <itemtype type="u4.int"/>
+    <itemtype type="u4.float"/>
+    <itemtype type="u8.long"/>
+    <itemtype type="u8.double"/>
+
+    <!-- magic -->
+    <item name="magic" type="u4.hex" format="hex" value="0xCAFEBABE" valueType="fix"/>
+
+    <!-- minor_version -->
+    <item name="minor_version" type="u2.short"/>
+
+    <!-- major_version -->
+    <item name="major_version" type="u2.short"/>
+
+    <!-- constant_pool_count -->
+    <item name="constant_pool_count" type="u2.short"/>
+
+    <!-- constant_pool -->
+    <array name="constant_pool" length="${constant_pool_count} - 1">
+        <item name="tag" type="u1" format="int"/>
+        <select value="${tag}">
+            <option value="1">
+                <item name="length" type="u2.short"/>
+                <item name="bytes" type="u2" length="${length}" format="string"/>
+            </option>
+        </select>
+    </array>
+
+    <!-- access_flags -->
+    <item name="access_flags" type="u2.short"/>
+
+    <!-- this_class -->
+    <item name="this_class" type="u2" format="string" value="constant_pool[constant_pool[this].name_index].value"/>
+
+    <!-- super_class -->
+    <item name="super_class" type="u2" format="string" value="constant_pool[constant_pool[this].name_index].value"/>
+
+    <!-- interfaces_count -->
+    <item name="interfaces_count" type="u2" format="short"/>
+
+    <array name="interfaces" length="${interfaces_count}">
+        <item name="interface" type="u2" format="string" value="constant_pool[constant_pool[this].name_index].value"/>
+    </array>
+
+</class>
