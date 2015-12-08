@@ -10,23 +10,27 @@
     <itemtype type="u8.double"/>
 
     <!-- magic -->
-    <item name="magic" type="u4.hex" format="hex" value="0xCAFEBABE" valueType="fix"/>
+    <item name="magic" type="u4" format="hex" fixed="0xCAFEBABE"/>
 
     <!-- minor_version -->
-    <item name="minor_version" type="u2.short"/>
+    <item name="minor_version" type="u2" format="short"/>
 
     <!-- major_version -->
-    <item name="major_version" type="u2.short"/>
+    <item name="major_version" type="u2" format="short"/>
 
     <!-- constant_pool_count -->
-    <item name="constant_pool_count" type="u2.short"/>
+    <item name="constant_pool_count" type="u2" format="short"/>
 
     <!-- constant_pool -->
     <array name="constant_pool" length="${constant_pool_count} - 1">
         <item name="tag" type="u1" format="int"/>
         <select value="${tag}">
             <option value="1">
-                <item name="length" type="u2.short"/>
+                <item name="length" type="u2" format="short"/>
+                <item name="bytes" type="u2" length="${length}" format="string"/>
+            </option>
+            <option value="2">
+                <item name="length" type="u2" format="short"/>
                 <item name="bytes" type="u2" length="${length}" format="string"/>
             </option>
         </select>
