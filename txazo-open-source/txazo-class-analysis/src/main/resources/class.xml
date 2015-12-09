@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<class>
-
-    <itemtype type="u1.hex"/>
-    <itemtype type="u2.short"/>
-    <itemtype type="u4.int"/>
-    <itemtype type="u4.float"/>
-    <itemtype type="u8.long"/>
-    <itemtype type="u8.double"/>
+<class name="ClassFile">
 
     <!-- magic -->
     <item name="magic" type="u4" format="hex" fixed="0xCAFEBABE"/>
@@ -19,37 +12,119 @@
     <item name="major_version" type="u2" format="short"/>
 
     <!-- constant_pool_count -->
-    <item name="constant_pool_count" type="u2" format="short"/>
+    <item id="constant_pool_count" name="constant_pool_count" type="u2" format="short"/>
 
     <!-- constant_pool -->
-    <array name="constant_pool" length="${constant_pool_count} - 1">
-        <item name="tag" type="u1" format="int"/>
-        <select value="${tag}">
+    <array id="constant_pool" name="constant_pool" length="${constant_pool_count}">
+        <item id="constant_pool_tag" name="tag" type="u1" format="int"/>
+        <select selected="${constant_pool_tag}">
             <option value="1">
-                <item name="length" type="u2" format="short"/>
-                <item name="bytes" type="u2" length="${length}" format="string"/>
+                <item id="length" name="length" type="u2" format="short"/>
+                <item name="bytes" type="u1" length="${length}" format="string"/>
             </option>
-            <option value="2">
-                <item name="length" type="u2" format="short"/>
-                <item name="bytes" type="u2" length="${length}" format="string"/>
+            <option value="3">
+                <item name="bytes" type="u4" format="int"/>
+            </option>
+            <option value="4">
+                <item name="bytes" type="u4" format="float"/>
+            </option>
+            <option value="5">
+                <item name="bytes" type="u8" format="long"/>
+            </option>
+            <option value="6">
+                <item name="bytes" type="u8" format="double"/>
+            </option>
+            <option value="7">
+                <item name="name_index" type="u2" format="short"/>
+            </option>
+            <option value="8">
+                <item name="string_index" type="u2" format="short"/>
+            </option>
+            <option value="9">
+                <item name="class_index" type="u2" format="short"/>
+                <item name="name_and_type_index" type="u2" format="short"/>
+            </option>
+            <option value="10">
+                <item name="class_index" type="u2" format="short"/>
+                <item name="name_and_type_index" type="u2" format="short"/>
+            </option>
+            <option value="11">
+                <item name="class_index" type="u2" format="short"/>
+                <item name="name_and_type_index" type="u2" format="short"/>
+            </option>
+            <option value="12">
+                <item name="name_index" type="u2" format="short"/>
+                <item name="descriptor_index" type="u2" format="short"/>
+            </option>
+            <option value="15">
+                <item name="reference_kind" type="u1" format="byte"/>
+                <item name="reference_index" type="u2" format="short"/>
+            </option>
+            <option value="16">
+                <item name="descriptor_index" type="u2" format="short"/>
+            </option>
+            <option value="18">
+                <item name="bootstrap_method_attr_index" type="u2" format="short"/>
+                <item name="name_and_type_index" type="u2" format="short"/>
             </option>
         </select>
     </array>
 
     <!-- access_flags -->
-    <item name="access_flags" type="u2.short"/>
+    <item name="access_flags" type="u2" format="short">
+        <and>
+            <one name="ACC_PUBLIC" value="0x0001" output="public"/>
+            <one name="ACC_FINAL" value="0x0010" output="final"/>
+            <one name="ACC_SUPER" value="0x0020"/>
+            <one name="ACC_INTERFACE" value="0x0200" output="interface"/>
+            <one name="ACC_ABSTRACT" value="0x0400" output="abstract"/>
+            <one name="ACC_SYNTHETIC" value="0x1000"/>
+            <one name="ACC_ANNOTATION" value="0x2000" output="@interface"/>
+            <one name="ACC_ENUM" value="0x4000" output="enum"/>
+        </and>
+    </item>
 
     <!-- this_class -->
-    <item name="this_class" type="u2" format="string" value="constant_pool[constant_pool[this].name_index].value"/>
+    <item name="this_class" type="u2" format="string"
+          value="${constant_pool[${constant_pool[${this}].name_index}].bytes}"/>
 
     <!-- super_class -->
-    <item name="super_class" type="u2" format="string" value="constant_pool[constant_pool[this].name_index].value"/>
+    <item name="super_class" type="u2" format="string"
+          value="${constant_pool[${constant_pool[${this}].name_index}].bytes}"/>
 
     <!-- interfaces_count -->
-    <item name="interfaces_count" type="u2" format="short"/>
+    <item id="interfaces_count" name="interfaces_count" type="u2" format="short"/>
 
+    <!-- interfaces -->
     <array name="interfaces" length="${interfaces_count}">
-        <item name="interface" type="u2" format="string" value="constant_pool[constant_pool[this].name_index].value"/>
+        <item name="interface" type="u2" format="string"
+              value="${constant_pool[${constant_pool[${this}].name_index}].bytes}"/>
+    </array>
+
+    <!-- fields_count -->
+    <item id="fields_count" name="fields_count" type="u2" format="short"/>
+
+    <!-- fields -->
+    <array name="fields" length="${fields_count}">
+        <item name="access_flags" type="u2" format="short">
+            <and>
+                <one name="ACC_PUBLIC" value="0x0001" output="public"/>
+                <one name="ACC_PRIVATE" value="0x0002" output="private"/>
+                <one name="ACC_PROTECTED" value="0x0004" output="protected"/>
+                <one name="ACC_STATIC" value="0x0008" output="static"/>
+                <one name="ACC_FINAL" value="0x0010" output="final"/>
+                <one name="ACC_VOLATILE" value="0x0040" output="volatile"/>
+                <one name="ACC_TRANSIENT" value="0x0080" output="transient"/>
+                <one name="ACC_SYNTHETIC" value="0x1000"/>
+                <one name="ACC_ENUM" value="0x4000" output="enum"/>
+            </and>
+        </item>
+        <item name="name_index" type="u2" format="short"/>
+        <item name="descriptor_index" type="u2" format="short"/>
+        <item id="attributes_count" name="attributes_count" type="u2" format="short"/>
+        <array name="attributes" length="${attributes_count}">
+
+        </array>
     </array>
 
 </class>

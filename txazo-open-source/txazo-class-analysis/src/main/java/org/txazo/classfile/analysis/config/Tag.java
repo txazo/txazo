@@ -4,21 +4,21 @@ import java.util.*;
 
 public class Tag {
 
-    public static final String ROOT_TAG_NAME = "class";
-    private static final Set<String> PARENT_TAG_NAME_SET = new HashSet<String>(Arrays.asList(new String[]{"array", "select", "option"}));
+    public static final String ROOT_TAG = "class";
+    private static final Set<String> PARENT_TAG_SET = new HashSet<String>(Arrays.asList(new String[]{"array", "select", "option"}));
 
-    private String name;
+    private String tag;
 
     private Map<String, String> attributes = new HashMap<String, String>();
 
     private List<Tag> childs = new ArrayList<Tag>();
 
-    public Tag(String name) {
-        this.name = name;
+    public Tag(String tag) {
+        this.tag = tag;
     }
 
-    public Tag(String name, Map<String, String> attributes) {
-        this.name = name;
+    public Tag(String tag, Map<String, String> attributes) {
+        this.tag = tag;
         this.attributes = attributes;
     }
 
@@ -27,19 +27,31 @@ public class Tag {
     }
 
     public boolean isRoot() {
-        return ROOT_TAG_NAME.endsWith(name);
+        return ROOT_TAG.equals(tag);
     }
 
     public boolean isParent() {
-        return PARENT_TAG_NAME_SET.contains(name);
+        return PARENT_TAG_SET.contains(tag);
+    }
+
+    public String getId() {
+        return getAttribute("id", String.class);
     }
 
     public String getName() {
-        return name;
+        return getAttribute("name", String.class);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public <T> T getAttribute(String key, Class<T> clazz) {
+        return (T) attributes.get(key);
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public Map<String, String> getAttributes() {

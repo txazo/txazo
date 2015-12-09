@@ -114,8 +114,12 @@ ClassFile {
 ----------**********< 加载、链接、初始化 >**********----------
 
 
+----------**********< Java虚拟机指令集 >**********----------
 
 
+----------**********< add >**********----------
+1. Java HotSpot Client VM(java -client)
+   Java HotSpot Server VM(java -server)
 
 
 

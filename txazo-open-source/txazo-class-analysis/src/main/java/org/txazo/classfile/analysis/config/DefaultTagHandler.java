@@ -15,7 +15,7 @@ public class DefaultTagHandler extends TagHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        if (Tag.ROOT_TAG_NAME.equals(qName)) {
+        if (Tag.ROOT_TAG.equals(qName)) {
             root = new Tag(qName);
             parentTagStack.push(root);
         } else {
