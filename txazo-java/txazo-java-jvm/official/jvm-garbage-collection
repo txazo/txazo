@@ -9,3 +9,76 @@
 
 -XX:MaxGCPauseMillis=500
 -XX:GCTimeRatio=20
+
+----------**********< 垃圾收集算法 >**********----------
+1. 标记清除算法
+2. 复制算法
+3. 标记整理算法
+4. 分代收集算法(新生代－复制算法, 老年代－标记整理算法)
+
+
+young generation(minor GC)
+    eden space
+    survivor from space
+    survivor to space
+tenured generation(major GC/Full GC)
+
+并行垃圾收集器
+吞吐量垃圾收集器
+
+----------**********< 垃圾收集的性能指标 >**********----------
+1. 吞吐量(程序运行的百分比)
+2. 垃圾收集停顿时间
+3. 垃圾收集频率
+
+-verbose:gc
+-XX:+PrintGCDetails
+-XX:+PrintGCTimeStamps
+
+-Xmx4G
+-Xms4G
+-XX:MinHeapFreeRatio=40
+-XX:MaxHeapFreeRatio=70
+-XX:NewRatio=3(default)
+-XX:NewSize=1G
+-XX:MaxNewSize=1G
+-XX:SurvivorRatio=8(default)
+-XX:PrintTenuringDistribution
+-XX:+PrintFlagsFinal
+
+----------**********< 垃圾收集器 >**********----------
+1. 串行收集器
+    -XX:+UseSerialGC
+2. 并行收集器(吞吐量收集器)
+    -XX:+UseParallelGC
+3. 并发收集器
+    -XX:+UseG1GC(G1)
+    -XX:+UseConcMarkSweepGC(CMS)
+
+----------**********< 垃圾收集器选择 >**********----------
+1. －Xmx < 100M, -XX:+UseSerialGC
+2. 单CPU, -XX:+UseSerialGC
+3. 吞吐量优先, -XX:+UseParallelGC
+4. 响应时间优先, -XX:+UseG1GC或-XX:+UseConcMarkSweepGC
+
+----------**********< 并行垃圾收集器 >**********----------
+1. -XX:+UseParallelGC
+   minor gc: 并行
+   minor gc: 并行
+2. -XX:ParallelGCThreads=8
+3. -XX:MaxGCPauseMillis=1000
+4. -XX:GCTimeRatio=99(default)
+5. 目标
+    1) 最大停顿时间
+    2) 吞吐量
+    3) 最小化内存占用
+
+----------**********< 并发垃圾收集器 >**********----------
+1. G1、CMS
+2. 低停顿时间高吞吐量
+
+----------**********< 类元数据(Class Metadata) >**********----------
+1. 本机内存(JDK 8)
+   －XX:MaxMetaspaceSize=128M
+2. metadata
+       chunk - ClassLoader

@@ -2,6 +2,11 @@ http://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/
 http://docs.oracle.com/javase/specs/jvms/se8/html/index.html
 http://docs.oracle.com/javase/8/docs/technotes/guides/vm/index.html
 http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136373.html
+http://docs.oracle.com/javase/8/
+
+http://docs.oracle.com/javase/8/docs/technotes/guides/management/index.html
+http://docs.oracle.com/javase/8/docs/technotes/guides/management/jconsole.html
+http://docs.oracle.com/javase/8/docs/technotes/tools/index.html
 
 ----------**********< 类文件结构 >**********----------
 ClassFile {
