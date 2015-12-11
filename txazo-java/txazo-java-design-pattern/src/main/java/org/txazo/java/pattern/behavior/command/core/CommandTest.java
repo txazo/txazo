@@ -17,10 +17,15 @@ public class CommandTest {
         Command onCommand = new OnCommand(tv);
         Command offCommand = new OffCommand(tv);
         Command channelCommand = new ChannelCommand(tv);
-        Control control = new Control(onCommand, offCommand, channelCommand);
+        MacroCommand autoCommand = new AutoMacroCommand();
+        autoCommand.addCommand(onCommand);
+        autoCommand.addCommand(channelCommand);
+        autoCommand.addCommand(offCommand);
+        Control control = new Control(onCommand, offCommand, channelCommand, autoCommand);
         control.turnOn();
         control.changeChannel();
         control.turnOff();
+        control.auto();
     }
 
 }

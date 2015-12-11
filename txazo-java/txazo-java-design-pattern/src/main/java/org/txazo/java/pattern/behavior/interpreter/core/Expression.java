@@ -1,7 +1,7 @@
 package org.txazo.java.pattern.behavior.interpreter.core;
 
 /**
- * Expression
+ * 抽象表达式
  *
  * @author txazo
  * @email txazo1218@163.com

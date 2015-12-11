@@ -1,7 +1,7 @@
 package org.txazo.java.pattern.behavior.interpreter.core;
 
 /**
- * MinusExpression
+ * 非终结符表达式
  *
  * @author txazo
  * @email txazo1218@163.com
