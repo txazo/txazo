@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chart</title>
+</head>
+<body>
+
+<div style="margin: 100px auto; width: 800px;">
+    <canvas id="chart" width="800" height="400" style="background-color: #000;"></canvas>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="./chartjs/Chart.js"></script>
+<script>
+    $(function () {
+        var chart = new Chart($("#chart").get(0).getContext("2d"));
+        chart.Line({
+            labels: ["", "10:15", "10:16", "10:17", "10:18", ""],
+            datasets: [
+                {
+                    fillColor: "rgba(220,220,220,0.5)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    data: [65, 59, 90, 81, 56, 55, 40]
+                },
+                {
+                    fillColor: "rgba(151,187,205,0.5)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    data: [28, 48, 40, 19, 96, 27, 100]
+                },
+                {
+                    fillColor: "green",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    data: [12, 15, 34, 54, 96, 67, 43]
+                }
+            ]
+        }, {
+            scaleLineColor: "red",
+            scaleLineWidth: 2,
+            scaleShowLabels: true,
+            scaleLabel: "<%=value%>",
+            scaleFontFamily: "Menlo, 'Courier New', Consolas, Monaco, 'Andale Mono', monospace",
+            scaleFontSize: 14,
+            scaleFontStyle: "bold",
+            scaleFontColor: "#369",
+            scaleShowGridLines: false,
+            bezierCurve: true,
+            pointDot: true,
+            pointDotRadius: 4,
+            pointDotStrokeWidth: 1,
+            datasetStroke: true,
+            datasetStrokeWidth: 2,
+            datasetFill: false,
+            showTooltips: false
+        });
+    });
+</script>
+</body>
+</html>
+

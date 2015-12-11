@@ -16,32 +16,15 @@ import java.lang.management.ThreadMXBean;
 public abstract class MXBeanFactory {
 
     public static OperatingSystemMXBean getOperatingSystemMXBean() {
-        return OperatingSystemMXBeanHolder.instance;
+        return (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
     }
 
     public static ThreadMXBean getThreadMXBean() {
-        return ThreadMXBeanHolder.instance;
+        return ManagementFactory.getThreadMXBean();
     }
 
     public static MemoryMXBean getMemoryMXBean() {
-        return MemoryMXBeanHolder.instance;
-    }
-
-    private static class OperatingSystemMXBeanHolder {
-
-        private static OperatingSystemMXBean instance = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-
-    }
-
-    private static class ThreadMXBeanHolder {
-
-        private static ThreadMXBean instance = ManagementFactory.getThreadMXBean();
-    }
-
-    private static class MemoryMXBeanHolder {
-
-        private static MemoryMXBean instance = ManagementFactory.getMemoryMXBean();
-
+        return ManagementFactory.getMemoryMXBean();
     }
 
 }

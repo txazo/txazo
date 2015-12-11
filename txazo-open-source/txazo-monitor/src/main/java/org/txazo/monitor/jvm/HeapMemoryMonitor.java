@@ -3,37 +3,31 @@ package org.txazo.monitor.jvm;
 import org.txazo.monitor.common.util.ByteUtils;
 import org.txazo.monitor.mx.MXBeanFactory;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
 
 /**
- * HeapMemoryMonitor
- *
- * @author txazo
- * @email txazo1218@163.com
- * @since 07.08.2015
+ * 堆内存监控
  */
 public class HeapMemoryMonitor {
 
     /** -Xms */
     public static long getInit() {
-        return ByteUtils.getMByte(getHeapMemoryUsage().getInit());
+        return ByteUtils.getMB(getHeapMemoryUsage().getInit());
     }
 
-    /** currently used Memory */
+    /** currently used memory */
     public static long getUsed() {
-        return ByteUtils.getMByte(getHeapMemoryUsage().getUsed());
+        return ByteUtils.getMB(getHeapMemoryUsage().getUsed());
     }
 
-    /** committed >= used */
+    /** used <= committed */
     public static long getCommitted() {
-        return ByteUtils.getMByte(getHeapMemoryUsage().getCommitted());
+        return ByteUtils.getMB(getHeapMemoryUsage().getCommitted());
     }
 
-    /** max >= committed >= used */
+    /** used <= committed <= max */
     public static long getMax() {
-        return ByteUtils.getMByte(getHeapMemoryUsage().getMax());
+        return ByteUtils.getMB(getHeapMemoryUsage().getMax());
     }
 
     private static MemoryUsage getHeapMemoryUsage() {

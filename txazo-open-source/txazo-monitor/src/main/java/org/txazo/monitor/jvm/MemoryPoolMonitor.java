@@ -18,9 +18,16 @@ public abstract class MemoryPoolMonitor {
         for (MemoryPoolMXBean m : mpmbs) {
             System.out.println(m.getName());
             System.out.println(m.getType());
+
             System.out.println(m.getUsage());
+//            System.out.println(m.getUsageThreshold());
+//            System.out.println(m.getUsageThresholdCount());
+
             System.out.println(m.getPeakUsage());
+
             System.out.println(m.getCollectionUsage());
+//            System.out.println(m.getCollectionUsageThreshold());
+//            System.out.println(m.getCollectionUsageThresholdCount());
         }
     }
 

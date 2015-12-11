@@ -12,15 +12,15 @@ import org.txazo.monitor.common.util.ByteUtils;
 public abstract class JVMMemoryMonitor {
 
     public static long getMaxMemory() {
-        return ByteUtils.getMByte(Runtime.getRuntime().maxMemory());
+        return ByteUtils.getMB(Runtime.getRuntime().maxMemory());
     }
 
     public static long getTotalMemory() {
-        return ByteUtils.getMByte(Runtime.getRuntime().totalMemory());
+        return ByteUtils.getMB(Runtime.getRuntime().totalMemory());
     }
 
     public static long getFreeMemory() {
-        return ByteUtils.getMByte(Runtime.getRuntime().freeMemory());
+        return ByteUtils.getMB(Runtime.getRuntime().freeMemory());
     }
 
 }

@@ -16,22 +16,22 @@ public class NonHeapMemoryMonitor {
 
     /** -Xms */
     public static long getInit() {
-        return ByteUtils.getMByte(getNonHeapMemoryUsage().getInit());
+        return ByteUtils.getMB(getNonHeapMemoryUsage().getInit());
     }
 
     /** currently used Memory */
     public static long getUsed() {
-        return ByteUtils.getMByte(getNonHeapMemoryUsage().getUsed());
+        return ByteUtils.getMB(getNonHeapMemoryUsage().getUsed());
     }
 
-    /** committed >= used */
+    /** used <= committed */
     public static long getCommitted() {
-        return ByteUtils.getMByte(getNonHeapMemoryUsage().getCommitted());
+        return ByteUtils.getMB(getNonHeapMemoryUsage().getCommitted());
     }
 
-    /** max >= committed >= used */
+    /** used <= committed <= max */
     public static long getMax() {
-        return ByteUtils.getMByte(getNonHeapMemoryUsage().getMax());
+        return ByteUtils.getMB(getNonHeapMemoryUsage().getMax());
     }
 
     private static MemoryUsage getNonHeapMemoryUsage() {

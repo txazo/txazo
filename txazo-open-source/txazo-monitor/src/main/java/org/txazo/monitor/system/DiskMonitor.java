@@ -20,7 +20,7 @@ public class DiskMonitor {
         for (File file : files) {
             freeSpace += file.getFreeSpace();
         }
-        return ByteUtils.getGByte(freeSpace);
+        return ByteUtils.getGB(freeSpace);
     }
 
 }

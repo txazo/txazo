@@ -9,32 +9,32 @@ package org.txazo.monitor.common.util;
  */
 public abstract class ByteUtils {
 
-    private static final long BYTE_UNIT_1 = 1 << 10;
-    private static final long BYTE_UNIT_2 = 1 << 20;
-    private static final long BYTE_UNIT_3 = 1 << 30;
+    private static final long BYTE_SHIFT_1 = 10;
+    private static final long BYTE_SHIFT_2 = 20;
+    private static final long BYTE_SHIFT_3 = 30;
 
-    public static long getKByte(long bytes) {
-        return bytes / BYTE_UNIT_1;
+    public static long getKB(long bytes) {
+        return bytes >> BYTE_SHIFT_1;
     }
 
-    public static long getMByte(long bytes) {
-        return bytes / BYTE_UNIT_2;
+    public static long getMB(long bytes) {
+        return bytes >> BYTE_SHIFT_2;
     }
 
-    public static long getMByteFromKByte(long bytes) {
-        return bytes / BYTE_UNIT_1;
+    public static long getMBFromKB(long bytes) {
+        return bytes >> BYTE_SHIFT_1;
     }
 
-    public static long getGByte(long bytes) {
-        return bytes / BYTE_UNIT_3;
+    public static long getGB(long bytes) {
+        return bytes >> BYTE_SHIFT_3;
     }
 
-    public static long getGByteFromKByte(long bytes) {
-        return bytes / BYTE_UNIT_2;
+    public static long getGBFromKB(long bytes) {
+        return bytes >> BYTE_SHIFT_2;
     }
 
-    public static long getGByteFromMByte(long bytes) {
-        return bytes / BYTE_UNIT_1;
+    public static long getGBFromMB(long bytes) {
+        return bytes >> BYTE_SHIFT_1;
     }
 
 }

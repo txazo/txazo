@@ -14,12 +14,12 @@ public abstract class MemoryMonitor {
 
     /** FreePhysicalMemory */
     public static long getFreePhysicalMemory() {
-        return ByteUtils.getMByte(MXBeanFactory.getOperatingSystemMXBean().getFreePhysicalMemorySize());
+        return ByteUtils.getMB(MXBeanFactory.getOperatingSystemMXBean().getFreePhysicalMemorySize());
     }
 
     /* FreeSwapSpace */
     public static long getFreeSwapSpace() {
-        return ByteUtils.getMByte(MXBeanFactory.getOperatingSystemMXBean().getFreeSwapSpaceSize());
+        return ByteUtils.getMB(MXBeanFactory.getOperatingSystemMXBean().getFreeSwapSpaceSize());
     }
 
 }
