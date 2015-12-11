@@ -18,14 +18,21 @@ public class Arithmetic {
     private static Pattern minusPattern = Pattern.compile("([^\\-]+)\\-(.+)");
     private static Pattern mulPattern = Pattern.compile("([^\\*]+)\\*(.+)");
     private static Pattern subPattern = Pattern.compile("([^/]+)/(.+)");
+    private static Pattern bracketPattern = Pattern.compile("(.+)\\(([^\\(\\)]+)\\)(.+)");
 
     public double arithmetic(String expression) {
+        if (expression == null) {
+            throw new IllegalArgumentException();
+        }
+        expression = expression.replaceAll("\\s", "");
         return interpreter(expression).interpreter();
     }
 
     public Expression interpreter(String expression) {
         Matcher matcher = null;
-        if ((matcher = plusPattern.matcher(expression)).find()) {
+        if ((matcher = bracketPattern.matcher(expression)).find()) {
+            return interpreter(matcher.group(1) + interpreter(matcher.group(2)).interpreter() + matcher.group(3));
+        } else if ((matcher = plusPattern.matcher(expression)).find()) {
             return new PlusExpression(interpreter(matcher.group(1)), interpreter(matcher.group(2)));
         } else if ((matcher = minusPattern.matcher(expression)).find()) {
             return new MinusExpression(interpreter(matcher.group(1)), interpreter(matcher.group(2)));

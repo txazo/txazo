@@ -24,6 +24,7 @@ public class IteratorTest {
         Assert.assertEquals(iterator.last(), "manager");
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
+            iterator.remove();
         }
     }
 

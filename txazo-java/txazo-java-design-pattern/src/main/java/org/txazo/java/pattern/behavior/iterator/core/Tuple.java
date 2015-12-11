@@ -2,6 +2,7 @@ package org.txazo.java.pattern.behavior.iterator.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Iterable
@@ -25,10 +26,11 @@ public class Tuple<E> implements Iterable<E> {
 
     private class TupleIterator implements Iterator<E> {
 
-        private int current;
+        private int last = -1;
+        private int cursor = 0;
 
         private E get(int index) {
-            return index >= 0 && index < elements.size() ? elements.get(index) : null;
+            return index >= 0 && index < size() ? elements.get(index) : null;
         }
 
         @Override
@@ -38,22 +40,35 @@ public class Tuple<E> implements Iterable<E> {
 
         @Override
         public E last() {
-            return get(elements.size() - 1);
+            return get(size() - 1);
         }
 
         @Override
         public E next() {
-            return get(current++);
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            E e = get(last = cursor);
+            cursor++;
+            return e;
         }
 
         @Override
         public boolean hasNext() {
-            return current < elements.size();
+            return cursor < size();
         }
 
         @Override
         public void remove() {
-            elements.remove(current);
+            if (last < 0) {
+                throw new IllegalStateException();
+            }
+            elements.remove(cursor = last);
+            last = -1;
+        }
+
+        public int size() {
+            return elements.size();
         }
 
     }
