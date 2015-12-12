@@ -13,8 +13,6 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
  * 3) int shift(位偏移)
  * 4) final int[] array
  *
- * @author xiaozhou.tu
- * @date 2015-10-20
  * @see AtomicIntegerArray
  * @see AtomicIntegerArray#base
  * @see AtomicIntegerArray#shift

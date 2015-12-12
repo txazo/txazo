@@ -12,8 +12,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * 2) long valueOffset(类的字段偏移)
  * 3) volatile int value(1为true, 0为false)
  *
- * @author xiaozhou.tu
- * @date 2015-10-20
  * @see AtomicBoolean
  * @see AtomicBoolean#value
  * @see AtomicBoolean#valueOffset
