@@ -5,18 +5,15 @@ import org.junit.Test;
 import java.util.*;
 
 /**
- * ComparatorTest
+ * Comparator
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.Comparator
- * @since 30.07.2015
  */
 public class ComparatorTest {
 
     /**
      * Comparator
-     *
+     * <p/>
      * 1) 排序接口
      * 2) 可对数组 List Set Map进行排序
      */

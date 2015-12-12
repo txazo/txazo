@@ -1,12 +1,9 @@
 package org.txazo.java.collection.map;
 
 /**
- * HashtableTest
+ * Hashtable
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.Hashtable
- * @since 30.07.2015
  */
 public class HashtableTest {
 

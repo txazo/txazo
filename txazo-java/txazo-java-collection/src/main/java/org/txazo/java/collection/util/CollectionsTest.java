@@ -5,12 +5,9 @@ import org.junit.Test;
 import java.util.*;
 
 /**
- * CollectionsTest
+ * Collections
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.Collections
- * @since 29.07.2015
  */
 public class CollectionsTest {
 

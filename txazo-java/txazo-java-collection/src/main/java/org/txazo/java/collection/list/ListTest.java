@@ -10,12 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ListTest
+ * List
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.List
- * @since 28.07.2015
  */
 public class ListTest {
 

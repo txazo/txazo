@@ -1,12 +1,9 @@
 package org.txazo.java.collection.map;
 
 /**
- * HashMapTest
+ * HashMap
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.HashMap
- * @since 30.07.2015
  */
 public class HashMapTest {
 

@@ -1,12 +1,9 @@
 package org.txazo.java.collection.list;
 
 /**
- * LinkedListTest
+ * LinkedList
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.LinkedList
- * @since 29.07.2015
  */
 public class LinkedListTest {
 

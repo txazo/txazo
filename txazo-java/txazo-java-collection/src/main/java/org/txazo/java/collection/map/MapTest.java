@@ -8,12 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * MapTest
+ * Map
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.Map
- * @since 30.07.2015
  */
 public class MapTest {
 

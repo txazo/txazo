@@ -7,12 +7,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * ArrayBlockingQueueTest
+ * ArrayBlockingQueue
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.concurrent.ArrayBlockingQueue
- * @since 2015-09-08
  */
 public class ArrayBlockingQueueTest {
 

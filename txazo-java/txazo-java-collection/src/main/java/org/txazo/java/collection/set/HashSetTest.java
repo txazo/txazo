@@ -1,12 +1,9 @@
 package org.txazo.java.collection.set;
 
 /**
- * HashSetTest
+ * HashSet
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.HashSet
- * @since 31.07.2015
  */
 public class HashSetTest {
 

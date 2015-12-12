@@ -7,12 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * IteratorTest
+ * Iterator
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.Iterator
- * @since 30.07.2015
  */
 public class IteratorTest {
 
@@ -33,6 +30,7 @@ public class IteratorTest {
 
         for (Iterator<Integer> i = list.iterator(); i.hasNext(); ) {
             System.out.println(i.next());
+            i.remove();
         }
     }
 

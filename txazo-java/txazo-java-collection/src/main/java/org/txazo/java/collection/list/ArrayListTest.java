@@ -6,12 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ArrayListTest
+ * ArrayList
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.ArrayList
- * @since 28.07.2015
  */
 public class ArrayListTest {
 

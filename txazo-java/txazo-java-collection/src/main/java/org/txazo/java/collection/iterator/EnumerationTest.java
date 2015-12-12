@@ -6,18 +6,15 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 /**
- * EnumerationTest
+ * Enumeration
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.Enumeration
- * @since 30.07.2015
  */
 public class EnumerationTest {
 
     /**
      * Enumeration
-     *
+     * <p/>
      * 迭代器模式
      */
 

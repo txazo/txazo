@@ -1,12 +1,9 @@
 package org.txazo.java.collection.set;
 
 /**
- * CopyOnWriteArraySetTest
+ * CopyOnWriteArraySet
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.concurrent.CopyOnWriteArraySet
- * @since 31.07.2015
  */
 public class CopyOnWriteArraySetTest {
 

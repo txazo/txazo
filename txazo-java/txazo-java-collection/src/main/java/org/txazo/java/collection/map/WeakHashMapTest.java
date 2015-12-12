@@ -1,12 +1,9 @@
 package org.txazo.java.collection.map;
 
 /**
- * WeakHashMapTest
+ * WeakHashMap
  *
- * @author txazo
- * @email txazo1218@163.com
  * @see java.util.WeakHashMap
- * @since 30.07.2015
  */
 public class WeakHashMapTest {
 
