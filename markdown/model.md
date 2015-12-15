@@ -1,45 +1,44 @@
-[TOC]
+# 标题
 
-# 1
-## 2
-### 3
-#### 4
-##### 5
-###### 6
+## 二级标题
+### 三级标题
+#### 四级标题
 
-> 1
->> 2
->>> 3
+### 块
 
+    这是`块`的内容, 前后空行
+    这是`块`的内容, 前后空行
+
+### 有序列表
+1. Apple
+2. Orange
+3. Banana
+
+### 无序列表
+* Apple
+* Orange
+* Banana
+
+## 换行
+换行, 后面加2个空格
+换行, 后面加2个空格
+
+### 分隔线
+***
+
+### 超链接
+[baidu](http://www.baidu.com)
+<http://www.baidu.com>
+
+### 图片
+![baidu](http://www.baidu.com)
+
+### 代码块
 ```
-inport java
+var value = 0;
 ```
 
-import `java`
-
-1. as
-2. as
-3. as
-
-* as
-* as
-* as
-
-\*\*
-
-  asas
-
-*****
-
-as *as* as
-
-as **as** as
-
-| as | as |
-| ------ | ------ |
-| as | as |
-
-![Alt text](/path/to/img.jpg)
-
-[baidu](www.baidu.com)
-<http://www.baidu.com/>
+### 表格
+|     Name     |     Age     |
+| ------------ | ----------- |
+|     root     |     24       |
