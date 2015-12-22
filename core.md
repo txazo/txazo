@@ -49,7 +49,25 @@
 
 #### NIO
 
+	IO和NIO对比
+	
+| | IO | NIO |
+| :----------: | :-------------: | :-------------: |
+| 是否双向 | 单向 | 双向 |
+| 是否异步 | 同步阻塞 | 异步非阻塞 |
+| 操作方式 | 字节流 | 通道、缓冲区 |
+
+	Channel：
+	Buffer：
+	Selector：
+
 #### 集合
+* List：ArrayList、LinkedList、Vector、Stack
+* Set：HashSet、TreeSet
+* Map：HashMap、TreeMap
+* Queue
+* 迭代器：Iterator、Enumeration
+* 
 
 #### 多线程
 
