@@ -42,15 +42,15 @@
 
 ## Java
 #### Java基础
-* 克隆: Cloneable
-* 比较: Comparable、Comparator
-* 迭代器: Iterable
-* 类加载器: ClassLoader、URLClassLoader
-* 枚举: Enum
-* 基本数据类型包装类: Integer、Double
-* 对象: Object
-* 字符串: String、StringBuffer、StringBuilder
-* 异常: Throwable、Exception、Error、RuntimeException
+* 克隆：Cloneable
+* 比较：Comparable、Comparator
+* 迭代器：Iterable
+* 类加载器：ClassLoader、URLClassLoader
+* 枚举：Enum
+* 基本数据类型包装类：Integer、Double
+* 对象：Object
+* 字符串：String、StringBuffer、StringBuilder
+* 异常：Throwable、Exception、Error、RuntimeException
 
 #### IO
 * 文件流: 磁盘
