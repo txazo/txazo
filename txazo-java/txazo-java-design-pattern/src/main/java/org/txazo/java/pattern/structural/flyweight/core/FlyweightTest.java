@@ -3,7 +3,7 @@ package org.txazo.java.pattern.structural.flyweight.core;
 import org.junit.Test;
 
 /**
- * FlyweightTest
+ * 享元模式
  *
  * @author txazo
  * @email txazo1218@163.com
