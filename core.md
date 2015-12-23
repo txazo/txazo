@@ -19,33 +19,48 @@
 * shell
 
 ### JVM
-* 类加载机制
 * 内存模型
 * 垃圾回收
-* 性能优化
+* 类加载机制
+* JVM参数和调优
+* Java工具
+
+		jps、jstack、jmap、jconsole、javap
+
+* 内存溢出
+	* HeapOutOfMemory
+	* StackOutOfMemory
+	* StackOverFlow
+	* YoungOutOfMemory
+	* MethodAreaOutOfMemory
+	* ConstantPoolOutOfMemory
+	* DirectMemoryOutOfMemory
+* 常见问题
+	* Java程序响应很慢
+	* Java程序频繁Full GC
+	* Java程序发生OutOfMemory
 
 ## Java
+#### Java基础
+* 克隆: Cloneable
+* 比较: Comparable、Comparator
+* 迭代器: Iterable
+* 类加载器: ClassLoader、URLClassLoader
+* 枚举: Enum
+* 基本数据类型包装类: Integer、Double
+* 对象: Object
+* 字符串: String、StringBuffer、StringBuilder
+* 异常: Throwable、Exception、Error、RuntimeException
+
 #### IO
-
-	基本流
-
-| 流类型 | 流说明 |
-| :----------: | :-------------: |
-| 文件流 | 磁盘 |
-| Socket流 | 网络 |
-| 字节/字符数组流 | 内存 |
-
-	过滤流
-
-| 流类型 | 流说明 |
-| :----------: | :-------------: |
-| 对象流 | 对象 |
-| 缓冲流 | 缓冲区 |
-| 基本数据类型流 | 基本数据类型 |
-
-	装饰器模式：基本数据类型流、对象流、缓冲流
-	
-	序列化/反序列化：Serializable、Externalizable，深度克隆
+* 文件流: 磁盘
+* Socket流: 网络
+* 字节/字符数组流: 内存
+* 对象流: 对象
+* 缓冲流: 缓冲区
+* 基本数据类型流: 基本数据类型
+* 装饰器模式：基本数据类型流、对象流、缓冲流
+* 序列化/反序列化：Serializable、Externalizable，深度克隆
 
 #### NIO
 
@@ -108,6 +123,7 @@
 * ActiveMQ
 
 ### 高并发
+* Java内存模型
 * 多线程
 * 高性能
 * 高并发
