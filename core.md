@@ -74,11 +74,30 @@
 	IO: 单向、同步阻塞、字节流、字节流
 	NIO: 双向、异步非阻塞、通道、缓冲区
 
-	Channel:
-	Buffer:
-	Selector:
+	Channel: 通道
+	Buffer: 缓冲区
+	Selector: 选择器
 	
-	nio和reactor设计模式
+	reactor模式
+	epoll
+	
+	阻塞IO模型: 用户进程等待准备数据和将数据从内核拷贝到用户内存
+	非阻塞IO模型: 用户进程不断轮询数据是否就绪, 用户进程将数据从内核拷贝到用户内存
+	多路复用IO模型(NIO): 一个线程管理多个socket, 不断轮询socket状态
+	信号驱动IO模型: 内核等待数据就绪, 数据就绪后发送信号给用户进程
+	异步IO模型: 内核等待数据就绪, 内核拷贝数据到用户内存
+	
+	IO请求: 查看数据是否就绪、数据拷贝(内核拷贝到用户内存)
+	
+	同步:
+	异步:
+	阻塞: 数据未就绪, 阻塞
+	非阻塞: 数据未就绪, 直接返回
+	
+	多线程IO模式:
+	线程池IO模式:
+	Reactor模式(多路复用IO模型):
+	Proactor模式(异步IO模型):
 
 #### 集合
 * List：ArrayList、LinkedList、Vector、Stack
