@@ -13,7 +13,7 @@ public class SwitchStringSugar {
 
     /**
      * switch字符串 - 语法糖
-     *
+     * <p>
      * 1) 先通过hashCode()来进行switch, 然后通过equals()验证
      */
 

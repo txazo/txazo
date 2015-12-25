@@ -68,6 +68,7 @@
 #### 序列化/反序列化
 	单例、枚举
 	性能: 序列化时间、反系列化时间、序列化大小、序列化压缩大小、序列化格式
+	fastjson、protobuf
 
 #### NIO
 
@@ -116,6 +117,21 @@
 	InvocationHandler: 接口
 	CGlib: 接口或类
 	<http://blog.csdn.net/luanlouis/article/details/24589193>
+
+#### 注解
+
+#### 语法糖
+
+	断言
+	自动拆箱装箱
+	枚举
+	增强for循环
+	泛型: 类型擦除(编译期), 强制类型转换
+	条件编译
+	内部类
+	switch字符串: 先hashcode(), 后equals()
+	try-with-resources
+	可变长参数: 数组
 
 #### 集合
 * List：ArrayList、LinkedList、Vector、Stack
