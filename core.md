@@ -103,13 +103,26 @@
 	Reactor模式(多路复用IO模型): 注册事件、轮询事件、分发事件
 	Proactor模式(异步IO模型): 注册事件、轮询事件、异步IO、分发事件
 
+#### 反射
+
+	asm: 字节码操控工具
+
+	javassist: 运行时操作字节码
+
+#### 动态代理
+
+	asm: 字节码
+	javassist:
+	InvocationHandler: 接口
+	CGlib: 接口或类
+	<http://blog.csdn.net/luanlouis/article/details/24589193>
+
 #### 集合
 * List：ArrayList、LinkedList、Vector、Stack
 * Set：HashSet、TreeSet
 * Map：HashMap、TreeMap
 * Queue
 * 迭代器：Iterator、Enumeration
-* 
 
 #### 多线程
 
