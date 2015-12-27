@@ -407,6 +407,22 @@ public static void main(String[] args) {
     line 8: 16
 
 
+2.1.3. CPU缓存，L1，L2，L3和伪共享
+
+
+    http://duartes.org/gustavo/blog/post/intel-cpu-caches/
+    http://mechanical-sympathy.blogspot.com/2011/07/false-sharing.html
+
+
+2.1.4. 什么是尾递归
+
+
+2.1.5. 熟悉位运算
+
+
+    用位运算实现加、减、乘、除、取余
+
+
 2.1.6. 参考资料
 
 
@@ -446,6 +462,67 @@ public static void main(String[] args) {
     http://asm.ow2.org/
     http://cglib.sourceforge.net/
     http://www.javassist.org/
+
+
+2.3. 网络编程知识
+
+
+2.3.1. Java RMI，Socket，HttpClient
+
+
+2.3.2. 用Java写一个简单的静态文件的HTTP服务器
+
+
+    实现客户端缓存功能，支持返回304
+    实现可并发下载一个文件
+    使用线程池处理客户端请求
+    使用nio处理客户端请求
+    支持简单的rewrite规则
+    上述功能在实现的时候需要满足“开闭原则”
+
+
+2.3.3. 了解nginx和apache服务器的特性并搭建一个对应的服务器
+
+
+    http://nginx.org/
+    http://httpd.apache.org/
+
+
+2.3.4. 用Java实现FTP、SMTP协议
+
+
+2.3.5. 什么是CDN？如果实现？DNS起到什么作用？
+
+
+    搭建一个DNS服务器
+    搭建一个 Squid 或 Apache Traffic Server 服务器
+    http://www.squid-cache.org/
+    http://trafficserver.apache.org/
+    http://en.wikipedia.org/wiki/Domain_Name_System
+
+
+2.3.6. 参考资料
+
+
+    http://www.ietf.org/rfc/rfc2616.txt
+    http://tools.ietf.org/rfc/rfc5321.txt
+    http://en.wikipedia.org/wiki/Open/closed_principle
+
+
+2.4. 框架知识
+
+
+    spring，spring mvc，阅读主要源码
+    ibatis，阅读主要源码
+    用spring和ibatis搭建java server
+
+
+2.5. 应用服务器知识
+
+
+    熟悉使用jboss，https://www.jboss.org/overview/
+    熟悉使用tomcat，http://tomcat.apache.org/
+    熟悉使用jetty，http://www.eclipse.org/jetty/
 
 
 三、 高级篇
@@ -534,7 +611,41 @@ public static void main(String[] args) {
     http://www.antlr.org/
 
 
+3.2. 操作系统知识
+
+
+    Ubuntu
+    Centos
+    使用linux，熟悉shell脚本
+
+
 3.3. 数据存储知识
+
+
+3.3.1. 关系型数据库
+
+
+    MySQL
+    如何看执行计划
+    如何搭建MySQL主备
+    binlog是什么
+    Derby，H2，PostgreSQL
+    SQLite
+
+
+3.3.2. NoSQL
+
+
+    Cache
+    Redis
+    Memcached
+    Leveldb
+    Bigtable
+    HBase
+    Cassandra
+    Mongodb
+    图数据库
+    neo4j
 
 
 3.3.3. 参考资料
@@ -550,6 +661,48 @@ public static void main(String[] args) {
 
 
 3.4. 大数据知识
+
+
+3.4.1. Zookeeper，在linux上部署zk
+
+
+3.4.2. Solr，Lucene，ElasticSearch
+
+
+    在linux上部署solr，solrcloud，，新增、删除、查询索引
+
+
+3.4.3. Storm，流式计算，了解Spark，S4
+
+
+    在linux上部署storm，用zookeeper做协调，运行storm hello world，local和remote模式运行调试storm topology。
+
+
+3.4.4. Hadoop，离线计算
+
+
+    Hdfs：部署NameNode，SecondaryNameNode，DataNode，上传文件、打开文件、更改文件、删除文件
+    MapReduce：部署JobTracker，TaskTracker，编写mr job
+    Hive：部署hive，书写hive sql，得到结果
+    Presto：类hive，不过比hive快，非常值得学习
+
+
+3.4.5. 分布式日志收集flume，kafka，logstash
+
+
+3.4.6. 数据挖掘，mahout
+
+
+3.4.7. 参考资料
+
+
+    http://zookeeper.apache.org/
+    https://lucene.apache.org/solr/
+    https://github.com/nathanmarz/storm/wiki
+    http://hadoop.apache.org/
+    http://prestodb.io/
+    http://flume.apache.org/，http://logstash.net/，http://kafka.apache.org/
+    http://mahout.apache.org/
 
 
 3.5. 网络安全知识

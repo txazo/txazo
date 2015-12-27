@@ -1,9 +1,13 @@
-### IO
-
 ### CPU
-* 控制单元
-* 运算单元
-* 存储单元
+
+	CPU寄存器 > L1 > L2 > L3 > 跨槽 > 内存 > 磁盘
+	L1 Cache: L1 Data Cache、L2 Instruction Cache
+	L2 Cache
+	L3 Cache
+	Cache Line: 缓存行, 64个字节, CPU最小操作单位
+		1) Cache Miss: 缓存未命中, 按照数据的物理顺序访问数据(二维long数组)
+		2) Cache冲突: 避免缓存行冲突, 补齐缓存行, 伪共享
+		3) Cache满: 减少操作的数据大小
 
 ### Memory
 
@@ -15,8 +19,9 @@
 * tomcat配置
 
 ### Linux
-* linux
-* shell
+
+	linux
+	shell
 
 ### JVM
 * 内存模型
@@ -53,6 +58,10 @@
 	对象: Object
 	字符串: String、StringBuffer、StringBuilder
 	异常: Throwable、Exception、Error、RuntimeException
+
+#### 位操作
+
+	<<、>>、>>>、&、|、^、~
 
 #### IO
 
@@ -143,14 +152,29 @@
 
 #### 网络编程
 
+	DNS: 搭建DNS服务器
+	CDN
+	网络协议: TCP/IP、HTTP、SSL
+	Socket
+	URL
+	HttpURLConnection
+	简单的HTTP服务器: 线程池、NIO、Reactor模式、状态码
+	nginx、apache: 特性、搭建、配置
+	FTP、SMTP: Java实现
+
 ***
 
 ## 设计模式
-#### 创建型模式
+#### 创建型模式(6)
 
-	单例模式
+	简单工厂模式: 一个工厂创建不同的产品
+	工厂方法模式: 不同的工厂创建不同的产品
+	抽象工厂模式: 不同的工厂创建不同的产品簇
+	单例模式: 一个类只有一个实例
+	原型模式: 拷贝原型，创建对象
+	建造者模式: 分离整体构建算法和部件构造
 
-#### 结构型模式
+#### 结构型模式(7)
 
 	适配器模式: 转换接口, 复用功能
 	桥接模式: 分离抽象与实现, 各自独立变化
@@ -160,19 +184,57 @@
 	享元模式: 分离变与不变, 运用共享技术有效地支持大量细粒度的对象
 	代理模式: 为其它对象提供一种代理以控制对这个对象的访问
 
-#### 行为型模式
+#### 行为型模式(11)
 
-	迭代器模式
+	职责链模式:
+	命令模式:
+	过滤器迷失:
+	迭代器模式: 定义访问和遍历元素的接口
+	中介者模式: 封装一系列的对象交互
+	备忘录模式: 保存和恢复内部状态
+	观察者模式: 多个观察者监听一个主题, 主题状态变化时, 通知所有观察者
+	状态模式: 根据状态来分离和选择行为
+	策略模式: 分离算法, 选择实现
+	模板方法模式: 固定算法骨架, 不变, 延迟子类实现, 可变
+	访问者模式:
+
+#### AOP
+
+#### NIO和Reactor模式
 
 ***
 
 ## 开源框架(原理和机制)
-* Struts2
-* Spring
-* MyBatis
+
+	Struts2: 源码
+	Spring、Spring MVC: 源码
+	MyBatis: 源码
+
+## 应用服务器
+
+	tomcat
 
 ## MySQL
-* sql优化
+
+	MySQL主从、分库分表
+	binlog
+	sql优化
+
+## NoSQL
+
+	Cache
+	Redis
+	Memcached
+
+## 大数据
+
+	ZooKeeper: 部署
+	Storm: 流式计算
+	Hadoop: Hdfs、MapReduce、Hive
+
+## 网络安全
+
+
 
 ### 分布式
 * RPC
@@ -183,6 +245,11 @@
 ### 消息
 * JMS
 * ActiveMQ
+
+## 搜索
+
+	Lucene
+	Solr
 
 ### 高并发
 * Java内存模型
