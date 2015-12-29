@@ -1,4 +1,56 @@
-### CPU
+## JVM
+
+#### class文件结构
+
+#### 类加载机制
+
+	启动类加载器、扩展类加载器、应用程序类加载器
+	双亲委派机制
+
+#### jvm内存模型
+
+	程序计数器: 线程私有
+	Java虚拟机栈: 线程私有, 栈帧(局部变量表、操作数栈、动态链接、方法出口), OutOfMemoryError、StackOverflowError
+	本地方法栈: Native方法
+	Java堆: 线程共享, 分配对象, 新生代(Eden、From Survivor、To Survivor)、老年代、永久代, OutOfMemoryError
+	方法区: 线程共享, 永久代, 存储虚拟机加载的类信息、常量、静态变量, OutOfMemoryError
+	运行时常量池: 线程共享, OutOfMemoryError
+	直接内存: OutOfMemoryError
+
+#### 垃圾回收
+
+	垃圾回收算法: 标记清除算法、复制算法、标记整理算法、分代收集算法
+	垃圾收集器: Serial收集器、ParNew收集器、Parallel Scavenge收集器、Serial Old收集器、Parallel Old收集器、CMS收集器、G1收集器
+
+#### jvm参数
+
+	-Xms、-Xmx
+
+#### 内存溢出
+
+	堆内存溢出
+	栈内存溢出
+	StackOverFlow
+	方法区内存溢出
+	常量池内存溢出
+	直接内存溢出
+
+#### jvm调优
+
+	响应很慢
+	频繁Full GC, 垃圾回收日志
+	发生OutOfMemory
+
+
+#### jdk工具
+
+	jps
+	jstack
+	jmap
+	jconsole
+	javap
+
+## CPU
 
 	CPU寄存器 > L1 > L2 > L3 > 跨槽 > 内存 > 磁盘
 	L1 Cache: L1 Data Cache、L2 Instruction Cache
@@ -9,41 +61,10 @@
 		2) Cache冲突: 避免缓存行冲突, 补齐缓存行, 伪共享
 		3) Cache满: 减少操作的数据大小
 
-### Memory
-
-### 网络协议
-* TCP/IP
-* HTTP
-
-### Tomcat
-* tomcat配置
-
-### Linux
+## Linux
 
 	linux
 	shell
-
-### JVM
-* 内存模型
-* 垃圾回收
-* 类加载机制
-* JVM参数和调优
-* Java工具
-
-		jps、jstack、jmap、jconsole、javap
-
-* 内存溢出
-	* HeapOutOfMemory
-	* StackOutOfMemory
-	* StackOverFlow
-	* YoungOutOfMemory
-	* MethodAreaOutOfMemory
-	* ConstantPoolOutOfMemory
-	* DirectMemoryOutOfMemory
-* 常见问题
-	* Java程序响应很慢
-	* Java程序频繁Full GC
-	* Java程序发生OutOfMemory
 
 ## Java
 
@@ -198,7 +219,13 @@
 	模板方法模式: 固定算法骨架, 延迟子类实现
 	访问者模式: 固定数据结构中元素, 访问者的实现可变
 
-#### AOP
+#### MVC
+
+	模型
+	视图
+	控制器
+
+#### AOP(面向切面编程)
 
 	面向切面编程
 	实现: 动态代理
@@ -285,6 +312,3 @@
 
 ### 业务场景
 * 秒杀库存
-
-### 模型
-1. reactor模式
