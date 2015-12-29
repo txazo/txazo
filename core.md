@@ -200,7 +200,13 @@
 
 #### AOP
 
+	面向切面编程
+	实现: 动态代理
+
 #### NIO和Reactor模式
+
+	NIO
+	Reactor模式
 
 ***
 
@@ -208,7 +214,16 @@
 
 	Struts2: 源码
 	Spring、Spring MVC: 源码
-	MyBatis: 源码
+
+#### MyBatis
+
+	sql配置化
+	动态sql
+	事务处理
+	缓存: 一级缓存、二级缓存
+	连接池
+	结果集包装
+	源码: 
 
 ## 应用服务器
 
