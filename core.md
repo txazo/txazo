@@ -195,14 +195,17 @@
 	javassist
 	<http://blog.csdn.net/luanlouis/article/details/24589193>
 
-#### 注解
-
 #### 集合
-* List：ArrayList、LinkedList、Vector、Stack
-* Set：HashSet、TreeSet
-* Map：HashMap、TreeMap
-* Queue
-* 迭代器：Iterator、Enumeration
+
+	fail-fast机制
+	比较器: Comparator、Comparable
+	迭代器: Iterator、Enumeration
+	List: ArrayList、Vector、Stack、LinkedList
+	Set: HashSet、TreeSet
+	Map: HashMap、Hashtable、TreeMap
+	Queue: Deque
+	Deque: ArrayDeque、LinkedList
+	Arrays、Collections
 
 #### 多线程
 
@@ -217,8 +220,6 @@
 	简单的HTTP服务器: 线程池、NIO、Reactor模式、状态码
 	nginx、apache: 特性、搭建、配置
 	FTP、SMTP: Java实现
-
-***
 
 ## 设计模式
 
@@ -350,9 +351,11 @@
 ### 技术点
 * 序列化
 
-### 业务场景
-* 秒杀库存
+## 业务场景
+#### 秒杀减库存
 
+	请求: 读cache -> 请求队列
 
+[参考]
 
-http://www.javaspecialists.eu/index.jsp
+[http://www.javaspecialists.eu/index.jsp]
