@@ -1,11 +1,59 @@
 ## JVM
 
+#### javac编译
+
+	*.java -> *.class
+	解语法糖
+
+#### 语法糖
+
+	断言: assert
+	自动拆箱装箱: 基本数据类型、包装类型
+	枚举
+	增强for循环
+	泛型: 类型擦除, 强制类型转换
+	条件编译
+	内部类
+	switch字符串: 先hashcode(), 后equals()
+	try-with-resources: AutoCloseable
+	可变长参数: 数组
+
 #### class文件结构
+
+	magic
+	minor_version
+	major_version
+	constant_pool_count
+	constant_pool[constant_pool_count - 1]
+	access_flags
+	this_class
+	super_class
+	interfaces_count
+	interfaces[interfaces_count]
+	fields_count
+	fields[fields_count]
+	methods_count
+	methods[methods_count]
+	attributes_count
+	attributes[attributes_count]
+
+#### jvm指令集
+
+	javap -c $.class
+	javap -v $.class
 
 #### 类加载机制
 
-	启动类加载器、扩展类加载器、应用程序类加载器
+	1) 获取类的二进制字节码(jar包、网络、asm)
+	2) 解析二进制字节码转化为方法区中类的运行时数据结构
+	3) Java堆中生成一个Class对象, 作为方法区中类信息的访问入口
+	4) 类静态变量分配内存, 设置默认值
+	5) 类初始化: 父类初始化, 静态变量赋值, static静态代码块执行
+	6) 对象初始化: 分配内存, 初始化父对象, 类实例变量赋值, 执行构造函数
+
+	启动类加载器、扩展类加载器、系统类加载器
 	双亲委派机制
+	BootstrapClassLoader(C实现) -> Launcher -> Launcher.ExtClassLoader、Launcher.AppClassLoader
 
 #### jvm内存模型
 
@@ -149,19 +197,6 @@
 
 #### 注解
 
-#### 语法糖
-
-	断言
-	自动拆箱装箱
-	枚举
-	增强for循环
-	泛型: 类型擦除(编译期), 强制类型转换
-	条件编译
-	内部类
-	switch字符串: 先hashcode(), 后equals()
-	try-with-resources
-	可变长参数: 数组
-
 #### 集合
 * List：ArrayList、LinkedList、Vector、Stack
 * Set：HashSet、TreeSet
@@ -186,6 +221,7 @@
 ***
 
 ## 设计模式
+
 #### 创建型模式(6)
 
 	简单工厂模式: 一个工厂, 创建多个产品
@@ -239,8 +275,9 @@
 
 ## 开源框架(原理和机制)
 
-	Struts2: 源码
-	Spring、Spring MVC: 源码
+#### Struts2
+
+#### Spring
 
 #### MyBatis
 
@@ -250,7 +287,10 @@
 	缓存: 一级缓存、二级缓存
 	连接池
 	结果集包装
-	源码: 
+
+	SqlSessionFactory -> SqlSession -> Mapper -> MapperProxy -> MapperMethod -> SqlSession
+							 |
+							 -> Executor -> StatementHandler -> ResultSetHandler
 
 ## 应用服务器
 
@@ -312,3 +352,7 @@
 
 ### 业务场景
 * 秒杀库存
+
+
+
+http://www.javaspecialists.eu/index.jsp

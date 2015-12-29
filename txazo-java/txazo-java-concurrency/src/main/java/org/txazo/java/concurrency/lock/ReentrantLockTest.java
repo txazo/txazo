@@ -35,11 +35,28 @@ public class ReentrantLockTest {
     @Test
     public void test() {
         Lock lock = new ReentrantLock();
+
         /** lock()不要写在try中 */
         lock.lock();
         try {
         } finally {
             lock.unlock();
+        }
+
+        try {
+            lock.lockInterruptibly();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+
+        boolean acquired = lock.tryLock();
+        if (acquired) {
+            try {
+            } finally {
+                lock.unlock();
+            }
         }
     }
 

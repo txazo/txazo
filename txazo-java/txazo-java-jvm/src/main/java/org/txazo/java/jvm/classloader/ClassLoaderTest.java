@@ -61,7 +61,6 @@ public class ClassLoaderTest {
         Assert.assertNull(bootstrapClassLoader);
         Assert.assertNull(System.class.getClassLoader());
         print(Launcher.getBootstrapClassPath().getURLs());
-
     }
 
     private static void print(URL[] urls) {
