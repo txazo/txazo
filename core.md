@@ -356,6 +356,10 @@
 
 	请求: 读cache -> 请求队列
 
+## 架构
+
+	
+
 [参考]
 
 [http://www.javaspecialists.eu/index.jsp]
