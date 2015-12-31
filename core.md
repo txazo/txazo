@@ -369,8 +369,6 @@
 
 ## 架构
 
-	
-
 [参考]
 
 [http://www.javaspecialists.eu/index.jsp]
