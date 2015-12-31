@@ -7,7 +7,7 @@
 
 #### 语法糖
 
-	断言: assert
+	断言: assert, AssertionError
 	自动拆箱装箱: 基本数据类型、包装类型
 	枚举
 	增强for循环
@@ -47,19 +47,19 @@
 	1) 获取类的二进制字节码(jar包、网络、asm)
 	2) 解析二进制字节码转化为方法区中类的运行时数据结构
 	3) Java堆中生成一个Class对象, 作为方法区中类信息的访问入口
-	4) 类静态变量分配内存, 设置默认值
+	4) 类静态变量分配内存, 初始化默认值
 	5) 类初始化: 父类初始化, 静态变量赋值, static静态代码块执行
 	6) 对象初始化: 分配内存, 初始化父对象, 类实例变量赋值, 执行构造函数
 
-	启动类加载器、扩展类加载器、系统类加载器
 	双亲委派机制
-	BootstrapClassLoader(C实现) -> Launcher -> Launcher.ExtClassLoader、Launcher.AppClassLoader
+	启动类加载器、扩展类加载器、系统类加载器
+	BootstrapClassLoader(C实现) -> Launcher -> Launcher.ExtClassLoader、Launcher.AppClassLoader(系统类加载器)
 
 #### jvm内存模型
 
 	程序计数器: 线程私有
 	Java虚拟机栈: 线程私有, 栈帧(局部变量表、操作数栈、动态链接、方法出口), OutOfMemoryError、StackOverflowError
-	本地方法栈: Native方法
+	本地方法栈: Native方法, OutOfMemoryError
 	Java堆: 线程共享, 分配对象, 新生代(Eden、From Survivor、To Survivor)、老年代、永久代, OutOfMemoryError
 	方法区: 线程共享, 永久代, 存储虚拟机加载的类信息、常量、静态变量, OutOfMemoryError
 	运行时常量池: 线程共享, OutOfMemoryError
@@ -72,7 +72,14 @@
 
 #### jvm参数
 
-	-Xms、-Xmx
+	-Xms4G
+	-Xmx4G
+	-Xmn1G
+	-Xss128k
+	-XX:PermSize=6M
+	-XX:MaxPermSize=6M
+	-XX:NewRatio=3
+	-XX:SurvivorRatio=8(default)
 
 #### 内存溢出
 
@@ -80,7 +87,7 @@
 	栈内存溢出
 	StackOverFlow
 	方法区内存溢出
-	常量池内存溢出
+	运行时常量池内存溢出
 	直接内存溢出
 
 #### jvm调优
@@ -89,6 +96,10 @@
 	频繁Full GC, 垃圾回收日志
 	发生OutOfMemory
 
+	堆大小设置
+	垃圾收集器选择: 串行、并行、并发, 吞吐量优先、响应时间优先
+	GC日志, Young GC、Full GC
+	dump分析
 
 #### jdk工具
 
@@ -105,7 +116,7 @@
 	L2 Cache
 	L3 Cache
 	Cache Line: 缓存行, 64个字节, CPU最小操作单位
-		1) Cache Miss: 缓存未命中, 按照数据的物理顺序访问数据(二维long数组)
+		1) Cache Miss: 缓存未命中, 按照数据的物理顺序访问数据(二维数组)
 		2) Cache冲突: 避免缓存行冲突, 补齐缓存行, 伪共享
 		3) Cache满: 减少操作的数据大小
 
@@ -117,16 +128,6 @@
 ## Java
 
 #### Java基础
-
-	克隆: Cloneable
-	比较: Comparable、Comparator
-	迭代器: Iterable
-	类加载: ClassLoader、URLClassLoader
-	枚举: Enum
-	基本数据类型包装类: Integer、Double
-	对象: Object
-	字符串: String、StringBuffer、StringBuilder
-	异常: Throwable、Exception、Error、RuntimeException
 
 #### 位操作
 
@@ -144,9 +145,11 @@
 	编码: ASCII、ISO-8859-1、GB2312、GBK、UTF-8、UTF-16
 
 #### 序列化/反序列化
-	单例、枚举
-	性能: 序列化时间、反系列化时间、序列化大小、序列化压缩大小、序列化格式
+
+	单例
+	枚举
 	fastjson、protobuf
+	性能: 序列化时间、反序列化时间、序列化大小、序列化压缩大小、序列化格式
 
 #### NIO
 
@@ -169,7 +172,7 @@
     阻塞IO: 用户线程一直等待直到数据就绪
     非阻塞IO: 数据未就绪, 直接返回标志信息给用户线程
     同步IO: 用户线程将数据从内核拷贝到用户线程
-    异步IO: 内核将数据从内核拷贝到用户线程, 然后发送消息通知用户线程
+    异步IO: 内核将数据从内核拷贝到用户线程, 然后发送信号通知用户线程
 
 	阻塞IO模型: 用户线程等待数据就绪, 然后将数据从内核拷贝到用户线程
 	非阻塞IO模型: 用户线程不断轮询数据是否就绪, 数据就绪后, 用户线程将数据从内核拷贝到用户线程
@@ -178,7 +181,7 @@
 	异步IO模型: 内核等待数据就绪, 数据就绪后, 内核拷贝数据到用户线程, 然后发送信号通知用户线程
 
 	多线程IO模式: 一个连接一个线程
-	线程池IO模式: 多个连接重用线程池中的线程
+	线程池IO模式: 线程池
 	Reactor模式(多路复用IO模型): 注册事件、轮询事件、分发事件
 	Proactor模式(异步IO模型): 注册事件、轮询事件、异步IO(内核拷贝数据到用户线程)、分发事件
 
@@ -193,7 +196,6 @@
 	CGlib: 代理接口或类
 	asm
 	javassist
-	<http://blog.csdn.net/luanlouis/article/details/24589193>
 
 #### 集合
 
@@ -209,15 +211,26 @@
 
 #### 多线程
 
+	Thread、Runnable
+	ThreadLocal
+	wait()、notify()、notifyAll()
+	sleep()、join()、interrupt()
+	synchronized
+
+#### 并发包
+
+	并发包基础: volatile、CAS(Compare And Swap)、AQS(AbstractQueuedSynchronizer)
+	原子类
+	锁: ReentrantLock、ReentrantReadWriteLock、Condition、LockSupport
+	并发扩展: Semaphore、CyclicBarrier、CountDownLatch
+	线程池: Callable、Future、Executor
+	并发集合: ConcurrentHashMap、CopyOnWriteArrayList、CopyOnWriteArraySet、ArrayBlockingQueue、LinkedBlockingQueue
+
 #### 网络编程
 
-	DNS: 搭建DNS服务器
-	CDN
 	网络协议: TCP/IP、HTTP、SSL
-	Socket
-	URL
-	HttpURLConnection
-	简单的HTTP服务器: 线程池、NIO、Reactor模式、状态码
+	URL、Socket、HttpURLConnection
+	简单的HTTP服务器: 线程池、NIO、Reactor模式、响应状态码
 	nginx、apache: 特性、搭建、配置
 	FTP、SMTP: Java实现
 
@@ -342,14 +355,12 @@
 * 性能调优
 
 ### 常见解决方案
-* sso, 单点登录
-* 一致性hash, 分布式缓存
-* 全文检索, lucene
-* 负载均衡
-* 连接池
 
-### 技术点
-* 序列化
+	sso, 单点登录
+	一致性hash, 分布式缓存
+	全文检索, lucene
+	负载均衡
+	连接池
 
 ## 业务场景
 #### 秒杀减库存
