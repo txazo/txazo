@@ -148,7 +148,6 @@
 
 	单例
 	枚举
-	fastjson、protobuf
 	通用: 跨平台、跨语言(序列化格式)
 	性能: 空间开销(序列化大小)、时间开销(序列化/反序列化时间)
 	序列化协议: XML、JSON、Thrift、ProtoBuf
