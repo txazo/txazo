@@ -243,7 +243,7 @@
 	抽象工厂模式: 多个工厂, 一个工厂创建一个产品簇
 	单例模式: 控制一个类只有一个实例, 懒汉, 饿汉, 枚举, 静态内部类, 双重检查锁
 	原型模式: 对象拷贝, 浅复制, 深复制
-	建造者模式: 分离对象的构建和表示(Director -> Builder -> Product)
+	建造者模式: 分离对象的构建和表示, Director(不变) -> Builder(可变) -> Product
 
 #### 结构型模式(7)
 
@@ -275,17 +275,16 @@
 	视图
 	控制器
 
-#### AOP(面向切面编程)
+#### AOP
 
 	面向切面编程
 	实现: 动态代理
+	应用: 性能监控、权限控制、事务管理、日志记录
 
 #### NIO和Reactor模式
 
 	NIO
 	Reactor模式
-
-***
 
 ## 开源框架(原理和机制)
 
@@ -312,49 +311,49 @@
 
 ## MySQL
 
-	MySQL主从、分库分表
+	分库分表
+	主从同步
 	binlog
+	慢查询
 	sql优化
-
-## NoSQL
-
-	Cache
-	Redis
-	Memcached
-
-## 大数据
-
-	ZooKeeper: 部署
-	Storm: 流式计算
-	Hadoop: Hdfs、MapReduce、Hive
 
 ## 网络安全
 
+	Base64: 双向编码解码
+	MD5: 单向加密
+	SHA: 单向加密
+	AES: 对称加密
+	DES: 对称加密
+	DSA: 数字签名算法
+	RSA: 非对称加密
 
+## 分布式
+	
+	RPC
+	Dubbo
+	Hessian
+	Thirft
 
-### 分布式
-* RPC
-* Dubbo
+## 缓存
 
-### 缓存
+	Redis
+	Memcached
 
-### 消息
-* JMS
-* ActiveMQ
+## 消息
+	
+	JMS
+	ActiveMQ
 
 ## 搜索
 
 	Lucene
 	Solr
 
-### 高并发
-* Java内存模型
-* 多线程
-* 高性能
-* 高并发
-* 性能调优
+## 高并发
 
-### 常见解决方案
+	Java内存模型
+
+## 常见解决方案
 
 	sso, 单点登录
 	一致性hash, 分布式缓存
@@ -366,9 +365,3 @@
 #### 秒杀减库存
 
 	请求: 读cache -> 请求队列
-
-## 架构
-
-[参考]
-
-[http://www.javaspecialists.eu/index.jsp]
