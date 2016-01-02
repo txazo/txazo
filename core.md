@@ -282,10 +282,19 @@
 	实现: 动态代理
 	应用: 性能监控、权限控制、事务管理、日志记录
 
+#### BIO
+
+	同步阻塞
+	accept -> New Thread(read -> decode -> process -> encode -> write)
+	accept -> Queue + Thread Pool(read -> decode -> process -> encode -> write)
+
 #### NIO和Reactor模式
 
-	NIO
-	Reactor模式
+	同步非阻塞
+	read request -> decode request -> process service -> encode reply -> write reply
+	MainReactor: acceptor
+	SubReactor: read、write
+	Dispatch(Thread Pool): decode、process、encode
 
 ## 开源框架(原理和机制)
 
@@ -389,9 +398,50 @@
 
 	数据变更 -> 发布订阅系统 -> push/pull
 
+#### KV Store
+
 ## 缓存
 #### 数据缓存
 
 	本地缓存:
+	集中式缓存:
 	分布式缓存: 缓存服务化
 	缓存命中率: 缓存划分力度, 业务相关性, 缓存有效期
+
+## 消息
+
+	消息类型: 点对点、发布/订阅
+	消息顺序: 有序、无序
+	消息模型: push、pull
+	消息存储: 持久化、非持久化
+	消息优先级
+
+## 分布式
+
+	无状态节点: 应用服务器
+	有状态节点: 缓存、数据库
+
+## 数据一致性
+
+	最终一致性
+
+## 前端性能优化
+
+	1) 减少http请求
+	2) 减少重定向
+	3) 预加载
+	4) 减少cookie大小
+	5) 延迟加载
+	6) Ajax异步化
+	7) CDN加速
+	8) 延迟渲染
+	9) DNS预解析
+	10) js放在尾部
+
+## 中间件
+
+	MVC框架
+	RPC服务框架
+	消息中间件
+	数据库中间件
+	分布式存储
