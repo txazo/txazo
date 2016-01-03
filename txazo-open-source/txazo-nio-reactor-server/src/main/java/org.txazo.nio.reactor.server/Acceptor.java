@@ -9,8 +9,8 @@ public class Acceptor {
 
     private SubReactor subReactor;
 
-    public Acceptor() {
-        subReactor = new SubReactor();
+    public Acceptor(SubReactor subReactor) {
+        this.subReactor = subReactor;
     }
 
     public void accept(ServerSocketChannel server, SelectionKey selectionKey) {

@@ -1,9 +1,7 @@
 package org.txazo.nio.reactor.server;
 
-public class Processor {
+public interface Processor {
 
-    public void process(byte[] data) {
-
-    }
+    public void process(Request request, Response response);
 
 }

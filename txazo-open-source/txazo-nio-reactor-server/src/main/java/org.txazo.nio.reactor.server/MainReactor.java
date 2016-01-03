@@ -1,5 +1,7 @@
 package org.txazo.nio.reactor.server;
 
+import org.txazo.nio.reactor.server.exception.NioException;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
@@ -8,7 +10,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-public class MainReactor implements Runnable {
+public class MainReactor implements Runnable, Reactor {
 
     private volatile boolean running = true;
     private Selector selector;
@@ -23,8 +25,6 @@ public class MainReactor implements Runnable {
             server.configureBlocking(false);
             server.socket().bind(new InetSocketAddress("127.0.0.1", 8080));
             server.register(selector, SelectionKey.OP_ACCEPT);
-
-            acceptor = new Acceptor();
         } catch (IOException e) {
             throw new NioException("MainReactor init failed");
         }
@@ -47,8 +47,18 @@ public class MainReactor implements Runnable {
         }
     }
 
+    @Override
+    public void start() {
+
+    }
+
+    @Override
     public void stop() {
         running = false;
+    }
+
+    public void setAcceptor(Acceptor acceptor) {
+        this.acceptor = acceptor;
     }
 
 }
