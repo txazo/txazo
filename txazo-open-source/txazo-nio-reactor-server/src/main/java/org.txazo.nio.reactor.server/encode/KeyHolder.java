@@ -2,7 +2,6 @@ package org.txazo.nio.reactor.server.encode;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
-import org.txazo.nio.reactor.server.exception.NioException;
 
 public abstract class KeyHolder {
 
@@ -14,7 +13,7 @@ public abstract class KeyHolder {
         try {
             KEY = Hex.decodeHex(TEXT.toCharArray());
         } catch (DecoderException e) {
-            throw new NioException("KeyHolder init failed");
+            throw new RuntimeException("KeyHolder init failed");
         }
     }
 

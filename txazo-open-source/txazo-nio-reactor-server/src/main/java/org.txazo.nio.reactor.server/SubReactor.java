@@ -1,7 +1,5 @@
 package org.txazo.nio.reactor.server;
 
-import org.txazo.nio.reactor.server.exception.NioException;
-
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -23,7 +21,7 @@ public class SubReactor implements Runnable, Reactor {
             writeHandler = new WriteHandler();
             processor = new NioProcessor();
         } catch (IOException e) {
-            throw new NioException("SubReactor init failed");
+            throw new RuntimeException("SubReactor init failed");
         }
     }
 

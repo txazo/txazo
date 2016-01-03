@@ -1,7 +1,5 @@
 package org.txazo.nio.reactor.server;
 
-import org.txazo.nio.reactor.server.exception.NioException;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
@@ -26,7 +24,7 @@ public class MainReactor implements Runnable, Reactor {
             server.socket().bind(new InetSocketAddress("127.0.0.1", 8080));
             server.register(selector, SelectionKey.OP_ACCEPT);
         } catch (IOException e) {
-            throw new NioException("MainReactor init failed");
+            throw new RuntimeException("MainReactor init failed");
         }
     }
 
