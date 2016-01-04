@@ -7,21 +7,25 @@ public class NioServer implements Lifecycle {
 
     private MainReactor mainReactor;
     private Acceptor acceptor;
-
     private List<SubReactor> subReactors = new ArrayList<SubReactor>();
     private List<Thread> subReactorThreads = new ArrayList<Thread>();
 
     public NioServer() {
-        mainReactor = new MainReactor();
+        this(1000);
+    }
 
+    public NioServer(int maxConnections) {
+        if (maxConnections <= 0) {
+            throw new IllegalArgumentException("maxConnections must be greater than zero");
+        }
+
+        mainReactor = new MainReactor();
+        acceptor = new Acceptor(maxConnections);
         for (int i = 0, length = Runtime.getRuntime().availableProcessors(); i < length; i++) {
             subReactors.add(new SubReactor());
         }
 
-        acceptor = new Acceptor(1000);
-
         mainReactor.setAcceptor(acceptor);
-
         acceptor.setSubReactors(subReactors);
     }
 
@@ -33,21 +37,26 @@ public class NioServer implements Lifecycle {
         Thread acceptorThread = new Thread(acceptor);
         acceptorThread.start();
 
-        for (int i = 0, length = subReactors.size(); i < length; i++) {
-            Thread subThread = new Thread(subReactors.get(i));
+        for (SubReactor subReactor : subReactors) {
+            Thread subThread = new Thread(subReactor);
             subThread.start();
             subReactorThreads.add(subThread);
         }
 
         mainThread.join();
-        for (int i = 0, length = subReactorThreads.size(); i < length; i++) {
-            subReactorThreads.get(i).join();
+        acceptorThread.join();
+        for (Thread subReactorThread : subReactorThreads) {
+            subReactorThread.join();
         }
     }
 
     @Override
     public void stop() throws Exception {
         mainReactor.stop();
+        acceptor.stop();
+        for (SubReactor subReactor : subReactors) {
+            subReactor.stop();
+        }
     }
 
 }

@@ -8,32 +8,26 @@ import java.util.Deque;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class Acceptor implements Runnable {
+public class Acceptor extends AbstractLifecycle {
 
-    private final int maxAcceptConnections;
-    private volatile int acceptConnections = 0;
-    private Deque acceptConnectionDeque = new ConcurrentLinkedDeque<>();
+    private final int maxConnections;
+    private volatile int connections = 0;
+    private Deque connectionDeque = new ConcurrentLinkedDeque<>();
     private List<SubReactor> subReactors;
 
-    public Acceptor(int maxAcceptConnections) {
-        this.maxAcceptConnections = maxAcceptConnections;
+    public Acceptor(int maxConnections) {
+        this.maxConnections = maxConnections;
     }
 
     @Override
-    public void run() {
-        while (true) {
-            try {
-                for (SubReactor subReactor : subReactors) {
-                    subReactor.register(null, 0);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public void doRun() throws Exception {
+        for (SubReactor subReactor : subReactors) {
+            subReactor.register(null, 0);
         }
     }
 
     public void accept(ServerSocketChannel server, SelectionKey selectionKey) {
-        if (acceptConnections > maxAcceptConnections) {
+        if (connections > maxConnections) {
             return;
         }
 
@@ -41,8 +35,8 @@ public class Acceptor implements Runnable {
             if (selectionKey.isAcceptable()) {
                 SocketChannel socket = server.accept();
                 if (socket != null) {
-                    acceptConnections++;
-                    acceptConnectionDeque.addLast(socket);
+                    connections++;
+                    connectionDeque.addLast(socket);
                 }
             }
         } catch (IOException e) {

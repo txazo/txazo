@@ -1,5 +1,7 @@
 package org.txazo.nio.reactor.server;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
@@ -8,12 +10,12 @@ import java.nio.channels.ServerSocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-public class MainReactor implements Runnable, Reactor {
+public class MainReactor extends AbstractLifecycle {
 
-    private volatile boolean running = true;
     private Selector selector;
     private ServerSocketChannel server;
     private Acceptor acceptor;
+    private Set<SelectionKey> selectionKeys;
 
     public MainReactor() {
         try {
@@ -29,30 +31,15 @@ public class MainReactor implements Runnable, Reactor {
     }
 
     @Override
-    public void run() {
-        Set<SelectionKey> selectionKeys = null;
-        while (running || !Thread.interrupted()) {
-            try {
-                selector.select();
-                selectionKeys = selector.selectedKeys();
-                for (Iterator<SelectionKey> iterator = selectionKeys.iterator(); iterator.hasNext(); ) {
-                    acceptor.accept(server, iterator.next());
-                }
-                selectionKeys.clear();
-            } catch (IOException e) {
-                e.printStackTrace();
+    public void doRun() throws Exception {
+        selector.select();
+        selectionKeys = selector.selectedKeys();
+        if (CollectionUtils.isNotEmpty(selectionKeys)) {
+            for (Iterator<SelectionKey> iterator = selectionKeys.iterator(); iterator.hasNext(); ) {
+                acceptor.accept(server, iterator.next());
             }
+            selectionKeys.clear();
         }
-    }
-
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void stop() {
-        running = false;
     }
 
     public void setAcceptor(Acceptor acceptor) {

@@ -1,5 +1,7 @@
 package org.txazo.nio.reactor.server;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -7,9 +9,10 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-public class SubReactor implements Runnable, Reactor {
+public class SubReactor extends AbstractLifecycle {
 
     private Selector selector;
+    private Set<SelectionKey> selectionKeys;
     private ReadHandler readHandler;
     private WriteHandler writeHandler;
     private static Processor processor;
@@ -26,19 +29,14 @@ public class SubReactor implements Runnable, Reactor {
     }
 
     @Override
-    public void run() {
-        Set<SelectionKey> selectionKeys = null;
-        while (!Thread.interrupted()) {
-            try {
-                selector.select();
-                selectionKeys = selector.selectedKeys();
-                for (Iterator<SelectionKey> iterator = selectionKeys.iterator(); iterator.hasNext(); ) {
-                    dispatch(iterator.next());
-                }
-                selectionKeys.clear();
-            } catch (IOException e) {
-                e.printStackTrace();
+    public void doRun() throws Exception {
+        selector.select();
+        selectionKeys = selector.selectedKeys();
+        if (CollectionUtils.isNotEmpty(selectionKeys)) {
+            for (Iterator<SelectionKey> iterator = selectionKeys.iterator(); iterator.hasNext(); ) {
+                dispatch(iterator.next());
             }
+            selectionKeys.clear();
         }
     }
 
@@ -57,16 +55,6 @@ public class SubReactor implements Runnable, Reactor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void stop() {
-
     }
 
 }
