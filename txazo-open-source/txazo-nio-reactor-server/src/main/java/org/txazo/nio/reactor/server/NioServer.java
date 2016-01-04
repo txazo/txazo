@@ -15,7 +15,7 @@ public class NioServer implements Lifecycle {
     private List<Thread> subReactorThreads = new ArrayList<Thread>();
 
     public NioServer() {
-        this(8080, 1000);
+        this(8090, 1000);
     }
 
     public NioServer(int port, int maxConnections) {

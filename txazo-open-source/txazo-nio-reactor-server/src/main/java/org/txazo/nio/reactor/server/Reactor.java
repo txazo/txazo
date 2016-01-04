@@ -13,10 +13,9 @@ public class Reactor extends ThreadLifecycle {
 
     private static final Logger logger = Logger.getLogger(Reactor.class);
 
-    protected volatile boolean selecting = false;
     protected Dispatcher dispatcher;
     protected Selector selector;
-    private Set<SelectionKey> selectionKeys;
+    protected Set<SelectionKey> selectionKeys;
 
     public Reactor(Dispatcher dispatcher) {
         this.dispatcher = dispatcher;
@@ -30,8 +29,11 @@ public class Reactor extends ThreadLifecycle {
 
     @Override
     protected void doRun() throws Exception {
+        select();
+    }
+
+    protected void select() throws Exception {
         selector.select();
-        selecting = true;
         selectionKeys = selector.selectedKeys();
         if (CollectionUtils.isNotEmpty(selectionKeys)) {
             for (Iterator<SelectionKey> iterator = selectionKeys.iterator(); iterator.hasNext(); ) {
@@ -40,7 +42,6 @@ public class Reactor extends ThreadLifecycle {
             }
             selectionKeys.clear();
         }
-        selecting = false;
     }
 
 }
