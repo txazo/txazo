@@ -1,21 +1,24 @@
 package org.txazo.nio.reactor.server;
 
+import org.apache.log4j.Logger;
 import org.txazo.nio.reactor.server.handler.HandlerContext;
 import org.txazo.nio.reactor.server.handler.ReadHandler;
 
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
-import java.util.Deque;
 import java.util.List;
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Dispatcher extends ThreadLifecycle {
 
+    private static final Logger logger = Logger.getLogger(Dispatcher.class);
+
     private final int maxConnections;
     private AtomicInteger currentConnections = new AtomicInteger(0);
     private List<SubReactor> subReactors;
-    private Deque<RegisterTask> taskDeque = new LinkedBlockingDeque<RegisterTask>();
+    private BlockingDeque<RegisterTask> taskDeque = new LinkedBlockingDeque<RegisterTask>();
 
     public Dispatcher(int maxConnections) {
         this.maxConnections = maxConnections;
@@ -24,19 +27,24 @@ public class Dispatcher extends ThreadLifecycle {
     @Override
     protected void doRun() throws Exception {
         for (SubReactor subReactor : subReactors) {
-            taskDeque.pollFirst().register(subReactor);
+            taskDeque.takeLast().register(subReactor);
         }
     }
 
     public void registerRead(SocketChannel socket) {
-        taskDeque.addLast(new RegisterTask(socket) {
+        try {
+            logger.info("add RegisterTask read");
+            taskDeque.putFirst(new RegisterTask(socket) {
 
-            @Override
-            public void register(SocketChannel socket, SubReactor subReactor) throws Exception {
-                subReactor.register(socket, SelectionKey.OP_READ, new ReadHandler(new HandlerContext(socket)));
-            }
+                @Override
+                public void register(SocketChannel socket, SubReactor subReactor) throws Exception {
+                    subReactor.register(socket, SelectionKey.OP_READ, new ReadHandler(new HandlerContext(socket)));
+                }
 
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void dispatch(SelectionKey selectionKey) {

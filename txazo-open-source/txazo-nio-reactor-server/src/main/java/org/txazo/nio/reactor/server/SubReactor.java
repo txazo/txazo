@@ -1,44 +1,32 @@
 package org.txazo.nio.reactor.server;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
-import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
 public class SubReactor extends Reactor {
 
-    private ReadHandler1 readHandler;
-    private WriteHandler writeHandler;
-    private static Processor processor;
+    private static final Logger logger = Logger.getLogger(SubReactor.class);
 
     public SubReactor(Dispatcher dispatcher) {
         super(dispatcher);
 
         try {
             selector = Selector.open();
-            readHandler = new ReadHandler1();
-            writeHandler = new WriteHandler();
-            processor = new NioProcessor();
         } catch (IOException e) {
             throw new RuntimeException("SubReactor init failed", e);
         }
     }
 
     public void register(SocketChannel socket, int ops, Object attach) throws IOException {
+        if (!selecting) {
+            selector.wakeup();
+        }
         socket.configureBlocking(false);
         socket.register(selector, ops, attach);
-    }
-
-    private void dispatch(SelectionKey selectionKey) {
-        try {
-            if (selectionKey.isReadable()) {
-                readHandler.read(selectionKey);
-            } else if (selectionKey.isWritable()) {
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        logger.info("register event");
     }
 
 }

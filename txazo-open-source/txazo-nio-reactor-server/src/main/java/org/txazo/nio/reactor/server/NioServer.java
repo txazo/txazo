@@ -1,9 +1,13 @@
 package org.txazo.nio.reactor.server;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class NioServer implements Lifecycle {
+
+    private static final Logger logger = Logger.getLogger(NioServer.class);
 
     private Dispatcher dispatcher;
     private MainReactor mainReactor;
@@ -28,20 +32,28 @@ public class NioServer implements Lifecycle {
         for (int i = 0, length = Runtime.getRuntime().availableProcessors(); i < length; i++) {
             subReactors.add(new SubReactor(dispatcher));
         }
+
+        dispatcher.setSubReactors(subReactors);
     }
 
     @Override
     public void start() throws Exception {
-        Thread mainThread = new Thread(mainReactor);
-        mainThread.start();
+        Thread dispatcherThread = new Thread(dispatcher, "dispatcherThread");
+        dispatcherThread.start();
 
-        for (SubReactor subReactor : subReactors) {
-            Thread subThread = new Thread(subReactor);
-            subThread.start();
-            subReactorThreads.add(subThread);
+        Thread mainReactorThread = new Thread(mainReactor, "mainReactorThread");
+        mainReactorThread.start();
+
+        for (int i = 0, length = subReactors.size(); i < length; i++) {
+            Thread subReactorThread = new Thread(subReactors.get(i), "subReactorThread-" + i);
+            subReactorThread.start();
+            subReactorThreads.add(subReactorThread);
         }
 
-        mainThread.join();
+        logger.info("NioServer start ...");
+
+        dispatcherThread.join();
+        mainReactorThread.join();
         for (Thread subReactorThread : subReactorThreads) {
             subReactorThread.join();
         }
@@ -49,6 +61,7 @@ public class NioServer implements Lifecycle {
 
     @Override
     public void stop() throws Exception {
+        dispatcher.stop();
         mainReactor.stop();
         for (SubReactor subReactor : subReactors) {
             subReactor.stop();
