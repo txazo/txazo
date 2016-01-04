@@ -1,6 +1,6 @@
 package org.txazo.nio.reactor.server;
 
-public abstract class AbstractLifecycle implements Runnable, Lifecycle {
+public abstract class ThreadLifecycle implements Runnable, Lifecycle {
 
     private volatile boolean running = true;
 

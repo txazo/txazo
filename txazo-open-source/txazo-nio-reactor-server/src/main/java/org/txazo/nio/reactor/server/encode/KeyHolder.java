@@ -13,7 +13,7 @@ public abstract class KeyHolder {
         try {
             KEY = Hex.decodeHex(TEXT.toCharArray());
         } catch (DecoderException e) {
-            throw new RuntimeException("KeyHolder init failed");
+            throw new RuntimeException("KeyHolder init failed", e);
         }
     }
 
