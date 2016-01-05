@@ -1,7 +1,6 @@
 package org.txazo.nio.reactor.server;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.log4j.Logger;
 import org.txazo.nio.reactor.server.handler.HandlerContext;
 import org.txazo.nio.reactor.server.handler.ReadHandler;
 import org.txazo.nio.reactor.server.handler.WriteHandler;
@@ -15,8 +14,6 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class SubReactor extends Reactor {
-
-    private static final Logger logger = Logger.getLogger(SubReactor.class);
 
     private volatile boolean selectBlocking = false;
     private Runnable r;

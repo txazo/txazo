@@ -1,13 +1,9 @@
 package org.txazo.nio.reactor.server;
 
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class NioServer implements Lifecycle {
-
-    private static final Logger logger = Logger.getLogger(NioServer.class);
 
     private Dispatcher dispatcher;
     private MainReactor mainReactor;
@@ -49,8 +45,6 @@ public class NioServer implements Lifecycle {
             subReactorThread.start();
             subReactorThreads.add(subReactorThread);
         }
-
-        logger.info("NioServer start ...");
 
         dispatcherThread.join();
         mainReactorThread.join();

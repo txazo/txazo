@@ -1,8 +1,5 @@
 package org.txazo.nio.reactor.server;
 
-import org.apache.log4j.Logger;
-
-import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.List;
 import java.util.concurrent.BlockingDeque;
@@ -10,8 +7,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Dispatcher extends ThreadLifecycle {
-
-    private static final Logger logger = Logger.getLogger(Dispatcher.class);
 
     private final int maxConnections;
     private AtomicInteger currentConnections = new AtomicInteger(0);
@@ -30,7 +25,7 @@ public class Dispatcher extends ThreadLifecycle {
     }
 
     public void registerRead(SocketChannel socket) throws Exception {
-        registerTaskDeque.putFirst(new RegisterTask(socket) {
+        register(new RegisterTask(socket) {
 
             @Override
             public void register(SubReactor subReactor, SocketChannel socket) throws Exception {
@@ -41,7 +36,7 @@ public class Dispatcher extends ThreadLifecycle {
     }
 
     public void registerWrite(SocketChannel socket) throws Exception {
-        registerTaskDeque.putFirst(new RegisterTask(socket) {
+        register(new RegisterTask(socket) {
 
             @Override
             public void register(SubReactor subReactor, SocketChannel socket) throws Exception {
@@ -49,6 +44,10 @@ public class Dispatcher extends ThreadLifecycle {
             }
 
         });
+    }
+
+    private void register(RegisterTask task) throws Exception {
+        registerTaskDeque.putFirst(task);
     }
 
     public void dispatch(Runnable r) {

@@ -1,7 +1,6 @@
 package org.txazo.nio.reactor.server;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -10,8 +9,6 @@ import java.nio.channels.ServerSocketChannel;
 import java.util.Iterator;
 
 public class MainReactor extends Reactor {
-
-    private static final Logger logger = Logger.getLogger(MainReactor.class);
 
     private ServerSocketChannel server;
     private Acceptor acceptor;
