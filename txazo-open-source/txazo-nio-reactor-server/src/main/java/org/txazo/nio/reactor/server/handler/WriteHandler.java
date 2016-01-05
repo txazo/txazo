@@ -17,12 +17,11 @@ public class WriteHandler extends AbstractHandler {
 
     @Override
     public void run() {
-        logger.info("write");
         SocketChannel socket = context.getSocket();
         try {
             ByteBuffer buffer = ByteBuffer.allocate(1024);
             buffer.clear();
-            buffer.put("success".getBytes());
+            buffer.put("HTTP/1.1 200 OK\r\n\r\nsuccess".getBytes());
             buffer.flip();
             while (buffer.hasRemaining()) {
                 socket.write(buffer);
