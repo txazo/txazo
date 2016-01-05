@@ -1,6 +1,0 @@
-Path: /usr/local/zookeeper
-
-Conf: conf/zoo.cfg
-
-Start: bin/zkServer.sh start
-Stop: bin/zkServer.sh stop

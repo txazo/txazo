@@ -1,3 +1,5 @@
+**************************************************
+
 ## JVM
 
 #### javac编译
@@ -39,8 +41,17 @@
 
 #### jvm指令集
 
-	javap -c $.class
-	javap -v $.class
+	javap
+
+#### jvm内存模型
+
+	程序计数器: 线程私有
+	Java虚拟机栈: 线程私有, 栈帧(局部变量表、操作数栈、动态链接、方法出口), OutOfMemoryError、StackOverflowError
+	本地方法栈: Native方法, OutOfMemoryError
+	Java堆: 线程共享, 分配对象, 新生代(Eden、From Survivor、To Survivor)、老年代、永久代, OutOfMemoryError
+	方法区: 线程共享, 永久代, 存储虚拟机加载的类信息、常量、静态变量, OutOfMemoryError
+	运行时常量池: 线程共享, OutOfMemoryError
+	直接内存: OutOfMemoryError
 
 #### 类加载机制
 
@@ -55,59 +66,63 @@
 	启动类加载器、扩展类加载器、系统类加载器
 	BootstrapClassLoader(C实现) -> Launcher -> Launcher.ExtClassLoader、Launcher.AppClassLoader(系统类加载器)
 
-#### jvm内存模型
+#### 垃圾标记算法
 
-	程序计数器: 线程私有
-	Java虚拟机栈: 线程私有, 栈帧(局部变量表、操作数栈、动态链接、方法出口), OutOfMemoryError、StackOverflowError
-	本地方法栈: Native方法, OutOfMemoryError
-	Java堆: 线程共享, 分配对象, 新生代(Eden、From Survivor、To Survivor)、老年代、永久代, OutOfMemoryError
-	方法区: 线程共享, 永久代, 存储虚拟机加载的类信息、常量、静态变量, OutOfMemoryError
-	运行时常量池: 线程共享, OutOfMemoryError
-	直接内存: OutOfMemoryError
+	1) 引用计数算法
+	2) 可达性分析算法
 
-#### 垃圾回收
+#### 垃圾收集算法
 
-	垃圾回收算法: 标记清除算法、复制算法、标记整理算法、分代收集算法
-	垃圾收集器: Serial收集器、ParNew收集器、Parallel Scavenge收集器、Serial Old收集器、Parallel Old收集器、CMS收集器、G1收集器
+	1) 标记清除算法
+	2) 复制算法
+	3) 标记整理算法
+	4) 分代收集算法
 
-#### jvm参数
+#### 垃圾收集器
 
+	1) Serial收集器
+	2) ParNew收集器
+	3) Parallel Scavenge收集器
+	4) Serial Old收集器
+	5) Parallel Old收集器
+	6) CMS收集器
+	7) G1收集器
+
+#### 堆内存分配
+
+	1) 对象优先在Eden分配
+	2) 大对象直接进入老年代
+	3) 长期存活的对象进入老年代
+
+#### GC
+
+	新生代GC: Minor GC、Young GC
+	老年代GC: Major GC、Full GC
+
+#### 内存调优
+
+	-Xss128k
+	-Xmn1G
+	-XX:NewRatio=3
 	-Xms4G
 	-Xmx4G
-	-Xmn1G
-	-Xss128k
-	-XX:PermSize=6M
-	-XX:MaxPermSize=6M
-	-XX:NewRatio=3
-	-XX:SurvivorRatio=8(default)
+    -XX:SurvivorRatio=8
+    -XX:MaxTenuringThreshold=10
+    -XX:PermSize=6M
+    -XX:MaxPermSize=6M
 
-#### 内存溢出
+#### GC调优
 
-	堆内存溢出
-	栈内存溢出
-	StackOverFlow
-	方法区内存溢出
-	运行时常量池内存溢出
-	直接内存溢出
+	垃圾收集器搭配
+	监控工具: JConsole、VisualVM
+	GC日志: -verbose:gc、-XX:+PrintGC、-XX:PrintGCDetails、-XX:+PrintGCTimeStamps、-Xloggc
 
-#### jvm调优
+#### 诊断
 
-	响应很慢
-	频繁Full GC, 垃圾回收日志
-	发生OutOfMemory
+	内存泄漏: jmap
+	线程: 等待、锁竞争、死锁, jstack
 
-	堆大小设置
-	垃圾收集器选择: 串行、并行、并发, 吞吐量优先、响应时间优先
-	GC日志, Young GC、Full GC
-	dump分析
-
-#### jdk工具
-
-	jps
-	jstack
-	jmap
-	jconsole
-	javap
+**************************************************
 
 ## CPU
 
@@ -120,10 +135,7 @@
 		2) Cache冲突: 避免缓存行冲突, 补齐缓存行, 伪共享
 		3) Cache满: 减少操作的数据大小
 
-## Linux
-
-	linux
-	shell
+**************************************************
 
 ## Java
 
@@ -234,6 +246,17 @@
 	简单的HTTP服务器: 线程池、NIO、Reactor模式、响应状态码
 	nginx、apache: 特性、搭建、配置
 	FTP、SMTP: Java实现
+	RPC原理
+	消息机制(JMS)原理
+
+#### 远程通讯
+
+	请求转化: 序列化
+	传输格式: stream、xml、json
+	传输协议: tcp/ip、http、udp
+	网络IO: bio、nio、aio
+
+**************************************************
 
 ## 设计模式
 
@@ -295,6 +318,8 @@
 	MainReactor: acceptor
 	SubReactor: read、write
 	Dispatch(Thread Pool): decode、process、encode
+
+**************************************************
 
 ## 开源框架(原理和机制)
 
