@@ -38,7 +38,7 @@ public class Dispatcher extends ThreadLifecycle {
 
                 @Override
                 public void register(SocketChannel socket, SubReactor subReactor) throws Exception {
-                    subReactor.register(socket, SelectionKey.OP_READ, new ReadHandler(new HandlerContext(socket)));
+                    subReactor.register(socket);
                 }
 
             });
