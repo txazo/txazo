@@ -1,8 +1,6 @@
 package org.txazo.nio.reactor.server;
 
 import org.apache.log4j.Logger;
-import org.txazo.nio.reactor.server.handler.HandlerContext;
-import org.txazo.nio.reactor.server.handler.ReadHandler;
 
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
@@ -18,7 +16,7 @@ public class Dispatcher extends ThreadLifecycle {
     private final int maxConnections;
     private AtomicInteger currentConnections = new AtomicInteger(0);
     private List<SubReactor> subReactors;
-    private BlockingDeque<RegisterTask> taskDeque = new LinkedBlockingDeque<RegisterTask>();
+    private BlockingDeque<RegisterTask> registerTaskDeque = new LinkedBlockingDeque<RegisterTask>();
 
     public Dispatcher(int maxConnections) {
         this.maxConnections = maxConnections;
@@ -27,28 +25,33 @@ public class Dispatcher extends ThreadLifecycle {
     @Override
     protected void doRun() throws Exception {
         for (SubReactor subReactor : subReactors) {
-            taskDeque.takeLast().register(subReactor);
+            registerTaskDeque.takeLast().register(subReactor);
         }
     }
 
-    public void registerRead(SocketChannel socket) {
-        try {
-            logger.info("add RegisterTask read");
-            taskDeque.putFirst(new RegisterTask(socket) {
+    public void registerRead(SocketChannel socket) throws Exception {
+        registerTaskDeque.putFirst(new RegisterTask(socket) {
 
-                @Override
-                public void register(SocketChannel socket, SubReactor subReactor) throws Exception {
-                    subReactor.register(socket);
-                }
+            @Override
+            public void register(SubReactor subReactor, SocketChannel socket) throws Exception {
+                subReactor.registerRead(socket);
+            }
 
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
     }
 
-    public void dispatch(SelectionKey selectionKey) {
-        Runnable r = (Runnable) selectionKey.attachment();
+    public void registerWrite(SocketChannel socket) throws Exception {
+        registerTaskDeque.putFirst(new RegisterTask(socket) {
+
+            @Override
+            public void register(SubReactor subReactor, SocketChannel socket) throws Exception {
+                subReactor.registerWrite(socket);
+            }
+
+        });
+    }
+
+    public void dispatch(Runnable r) {
         if (r != null) {
             r.run();
         }
@@ -74,23 +77,19 @@ public class Dispatcher extends ThreadLifecycle {
         this.subReactors = subReactors;
     }
 
-    private static abstract class RegisterTask {
+    private abstract class RegisterTask {
 
-        protected SocketChannel socket;
+        private SocketChannel socket;
 
         public RegisterTask(SocketChannel socket) {
             this.socket = socket;
         }
 
-        public void register(SubReactor subReactor) {
-            try {
-                register(socket, subReactor);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        public void register(SubReactor subReactor) throws Exception {
+            register(subReactor, socket);
         }
 
-        public abstract void register(SocketChannel socket, SubReactor subReactor) throws Exception;
+        public abstract void register(SubReactor subReactor, SocketChannel socket) throws Exception;
 
     }
 

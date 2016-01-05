@@ -2,7 +2,6 @@ package org.txazo.nio.reactor.server;
 
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
@@ -23,10 +22,9 @@ public class Acceptor implements Runnable {
         try {
             SocketChannel socket = server.accept();
             if (socket != null) {
-                logger.info("accept new connection");
                 dispatcher.registerRead(socket);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
