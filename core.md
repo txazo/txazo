@@ -320,12 +320,12 @@
 
 #### MyBatis
 
-	sql配置化
+	半自动的ORM: sql和类之间的映射, sql参数映射, 结果集映射
+	sql从代码中分离: xml配置、注解配置
 	动态sql
-	事务处理
+	事务管理
 	缓存: 一级缓存、二级缓存
-	连接池
-	结果集包装
+	数据库连接池
 
 	SqlSessionFactory -> SqlSession -> Mapper -> MapperProxy -> MapperMethod -> SqlSession
 							 |
