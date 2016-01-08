@@ -320,16 +320,18 @@
 
 #### MyBatis
 
-	半自动的ORM: sql和类之间的映射, sql参数映射, 结果集映射
+	半自动的ORM: sql参数映射, 结果集映射
 	sql从代码中分离: xml配置、注解配置
+	封装JDBC代码、参数设置、结果集检索
 	动态sql
-	事务管理
 	缓存: 一级缓存、二级缓存
+	事务管理
 	数据库连接池
 
-	SqlSessionFactory -> SqlSession -> Mapper -> MapperProxy -> MapperMethod -> SqlSession
-							 |
-							 -> Executor -> StatementHandler -> ResultSetHandler
+	MappedStatement
+	SqlSessionFactoryBuilder - > SqlSessionFactory -> SqlSession
+	SqlSession -> Mapper -> MapperProxy -> MapperMethod -> SqlSession
+	SqlSession -> Executor -> StatementHandler -> ResultSetHandler
 
 ## 应用服务器
 
@@ -494,3 +496,21 @@
 	binlog
 	慢查询
 	sql优化
+
+**************************************************
+
+## 源码(为什么、底层原理)
+
+	java.lang.AutoCloseable: close(), try-with-resource语法糖
+	java.lang.Comparable: Arrays.sort、Collections.sort、TreeSet、TreeMap
+	java.lang.Byte: valueOf()、ByteCache
+	java.lang.Character: valueOf()、CharacterCache
+	java.lang.Class: forName()、newInstance()
+
+	java.lang.ClassLoader
+	java.lang.Enum
+	java.lang.Integer: valueOf()
+	java.lang.String
+	java.lang.Object
+	java.lang.Thread
+	java.lang.ThreadLocal
