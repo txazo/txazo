@@ -502,15 +502,34 @@
 ## 源码(为什么、底层原理)
 
 	java.lang.AutoCloseable: close(), try-with-resource语法糖
-	java.lang.Comparable: Arrays.sort、Collections.sort、TreeSet、TreeMap
+	java.lang.Comparable: Arrays.sort()、Collections.sort()、TreeSet、TreeMap
 	java.lang.Byte: valueOf()、ByteCache
 	java.lang.Character: valueOf()、CharacterCache
-	java.lang.Class: forName()、newInstance()
-
+	java.lang.Class: 
+		forName(): native
+		newInstance(): Constructor.newInstance()
+		getResource(): ClassLoader.getResource()
+		getResourceAsStream(): ClassLoader.getResourceAsStream()
+	
+	java.lang.reflect.Constructor
+		newInstance():
+		
 	java.lang.ClassLoader
-	java.lang.Enum
-	java.lang.Integer: valueOf()
-	java.lang.String
-	java.lang.Object
+	
+	java.lang.Enum: 
+		final String name、final int ordinal
+		valueOf(): 反射调用values()获取枚举实例数组，封装为HashMap<String, T>
+	
 	java.lang.Thread
+		ThreadLocal.ThreadLocalMap
+		
 	java.lang.ThreadLocal
+		get(): Thread.currentThread().threadLocals.get(this)
+		set(): Thread.currentThread().threadLocals.set(this, value)
+		remove(): Thread.currentThread().threadLocals.remove(this)
+	
+	java.lang.Integer: valueOf()
+	
+	java.lang.String
+	
+	java.lang.Object
