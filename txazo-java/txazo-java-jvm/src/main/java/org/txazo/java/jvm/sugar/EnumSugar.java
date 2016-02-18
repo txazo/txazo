@@ -24,32 +24,30 @@ public class EnumSugar {
 /**
  * 枚举 - 反编译
  */
-//final class SugarDeCompile extends Enum {
-//
-//    private SugarDeCompile(String s, int i) {
-//        super(s, i);
-//    }
-//
-//    public static SugarDeCompile[] values() {
-//        SugarDeCompile asugardecompile[];
-//        int i;
-//        SugarDeCompile asugardecompile1[];
-//        System.arraycopy(asugardecompile = ENUM$VALUES, 0, asugardecompile1 = new SugarDeCompile[i = asugardecompile.length], 0, i);
-//        return asugardecompile1;
-//    }
-//
-//    public static SugarDeCompile valueOf(String s) {
-//        return Enum.valueOf(SugarDeCompile.class, s);
-//    }
-//
-//    public static final SugarDeCompile THIN;
-//    public static final SugarDeCompile SWEET;
-//    private static final SugarDeCompile ENUM$VALUES[];
-//
-//    static {
-//        THIN = new SugarDeCompile("THIN", 0);
-//        SWEET = new SugarDeCompile("SWEET", 1);
-//        ENUM$VALUES = (new SugarDeCompile[]{THIN, SWEET});
-//    }
-//
-//}
+public final class Color extends Enum<Color> {
+
+    public static final Color RED;
+    public static final Color GREEN;
+    public static final Color BLUE;
+    private static Color $VALUES[];
+
+    static {
+        RED = new Color("RED", 0);
+        GREEN = new Color("GREEN", 1);
+        BLUE = new Color("BLUE", 2);
+        $VALUES = (new Color[]{RED, GREEN, BLUE});
+    }
+
+    private Color(String name, int ordinal) {
+        super(name, ordinal);
+    }
+
+    public static Color[] values() {
+        return $VALUES.clone();
+    }
+
+    public static Color valueOf(String name) {
+        return Enum.valueOf(Color.class, name);
+    }
+
+}
