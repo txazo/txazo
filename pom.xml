@@ -16,6 +16,7 @@
         <module>txazo-java</module>
         <module>txazo-open-source</module>
         <module>txazo-pom</module>
+        <module>txazo-tool</module>
     </modules>
 
     <properties>
