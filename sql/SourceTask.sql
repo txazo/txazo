@@ -1,4 +1,4 @@
-create table ChannelPkgTask (
+create table SourceTask (
     id int(11) unsigned not null auto_increment comment 'id',
     creator varchar(32) not null default '' comment 'creator',
     status tinyint(4) unsigned not null default 0 comment 'status',
@@ -10,4 +10,4 @@ create table ChannelPkgTask (
     updateTime timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP comment 'updateTime',
     primary key (id),
     key (creator)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ChannelPkgTask';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='SourceTask';
