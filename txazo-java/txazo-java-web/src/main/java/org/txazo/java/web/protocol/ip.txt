@@ -1,7 +1,0 @@
-IP - Internet Protocol
-
-分组打包 - 数据包 - 分片 - 集合组装
-
-IPv4
-
-IPv6

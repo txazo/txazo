@@ -1,6 +1,0 @@
-javap 反汇编器
-
-javap Hello.class
-javap -v Hello.class
-javap -c Hello.class
-javap -s Hello.class

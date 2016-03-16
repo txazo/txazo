@@ -1,3 +1,0 @@
-jstat
-
-jstat -gc <vim> 250 10

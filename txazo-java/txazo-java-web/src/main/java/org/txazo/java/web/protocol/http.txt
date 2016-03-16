@@ -1,4 +1,0 @@
-HTTP - HyperText Transfer Protocol
-
-1) 超文本传输协议
-2) TCP/IP协议之上

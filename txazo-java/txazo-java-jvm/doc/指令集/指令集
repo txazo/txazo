@@ -1,9 +1,0 @@
-JVM指令集
-
-iconst
-
-iload
-istore
-
-[Throw Exception]
-athrow
