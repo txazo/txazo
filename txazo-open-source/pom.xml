@@ -24,7 +24,6 @@
         <module>txazo-monitor</module>
         <module>txazo-nio-reactor-server</module>
         <module>txazo-test</module>
-        <module>txazo-util</module>
         <module>txazo-weixin</module>
     </modules>
 
