@@ -16,3 +16,5 @@ create table HasTasteCategory (
     primary key (id),
     key (updateTime)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='HasTasteCategory';
+
+alter table HasTasteCategory add name varchar(32) not null default '' comment '原名';
