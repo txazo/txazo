@@ -8,6 +8,7 @@ create table HasTasteCategory (
     listTitle varchar(32) not null default '' comment '列表页描述',
     listImage varchar(128) not null default '' comment '列表页图片',
     listUrl varchar(256) not null default '' comment '列表页链接',
+    subTitle varchar(128) not null default '' comment '5字标题',
     topicTitle varchar(128) not null default '' comment '专题页描述',
     topicImage varchar(128) not null default '' comment '专题页图片',
     isDeleted tinyint(4) unsigned not null default 0 comment '是否删除, 0-未删除, 1-删除',
@@ -18,3 +19,7 @@ create table HasTasteCategory (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='HasTasteCategory';
 
 alter table HasTasteCategory add name varchar(32) not null default '' comment '原名';
+alter table HasTasteCategory modify subTitle varchar(32) not null default '' comment '5字标题';
+alter table HasTasteCategory modify listImage varchar(256) not null default '' comment '列表页图片';
+alter table HasTasteCategory modify topicImage varchar(1024) not null default '' comment '专题页图片';
+
