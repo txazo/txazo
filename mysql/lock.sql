@@ -21,13 +21,32 @@
    4) insert/delete/update, 写, 加排它锁
 
 // 读
-   1) 快照读, 不加锁
+   1) 快照读/一致读, 不加锁
       select ...
    2) 当前读, 加共享锁
       select ... lock in share mode
    3) 当前读, 加排它锁
       select ... for update
       insert/delete/update
+
+// binlog: 主从同步
+
+// undo log: 撤消日志
+   1) 记录原始的数据
+   2) 保证事务的原子性, 用来回滚事务
+
+// redo log: 重做日志
+   1) 记录更改的数据
+   2) 保证事务的持久性, 用来恢复数据
+   3) 延迟数据的持久化, 提升I/O性能
+
+// undo log + redo log
+   1) 事务开始
+   2) 记录undo log
+   3) 修改数据
+   4) 记录redo log
+   5) redo log写入磁盘
+   6) 事务提交
 
 // 开启锁监控
    create table innodb_lock_monitor(a int) engine=innodb;
