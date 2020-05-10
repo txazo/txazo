@@ -42,3 +42,29 @@ CREATE TABLE UserConfig (
    unique (user),
    KEY updateTime (updateTime)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='UserConfig';
+
+
+create table MyisamI(
+    id int(11) unsigned not null auto_increment comment 'id',
+    name varchar(64) not null default '' comment 'name',
+    name1 varchar(64) not null default '' comment 'name1',
+    name2 varchar(64) not null default '' comment 'name2',
+    primary key (id),
+    key (name),
+    key (name1),
+    key (name2)
+) ENGINE=Myisam DEFAULT CHARSET=utf8 COMMENT='MyisamI';
+
+create table Product (
+    id int(11) unsigned not null auto_increment comment 'id',
+    name varchar(16) not null default '' comment 'name',
+    primary key (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Product';
+
+
+insert into InnoDBI(name, name1, name2) values('asas1', 'adfaf1', 'asasas1');
+insert into InnoDBI(name, name1, name2) values('asas2', 'adfaf2', 'asasas2');
+insert into InnoDBI(name, name1, name2) values('asas3', 'adfaf3', 'asasas3');
+insert into InnoDBI(name, name1, name2) values('asas4', 'adfaf4', 'asasas4');
+insert into InnoDBI(name, name1, name2) values('asas5', 'adfaf5', 'asasas5');
+insert into InnoDBI(name, name1, name2) values('asas6', 'adfaf6', 'asasas6');
